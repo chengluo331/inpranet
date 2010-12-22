@@ -1,6 +1,16 @@
 #summary compte-rendu réunion 16/12/2010
 #labels Phase-Requirements
 
+Personnes présentes :
+ * M. Bourret (sopra)
+ * M. Amghar (INSA)
+ * M. Aubry (INSA)
+ * Yoann Buch
+ * Yi Quan Zhou
+ * Wenshao Low
+ * Cheng Luo
+ * Stephane Seng  
+
 = 1. Architecture existante =
 
 == References ==
@@ -106,5 +116,3 @@ Le projet peut se découper en 4 problématiques distinctes :
  * Préparer des questions
  * Mettre en place/organiser ce 1er RDV (Jeudi de la rentrée, 14h)
  * Stage à la clé. Déclarer les personnes intéressées au plus tôt
-
-
