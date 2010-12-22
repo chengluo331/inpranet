@@ -49,7 +49,7 @@ Ce besoin nécessite d'adapter l'architecture existante.
    * base d'habitude : déterminer des habitudes dans les déplacements de l'utilisateur
  * Module requettage : attaqué par une application mobile (sous Androïd) :
    * upload des informations géotemporelles de l'utilisateur (id utilisateur, longitude, latitude, date)
-   * download d'informations/documents en lien avec la zone dans lequel l'utilisateur se trouve ou va se trouver
+   * download d'informations/documents en lien avec la zone dans laquelle l'utilisateur se trouve ou va se trouver
  * Les modules d'aggregation, d'adaptation sembleraient suffire.
 
 
@@ -71,8 +71,8 @@ Le projet peut se découper en 4 problématiques distinctes :
  * Par des coordonnées ? (polygone)
  * Le domaine d'études se bornera à une région volontairement limitée dans un premier temps : lyon et ses alentours.
  * Découpage en zones fonctionnelles (ex : autoroute A7, centre ville, etc.)
- * Utilisation d'une base de données spatiale. Interêts : indexation des données intégrée et requêtes/opérations adaptées aux besoins (ex : à partir d'une longitude/latitude donner la zone dans englobante).
- * Possibilité d'utiliser PostGIS
+ * Utilisation d'une base de données spatiale. Interêts : indexation des données intégrée et requêtes/opérations adaptées aux besoins (ex : à partir d'une longitude/latitude donner la zone qui l'englobe).
+ * Possibilité d'utiliser [http://postgis.refractions.net/ PostGIS]
 
 == C. Comment analyser les documents ==
 
@@ -99,8 +99,8 @@ Le projet peut se découper en 4 problématiques distinctes :
 
 = 5. Organisation du projet =
 
- * MOE : 5 personnes dont 1 chef de projet
  * MOA : M. Bourret pour Sopra
+ * MOE : 5 personnes dont 1 chef de projet
  * 1 réunion hebdomadaire entre le chef de projet et la MOA
  * 1 réunion mensuelle avec l'ensemble de la MOE et la MOA
 
