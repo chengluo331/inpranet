@@ -24,7 +24,7 @@ Règles :
 
 == A. Comment stocker et déduire les habitudes géotemporelles ==
 
-Recherches, étude de faisabilité : [Moteur_Habitudes Moteur Habitudes]
+Recherches, étude de faisabilité : [Moteur_Habitutde Moteur Habitudes]
 
 == B. Comment stocker/requetter/définir les zones ==
 
