@@ -1,2 +1,10 @@
 #summary Etude/Faisabilité/Recherche sur la problématique des zones
 #labels Phase-Requirements
+
+= Solutions existantes = 
+
+|| *Nom* || *Info* ||
+|| MySQL || [http://dev.mysql.com/doc/refman/5.5/en/spatial-extensions.html info] ||
+|| PostgreSQL/PostGIS || [http://postgis.refractions.net/ info] ||
+|| Oracle spatial || [http://www.oracle.com/technetwork/database/options/spatial/index.html info] ||
+|| SQL Server Spatial || [http://www.microsoft.com/sqlserver/2008/en/us/spatial-data.aspx info] ||
