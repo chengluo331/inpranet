@@ -24,7 +24,11 @@ Règles :
 
 == A. Comment stocker et déduire les habitudes géotemporelles ==
 
+Recherches, étude de faisabilité : [Moteur_Habitudes Moteur Habitudes]
+
 == B. Comment stocker/requetter/définir les zones ==
+
+Recherches, étude de faisabilité : [Moteur_Zones Moteur Zones]
 
  * Yoann : 
   * bien motivé par la problématique de la géolocalisation
@@ -33,9 +37,11 @@ Règles :
 
 == C. Comment analyser les documents ==
 
+Recherches, étude de faisabilité : [Indexation_Documents Indexation Documents]
+
 == D. Comment récupérer les habitudes géotemporelles et proposer du contenu ==
 
-[Client_Mobile Client Mobile]
+Recherches, étude de faisabilité : [Client_Mobile Client Mobile]
 
 = Questions pour M. Bourret =
 
