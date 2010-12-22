@@ -4,6 +4,7 @@
 = Tâches à faire =
 
  * donner les personnes intéressées par un éventuel stage
+ * ...
 
 = Répartition des modules =
 
@@ -31,3 +32,5 @@ Règles :
 
 
 = Questions pour M. Bourret =
+
+ * TODO
