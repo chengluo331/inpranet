@@ -1,0 +1,33 @@
+#summary Préparation de la réunion rentrée 2011
+#labels Phase-Requirements
+
+= Tâches à faire =
+
+ * donner les personnes intéressées par un éventuel stage
+
+= Répartition des modules =
+
+Objectifs : 
+ * répartir les membres du projet
+ * paralléliser le travail
+
+Règles :
+ * mettez-vous où vous voulez, un module qui vous motive !
+ * vous pouvez choisir plusieurs modules. Vu qu'il y a 5 membres et 4 modules il faudra certainement que certains membres travaillent sur 2 modules
+ * *ce n'est pas définif.* L'idée est de déterminer les motivations de chacun et de voir comment on pourrait répartir le travail
+
+== A. Comment stocker et déduire les habitudes géotemporelles ==
+
+== B. Comment stocker/requetter/définir les zones ==
+
+ * Yoann : 
+  * bien motivé par la problématique de la géolocalisation
+  * quelques experiences dans les Systèmes d'Information Géographiques en entreprise
+  * motivé pour utiliser une base de données spatiale (genre PostGIS)
+
+== C. Comment analyser les documents ==
+
+== D. Comment récupérer les habitudes géotemporelles et proposer du contenu ==
+
+
+= Questions pour M. Bourret =
