@@ -3,7 +3,9 @@
 
 = Tâches à faire =
 
- * donner les personnes intéressées par un éventuel stage
+ * donner les personnes intéressées par un éventuel stage :
+   * Luo Cheng
+   * [autre personne]
  * répartir les macro-tâches
  * prévoir un macro-planning
  * effectuer des recherches sur les différentes problématiques
