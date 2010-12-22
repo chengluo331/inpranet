@@ -61,7 +61,7 @@ Ce besoin nécessite d'adapter l'architecture existante.
 
 Le projet peut se découper en 4 problématiques distinctes :
 
-== A. Comment stocker et détecter les habitudes ==
+== A. Comment stocker et déduire les habitudes géotemporelles ==
 
  * Où est-ce que l'utilisateur est ? 
  * Où est-ce qu'il va être ? 
@@ -85,7 +85,7 @@ Le projet peut se découper en 4 problématiques distinctes :
  * Associer au document une plage de temps (date de début, durée/date de fin)
  * Stocker ces informations
 
-== D. Comment repérer les habitudes et proposer du contenu ==
+== D. Comment récupérer les habitudes géotemporelles et proposer du contenu ==
 
  * Développement d'une application pour téléphone mobile (Android)
  * 2 rôles :
