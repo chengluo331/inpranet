@@ -35,6 +35,7 @@ Règles :
 
 == D. Comment récupérer les habitudes géotemporelles et proposer du contenu ==
 
+[Client_Mobile Client Mobile]
 
 = Questions pour M. Bourret =
 
