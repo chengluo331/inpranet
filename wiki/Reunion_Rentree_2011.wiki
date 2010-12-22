@@ -4,7 +4,12 @@
 = Tâches à faire =
 
  * donner les personnes intéressées par un éventuel stage
- * ...
+ * répartir les macro-tâches
+ * prévoir un macro-planning
+ * effectuer des recherches sur les différentes problématiques
+   * faisabilité
+   * technologies
+   * intégration dans l'existant
 
 = Répartition des modules =
 
