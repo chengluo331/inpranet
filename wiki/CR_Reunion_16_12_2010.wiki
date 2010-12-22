@@ -21,7 +21,7 @@ Documents consultables sur le répertoire partagé :
 
 == Modules ==
 
- * Aggrégation (récupération d'informations sur internet)
+ * Aggrégation (récupération d'informations sur internet/intranet)
  * Adaptation (normalisation des données)
  * Indexation (moteur texte + moteur de vectorisation)
  * Requettage
