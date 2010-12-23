@@ -47,4 +47,6 @@ Recherches, étude de faisabilité : [Client_Mobile Client Mobile]
 
 = Questions pour M. Bourret =
 
- * TODO
+ * discuter de la distinction des modes "temps réel" et "prédictif" 
+   * "temps réel" => pas besoin de connaître les habitudes, on push de l'information sur la zone
+ * ...
