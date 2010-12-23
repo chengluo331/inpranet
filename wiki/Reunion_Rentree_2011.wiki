@@ -49,4 +49,6 @@ Recherches, étude de faisabilité : [Client_Mobile Client Mobile]
 
  * discuter de la distinction des modes "temps réel" et "prédictif" 
    * "temps réel" => pas besoin de connaître les habitudes, on push de l'information sur la zone
+ * intégration à la solution existante 
+   * intégration dès le début ?
  * ...
