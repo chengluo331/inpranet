@@ -28,22 +28,37 @@ Règles :
 
 Recherches, étude de faisabilité : [Moteur_Habitutde Moteur Habitudes]
 
+Personnes intéressées :
+
+ * XXX
+
 == B. Comment stocker/requetter/définir les zones ==
 
 Recherches, étude de faisabilité : [Moteur_Zones Moteur Zones]
+
+Personnes intéressées :
 
  * Yoann : 
   * bien motivé par la problématique de la géolocalisation
   * quelques experiences dans les Systèmes d'Information Géographiques en entreprise
   * motivé pour utiliser une base de données spatiale (genre PostGIS)
+ * XXX
 
 == C. Comment analyser les documents ==
 
 Recherches, étude de faisabilité : [Indexation_Documents Indexation Documents]
 
+Personnes intéressées :
+
+ * XXX
+
 == D. Comment récupérer les habitudes géotemporelles et proposer du contenu ==
 
 Recherches, étude de faisabilité : [Client_Mobile Client Mobile]
+
+Personnes intéressées :
+
+ * XXX
 
 = Questions pour M. Bourret =
 
