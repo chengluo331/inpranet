@@ -1,2 +1,8 @@
 #summary Recherche/faisabilité du client mobile
 #labels Phase-Requirements
+
+== Service de localisation en Android == 
+|| *Nom* || *lien* ||
+|| Location and Maps || [http://developer.android.com/guide/topics/location/index.html lien] ||
+|| User Location || [http://developer.android.com/guide/topics/location/obtaining-user-location.html lien]||
+|| API || [http://developer.android.com/reference/android/location/LocationManager.html lien] ||
