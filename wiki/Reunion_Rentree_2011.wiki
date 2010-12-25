@@ -60,7 +60,8 @@ Personnes intéressées :
 
  * Cheng
   * expériences en développement pour Android
-  * motivé pour développer un module en Android pour récupérer les habitudes géotemporelles
+  * motivé pour développer un module en Android pour récupérer les coordonnées d'utilisateur
+  * motivé pour analyser, définir les habitudes géotemporelles d'utilisateur
  * XXX
 
 = Questions pour M. Bourret =
