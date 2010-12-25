@@ -50,6 +50,8 @@ Recherches, étude de faisabilité : [Indexation_Documents Indexation Documents]
 
 Personnes intéressées :
 
+ * Cheng
+  * Rechercher algorithme d'indexation géographique des documents 
  * XXX
 
 == D. Comment récupérer les habitudes géotemporelles et proposer du contenu ==
