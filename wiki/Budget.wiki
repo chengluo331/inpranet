@@ -14,3 +14,5 @@ _Compter l'équivalent d'un TP 4IF : 5 x 4h (TD+TPs) + travail en dehors : 10-20
 _Noter au fur et à mesure le temps passé par membre et par module/sous modules?/milestones?_
 
  
+*Idées d'amélioration :*
+ * utiliser un lien vers un chart google pour comparer avec un bar chart réalisé/prévu
