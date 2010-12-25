@@ -1,4 +1,4 @@
-#summary planning du projet
+#summary Planning du projet
 #labels Phase-Requirements
 
 *A faire à la suite de la 1ere réunion 2011.*
