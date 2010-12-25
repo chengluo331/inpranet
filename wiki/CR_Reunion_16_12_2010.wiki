@@ -5,11 +5,12 @@ Personnes présentes :
  * M. Bourret (sopra)
  * M. Amghar (INSA)
  * M. Aubry (INSA)
- * Yoann Buch
- * Yi Quan Zhou
- * Wenshao Low
- * Cheng Luo
- * Stephane Seng  
+ * Equipe :
+   * Yoann Buch
+   * Yi Quan Zhou
+   * Wenshao Low
+   * Cheng Luo
+   * Stephane Seng  
 
 Table des matières :
 
