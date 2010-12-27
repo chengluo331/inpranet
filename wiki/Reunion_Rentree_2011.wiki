@@ -29,7 +29,7 @@ Règles :
 Recherches, étude de faisabilité : [Moteur_Habitutde Moteur Habitudes]
 
 Personnes intéressées :
-
+ * Yiquan
  * XXX
 
 == B. Comment stocker/requetter/définir les zones ==
@@ -64,6 +64,8 @@ Personnes intéressées :
   * expériences en développement pour Android
   * motivé pour développer un module en Android pour récupérer les coordonnées d'utilisateur
   * motivé pour analyser, définir les habitudes géotemporelles d'utilisateur
+ * Yiquan
+  * intéressé par le développement Android 
  * XXX
 
 = Questions pour M. Bourret =
