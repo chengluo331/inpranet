@@ -6,3 +6,9 @@
 || Location and Maps || [http://developer.android.com/guide/topics/location/index.html lien] ||
 || User Location || [http://developer.android.com/guide/topics/location/obtaining-user-location.html lien]||
 || API || [http://developer.android.com/reference/android/location/LocationManager.html lien] ||
+
+== Projet Open Source ==
+Quelque projets open source existants...
+|| *Nom* || *lien* ||
+|| mytracks || [http://code.google.com/p/mytracks lien] ||
+|| posit-mobile || [http://code.google.com/p/posit-mobile lien] ||
