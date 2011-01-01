@@ -8,3 +8,7 @@
 || PostgreSQL/PostGIS || [http://postgis.refractions.net/ info] ||
 || Oracle spatial || [http://www.oracle.com/technetwork/database/options/spatial/index.html info] ||
 || SQL Server Spatial || [http://www.microsoft.com/sqlserver/2008/en/us/spatial-data.aspx info] ||
+
+= PostgreSQL/PostGIS/QGis = 
+
+[http://postgresql.developpez.com/articles/postgisqgis/ Tutoriel] pour installer ces 3 outils
