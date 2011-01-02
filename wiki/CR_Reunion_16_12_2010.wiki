@@ -82,7 +82,7 @@ Le projet peut se découper en 4 problématiques distinctes :
 == C. Comment analyser les documents ==
 
  * Extraire les données géo-temporelles
- * Associer le document à une zone à l'aide d'adresses ou de mots clés (ex : fourvière, pardieu, mairie de lyon, etc.)
+ * Associer le document à une zone à l'aide d'adresses ou de mots clés (ex : fourvière, part-dieu, mairie de lyon, etc.)
  * Associer au document une plage de temps (date de début, durée/date de fin)
  * Stocker ces informations
 
