@@ -30,6 +30,7 @@ Recherches, étude de faisabilité : [Moteur_Habitutde Moteur Habitudes]
 
 Personnes intéressées :
  * Yiquan
+ * Wenshao
  * XXX
 
 == B. Comment stocker/requetter/définir les zones ==
@@ -42,6 +43,7 @@ Personnes intéressées :
   * bien motivé par la problématique de la géolocalisation
   * quelques experiences dans les Systèmes d'Information Géographiques en entreprise
   * motivé pour utiliser une base de données spatiale (genre PostGIS)
+ * Wenshao
  * XXX
 
 == C. Comment analyser les documents ==
