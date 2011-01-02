@@ -41,7 +41,7 @@ Exemples :
 
  * “je roule sur l'autoroute A7, des informations sur les conditions de circulation m'ont été préalablement envoyé sur mon mobile”
 
- * “je vais habituellement faire mes courses à la pardieu le Samedi après-midi, au moment ou je rentre dans le centre commercial des offres promotionnelles me sont proposées”
+ * “je vais habituellement faire mes courses à la part-dieu le Samedi après-midi, au moment ou je rentre dans le centre commercial des offres promotionnelles me sont proposées”
 
 Des scénarios sont à proposer que ce soit pour du commercial ou de l'aide à la décision objective.
 
