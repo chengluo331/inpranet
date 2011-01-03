@@ -72,12 +72,18 @@ Personnes intéressées :
 
 = Questions pour M. Bourret =
 
+Technique :
+
  * discuter de la distinction des modes "temps réel" et "prédictif" 
    * "temps réel" => pas besoin de connaître les habitudes, on push de l'information sur la zone
+ * problème de batterie par l'utilisation du GPS en continue sur le mobile. Quels sont les autres moyens (réseau GSM ?) ?
  * intégration à la solution existante 
-   * intégration dès le début ?
+   * intégration dès le début ? après ? pas du tout ?
+
+Projet :
+
  * quel doit être le livrable final ?
  * documentation technique à fournir ?
  * ajout de M. Bourret à notre mailing-list/code project ?
- * OK de mettre ces infos publiques ?
+ * OK de mettre ces infos publiques ? 
  * ...
