@@ -76,4 +76,8 @@ Personnes intéressées :
    * "temps réel" => pas besoin de connaître les habitudes, on push de l'information sur la zone
  * intégration à la solution existante 
    * intégration dès le début ?
+ * quel doit être le livrable final ?
+ * documentation technique à fournir ?
+ * ajout de M. Bourret à notre mailing-list/code project ?
+ * OK de mettre ces infos publiques ?
  * ...
