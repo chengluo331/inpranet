@@ -79,6 +79,7 @@ Technique :
  * problème de batterie par l'utilisation du GPS en continue sur le mobile. Quels sont les autres moyens (réseau GSM ?) ?
  * intégration à la solution existante 
    * intégration dès le début ? après ? pas du tout ?
+ * Sources des données géographiques(plan de ville) à nous de trouver? format? utiliser un connecteur existant pour injecter les données dans la base?
 
 Projet :
 
