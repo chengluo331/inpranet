@@ -1,2 +1,9 @@
 #summary Etude/Faisabilité/Recherche sur la problématique des documents
 #labels Phase-Requirements
+
+==Propositions de la source des documents==
+ * Newsletter/flux RSS
+  * ex: http://www.groupon.fr/deals/lyon
+ * Service web API
+  * ex: http://developer.shopping.com/
+ * Expression rationnelle (plus compliqué mais intéressant. A réfléchir !) 
