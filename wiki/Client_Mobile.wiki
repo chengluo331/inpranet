@@ -7,7 +7,19 @@
 || User Location || [http://developer.android.com/guide/topics/location/obtaining-user-location.html lien]||
 || API || [http://developer.android.com/reference/android/location/LocationManager.html lien] ||
 
-== Projet Open Source ==
+Android a proposé deux moyens pour obtenir la localisation d'utilisateur:
+ * _GPS_
+  * avantage: le plus précis
+  * inconvénient: consommer plus de batterie; disponible seulement à l'extérieur; réponse lente
+ * _Network Location Provider_
+  * avantage: économiser la batterie; réponse rapide
+  * inconvénient: moins précis que GPS
+Q: on utilise les deux?
+
+Q: pour diminuer la consomption et rendre application plus performant, on doit définir un model qui spécifie comment notre application obtenir la localisation d'utilisateur? et faire des estimations?
+
+
+== Projets Open Source intéressants ==
 Quelque projets open source existants...
 || *Nom* || *lien* ||
 || mytracks || [http://code.google.com/p/mytracks lien] ||
