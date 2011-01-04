@@ -14,3 +14,5 @@
 [http://postgresql.developpez.com/articles/postgisqgis/ PostgreSQL/PostGIS/QGis] 
 
 [http://www.davidgis.fr/documentation/win32/html/index.html Guide PostGIS]
+
+[http://workshops.opengeo.org/postgis-intro/ OpenGeo intro to PostGIS]
