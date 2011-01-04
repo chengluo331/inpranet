@@ -1,2 +1,6 @@
 #summary Etude/Faisabilité/Recherche sur la problématique des habitudes
 #labels Phase-Requirements
+
+= Interesting links =
+
+[http://arstechnica.com/science/news/2010/02/cell-phones-show-human-movement-predictable-93-of-the-time.ars location predictability]
