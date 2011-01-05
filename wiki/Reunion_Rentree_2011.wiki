@@ -54,6 +54,8 @@ Personnes intéressées :
 
  * Cheng
   * Rechercher algorithme d'indexation géographique des documents 
+ * Stéphane
+  * intéressé par la recherche sémantique
  * XXX
 
 == D. Comment récupérer les habitudes géotemporelles et proposer du contenu ==
