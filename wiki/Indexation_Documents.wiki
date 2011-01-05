@@ -4,6 +4,9 @@
 ==Propositions de la source des documents==
  * Newsletter/flux RSS
   * ex: http://www.groupon.fr/deals/lyon
+Q: pb de copyright
  * Service web API
   * ex: http://developer.shopping.com/
- * Expression rationnelle (plus compliqué mais intéressant. A réfléchir !) 
+ * page web brut
+  * utiliser l'expression rationnelle pour faire le filtrage de document(plus compliqué mais intéressant. A réfléchir !) 
+  * regex tester: http://regexpal.com/
