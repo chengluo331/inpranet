@@ -6,3 +6,5 @@
 [http://arstechnica.com/science/news/2010/02/cell-phones-show-human-movement-predictable-93-of-the-time.ars location predictability]
 
 [http://www.makeuseof.com/tag/how-to-trace-a-mobile-phone-location-with-google-latitude technologie google latitude]
+
+[http://www.clubic.com/actualite-156052-yahoo-fire-eagle-geolocalisation.html yahoo fireeagle]
