@@ -1,0 +1,130 @@
+#summary Compte rendu de la réunion du 06/01/2011
+#labels Phase-Requirements
+
+= Personnes présentes =
+
+Equipe :
+ * Yoann Buch
+ * Stephane Seng
+ * Cheng Luo
+ * Wenshao Low
+ * Yi Quan Zhou
+
+
+predictif => valeur ajoutée 
+predicitf/temps réel => dépend du caractère de l'evenement (ex : evt urgent, pas vraiment prefictif => instantanées)
+
+=> à voir si on définit des catégories d'evenements (ludique, circulation (accident/greve), commercial etc.)
+ex : application mobile 20 minutes => simple, categories pratiques
+=> a determiner coté indexation
+
+Recuperation d'infos => lyon
+info routiere 
+
+
+decoupage des zones sur la carte de lyon => quelques zones (ex : tracé de l'A7, part-dieu, centre ville, 2e arrondissement, etc.) qui peuvent se chevaucher
+=> garder des polygones sur une carte existante => pas de pb de droits
+=> créer une carte intéressante pour les scénarios
+=> viser simple, il faut que ça fonctionne
+=> bien bosser les modules, les interfaces
+
+
+
+integration => non
+mais au moins l'aggrgateur + adaptatione phone can be used on other networks.
+
+
+pas obligé de faire l'aggregation 
+=> ex preparer des full texte => fichier xml avec liste de zone/coord. + dates, categorie, titre, texte
+=> entrees/sorties, en entree flux html nettoyé, en sortie les métadonnées sous xml
+
+conso energie:
+- gps => priorité, ensuite GSM
+- demander le gps que par besoin
+
+Distinction application, service (localisation)
+tick de localisation paramétrable (ex : toute les 5 min)
+
+Mise en cache des coord. ? (si offline) ex avec sqlite
+Envoie par l'application
++ mode deconnecté => serveur envoie données sur client (documents) qui le stocke sous sqlite
+
+
+
+Rediger des spécifications :
+- métiers
+- techniques (par module, interfaces, conception, etc.)
+
+bien definir les roles des modules (qui fait quoi ?)
+ex : quels services proposés ? (ex : recupere moi la liste des zones pour tel coord.)
+=> faire un diagramme de flux => débouche sur contrat d'interfaces, structures de données
+Et dans chaque bulle :
+- initialisation (ex: identifier les zones, intiialiser les données
+
+entre les modules du serveur
+entre le client et le serveur (WS léger, type rest/json) ou encore plus léger (CSV)
+
+e phone can be used on other networks.
+=> va permettre de trouver les charges
+quoi, avec qui, comment => affecter les roles aux membres
+
+
+archi technique :
+- tomcat
+- 2 servlets E/S
+- BDD spatiale
+- communication WS avec CXF (framework WS) ou WSDL (description WS), faire le WSDL avant de monter le WS, ou bien faire l'objet qui fait le WSDL
+- projet web dynamique project ?
+
+
+sources de données :
+centre commerciaux
+office du tourisme
+millénaire 3/lat
+=> cibler des données pertinentes, choisies mais pas trop, car à faire manuellement
+
+problématique d'affectation d'un texte à une zone
+ex : utiliser WS envoie adresse => retour lon/lat
+geonames ?
+avec des mots clés : perrache, part-dieu, etc.
+=> peu de données mais suffisamment pour prouver que ça marche !
+
+
+Rechercher problématique données privée
+=> CNIL ? (localisation géographique, pas rattachable à une personne physique)
+authetification par login (pas par password pour l'instant, pas d'identifiant sim ou telephone comme ça on peut changer de tel)
+
+
+livrables :
+- spec fonctionnelles (quoi) => métier
+- spec techniques (comment), par module (WS, etc.) ex : WS soap, avec quel WSDL. BDD PostGis, etc., schema d'architecture
+- annexées modèles objets par modules
+- prototype
+- documentation d'exploitation (commment on compile, comment on installe, intègre)
+
+
+
+Ajout M. Bourret => mailgin list + google code project
+sbourret@gmail.com
+
+
+1ère deadlines :
+17 Jan, spec fonctionnelles => à mettre sur google doc
+semaine prochaine : spec fonctionnelles/techniques => plan
+M. Bourret => donnera des exemples de specs fonctionnelles/techniques
+
+=> RDV Tel Jeudi prochain => redonner num tel bureau amghar
+
+=> RDV Samedi 10h30-12h, mediatheque
+
+
+
+
+
+
+
+
+
+
+
+
