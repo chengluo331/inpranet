@@ -22,7 +22,7 @@ MOE :
 == Stage Sopra ==
 
 Cheng Luo est intéressé par le stage.
-M. Bourret rentrera en contact directement avec lui en discuter.
+M. Bourret rentrera en contact directement avec lui pour en discuter.
 
 == Temps réel vs Prédicif ==
 
@@ -30,9 +30,9 @@ Il était question de connaître les motivations de M. Bourret vis à vis de ces
 
 => Le prédictif apporte une réelle valeur ajoutée (le concept temps réel n'est pas nouveau). De plus, si le mode prédictif est implémenté alors le temps réel l'est forcément.
 
-Ce point à soulever une nouvelle problématique : *la caractérisation des évenements*, quels évènements doivent être envoyés à l'utilisateur en temps réel ou en avance ?
+Ce point a soulevé une nouvelle problématique : *la caractérisation des évenements*, quels évènements doivent être envoyés à l'utilisateur en temps réel ou bien en avance ?
 
-Exemple : des évènements urgents comme un accident qui viennent de se produire à proximité de là où l'utilisateur conduit. Il s'agit d'évènements non prédictifs/instantanés et donc accessible en temps réel.
+Exemple : des évènements urgents comme un accident qui viennent de se produire à proximité de là où l'utilisateur conduit. Il s'agit d'évènements non prédictifs/instantanés et donc accessibles en temps réel.
 
 Il faudra donc décider si l'on catégorise les évenements de manière plus fine (mais pas trop). Ex :
  * ludiques
@@ -45,15 +45,15 @@ C'est un élément à prendre en compte dans l'indexation des documents :
 
 Mais aussi au niveau du client mobile :
  * quel type de présentation ?
- * ex : application mobile 20 minutes => simple, par catégories
- * imaginer pour la page de garde, les évènements urgents/importants ?
+ * ex : application mobile 20 minutes => simple, par catégorie
+ * présenter sur la 1ere page les évènements urgents/importants ?
 
 
 == Découpage des zones ==
 
 Uniquement la région de Lyon.
 
-Comment récupérer une carte de Lyon ?
+Comment se procurer une carte de Lyon ?
  * pas besoin d'avoir une carte mais seulement les coordonnées des zones intéresssantes
  * partir d'une carte et déduire les zones (polygones), ensuite la carte ne sert plus
  * possibilité de récupérer la carte via [http://www.openstreetmap.org OSM]  ? => données libre d'utilisation
@@ -62,7 +62,7 @@ Quoi découper ?
  * découpage des zones sur la carte de lyon => quelques zones 
  * ex : tracé de l'A7, part-dieu, centre ville, 2e arrondissement, etc.
  * peuvent se chevaucher
- * créer un découpage intéressant pour les scénarios
+ * créer un découpage intéressant pour les scénarii
  * viser simple, il faut que ça fonctionne
 
 == Analyse de documents/Sources de données ==
@@ -76,7 +76,7 @@ Exemples de sources :
 
 => cibler des données pertinentes, choisies mais pas trop
 
-L'aggrégation peut se réduire à extraire manuellement des textes de pages web. 
+L'aggrégation peut se réduire à extraire manuellement des textes de pages web (pour notre prototype)
 
 Documents full texte (page webs nettoyées) => fichier xml. Exemple de métadonnées :
  * coordonnées (ou zone ?)
@@ -91,7 +91,7 @@ Utiliser un WS qui, à partir d'une adresse, retourne lon/lat :
  * WS google ?
  * [http://www.geonames.org/ geonames] ?
 
-Repérer des mots clés : perrache, part-dieu, etc.
+Repérer des mots clés : perrache, part-dieu, etc. Donc il doit y avoir une correspondance zone <=> mots clés
 => peu de données mais suffisamment pour prouver que ça marche !
 
 == Intégration à l'existant ==
@@ -116,11 +116,11 @@ Le client mobile devra être capable de fonctionner en mode déconnecté (cas de
 
 *Service*
 
-Si le client est sans connextion, il y a perte potentielle de données géotemporelles de l'utilisateur. L'idée est de stocker temporairement ces données pour les envoyer dès que la connexion est rétablie.
+Si le client est sans connexion, il y a perte potentielle de données géotemporelles de l'utilisateur. L'idée est de stocker temporairement ces données pour les envoyer dès que la connexion est rétablie.
 
 *Application*
 
-Les documents/informations provenant du serveur doivent être stockés pour être que l'application soit capable de les réstituer en mode déconnecté.
+Les documents/informations provenant du serveur doivent être stockés pour que l'application soit capable de les réstituer en mode déconnecté.
 
 Le stockage temporaire pourrait se faire grâce à [http://sqlite.org/ sqlite]
 
@@ -128,7 +128,7 @@ Le stockage temporaire pourrait se faire grâce à [http://sqlite.org/ sqlite]
 == Livrables ==
 
  * spec fonctionnelles (quoi) => aspect métier 
- * spec techniques (comment), par module (WS, etc.) ex : WS soap, avec quel WSDL. BDD PostGis, etc., schema d'architecture
+ * spec techniques (comment), par module (WS, etc.) ex : WS soap, avec quel WSDL. BDD PostGis, schema d'architecture, structure de données échangées, contrats, etc.
  * modèles objets par modules (en annexes)
  * prototype (code source, etc.)
  * documentation d'exploitation (commment on compile, comment on installe, intègre, etc.)
@@ -158,7 +158,7 @@ Garder à l'esprit, pour chaque module : Quoi, avec Qui, Comment
 
 Pistes pour l'architecture technique :
  * serveur web tomcat
- *  2 servlets simples E/S pour communication avec le client
+ * 2 servlets simples E/S pour communication avec le client
  * BDD spatiale type PostGIS
  * communication par WS CXF (framework WS) + WSDL (description WS)
    * faire le WSDL avant de monter le WS
@@ -180,16 +180,14 @@ MOA :
  * transmettre les documents exemples (différence entre spécifications fonctionnelles et techniques)
 
 MOE :
- * ajout M. Bourret aux outils collaboratifs (mailing-list, google code project, google document) => sbourret@gmail.com
- * RDV téléphonique MOA Jeudi 13 Jan => retransmettre les coordonnées téléphoniques
+ * ajout M. Bourret aux outils collaboratifs (mailing-list, google code project, google document)
+ * RDV téléphonique MOA Jeudi 13 Jan 14h => retransmettre les coordonnées téléphoniques
  * RDV MOE Samedi 8, 10h30 - 12h à la médiathèque de l'INSA
 
 Deadlines :
  * 17 Jan, spec. fonctionnelles/métiers => à mettre sur google doc
- * semaine prochaine : avancer sur les plans des spécifications fonctionnelles et techniques pour les présenter au RDV
+ * semaine prochaine : avancer sur les plans des documents de spécifications fonctionnelles et techniques pour les présenter au RDV
  * rendu des spec. techniques à déterminer
-
-
 
 
 
