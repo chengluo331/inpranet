@@ -71,7 +71,7 @@ Les sources de données (contrairement à l'ancien projet), doivent être ciblé
 
 Exemples de sources :
  * centres commerciaux
- * [office du tourisme http://www.lyon-france.com/]
+ * [http://www.lyon-france.com/ office du tourisme]
  * [http://www.millenaire3.com/ millénaire 3]
 
 => cibler des données pertinentes, choisies mais pas trop
@@ -188,6 +188,4 @@ Deadlines :
  * 17 Jan, spec. fonctionnelles/métiers => à mettre sur google doc
  * semaine prochaine : avancer sur les plans des documents de spécifications fonctionnelles et techniques pour les présenter au RDV
  * rendu des spec. techniques à déterminer
-
-
 
