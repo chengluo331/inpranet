@@ -83,6 +83,7 @@ Technique :
    * intégration dès le début ? après ? pas du tout ?
  * Sources des données géographiques(plan de ville) à nous de trouver? format? utiliser un connecteur existant pour injecter les données dans la base?
  * définir un model qui spécifie comment notre application mobile obtenir la localisation pour diminuer la consomption?
+ * Source d'informations routières et promotionnelles? Donner une liste de sites des magasins à connecteur? Filtrer les informations avec expression rationnelles?  Le problème de classer les info en fonction de leur géolocalisation (ex, promo différent dans différents magasins pendant différentes périodes)
 
 Projet :
 
