@@ -8,7 +8,7 @@ Télécharger et installer l'Eclipse JEE
 
 == Serveur Tomcat==
 
-On utilise le web service tomcat pour la communication entre les module côté serveur.
+On utilise le serveur tomcat pour les web services entre les modules du côté serveur.
 
 Télécharger Tomcat version 7
 [http://apache.cict.fr/tomcat/tomcat-7/v7.0.5-beta/bin/apache-tomcat-7.0.5-windows-x86.zip lien]
@@ -16,7 +16,7 @@ Télécharger Tomcat version 7
 Suivre le tutoriel pour intégrer dans l'Eclipse
 [http://www.objis.com/formation-java/tutoriel-eclipse-wtp-jee-integration-tomcat.html tuto]
 
-Remarque: le tutoriel est pour la version 6, mais c'est exactement le même que pour version 7
+Remarque: le tutoriel est pour Tomcat 6.0, mais c'est exactement le même que pour la version 7
 
 
 
