@@ -1,0 +1,22 @@
+= Mise en place de l'environnement de développement =
+
+== Eclipse ==
+Télécharger et installer l'Eclipse JEE
+[http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/heliossr1 lien]
+
+
+== Serveur Tomcat==
+
+On utilise le web service tomcat pour la communication entre les module côté serveur.
+
+Télécharger Tomcat version 7
+[http://apache.cict.fr/tomcat/tomcat-7/v7.0.5-beta/bin/apache-tomcat-7.0.5-windows-x86.zip lien]
+
+Suivre le tutoriel pour intégrer dans l'Eclipse
+[http://www.objis.com/formation-java/tutoriel-eclipse-wtp-jee-integration-tomcat.html tuto]
+
+Remarque: le tutoriel est pour la version 6, mais c'est exactement le même que pour version 7
+
+
+
+== Android ==
