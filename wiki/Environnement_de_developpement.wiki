@@ -1,4 +1,4 @@
-#labels Miseenplacedelenvironnementdedéveloppement
+#summary Mise en place de l'environnement de développement
 = Mise en place de l'environnement de développement =
 
 == Eclipse ==
