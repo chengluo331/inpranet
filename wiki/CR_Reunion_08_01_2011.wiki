@@ -1,13 +1,33 @@
-#summary Compte rendu de la réunion du 08/01/2011
+#summary Compte-rendu de la réunion du 08/01/2011
 
-= Introduction =
+Date : 08/01/2011
 
-Add your content here.
+Durée : 10h30 - 12h
 
+_Ce document n'est pas du tout fini, mise en ligne du schéma ce soir..._
 
-= Details =
+= Participants =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+* Yoann Buch
+* Cheng Luo
+* Wenshao Low
+* Stéphane Seng
+* Yi Quan Zhou 
+
+= Points de discussions =
+
+== Architecture globale du nouveau système ==
+
+Proposition d'une architecture globale de Yi Quan Zhou :
+
+* Un *Module Mobile*, envoi des informations (userID, date, latitude, longitude) vers un *Module Zone* ;
+* Le module Zone convertit les latitudes et les longitudes en zones à l'aide d'une *base de données de zones* ;
+* Transmission de (userID, date, zoneID) vers un *Module Habitudes* ;
+* Le module Habitudes ajoute ces informations à la *base de données d'habitudes* ;
+* Cela effectue également une requête vers le *Module Indexation* qui va envoyer les résultats vers le module mobile.
+
+== Discussions et améliorations de cette architecture ==
+
+* Remarque sur le fait que l'enregistrement d'une habitude ne doit pas entraîner une requête :
+** Les requêtes s'effectueront automatiquement ou directement à l'initiaitive de l'utilisateur de l'application ;
+
