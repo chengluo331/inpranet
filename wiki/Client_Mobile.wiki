@@ -24,3 +24,13 @@ Quelque projets open source existants...
 || *Nom* || *lien* ||
 || mytracks || [http://code.google.com/p/mytracks lien] ||
 || posit-mobile || [http://code.google.com/p/posit-mobile lien] ||
+
+
+== Service en Android ==
+Le Service est un composant d'application en Android([http://developer.android.com/reference/android/app/Service.html API]) qui permet d'effectuer une opération de longue durée à l'arrière plan sans interaction avec utilisateur.
+
+example: [http://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/index.html APIDemo/App/Service]
+
+ * RQ: 
+  * Il est possible de lancer un service en démarrage de système(Android). Il suffit d'implémenter un [http://developer.android.com/reference/android/content/BroadcastReceiver.html BroadcastReceiver] qui attend le BOOT_COMPLETED. [http://groups.google.com/group/android-developers/browse_thread/thread/112887fbb59f3ee2?pli=1 ref1] [http://androidgps.blogspot.com/2008/09/starting-android-service-at-boot-time.html ref2]
+  * Un service ne peut pas exister indépendamment. Il est un composant de l'application. Il exécute dans le même processus que l'application. L'idée est d'implémenter une application  avec des fonctions(start service, stop service, service setting... ) qui permet de gérer sons service déclenché.
