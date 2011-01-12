@@ -41,6 +41,14 @@ Proposition d'une architecture globale de Yi Quan :
 
   * Remarque pour la construction de la base de données des habitudes :
     ** Effectuer une pondération des habitudes selon la distance entre la zone actuelle et la zone qui a été prévue ;
-    ** RQ : Comment effectuer le calcul de cette distance sans communiquer avec le module Zone ?
+    ** Rmq : Comment effectuer le calcul de cette distance sans communiquer avec le module Zone ?
 
+  * Réflexion sur le mode temps réel :
+    ** Dans ce cas, le module Indexation ne fera pas de requêtes en se basant sur l'endroit où est supposé être l'utilisateur mais sur le lieu où il est actuellement ;
+    ** Si l'utilisateur n'est dans aucune zone, alors prendre les zones les plus proches.
 
+== Réflexions sur le module d'indexation ==
+
+  * Fonctionnement de la recherche de mots-clés (Fourvière, Part-Dieu, etc.) ou si on trouve une adresse :
+    ** Utilisation d'un Web Service (GeoNames par exemple) pour obtenir les coordonnées ;
+    ** Associer ces coordonnées à une/plusieurs zones ;
