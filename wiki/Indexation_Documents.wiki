@@ -1,7 +1,24 @@
 #summary Etude/Faisabilité/Recherche sur la problématique des documents
 #labels Phase-Requirements
 
-==Propositions de la source des documents==
+=Documents=
+
+==Types de documents==
+
+  * Documents qui traitent d’évènements et non actualités (sauf si on veut des articles “intéressants” : Problème sur la prédictivité des informations (agenda ET articles ?) ;
+  * Durée de vie d’une information ? Penser à supprimer les infos en trop, périmées...
+  * Catégories, en rapport avec un lieu et une date :
+    ** Actualités (société, politique, économie, international, technologies) ;
+    ** Évènements importants (traffic info ?) ;
+    ** Loisirs (culture, sport) ;
+    ** Shopping 
+
+==Sources pour les actualités==
+
+  * Journaux locaux :
+    ** http://www.20minutes.fr/ville/Lyon
+    ** http://www.lyoncapitale.fr/
+
  * Newsletter/flux RSS
   * ex: http://www.groupon.fr/deals/lyon
 Q: pb de copyright
