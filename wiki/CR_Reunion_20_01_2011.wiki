@@ -35,7 +35,9 @@ MOE :
 = Moteur habitude et zone =
 *Découpage zone*
 
- * Problème de poids affecté lors de découpage zone (cf. CR_Reunion_16_01_2011) 
+ * Problème de poids affecté lors de découpage de zone A en B et C (cf. CR_Reunion_16_01_2011) 
+
+ * Raison : la prédiction va être fortement perturbé s'il y a une autre zone (D par ex.) qui devient la zone le plus probable après la découpage (poids 1/2 va diminuer fortement la possibilité de B et C face à D).
 
  * Proposition : remplacer le poids (zone) par un stockage de coordonnées utilisateur en définissant une distance de déplacement. 
 
@@ -46,3 +48,20 @@ MOE :
 
 *MCD*
  * [https://doc-0g-7s-docs.googleusercontent.com/docs/secure/mk0g0uco09e0dpubkqkmb98kmfq5ltf5/5leegof2omi15oaggiq074mk84bj2d9t/1295632800000/03207346889125339895/03207346889125339895/0B8VOBMwtxcZQMmVlZTcyM2MtYTdiOS00YWM2LWJhOWQtMjg3NTBmNjE4YWMw?nonce=l5sjnt64q675a&user=03207346889125339895&hash=oogqautlupms7bb02gacno6cf6iopugl modèle MCD]
+
+
+*Problème de chevauchement de zones*
+
+ * On pourra avoir plusieurs zones qui se chevauchent (tunnel et part-dieu) ou qui s’englobent (Département IF de l’INSA et INSA). 
+ * Le stockage d’habitude d’un utilisateur sur ces zones pose donne un nouveau problématique.
+ * Scénario : (on prendra des chiffres comme des dates pour simplifier)
+  * Date| User| Zones
+  * 100 | U1 | A
+  * 110 | U1 | B
+  * 120 | U1 | B, D
+  * 130 | U1 | B
+  * 140 | U1 | C
+
+ * Remarque : on pourra voir B comme département IF et D comme INSA
+
+ * Solution proposé : utilise une table de zone_utilisateur pour un instant donné (cf. MCD)
