@@ -54,13 +54,13 @@ MOE :
   * _id_User_ | _zone courante_ | _date entrée_
 
  * table Position-utilisateur			
-  * _idUser_ | _date_ | _longitude_ | _latitude_
+  * _id_User_ | _date_ | _longitude_ | _latitude_
 
  * table Evénement
-  * _idUser_ | _date_ | _longitude_ | _latitude_
+  * _id_User_ | _date_ | _longitude_ | _latitude_
 
  * table Zone_utilisateur
-  * _idUser_ | _zone_
+  * _id_User_ | _zone_
 
 
 
