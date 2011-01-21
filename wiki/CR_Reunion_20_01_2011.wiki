@@ -79,3 +79,7 @@ MOE :
  * Remarque : on pourra voir B comme département IF et D comme INSA
 
  * Solution proposé : utilise une table de zone_utilisateur pour un instant donné (cf. MCD)
+
+= Prochain réunion =
+ * 28/01/2010
+ * à vérifier car l'absence de Wenshao et Cheng est prévu.
