@@ -57,7 +57,7 @@ MOE :
   * _id_User_ | _date_ | _longitude_ | _latitude_
 
  * table Evénement
-  * _id_User_ | _date_ | _longitude_ | _latitude_
+  * _id_User_ | _date_deb_ | _date_fin_ | _id_zone_
 
  * table Zone_utilisateur
   * _id_User_ | _zone_
