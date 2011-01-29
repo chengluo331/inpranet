@@ -1,0 +1,88 @@
+#summary Compte rendu de la réunion du 27/01/2011
+#labels Phase-Requirements
+
+Durée : 14h - 16h00
+
+== Participants ==
+
+MOA :
+ * M. Bourret
+MOE :
+ * Yoann Buch
+ * Stephane Seng
+ * Yi Quan Zhou
+
+== Spécifications fonctionnelles ==
+
+Présentation de la nouvelle version des spécifications fonctionnelles détaillées.
+
+M. Bourret nous a exposé son expérience vis à vis des documents contractuels : appels d'offre publics VS appels d'offres privés, notion de précédence dans les documents (CdC > specifications > ...).
+
+Importance du vocabulaire choisi : faire un glossaire (document, donnée géo-temporelle, etc.) => enlever toute ambiguité
+
+Deux options :
+ * on modifie le document initial
+ * on garde le document initial = spec. générales et on établit un autre document pour les spec. détaillées (sans les besoins non fonctionnels, plus précis, etc.)
+
+Ok pour le plan. L'idée est de présenter chaque fonction comme un module de traitement : des données en entrées => traitement => données en sorties et exceptions.
+
+Bien travailler la partie "Mécanisme général" => faire un diagramme de flux entre les modules => vue générale. Ok pour mettre l'architecture globale que l'on a réalisé => à simplifier par contre
+
+Ok de parler de "modules" ou de "Web services" => on dit ce que l'on veut, on essaie d'éviter la possibilité d'avoir de trop grosses différences d'implémentation.
+
+Bien inclure les maquettes IHM pour l'application mobile => maquettes en blocs simples => on veut juste mettre en évidence les informations à présenter et les actions accessibles => peut être fait sous powerpoint
+ 
+== Indexation ==
+
+*L'indexation ne se fera pas sur du full text* mais sur un fichier pré-traité que l'on peut considéré structuré comme suit :
+
+{{{
+<root>
+  <header>
+    <données geo>
+      <!-- représente les données du connecteur/aggrégateur => on sait donc d'ùou vient l'information, l'adresse précise  est donc connue. Ex: document extrait du centrel commercial Part-Dieu => je connais son adresse-->
+
+      <!-- données géo brutes, formats hétérogènes -->
+    </données geo>
+    <données temporelles>
+      <!-- idem, les dates ont été déduites -->
+    </données temporelles>
+  </header>
+  <texte>
+     <!-- partie optionnel si le header est considéré comme suffisant : on sait deja le lieu et la plage de temps -->
+     contenu du document. HTML nettoyé ?
+  </texte>
+</root>
+}}}
+
+*Conflits sur les lieux ou dates*. Exemple : le 1er mot clé est part-dieu mais ensuite on parle de Villeurbanne. Régle à suivre :
+ * le lieu ayant le plus d'occurence est selectionné 
+ * sinon si nb occurence pareil alors on prend le 1er
+
+Pour les dates il faudra souvent *compléter l'année* car elle est généralement renseignée uniquement avec le jour et le mois. Attention donc au choix de l'année (suivant date courante).
+
+*Stockage*. 
+ * titre
+ * corps (sous quel forme, nettoyé ?)
+ * métadonnées ?
+ * ID => trouver un identifiant pertinent pour pouvoir éliminer les doublons. Si même ID alors on prend le dernier.
+
+*Problématique du coût de l'analyse* => les optimisations ne doivent pas être nos préoccupations sur ce projet. Mais il existe de nombreuses solutions pour répondre à ce problème (surtout que l'on sera surement amené à faire de l'analyse en temps réel pour détecter à temps les évenements comme les accidents). Utilisation de threads, chaque thread traite une regexp ?
+
+== Habitudes ==
+
+
+== Suite ==
+
+ * continuer specifications fonctionnelles
+ * continuer les recherches sur l'indexation et les habitudes
+ * Réunion MOE Dimanche 28/01 10h30 local ETIC
+   * assignation des parties à faire dans les specs fonctionnelles
+   * reflexion sur les problématiques d'indexation + habitudes
+
+== Documents MOA ==
+
+M. Bourret doit nous transmettre :
+ * un exemple de maquette et les composants powerpoint pour en faire une
+ * des bouts de code divers et variés (nettoyage d'un fichier HTML, etc.)
+ * documentation inpr@net sur le stockage/indexation des documents
