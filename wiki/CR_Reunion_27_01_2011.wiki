@@ -88,7 +88,7 @@ Problèmes :
 
 Bilan de la reflexion :
  * il n'est *pas possible de chevaucher des zones* => on peut très bien s'en sortir à partir du moment où l'on considère qu'*une zone = plusieurs polygones*. L'administrateur découpe suivant le type de l'application (ex. 2 découpage possible pour le chevauchement zone commercial/autoroute => un axé circulation l'autre axé commercial)
- * *on peut chevaucher des zones uniquement si elles sont du même type d'habitude (considéré de même intérêt)*. EX. zones commerciales, zones d'evenements, zones de travaux, etc. C'est un piste mais ça reste à creuser surtout avec tous les impacts qui s'en suivent.
+ * *on peut chevaucher des zones uniquement si elles ne sont pas du même type d'habitude (considéré de même intérêt)*. EX. zones commerciales, zones d'evenements, zones de travaux, etc. C'est un piste mais ça reste à creuser surtout avec tous les impacts qui s'en suivent.
 
 Typer des zones => regles les problèmes de zone du coté moteur habitudes ?
 
