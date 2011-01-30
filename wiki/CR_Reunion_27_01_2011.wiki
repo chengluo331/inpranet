@@ -39,12 +39,12 @@ Bien inclure les maquettes IHM pour l'application mobile => maquettes en blocs s
 {{{
 <root>
   <header>
-    <données geo>
+    <données geo suffisant="true/false">
       <!-- représente les données du connecteur/aggrégateur => on sait donc d'ùou vient l'information, l'adresse précise  est donc connue. Ex: document extrait du centrel commercial Part-Dieu => je connais son adresse-->
 
       <!-- données géo brutes, formats hétérogènes -->
     </données geo>
-    <données temporelles>
+    <données temporelles suffisant="true/false">
       <!-- idem, les dates ont été déduites -->
     </données temporelles>
   </header>
