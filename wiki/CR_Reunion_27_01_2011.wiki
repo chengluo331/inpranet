@@ -131,3 +131,4 @@ M. Bourret doit nous transmettre :
  * un exemple de maquette et les composants powerpoint pour en faire une
  * des bouts de code divers et variés (nettoyage d'un fichier HTML, etc.)
  * documentation inpr@net sur le stockage/indexation des documents
+ * spec techniques
