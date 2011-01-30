@@ -47,6 +47,9 @@ Bien inclure les maquettes IHM pour l'application mobile => maquettes en blocs s
     <données temporelles suffisant="true/false">
       <!-- idem, les dates ont été déduites -->
     </données temporelles>
+    <titre></titre>
+    <date creation></date creation>   
+    <id></id>
   </header>
   <texte>
      <!-- partie optionnel si le header est considéré comme suffisant : on sait deja le lieu et la plage de temps -->
