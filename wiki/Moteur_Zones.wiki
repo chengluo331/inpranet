@@ -16,3 +16,11 @@
 [http://www.davidgis.fr/documentation/win32/html/index.html Guide PostGIS]
 
 [http://workshops.opengeo.org/postgis-intro/ OpenGeo intro to PostGIS]
+
+
+== Utilitaires pour découper des zones ==
+
+ * QGIS (Quantum GIS)
+ * GRASS GIS
+ * uDig 
+ * OpenJUMP 
