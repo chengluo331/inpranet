@@ -228,49 +228,47 @@ Idée pour les 2 solutions : ne jamais transmettre le password en clair, toujour
 
 Stocké par le profil : login, password, centres d'intérêt, documents déjà transmis à l'utilisateur.
 
-= 8.1. Cryptage avec la date =
+== 8.1. Cryptage avec la date ==
 
-Trouver un système de cryptage bijectif.
+Rappels (Types de cryptage) :
 
-Mobile : User + Password -> SHA (clé) -> Password crypté stocké dans GeoHabit.
-! Clé SHA injectif (# surjectif) -> on ne peut pls revenir au password initial et unique.
-Stocké en local.
+  * Bijectif : du message crypté on peut retrouver le message et vice-versa ;
+  * Injectif : on ne peut plus revenir au password initial et le résultat crypté unique.
 
-Communication : Password crypté + cryptage en plus par un système bijectif qui va inclure la date et l'heure courante).
-+ date en clair.
+But : trouver un système de cryptage bijectif.
+
+Password crypté par SHA injectif stocké en local : on ne s'intéresse pas à la vraie valeur du password mais qu'à sa version cryptée.
+
+Au final, stocké dans le mobile : Login + Password -> SHA (avec 1 clé) ; dans le serveur : Password crypté, qui pourra être comparé avec le password crypté du client mobile.
+
+On peut également, pour la Communication, utiliser un système faisant intervenir la date (pour éviter les écoutes) : Password crypté + cryptage en plus par un système bijectif qui va inclure la date et l'heure courante). Dans ce cas, il faut fournir la date du mobile en clair avec les requêtes pour le déchiffrement.
 
 Système : Cryptage + Date -> Retrouve le password crypté.
 
-C'est plus simple, pas de priorité au cryptage...
+Remarque générale :
 
-OU
+  * De toute façon, on ne donne pas de priorité au cryptage dans le projet...
 
-S	M
-<user+password
-	idSession>
+== 8.2. Système de sessionID ==
 
-<idSession
-<...
+Protocole (Fonctionnement des serveurs d'applications Tomcat) :
 
-Au démarrage : envoi du login + password crypté (SHA avec 1 clé)
-Suite authentification (serveur)
-Retourne ID session.
-Pour toute requête, que ID session.
-Côté serveur, garde mapping ID session <-> ID Session.
+  * Au démarrage, envoi du login + password crypté (SHA avec 1 clé) ;
+  * Authentification (serveur) ;
+  * Retourne un ID session conservé par le serveur ;
+  * Pour toute requête suivante, on n'utilise que l'ID session ;
+  * Côté serveur, garde mapping ID session <-> ID Session.
 
-(Fonctionnement des serveurs d'appli TomCat).
+Si déconnexion puis nouvelle connexion, on change de sessionID.
 
-Profil : Création compte
-Authentification
-IDSessions sur le schéma
+Remarques :
 
+  * Profil : Permettre la création d'un compte, l'authentification ;
+  * Ajouter les sessionIDs sur le schéma
 
+----
 
-
-
-
-Semaine prochaine :
-*******************
+= 9. Bilan et travail à faire pour la semaine prochaine =
 
 Spéc. fonctionnelles à finaliser.
 Définir les tâches de développement pour la semaine prochaine.
@@ -280,12 +278,4 @@ Stocker en plus dans le module Profil les catégories pour optimiser.
 
 Essayer de trouver un découpage administratif, etc; de Lyon, voir si format pour importer dans le système.
 
-
-
-
-
-
-ID :
-****
-
-Parler de centres d'intérêts.
+= 10. Prochaine réunion =
