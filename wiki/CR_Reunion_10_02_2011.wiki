@@ -23,7 +23,8 @@ MOE :
   # Scénario 3 : Injection de documents ;
   # Scénario 4 : Service de notification ;
   # Réponses aux questions de la MOE ;
-  # Réflexion sur l'identification des utilisateurs.
+  # Réflexions sur le cache utilisateur au niveau du serveur ;
+  # Réflexions sur l'identification des utilisateurs.
 
 = 1. Présentation du nouveau schéma d'architecture =
 
@@ -72,7 +73,8 @@ Protocole applicatif d'un SAM :
 
 L'ESB réalise une *chorégraphie des services* : qu'est ce qui doit être appelé avant, après. Connaît l'enchainement des processus. Peut également faire des transformation de protocoles techniques (REST -> CSV par exemple).
 
-Remarque : La configuration de l'ESB à spécifier.
+Remarque :
+  * La configuration de l'ESB à spécifier.
 
 == 2.3. Solutions existantes ==
 
@@ -97,7 +99,7 @@ API :
 
 == 2.4. Cas de notre projet ==
 
-*Intérêt d'utiliser ServiceMix 4.2/FuseESB 4.3 dans le projet.*
+*Intérêt d'utiliser ServiceMix 4.2/FuseESB 4.3 dans le projet.*<br/>
 Intégration : Faire l'intégration avec le service frontal comme spécifié puis remplacer ce service par une passerelle (retransmet sans faire de modifications) puis par un ESB complet.
 
 = 3. Scénario 1 : Enregistrement des positions =
@@ -144,20 +146,14 @@ Utilisation des englobements :
   * Arrondissement 3 60% ;
   * Part-Dieu 65% ;
 
-Paramètres passés à Indexation : A3 | Part-Dieu et (H, H+1)
-Renvoi : document CIVille, CICommercial.
-
-Indexation : Si on sait que le document est Commercial, chercher les zones qui sont commerciales.
-
-Stocker les deux zones (CIVille, CICommercial voire d'autres CI) dans la BD Habitudes.
-
-*L'engloblement peut être calculé automatiquement avec SGBDGeo.*<br/>
-* Envoyer les centres d'intérêts avec la requête du client.*
-
-+ Système de MaJ avec la répartition des pondérations sur les nouvelles sous-zones.
+Ici, les paramètres passés à Indexation seront : A3 | Part-Dieu et (H, H+1). Le retour est les documents associés aux CIVille, CICommercial, *CCentres d'affaires*.
 
 Remarques :
-
+  * Indexation : Si on sait que le document est Commercial, chercher les zones qui sont commerciales.
+  * Stocker les deux zones (CIVille, CICommercial voire d'autres CI) dans la BD Habitudes.
+  * *L'engloblement peut être calculé automatiquement avec SGBDGeo.*<br/>
+  * * Envoyer les centres d'intérêts avec la requête du client.*
+  * Système de MaJ avec la répartition des pondérations sur les nouvelles sous-zones.
   * La somme des probabilités de présence pour les zones d'un centre d'intérêt est de 100% ;
   * Le filtrage par les seuils pourra être remplacé par un filtrage "n plus probables par catégorie" ;
   * On gardera quand même un petit filtrage (on accepte pas les 2 % par exemple).
@@ -167,83 +163,73 @@ Remarques :
 
 Lors de la phase d’agrégation, on force la catégorie d'un document.
 Au final, Zone : Nom et Document : Texte, intervalle, zones (selon les centres d'intérêts).
--> 1 document avec une seule catégorie et 1 zone avec 1 catégorie.
+
+Remarque :
+  * 1 document avec une seule catégorie et 1 zone avec 1 catégorie.
 Possibilité d'avoir des documents dans 2 catégories, pas trop sinon inutile.
+  * Le forçage de la catégorie d'un document pourrait être évité en réutilisant ce qui a été fait dans l'ancien projet Inpr@net. Pas à faire pour le moment.
 
 == 3.5. Précisions sur les BDD Décisionnelles ==
 
-Stocker pour le Brut : fichier brut, pas de problème.
-Requêtage : Précalcul des habitudes des utilisateurs *toutes les nuits* + historisation (pas de calcul sur 1 an -> 1 mois ou 2 mois)
--> voir si existe des solutions libres...
--> Demander à Miquel et a Tchounikine
+Pour les coordonnées brutes, pas de problème si stockage dans un fichier brut.
 
-Limite stockage sur 2 semaines si vraies habitudes.
+Pour le requêtage, idée d'un *précalcul des habitudes des utilisateurs toutes les nuits* + historisation (*pas de calculs/stockage sur 1 an -> 1 mois ou 2 mois*) : *voir si existe des solutions libres* et demander aux professeurs.
 
----
+Remarque :
+  * On pourrait même limiter le stockage sur 2 semaines si on ne veut que des vraies habitudes.
 
-= Scénario 3 : Injection de documents =
+= 4. Scénario 3 : Injection de documents =
 
-Thésaurus, avec les zones ou longitude, latitude (via un batch de lancement).
-Ajouter dans spécifications : + Coordonnées des lieux-dits.
-Recherche sur les zones avec mots-clés et adresses -> voir si matching avec une seule zone.
+Ne pas oublier le *thésaurus*, avec les zones ou (longitude, latitude) (via un batch de lancement) -> À ajouter dans spécifications.
 
-! Filtrage des faux-positifs en utilisant la catégorie des zones selon la catégorie du document.
-Idée : éliminer le plus possible en amont.
+Remarques :
+  * Coordonnées des lieux-dits.
+  * Recherche sur les zones avec mots-clés et adresses -> voir si matching avec une seule zone ;
+  * Filtrage des faux-positifs en utilisant la catégorie des zones selon la catégorie du document.
 
-Scénario 4 :
-************
+*Idée générale des améliorations : éliminer le plus possible en amont.*
 
-Notification.
-Evènement urgent : flag sur les documents, possibilité de flagger par l'administrateur.
+= 5. Scénario 4 : Service de notification =
 
-Service frontal.
+Comment est détecté un évènement urgent : Flag sur les documents, possibilité de flagger par l'administrateur.
 
+= 6. Réponses aux questions de la MOE =
 
-Questions :
-***********
+Idées :
 
-Garder URI.
-Donner dates dans l'IHM.
-DOnner zone ?
-Onglets avec catégories dépendent du paramètrage.
+  * Garder l'URI pour les documents stockés ;
+  * Donner les dates dans l'IHM ou pas si surchargé ;
+  * Donner zone aussi ? À voir, l'ergonomie sur les mobiles est un domaine assez flou pour l'instant.
+  * Les onglets/catégories de l'IHM dépendent du paramètrage effectué par l'utilisateur.
 
-Requête : Requête seulement si pas beaucoup de déplacement pour le service (Différence position initiale, position finale)...
-Fréquence temps + Différence.
-Problème changement de zones : Distance zone >> Distance seuil non envoi.
+Améliorations à faire :
 
-Si arrêt du service et déconnexion, envoi message pour finir l'habitude pour finir la plage de donnée calculée.
+  * Requête : Requête seulement si pas beaucoup de déplacement pour le service (Différence position initiale, position finale)... ;
+  * Problème si changement de zones avec le système proposé ci-dessus : Distance zone >> Distance seuil non envoi.
+  * Si arrêt du service et déconnexion, envoi d'un message pour finir l'habitude et la plage de donnée calculée.
 
-Système non fait pour beaucoup de documents, pas besoin de beaucoup d'informations.
+Remarques :
 
-Plus, ajout d'un seuil en plus du "n plus probables".
-Pas de coulage avec l'ancien Inpr@net.
+  * Système non fait pour beaucoup de documents, pas besoin de beaucoup d'informations -> La quantité d'information à transmettre n'est pas aussi importante que ça ;
 
+= 7. Réflexions sur le cache utilisateur au niveau du serveur =
 
 Comment savoir quels documents à envoyer pour un client :
-"Je sais les documents que tu as déjà" -> Cache par utilisateur.
+"Je sais les documents que tu as déjà" -> 1 Cache par utilisateur.
 
-Catégorie # Centre d'intérêt
-Centres d'affaires
+= 8. Réflexions sur l'identification des utilisateurs =
 
-Comment calculer l'ID ?
+Idée : ne pas stocker d'informations permettant de retrouver l'utilisateur à partir des données qui sont stockées dans le système.
+Éviter d'envoyer toujours les mêmes informations au serveur par client pour bloquer les tentatives d'écoutes).
 
-Essayer de trouver un découpage administratif, etc; de Lyon, voir si format pour importer dans le système.
+Au final, on garde l'idée d'un login et d'un password pour un utilisateur.
 
+Idée pour les 2 solutions : ne jamais transmettre le password en clair, toujours le crypter avec SHA.
 
-Semaine prochaine :
-*******************
+Stocké par le profil : login, password, centres d'intérêt, documents déjà transmis à l'utilisateur.
 
-Spéc. fonctionnelles à finaliser.
-Définir les tâches de développement pour la semaine prochaine.
-Spéc techniques à faire après le développement.
+= 8.1. Cryptage avec la date =
 
-Stocker en plus dans le module Profil les catégories pour optimiser.
-
-
-User/Password :
-***************
-
-Profil : login, password, centres d'intérêt.
 Trouver un système de cryptage bijectif.
 
 Mobile : User + Password -> SHA (clé) -> Password crypté stocké dans GeoHabit.
@@ -277,6 +263,26 @@ Côté serveur, garde mapping ID session <-> ID Session.
 Profil : Création compte
 Authentification
 IDSessions sur le schéma
+
+
+
+
+
+
+Semaine prochaine :
+*******************
+
+Spéc. fonctionnelles à finaliser.
+Définir les tâches de développement pour la semaine prochaine.
+Spéc techniques à faire après le développement.
+
+Stocker en plus dans le module Profil les catégories pour optimiser.
+
+Essayer de trouver un découpage administratif, etc; de Lyon, voir si format pour importer dans le système.
+
+
+
+
 
 
 ID :
