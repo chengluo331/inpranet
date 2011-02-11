@@ -266,16 +266,25 @@ Remarques :
   * Profil : Permettre la création d'un compte, l'authentification ;
   * Ajouter les sessionIDs sur le schéma
 
-----
-
 = 9. Bilan et travail à faire pour la semaine prochaine =
 
-Spéc. fonctionnelles à finaliser.
-Définir les tâches de développement pour la semaine prochaine.
-Spéc techniques à faire après le développement.
+Bilan :
 
-Stocker en plus dans le module Profil les catégories pour optimiser.
+  * Catgéorisation des zones : on doit parler de centres d'intérêts plutôt que de catégories pour les zones ;
+  * Optimisation des communications : on peut optimiser les communications en effectuant le travail de filtrage en amont ;
+  * Profil : on peut stocker le login, le password crypté, les infos sur les documents qu'a actuellement l'utilisateur et les centres d'intérêts (paramètres) dans le système pour filtrer directement.
 
-Essayer de trouver un découpage administratif, etc; de Lyon, voir si format pour importer dans le système.
+Travail à faire :
+
+  * Spécifications fonctionnelles à finaliser avant *Mercredi midi* pour qu'une première lecture puisse être faite avant la prochaine réunion ;
+  * Essayer de trouver un découpage administratif (ou d'autres découpages) de Lyon, voir le format et voir comment importer dans le système (si ce n'est pas déjà fait).
+
+Points à voir lors de la prochaine réunion MOA :
+
+  * Valider les spécifications fonctionnelles ;
+  * Spécifications techniques à faire après le développement ;
+  * Définir les tâches de développement.
 
 = 10. Prochaine réunion =
+
+Il a été convenu d'une réunion le *Jeudi 17 février à 14 heures*, toujours au même lieu.
