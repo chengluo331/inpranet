@@ -257,7 +257,7 @@ Protocole (Fonctionnement des serveurs d'applications Tomcat) :
   * Authentification (serveur) ;
   * Retourne un ID session conservé par le serveur ;
   * Pour toute requête suivante, on n'utilise que l'ID session ;
-  * Côté serveur, garde mapping ID session <-> ID Session.
+  * Côté serveur, garde mapping ID session ↔ ID Session.
 
 Si déconnexion puis nouvelle connexion, on change de sessionID.
 
