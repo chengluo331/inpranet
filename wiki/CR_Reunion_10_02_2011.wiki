@@ -17,14 +17,7 @@ MOE :
 
 = Points abordés =
 
-  # Présentation du nouveau schéma d'architecture ;
-  # Entreprise Serial Bus (ESB) et Service-Oriented Architecture (SOA) ;
-  # Scénario 1 : Enregistrement des positions ;
-  # Scénario 3 : Injection de documents ;
-  # Scénario 4 : Service de notification ;
-  # Réponses aux questions de la MOE ;
-  # Réflexions sur le cache utilisateur au niveau du serveur ;
-  # Réflexions sur l'identification des utilisateurs.
+<wiki:toc max_depth="1" />
 
 = 1. Présentation du nouveau schéma d'architecture =
 
