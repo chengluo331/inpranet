@@ -47,10 +47,8 @@ La prochaine réunion est fixée au Jeudi 17 Mars
 
 
 = Répartition des tâches =
-Mobile: yiquan et Cheng
-Service frontal: Yoann
-Indexation : Stéphane et Cheng
-Zones: Wenshao et Yoann
-Habitude: Yiquan et wenshao
-
-
+ * Mobile: yiquan et Cheng
+ * Service frontal: Yoann
+ * Indexation : Stéphane et Cheng
+ * Zones: Wenshao et Yoann
+ * Habitude: Yiquan et wenshao
