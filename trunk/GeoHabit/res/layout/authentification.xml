@@ -17,7 +17,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:textSize="20sp"
-			android:typeface="serif"> 
+			android:typeface="sans"> 
 		</TextView>	
 		
 		<EditText android:text="" 
@@ -31,7 +31,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:textSize="20sp"
-			android:typeface="serif">
+			android:typeface="sans">
 		</TextView>
 	
 		<EditText android:text="" 
@@ -45,7 +45,8 @@
 			android:id="@+id/button_login" 
 			android:layout_gravity="center"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:typeface="sans">
 		</Button>
 	</LinearLayout>
 </LinearLayout>

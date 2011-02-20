@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, GeoHabit!</string>
     <string name="app_name">GeoHabit</string>
+    <string name="authentification">Authentification</string>
 </resources>
