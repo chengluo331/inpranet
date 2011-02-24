@@ -2,5 +2,9 @@
 <resources>
     <string name="hello">Hello World, GeoHabit!</string>
     <string name="app_name">GeoHabit</string>
-    <string name="authentification">Authentification</string>
+    
+    <!-- string utilisé dans main.xml -->
+	<string name="authentification">Authentification</string>
+	<string name="login">Identifiant</string>
+	<string name="password">Mot de passe</string>
 </resources>
