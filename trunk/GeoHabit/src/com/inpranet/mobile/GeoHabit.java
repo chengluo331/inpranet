@@ -7,8 +7,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 public class GeoHabit extends Activity implements OnClickListener{
+	/** Tag pour le log */
 	private static final String TAG = "GeoHabit";
-    /** Called when the activity is first created. */
+   
+	/** 
+	 * Méthode appelée lorsque l'activité est créé
+	 * 
+	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +24,9 @@ public class GeoHabit extends Activity implements OnClickListener{
         buttonAuthentification.setOnClickListener(this);
     }
 
+    /**
+     * Click sur un boutton
+     */
 	public void onClick(View v) {
 		Intent i = new Intent(this, Authentification.class);
 		startActivity(i);
