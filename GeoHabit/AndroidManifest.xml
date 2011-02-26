@@ -13,7 +13,17 @@
         <activity android:name=".Authentification" android:label="@string/authentification">
         </activity>
 
-    </application>
+    <service android:name=".LocalizationService"></service>
+    
+    <receiver android:name=".ServiceManager" 
+ 		android:enabled="true" 
+		 android:exported="false"
+		 android:label="ServiceManager">
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+    </intent-filter>
+</receiver>
+</application>
 
 
 <uses-sdk android:minSdkVersion="7"></uses-sdk>

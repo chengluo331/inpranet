@@ -9,9 +9,14 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 public class Authentification extends Activity implements OnClickListener{
+	/** Tag pour le log */
 	private static final String TAG = "Authentification";
 
 	@Override
+	/**
+	 * Méthode appelée lorsque l'activité est créé
+	 * afficher l'interface et définir les listeners
+	 */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.authentification);
@@ -20,13 +25,18 @@ public class Authentification extends Activity implements OnClickListener{
         loginButton.setOnClickListener(this);
     }
 
+	/**
+	 * Click sur un boutton
+	 */
 	public void onClick(View v) {
 		switch(v.getId()) {
+		// Boutton valider
 		case R.id.button_login:
 			//Recuperer le login et le mdp entres
 			EditText editLogin = (EditText) findViewById(R.id.edit_login);
 			String login = editLogin.getText().toString();
 			Log.d(TAG,"login = " + login);
+			
 			EditText editPassword = (EditText) findViewById(R.id.edit_password);
 			String password = editPassword.getText().toString();		
 			Log.d(TAG,"mdp = " + password);
@@ -37,8 +47,8 @@ public class Authentification extends Activity implements OnClickListener{
 			Intent i = new Intent(this, GeoHabit.class);
 			startActivity(i);
 			break;
-		//Autres bouttons
-		}
 		
+		//Autres bouttons
+		}		
 	}
 }
