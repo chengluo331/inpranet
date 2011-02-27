@@ -8,13 +8,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
+/**
+ * Activité pour gérer l'authentification de l'utilisateur
+ * @author yqzhou
+ *
+ */
 public class Authentification extends Activity implements OnClickListener{
 	/** Tag pour le log */
 	private static final String TAG = "Authentification";
 
 	@Override
 	/**
-	 * Méthode appelée lorsque l'activité est créé
+	 * Procédure appelée lorsque l'activité est créé
 	 * afficher l'interface et définir les listeners
 	 */
     public void onCreate(Bundle savedInstanceState) {

@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+/**
+ * Activité qui gère l'interface principale
+ * @author yqzhou
+ *
+ */
 public class GeoHabit extends Activity implements OnClickListener{
 	/** Tag pour le log */
 	private static final String TAG = "GeoHabit";
    
 	/** 
-	 * Méthode appelée lorsque l'activité est créé
+	 * Procédure appelée lorsque l'activité est créé
 	 * 
 	 */
     @Override
