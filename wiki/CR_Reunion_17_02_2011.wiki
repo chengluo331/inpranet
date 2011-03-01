@@ -19,7 +19,10 @@ MOE :
 
 = Premiers retours des spécifications fonctionnelles
 
- * Il n'y a pas de cookie dans une application mobile. Le login et le mdp crypté sont stocké en local. Le client mobile envoie le login en clair et le mdp crypté au système central.
+ * Il n'y a pas de cookie dans une application mobile (remplacer _cookie_ par _jeton_).
+ * De même, remplacer _cache_ par _mémoire locale_.
+ * Le login et le mdp crypté sont stocké en local. Le client mobile envoie le login en clair et le mdp crypté au système central.
+ * Parler de durée d'inactivité de la session.
  * Le client mobile échange des données avec le serveur en format JSON. A l'intérieur du système central, on fait SOAP. Le service frontal s'occupe de faire la transformation et l'aiguillage.
  * On ne réalise pas la fonctionnalité bookmark.
  * Le calcul des zones à partir de la longitude et la latitude se fera chaque nuit et non pas en temps réel.
@@ -43,7 +46,7 @@ La prochaine réunion est fixée au Jeudi 17 Mars
 = Question technique =
  * Les données de tous les modules sont centralisées dans un même schéma d'une base de données.
  * On utilise Hibernate comme unité de persistence commune à tous les modules.
- * On peut utiliser soapUI pour les tests de sénarios.
+ * On peut utiliser soapUI pour les tests de scénarios.
  * utilisation de Spring/Hibernate
  * OSGI ?
  * Maven ou Ant
