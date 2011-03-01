@@ -16,6 +16,7 @@
  * Lien : http://www.oracle.com/technetwork/java/javase/downloads/index.html
  * Version : 6 Update 24
  * Fichier : jre-6u24-windows-i586.exe
+ * Remarque : Pour les technologies Java, prendre la version Windows multi-language.
 
 *Description*<br/>
 Un JRE est un environnement nécessaire à l'exécution de programmes Java. Celui-ci contient une JVM, des librairies fondamentales ainsi que des petits composants et appelets supplémentaires.
@@ -51,6 +52,7 @@ Un JRE privé est un JRE qui est automatiquement installé avec un JDK. Celui-ci
  * Lien : http://www.oracle.com/technetwork/java/javase/downloads/index.html
  * Version : 6 Update 24
  * Fichier : jdk-6u24-windows-i586.exe
+ * Remarque : Pour les technologies Java, prendre la version Windows multi-language.
 
 *Description*<br/>
 Un JDK, avec un ensemble de composants utiles pour les développeurs. Se limite aux usages courants (pas de gestion de serveurs).
@@ -72,6 +74,7 @@ Un JDK, avec un ensemble de composants utiles pour les développeurs. Se limite 
  * Lien : http://www.oracle.com/technetwork/java/javaee/downloads/index.html
  * Version : 6 Update 1
  * Fichier : java_ee_sdk-6u1-windows-ml.exe
+ * Remarque : Pour les technologies Java, prendre la version Windows multi-language.
 
 *Description*<br/>
 Cette plateforme fournit des composants supplémentaires à ceux du JDK pour la programmation sur serveurs (exemples d'API : javax.ejb.*, javax.persistance.*, etc.). Il faut donc installer un JDK puis installer le Java EE pour assurer un fonctionnement normal. Enfin, Java EE SDK est également livré avec GlassFish, un serveur d'application, au même titre qu'Apache Geronimo ou que JBoss AS.
@@ -126,6 +129,7 @@ donc les spécifications des Java Servlet et des JavaServer Pages (avec Catalina
  * Lien : http://www.springsource.com/download/community
  * Version : 3.0.5.RELEASE (Spring Framework) ; 2.0.0.RELEASE (Spring Web Services)
  * Fichier : spring-framework-3.0.5.RELEASE.zip ; spring-ws-2.0.0.RELEASE-full.zip
+ * Remarque : L'enregistrement n'est obligatoire, cliquez sur le lien qui mène à la page de téléchargement.
 
 *Description*<br/>
 Spring est un framework Java qui a eu du succès nottament du fait de l'apport d'un nouveau modèle, plus efficace que celui des Enterprise JavaBeans, concernant les composants logiciels côté serveur. Spring offre donc plusieurs fonctionnalités pour les applications Java : Data access, Transaction management, Model-view-controler, Batch processing, etc.
