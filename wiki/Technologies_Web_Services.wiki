@@ -1,6 +1,8 @@
 #summary Présentation des technologies qui seront utilisées dans ce projet
 
-=Liste des technologies=
+_Ce document présente les différents outils et les logiciels qui seront utilisés dans ce projet. L'installation et la configuration de ces outils sont traitées dans le document suivant : [http://code.google.com/p/inpranet/wiki/Environnement_Developpement_2]_
+
+=Sommaire=
 
 <wiki:toc max_depth="1" />
 
