@@ -12,7 +12,11 @@ Si l'installation d'un plugin Eclipse prend beaucoup de temps (blocage à l'éta
  * Référence : http://code.google.com/eclipse/docs/faq.html#longinstall
  * Manage Sites, décocher tout sauf ceux qui vous intéressent.
 
-http://code.google.com/p/inpranet/source/browse/trunk/GeoHabit/res/drawable-mdpi/icon.png
+*Prérequis*<br/>
+Voici les fichiers qui vont être utilisés pour mettre en place l'environnement de développement.
+
+http://inpranet.googlecode.com/svn/wiki/screenshots/00.PNG
+
 
 =01. jre-6u24-windows-i586.exe=
 
@@ -95,7 +99,13 @@ L'installateur propose Java DB, qui sera installé dans un autre répertoire que
 
 *Configuration*
  * On peut installer le plugin pour le serveur GlassFish (mais ce n'est pas nécessaire pour nous) ;
- * Configurer Eclipse pour avoir un serveur Tomcat dans le Workspace, en utilsant le JDK comme JRE par défaut.
+ * Configurer Eclipse pour avoir un serveur Tomcat dans le Workspace, en utilsant le JDK comme JRE par défaut (voir les images ci-dessous).
+
+*Ajout d'un JRE, ici le JDK sera considéré comme tel*<br/>
+http://inpranet.googlecode.com/svn/wiki/screenshots/15.PNG
+
+*Configuration du serveur Tomcat pour utiliser le JDK*<br/>
+http://inpranet.googlecode.com/svn/wiki/screenshots/16.PNG
 
 =06. apache-maven-3.0.2-bin.zip=
 
@@ -169,6 +179,11 @@ L'installateur propose Java DB, qui sera installé dans un autre répertoire que
 *Configuration*<br/>
 On peut avoir un peu plus d'intégration avec Eclipse en utilisant le plugin STS, mais ce n'est pas nécessaire (et en plus, pas très clean lors de l'installation), il n'y a que les JARs qui nous intéressent.
 
+*Installation du SpringTools Suite (STS)*<\br>
+Ne cocher que les cases qui sont affichées ci-dessous sinon l'installation ne se fera pas...<\br>
+
+http://inpranet.googlecode.com/svn/wiki/screenshots/19.PNG
+
 =09. apache-ant-1.8.2-bin.zip=
 
 *Tutoriaux*
@@ -202,4 +217,70 @@ Entrer "ant -version" pour voir si Ant a bien été installé.
  * C:\hibernate
 
 *Configuration*
- * On peut également installer le plugin Hibernate Tools pour Eclipse.
+ * On peut également installer le plugin Hibernate Tools pour Eclipse (voir la capture ci-dessous).
+
+http://inpranet.googlecode.com/svn/wiki/screenshots/20.PNG
+
+=Configuration finale=
+
+*Variables d'environnement Windows*<br/>
+
+{{{
+
+}}}
+
+*Programmes installés*<br/>
+
+{{{
+C:\>dir /B/A:D
+Documents and Settings
+eclipse
+glassfishv3
+hibernate
+I386
+opt
+Program Files
+RECYCLER
+spring-framework
+System Volume Information
+WINDOWS
+Workspace
+
+C:\>dir "C:\Program Files" /B/A:D
+Apache Software Foundation
+ComPlus Applications
+Fichiers communs
+Internet Explorer
+Java
+Messenger
+microsoft frontpage
+Movie Maker
+MSN
+MSN Gaming Zone
+NetMeeting
+Online Services
+Outlook Express
+PostgreSQL
+Services en ligne
+Sun
+Uninstall Information
+Virtual PC Integration Components
+Windows Media Player
+Windows NT
+WindowsUpdate
+xerox
+
+C:\>dir "C:\Program Files\Apache Software Foundation" /B/A:D
+apache-ant-1.8.2
+apache-cxf-2.3.2
+apache-maven-3.0.2
+Tomcat 7.0
+
+C:\>dir "C:\Program Files\Java" /B/A:D
+jdk1.6.0_24
+jre6
+}}}
+
+*Plugins Eclipse*<br/>
+
+http://inpranet.googlecode.com/svn/wiki/screenshots/21.PNG
