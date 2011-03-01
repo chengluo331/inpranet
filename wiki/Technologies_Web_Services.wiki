@@ -80,7 +80,7 @@ Java EE contient égalment
 ----
 *> Précisions sur le vocabulaire Java*
 
- * Java EE SDK = Java SE SDK (= JDK) + JRE (= Platform) + Compléments propre au Java EE SDK<br/>
+ * Java EE SDK = Java SE SDK (= JDK) + JRE (= Platform) + Compléments propre au Java EE SDK
  * Java EE Platform = Java EE SDK, ce n'est qu'un SDK, la notion de plate-forme étant une interpolation du 2ème degré.
  * JRE = Java SE Runtime Environment (voir ensuite la différence entre JRE public et JRE privé).
 ----
