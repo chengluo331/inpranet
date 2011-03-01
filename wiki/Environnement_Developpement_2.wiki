@@ -65,6 +65,8 @@ L'installateur propose Java DB, qui sera installé dans un autre répertoire que
 *Notes*
  * Débloquer le serveur Glassfish vis-à-vis du pare-feu Windows.
 
+http://inpranet.googlecode.com/svn/wiki/screenshots/00.PNG
+
 =04. apache-tomcat-7.0.8.exe=
 
 *Procédure*
