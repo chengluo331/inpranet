@@ -239,6 +239,8 @@ C:\Documents and Settings\XPMUser>PATH
 PATH=C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Java\jdk1.6.0_24\bin;C:\Program Files\Apache Software Foundation\apache-maven-3.0.2\bin;C:\Program Files\Apache Software Foundation\apache-ant-1.8.2/bin
 }}}
 
+http://inpranet.googlecode.com/svn/wiki/screenshots/23.PNG
+
 *Programmes installés*<br/>
 
 {{{
