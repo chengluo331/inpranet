@@ -23,7 +23,8 @@ _Ce document présente les différents outils et les logiciels qui seront utilis
 *Description*<br/>
 Un JRE est un environnement nécessaire à l'exécution de programmes Java. Celui-ci contient une JVM, des librairies fondamentales ainsi que des petits composants et appelets supplémentaires.
 
-=Java Development Kit (JDK)=
+----
+*> Java Development Kit (JDK)*
 
 *Documentation*
  * http://en.wikipedia.org/wiki/Java_Development_Kit
@@ -32,7 +33,6 @@ Un JRE est un environnement nécessaire à l'exécution de programmes Java. Celu
 *Description*<br/>
 Un SDK (ou une partie du SDK) pour développer en Java. Contient les outils suivants : java, javac, jdb, etc. À préciser que le JDK fournit également un JRE (qui contient une JVM). On pourra noter que Java SE est un JDK et qu'il n'est pas le seul (OpenJDK par exemple).
 
-----
 *> Public JRE vs Private JRE*
 
 *Documentation* ||
