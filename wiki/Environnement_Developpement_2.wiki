@@ -221,6 +221,26 @@ Entrer "ant -version" pour voir si Ant a bien été installé.
 
 http://inpranet.googlecode.com/svn/wiki/screenshots/20.PNG
 
+=11. postgresql-9.0.3-1-windows.exe=
+
+*Tutoriaux*
+ * http://www.postgresql.org/docs/7.4/static/charset.html
+ * http://en.wikipedia.org/wiki/PostGIS
+
+*Procédure*
+ * Exécuter l'installateur.
+
+* Répertoire par défaut*
+ * C:\Program Files\PostgreSQL\9.0
+ * C:\Program Files\PostgreSQL\9.0\data (pour les données)
+
+*Configuration*
+ * Numéro de port : 5432 (par défaut)
+ * Localisation : French, France
+
+*Notes*
+ * À la fin de l'assistant d'installation, on peut aussi installer PostGIS 1.5.2-3 à l'aide de Stack Builder.
+
 =Configuration finale=
 
 *Variables d'environnement Windows*<br/>
