@@ -8,9 +8,11 @@
 
 La procédure de mise en place de l’environnent décrit ci-dessous a été testée sur un environnement vide, à l'aide d'une machine virtuelle (installation fraîche de Windows XP, sans aucune variable d'environnement prédéfinie et pas d'autres applications préinstallées).
 
-Si l'installation d'un plugin Eclipse prend beaucoup de temps (blocage à l'étape "Camcimating requirements and depedencies"), faire les actions suivantes :
-* Référence : http://code.google.com/eclipse/docs/faq.html#longinstall
-* Manage Sites, décocher tout sauf ceux qui vous intéressent.
+Si l'installation d'un plugin Eclipse prend beaucoup de temps (blocage à l'étape "Calculating requirements and depedencies"), faire les actions suivantes :
+ * Référence : http://code.google.com/eclipse/docs/faq.html#longinstall
+ * Manage Sites, décocher tout sauf ceux qui vous intéressent.
+
+http://code.google.com/p/inpranet/source/browse/trunk/GeoHabit/res/drawable-mdpi/icon.png
 
 =01. jre-6u24-windows-i586.exe=
 
