@@ -1,0 +1,203 @@
+#summary Mise en place de l'environnement de développement
+
+=Sommaire=
+
+<wiki:toc max_depth="1" />
+
+=Introduction=
+
+La procédure de mise en place de l’environnent décrit ci-dessous a été testée sur un environnement vide, à l'aide d'une machine virtuelle (installation fraîche de Windows XP, sans aucune variable d'environnement prédéfinie et pas d'autres applications préinstallées).
+
+Si l'installation d'un plugin Eclipse prend beaucoup de temps (blocage à l'étape "Camcimating requirements and depedencies"), faire les actions suivantes :
+* Référence : http://code.google.com/eclipse/docs/faq.html#longinstall
+* Manage Sites, décocher tout sauf ceux qui vous intéressent.
+
+=01. jre-6u24-windows-i586.exe=
+
+*Tutoriaux*
+ * http://www.oracle.com/technetwork/java/javase/index-137561.html
+ * http://www.oracle.com/technetwork/java/javase/jrereadme-182762.html
+
+*Procédure*
+ * Exécuter l'installateur.
+
+*Répertoire par défaut*
+ * C:\Program Files\Java\jre6\
+
+*Contenu*<br/>
+Aucun autre contenu que les fichiers contenus dans le répertoire d'installation avec une exception pour les programmes java, javaw, javaws dans C:\WINDOWS\system32 (contenu dans le PATH).
+
+*Vérification*
+ * Entrer "java -version" dans un interpréteur de commandes Windows.
+
+=02. jdk-6u24-windows-i586.exe=
+
+*Tutoriaux*
+ * http://www.oracle.com/technetwork/java/javase/index-137561.html
+ * http://www.oracle.com/technetwork/java/javase/readme-142177.html
+
+*Procédure*
+ * Exécuter l'installateur.
+
+*Répertoire par défaut*
+ * C:\Program Files\Java\jdk1.6.0_24
+
+*Contenu*<br/>
+L'installateur propose Java DB, qui sera installé dans un autre répertoire que le JDK. Le JDK fournit un JRE privé.
+
+=03. java_ee_sdk-6u1-windows-ml.exe=
+
+*Tutoriaux*
+ * http://www.youtube.com/watch?v=m_33ZHYCjf8&feature=related
+
+*Procédure*
+ * Exécuter l'installateur.
+
+*Répertoire par défaut*
+ * C:\glassfishv3
+
+*Notes*
+ * Débloquer le serveur Glassfish vis-à-vis du pare-feu Windows.
+
+=04. apache-tomcat-7.0.8.exe=
+
+*Procédure*
+ * Exécuter l'installateur.
+
+*Répertoire par défaut*
+ * C:\Program Files\Apache Software Foundation\Tomcat 7.0
+
+*Vérification*
+ * Lancer l'application "Monitor Tomcat" pour pouvoir démarrer le serveur Tomcat
+ * Essayer ensuite d'afficher la page "http://localhost:8080" depuis votre navigateur Web
+ * Vous pouvez maintenant arrêter les applications que vous venez de lancer.
+
+=05. eclipse-jee-helios-SR2-win32.zip=
+
+*Tutoriaux*
+ * http://wiki.eclipse.org/FAQ_Where_do_I_get_and_install_Eclipse%3F
+ * http://publib.boulder.ibm.com/infocenter/wf/v2r7m0/topic/org.eclipse.platform.doc.user/tasks/running_eclipse.htm
+ * http://stackoverflow.com/questions/165230/is-the-offical-sun-java-ee-tutorial-the-best-way-to-learn-how-to-make-java-web-ap
+ * http://help.eclipse.org/galileo/topic/org.eclipse.jdt.doc.user/gettingStarted/qs-2.htm
+ * http://www.youtube.com/watch?v=aBjlR9HoR50
+ * http://www.youtube.com/watch?v=9Kf5m7bMu74&feature=related
+ * http://wiki.eclipse.org/WTP_Tomcat_FAQ
+ * http://www.eclipse.org/webtools/initial-contribution/IBM/evalGuides/ServerToolsEval.html
+ * http://www.youtube.com/user/pgscispike
+
+*Procédure*
+ * Extraire le contenu de l'archive.
+
+*Répertoire par défaut*
+ * C:\eclipse
+
+*Configuration*
+ * On peut installer le plugin pour le serveur GlassFish (mais ce n'est pas nécessaire pour nous) ;
+ * Configurer Eclipse pour avoir un serveur Tomcat dans le Workspace, en utilsant le JDK comme JRE par défaut.
+
+=06. apache-maven-3.0.2-bin.zip=
+
+*Tutoriaux*
+ * http://maven.apache.org/download.html#Installation
+ * http://maven.40175.n5.nabble.com/naming-now-that-Maven-3-is-out-td3210546.html
+ * http://maven.apache.org/eclipse-plugin.html
+ * http://m2eclipse.sonatype.org/
+ * http://m2eclipse.sonatype.org/installing-m2eclipse.html
+ * http://www.jroller.com/JOKe/entry/configure_eclipse_3_3_wtp
+ * http://www.youtube.com/watch?v=rdhqAzHZkwc&feature=related
+ * http://www.youtube.com/watch?v=LyuMMqlpOq0&feature=related
+
+*Procédure*
+ * Extraire le contenu de l'archive.
+
+*Répertoire par défaut*
+ * C:\Program Files\Apache Software Foundation\apache-maven-3.0.2
+
+*Configuration*
+ * Ajouter la varaible d'environnement M2_HOME ("C:\Program Files\Apache Software Foundation\apache-maven-3.0.2") et M2 ("%M2_HOME%\bin") ;
+ * Ajouter dans le Path la valeur "%M2%" ;
+ * Vérifier que JAVA_HOME existe ("C:\Program Files\Java\jdk1.6.0_24") et que la valeur du Path contienne bien "%JAVA_HOME%\bin" ;
+ * Installer le plugin m2eclipse (Core et Extras).
+
+*Vérification*
+ * Entrer "mvn --version" dans un interpréteur de commandes Windows.
+
+*Notes*
+ * Apparament, garder le M2 au lieu de M3, même si on est en version 3...
+
+=07. apache-cxf-2.3.2.zip=
+
+*Tutoriaux*
+ * http://www.youtube.com/watch?v=UpZgxutMgYg
+ * http://cxf.apache.org/apache-cxf-232-release-notes.html
+ * http://cxf.apache.org/setting-up-eclipse.html
+ * http://www.ibm.com/developerworks/library/ws-pojo-springcxf/
+ * http://www.developpez.net/forums/f301/java/developpement-web-java/web-services/
+
+*Procédure*
+ * Extraire le contenu de l'archive.
+
+*Répertoire par défaut*
+ * C:\Program Files\Apache Software Foundation\apache-cxf-2.3.2
+
+*Configuration*
+ * Vérifier que les variables d'environnement pour le JDK soient bien présentes.
+ * Suivre le tutoriel pour faire fonctionner CXF avec Eclipse.
+ * Configurer le serveur Tomcat pour qu'il utilise CXF comme Runtime.
+
+=08. spring-framework-3.0.5.RELEASE.zip=
+
+*Tutoriaux*
+ * http://viralpatel.net/blogs/2010/06/spring-3-mvc-create-hello-world-application-spring-3-mvc.html
+ * http://viralpatel.net/blogs/category/spring
+ * http://www.youtube.com/watch?v=OwN6UdDzZNA&feature=related
+ * http://www.youtube.com/watch?v=ZwMwfGNrRtE
+ * http://www.springsource.com/developer/sts
+ * http://dist.springsource.com/release/STS/doc/STS-installation_instructions-2.3.3.M1.pdf
+ * http://blog.springsource.com/2010/07/01/sts-on-eclipse-3-6/
+ * http://forum.springsource.org/archive/index.php/t-100925.html
+ * http://download.springsource.com/release/STS/doc/STS-installation_instructions.pdf
+
+*Procédure*
+ * Extraire le contenu de l'archive.
+
+*Répertoire par défaut*
+ * C:\spring-framework
+
+*Configuration*<br/>
+On peut avoir un peu plus d'intégration avec Eclipse en utilisant le plugin STS, mais ce n'est pas nécessaire (et en plus, pas très clean lors de l'installation), il n'y a que les JARs qui nous intéressent.
+
+=09. apache-ant-1.8.2-bin.zip=
+
+*Tutoriaux*
+ * http://ant.apache.org/manual/install.html
+ * http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.user/gettingStarted/qs-82_create.htm
+
+*Procédure*
+ * Extraire le contenu de l'archive.
+
+*Répertoire par défaut*
+ * C:\Program Files\Apache Software Foundation\apache-ant-1.8.2
+
+*Configuration*
+ * Ajouter ANT_HOME comme variable d'environnement ainsi que %ANT_HOME%/bin dans votre Path.
+
+*Vérification*
+Entrer "ant -version" pour voir si Ant a bien été installé.
+
+=10. hibernate-distribution-3.6.1.Final-dist.zip=
+
+*Tutoriaux*
+ * http://download.jboss.org/jbosstools/updates/
+ * http://programming.manessinger.com/tutorials/an-eclipse-glassfish-java-ee-6-tutorial/
+ * http://www.visualbuilder.com/java/hibernate/tutorial/introduction-to-hibernate/
+ * http://stackoverflow.com/questions/351640/how-to-install-hibernate-tools-in-eclipse
+
+*Procédure*
+ * Extraire le contenu de l'archive.
+
+*Répertoire par défaut*
+ * C:\hibernate
+
+*Configuration*
+ * On peut également installer le plugin Hibernate Tools pour Eclipse.
