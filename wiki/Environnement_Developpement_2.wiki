@@ -1,6 +1,6 @@
 #summary Mise en place de l'environnement de développement
 
-_Ce document constitue une aide dans la mise en place de l'environnement de développement qui sera utilisé. Il précise notamment l'ordre des installations à effectuer ainsi que la configuration de ces logiciels. Pour obtenir des tutoriels sur l'utilisation de ces outils, on pourra se référer au document suivant : http://code.google.com/p/inpranet/wiki/Technologies_Web_Services _
+_Ce document constitue une aide dans la mise en place de l'environnement de développement qui sera utilisé. Il précise notamment l'ordre des installations à effectuer ainsi que la configuration de ces logiciels. Pour obtenir des tutoriels sur l'utilisation de ces outils, on pourra se référer au document suivant : http://code.google.com/p/inpranet/wiki/Tutoriels_Developpement _
 
 =Sommaire=
 
