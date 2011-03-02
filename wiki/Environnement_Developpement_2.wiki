@@ -69,7 +69,7 @@ http://inpranet.googlecode.com/svn/wiki/screenshots/07.PNG
 =04. apache-tomcat-7.0.8.exe=
 
 *Procédure*
- * Exécuter l'installateur.
+ * Exécuter l'installateur *en précisant que le JDK est le JRE qui sera utilisé par Tomcat*.
 
 *Répertoire par défaut*
  * C:\Program Files\Apache Software Foundation\Tomcat 7.0
