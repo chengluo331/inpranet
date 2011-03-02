@@ -19,7 +19,7 @@ http://inpranet.googlecode.com/svn/wiki/screenshots/00.PNG
 
 =01. jre-6u24-windows-i586.exe=
 
-*Tutoriaux*
+*Tutoriels*
  * http://www.oracle.com/technetwork/java/javase/index-137561.html
  * http://www.oracle.com/technetwork/java/javase/jrereadme-182762.html
 
@@ -37,7 +37,7 @@ Aucun autre contenu que les fichiers contenus dans le répertoire d'installation
 
 =02. jdk-6u24-windows-i586.exe=
 
-*Tutoriaux*
+*Tutoriels*
  * http://www.oracle.com/technetwork/java/javase/index-137561.html
  * http://www.oracle.com/technetwork/java/javase/readme-142177.html
 
@@ -52,7 +52,7 @@ L'installateur propose Java DB, qui sera installé dans un autre répertoire que
 
 =03. java_ee_sdk-6u1-windows-ml.exe=
 
-*Tutoriaux*
+*Tutoriels*
  * http://www.youtube.com/watch?v=m_33ZHYCjf8&feature=related
 
 *Procédure*
@@ -84,7 +84,7 @@ http://inpranet.googlecode.com/svn/wiki/screenshots/07.PNG
 
 =05. eclipse-jee-helios-SR2-win32.zip=
 
-*Tutoriaux*
+*Tutoriels*
  * http://wiki.eclipse.org/FAQ_Where_do_I_get_and_install_Eclipse%3F
  * http://publib.boulder.ibm.com/infocenter/wf/v2r7m0/topic/org.eclipse.platform.doc.user/tasks/running_eclipse.htm
  * http://stackoverflow.com/questions/165230/is-the-offical-sun-java-ee-tutorial-the-best-way-to-learn-how-to-make-java-web-ap
@@ -113,7 +113,7 @@ http://inpranet.googlecode.com/svn/wiki/screenshots/16.PNG
 
 =06. apache-ant-1.8.2-bin.zip=
 
-*Tutoriaux*
+*Tutoriels*
  * http://ant.apache.org/manual/install.html
  * http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.user/gettingStarted/qs-82_create.htm
 
@@ -132,7 +132,7 @@ Entrer "ant -version" pour voir si Ant a bien été installé.
 
 =07. apache-maven-3.0.2-bin.zip=
 
-*Tutoriaux*
+*Tutoriels*
  * http://maven.apache.org/download.html#Installation
  * http://maven.40175.n5.nabble.com/naming-now-that-Maven-3-is-out-td3210546.html
  * http://maven.apache.org/eclipse-plugin.html
@@ -162,7 +162,7 @@ Entrer "ant -version" pour voir si Ant a bien été installé.
 
 =08. apache-cxf-2.3.2.zip=
 
-*Tutoriaux*
+*Tutoriels*
  * http://www.youtube.com/watch?v=UpZgxutMgYg
  * http://cxf.apache.org/apache-cxf-232-release-notes.html
  * http://cxf.apache.org/setting-up-eclipse.html
@@ -182,7 +182,7 @@ Entrer "ant -version" pour voir si Ant a bien été installé.
 
 =09. spring-framework-3.0.5.RELEASE.zip=
 
-*Tutoriaux*
+*Tutoriels*
  * http://viralpatel.net/blogs/2010/06/spring-3-mvc-create-hello-world-application-spring-3-mvc.html
  * http://viralpatel.net/blogs/category/spring
  * http://www.youtube.com/watch?v=OwN6UdDzZNA&feature=related
@@ -210,7 +210,7 @@ http://inpranet.googlecode.com/svn/wiki/screenshots/19.PNG
 
 =10. hibernate-distribution-3.6.1.Final-dist.zip=
 
-*Tutoriaux*
+*Tutoriels*
  * http://download.jboss.org/jbosstools/updates/
  * http://programming.manessinger.com/tutorials/an-eclipse-glassfish-java-ee-6-tutorial/
  * http://www.visualbuilder.com/java/hibernate/tutorial/introduction-to-hibernate/
@@ -230,7 +230,7 @@ http://inpranet.googlecode.com/svn/wiki/screenshots/20.PNG
 
 =11. postgresql-9.0.3-1-windows.exe=
 
-*Tutoriaux*
+*Tutoriels*
  * http://www.postgresql.org/docs/7.4/static/charset.html
  * http://en.wikipedia.org/wiki/PostGIS
 
