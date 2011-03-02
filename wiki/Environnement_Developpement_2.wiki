@@ -74,6 +74,9 @@ http://inpranet.googlecode.com/svn/wiki/screenshots/07.PNG
 *Répertoire par défaut*
  * C:\Program Files\Apache Software Foundation\Tomcat 7.0
 
+*Configuration*
+ * Pas besoin d'installer le service au démarrage, surtout si vous êtes sur Vista ou 7 (problème à cause de l'UAC). Si ça a été fait, désactivez le démarrage automatique du service et de l'application ApacheTomcatMonitor.
+
 *Vérification*
  * Lancer l'application "Monitor Tomcat" pour pouvoir démarrer le serveur Tomcat
  * Essayer ensuite d'afficher la page "http://localhost:8080" depuis votre navigateur Web
