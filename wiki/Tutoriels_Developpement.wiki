@@ -1,4 +1,4 @@
-#summary Liste de tutoriels expliquant certaines tâches qui seront effectuées au cours de ce projet
+#summary Liste de tutoriels qui seront utiles dans le cadre de ce projet
 
 =Création de WSDL à partir d'une classe Java=
 
