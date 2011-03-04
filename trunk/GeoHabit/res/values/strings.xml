@@ -7,4 +7,5 @@
 	<string name="authentification">Authentification</string>
 	<string name="login">Identifiant</string>
 	<string name="password">Mot de passe</string>
+	<string name="exit">Quit</string>
 </resources>

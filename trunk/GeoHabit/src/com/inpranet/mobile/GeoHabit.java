@@ -27,13 +27,31 @@ public class GeoHabit extends Activity implements OnClickListener{
         //Test authentifiaction
         View buttonAuthentification = findViewById(R.id.button_authentification);
         buttonAuthentification.setOnClickListener(this);
+        View buttonExit = findViewById(R.id.button_exit);
+        buttonExit.setOnClickListener(this);
+        
+        // Start service
+        Intent iStartService = new Intent(this, LocalizationService.class);
+		startService(iStartService);
     }
 
     /**
      * Click sur un boutton
      */
 	public void onClick(View v) {
-		Intent i = new Intent(this, Authentification.class);
-		startActivity(i);
+		switch(v.getId()) {
+		// Boutton Authentification
+		case R.id.button_authentification:
+			Intent iStartAuthentification = new Intent(this, Authentification.class);
+			startActivity(iStartAuthentification);
+			break;
+		
+		// Boutton quit (utile pour tester sans relancer l'emulator)
+		case R.id.button_exit:
+			this.finish();
+			Intent iStopService = new Intent(this, LocalizationService.class);
+			stopService(iStopService);
+			break;
+		}
 	}
 }
