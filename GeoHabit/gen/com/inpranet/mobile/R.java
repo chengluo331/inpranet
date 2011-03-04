@@ -18,6 +18,7 @@ public final class R {
     }
     public static final class id {
         public static final int button_authentification=0x7f060003;
+        public static final int button_exit=0x7f060004;
         public static final int button_login=0x7f060002;
         public static final int edit_login=0x7f060000;
         public static final int edit_password=0x7f060001;
@@ -31,6 +32,7 @@ public final class R {
         /**  string utilisé dans main.xml 
          */
         public static final int authentification=0x7f050002;
+        public static final int exit=0x7f050005;
         public static final int hello=0x7f050000;
         public static final int login=0x7f050003;
         public static final int password=0x7f050004;
