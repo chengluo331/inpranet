@@ -3,6 +3,10 @@ package com.inpranet.mobile;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -27,9 +31,7 @@ public class GeoHabit extends Activity implements OnClickListener{
         //Test authentifiaction
         View buttonAuthentification = findViewById(R.id.button_authentification);
         buttonAuthentification.setOnClickListener(this);
-        View buttonExit = findViewById(R.id.button_exit);
-        buttonExit.setOnClickListener(this);
-        
+                
         // Start service
         Intent iStartService = new Intent(this, LocalizationService.class);
 		startService(iStartService);
@@ -46,12 +48,40 @@ public class GeoHabit extends Activity implements OnClickListener{
 			startActivity(iStartAuthentification);
 			break;
 		
-		// Boutton quit (utile pour tester sans relancer l'emulator)
-		case R.id.button_exit:
-			this.finish();
-			Intent iStopService = new Intent(this, LocalizationService.class);
-			stopService(iStopService);
-			break;
 		}
 	}
+	
+	/**
+	 *  Afficher le menu décrit dans res.menu.menu.xml lorsque l'on appuie sur boutton menu de l'appareil
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
+		return true;		
+	}
+	
+	/**
+	 * Procédure appelée lorsque un élement dans le menu est sélectionné
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		
+		// Element settings qui dirige vers l'activité Prefs pour configurer les paramètres
+		case R.id.settings:
+			startActivity(new Intent(this, Prefs.class));
+			break;
+			
+		// Element exit pour quitter l'application
+		case R.id.exit:
+			this.finish();
+			stopService(new Intent(this, LocalizationService.class));
+			break;
+			
+		}
+		return false;
+	}
+	
 }
