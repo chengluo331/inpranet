@@ -5,3 +5,9 @@
  * http://www.youtube.com/watch?v=o2Vjs8ylmFM&feature=related
  * http://www.ibm.com/developerworks/library/ws-pojo-springcxf/      En complement du tuto youtube
  * http://www.eclipse.org/webtools/community/education/web/t320/Implementing_a_Simple_Web_Service.pdf
+
+
+=Utilisation Postgres=
+
+ * Apres les étapes de l'installation, connecter sur la base de données en tant que superutilsateur. 
+ * http://www.postgresql.org/docs/manuals/
