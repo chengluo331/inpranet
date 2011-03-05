@@ -1,5 +1,6 @@
 package com.inpranet.mobile;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -45,6 +46,10 @@ public class LocalizationService extends Service {
 		return null;
 	}
 	
+	private void loadParameters() {
+		
+	}
+	
 	/**
 	 * Enregistrer la dernière position obtenue de l'utilisateur
 	 * si la connexion internet est disponible, on l'envoie au système central 
@@ -75,6 +80,8 @@ public class LocalizationService extends Service {
 	public void onCreate(){
 		super.onCreate();
 		Log.i(TAG, "Localization service started...");
+		
+		loadParameters();
 		
 		mgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 		

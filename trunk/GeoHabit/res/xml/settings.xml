@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ce fichier décrit les élements dans la page de configuration des paramètres -->
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <CheckBoxPreference
+  	android:key="localizationService"
+  	android:title="@string/pref_localizationService_title"
+  	android:summary="@string/pref_localizationService_summary"
+  	android:defaultValue="true" />
+  
+</PreferenceScreen>
