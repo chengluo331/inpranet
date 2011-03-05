@@ -13,4 +13,7 @@
 
 <string name="menu_settings">Paramètres</string>
 <string name="menu_exit">Quitter</string>
+<string name="tab_tag_acceuil">Acceuil</string>
+<string name="tab_tag_commerce">Commerce</string>
+<string name="tab_tag_sport">Sport</string>
 </resources>

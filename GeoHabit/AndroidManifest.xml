@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      android:versionCode="1"
-      android:versionName="1.0" package="com.inpranet.mobile">
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".GeoHabit"
-                  android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Authentification" android:label="@string/authentification">
-        </activity>
+	android:versionCode="1" android:versionName="1.0" package="com.inpranet.mobile">
+	<application android:icon="@drawable/icon" android:label="@string/app_name">
+		<activity android:name=".Authentification" android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		
+		<activity android:name=".CollectionActivity"/>
+		
+		<service android:name=".LocalizationService"></service>
 
-    <service android:name=".LocalizationService"></service>
-    
-    <receiver android:name=".ServiceManager" 
- 		android:enabled="true" 
-		 android:exported="false"
-		 android:label="ServiceManager">
-    <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED" />
-    </intent-filter>
-</receiver>
-<activity android:name="Prefs"></activity>
-</application>
+		<receiver android:name=".ServiceManager" android:enabled="true"
+			android:exported="false" android:label="ServiceManager">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+		<activity android:name="Prefs"></activity>
+	</application>
 
 
-<uses-sdk android:minSdkVersion="7"></uses-sdk>
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+	<uses-sdk android:minSdkVersion="7"></uses-sdk>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 </manifest> 

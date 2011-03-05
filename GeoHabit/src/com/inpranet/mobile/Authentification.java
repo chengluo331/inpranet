@@ -10,13 +10,15 @@ import android.widget.EditText;
 
 /**
  * Activité pour gérer l'authentification de l'utilisateur
- * @author yqzhou
+ * @author yqzhou, cluo
  *
  */
 public class Authentification extends Activity implements OnClickListener{
 	/** Tag pour le log */
 	private static final String TAG = "Authentification";
 
+	private boolean runFromLauncher; // lance par launcher
+	
 	@Override
 	/**
 	 * Procédure appelée lorsque l'activité est créé
@@ -24,11 +26,41 @@ public class Authentification extends Activity implements OnClickListener{
 	 */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.authentification);
-        //Definir les listeners pour les bouttons
-        View loginButton = findViewById(R.id.button_login);
-        loginButton.setOnClickListener(this);
+        runFromLauncher = false;
+        
+        // TODO gerer service
+        Intent intent = new Intent(this, LocalizationService.class);
+        startService(intent);
+        
+        String action = getIntent().getAction();
+        if(action.equals(Intent.ACTION_MAIN)){
+        	runFromLauncher = true;
+        	// test authentification
+        	// si oui lancer collection
+        	boolean isAuthentifie = checkSessionID();
+        	if(isAuthentifie){
+        		startCollectionActivity();
+        		finish();
+        	}else{
+        		initView();
+        	}
+        }else if(action.equals(Intent.ACTION_VIEW)){
+        	// supprimer authentification
+        	initView();
+        }else{
+        	// pas possible
+        	Log.e(TAG, "action inconnue");
+        	finish();
+        }       
     }
+
+	private void initView() {
+		 // affichier view, init composant
+    	setContentView(R.layout.authentification);
+        //Definir les listeners pour les bouttons
+    	View loginButton = findViewById(R.id.button_login);
+        loginButton.setOnClickListener(this);
+	}
 
 	/**
 	 * Click sur un boutton
@@ -48,12 +80,38 @@ public class Authentification extends Activity implements OnClickListener{
 			
 			//TODO crypter le mdp et envoie pour authentification 
 			
+			//TODO verification synchrone avec timeout(a voir avec handler)
 			//Si authentifie
-			Intent i = new Intent(this, GeoHabit.class);
-			startActivity(i);
+			boolean isAuthentified = checkAuthentification(login,password);
+			if(isAuthentified){
+				// si lance par launcher,on va passer dans la page de collection
+				if(runFromLauncher)	startCollectionActivity();
+				// stop activity une fois utilisateur est authentifie
+				finish();
+			}else{
+				Log.d(TAG, "erreur d'authentification");
+				// TODO affichier erreur dialog
+			}
 			break;
 		
 		//Autres bouttons
-		}		
+			default:
+				break;
+		}
+	}
+
+	private void startCollectionActivity() {
+		Intent i = new Intent(this, CollectionActivity.class);
+		startActivity(i);
+	}
+
+	private boolean checkSessionID() {
+		// TODO test session ID sauvegardee
+		return true;
+	}
+	
+	private boolean checkAuthentification(String login, String password) {
+		// TODO verfifier authentification
+		return true;
 	}
 }
