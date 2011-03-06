@@ -11,3 +11,6 @@
 
  * Apres les étapes de l'installation, connecter sur la base de données en tant que superutilsateur (cad pas de username et mot de passe défini lors de l'installation). 
  * http://www.postgresql.org/docs/manuals/
+
+=Utilisation PostGIS=
+ * http://tokumine.com/postgis/
