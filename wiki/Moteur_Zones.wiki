@@ -24,3 +24,11 @@
  * GRASS GIS
  * uDig 
  * OpenJUMP 
+
+== Tuto ==
+
+Utiliser uDig
+
+[http://workshops.opengeo.org/postgis-intro/geography.html geography]
+
+[http://www.postgis.org/docs/ch08.html#PostGIS_GeographyFunctions fonctions geographiques]
