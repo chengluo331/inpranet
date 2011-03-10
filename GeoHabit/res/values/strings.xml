@@ -8,11 +8,15 @@
 	<string name="login">Identifiant</string>
 	<string name="password">Mot de passe</string>
 	
-<string name="pref_localizationService_title">Service de localisation</string>
-<string name="pref_localizationService_summary">Récupérer votre position géographique</string>
+	<string name="pref_localizationService_title">Service de localisation</string>
+	<string name="pref_localizationService_summary">Récupérer votre position géographique</string>
+	<string name="pref_habit_precision_dialog_title">Précision d\'habitude</string>
+	
 
-<string name="menu_settings">Paramètres</string>
-<string name="menu_exit">Quitter</string>
+	<string name="menu_settings">Paramètres</string>
+	<string name="menu_exit">Quitter</string>
+	<string name="pref_habit_precision_title">Précision d\'habitude</string>
+	<string name="pref_habit_precision_summary">La précision sur la détection de votre habitude</string>
 <string name="tab_tag_acceuil">Acceuil</string>
 <string name="tab_tag_commerce">Commerce</string>
 <string name="tab_tag_sport">Sport</string>

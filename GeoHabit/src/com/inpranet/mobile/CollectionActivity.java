@@ -2,7 +2,10 @@ package com.inpranet.mobile;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +15,9 @@ public class CollectionActivity extends TabActivity {
 	private static final int INDEX_ACCEUIL = 0;
 	private static final int INDEX_COMMERCE = 1;
 	private static final int INDEX_SPORT = 2;
+	
+	/** Tag pour le log */
+	private static final String TAG = "CollectionActivity";
 	
 	private static final String[] TAB_ID = {"acceuil","commerce","sport"};
 
@@ -64,5 +70,12 @@ public class CollectionActivity extends TabActivity {
 			
 		}
 		return false;
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		Log.d(TAG, prefs.getString("habitPrecision", "nothing"));
 	}
 }
