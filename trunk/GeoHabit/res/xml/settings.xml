@@ -8,4 +8,11 @@
   	android:summary="@string/pref_localizationService_summary"
   	android:defaultValue="true" />
   
+  <ListPreference
+    android:key="habitPrecision"
+    android:title="@string/pref_habit_precision_title"
+    android:summary="@string/pref_habit_precision_summary"
+    android:entries="@array/entries_precisions"
+    android:entryValues="@array/entryValues_precisions"
+    android:dialogTitle="@string/pref_habit_precision_dialog_title" />
 </PreferenceScreen>
