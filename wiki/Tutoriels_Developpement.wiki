@@ -19,5 +19,10 @@
 
 =Hibernate=
 
+ * http://docs.jboss.org/hibernate/core/3.3/reference/en/html/tutorial.html
  * http://www.laliluna.de/articles/first-hibernate-example-tutorial.html
  * http://www.roseindia.net/hibernate/index.shtml
+ * http://facestutorials.icefaces.org/tutorial/hibernate-tutorial.html#stepfour
+
+ A propos du mappings, deux type de mappings sont possibles: xml ou annotation. On utilise plutôt les annotations comme ce qu'on a fait en 3IF avec TopLink
+ * http://docs.jboss.org/hibernate/stable/annotations/reference/en/html_single/
