@@ -16,3 +16,8 @@
 =Utilisation PostGIS=
 
  * http://tokumine.com/postgis/
+
+=Hibernate=
+
+ * http://www.laliluna.de/articles/first-hibernate-example-tutorial.html
+ * http://www.roseindia.net/hibernate/index.shtml
