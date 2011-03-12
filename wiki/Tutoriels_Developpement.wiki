@@ -8,11 +8,11 @@
  * http://www.eclipse.org/webtools/jst/components/ws/M4/tutorials/WebServiceExplorer.html
 
 Procédure :
- * Créer un Dynamic Web Project ;
- * Ajouter/Créer des classes Java et des points d'entrée pour le WS ;
- * Créer un Web Service et indiquer les points d'entrée crées en paramétrant la création du SEI. Pas besoin de créer le client. Il faut aussi publier le WS ;
- * Après la création du WS, un Web Service Explorer apparait. Noter l'URL du WSDL ;
- * Utiliser le Web Services Explorer pour tester le WS créé. Cet explorer est accessible via le menu Run, si on est dans la Java EE Perspective. Utiliser l'URL du WSDL précédemment noté.
+ # Créer un Dynamic Web Project ;
+ # Ajouter/Créer des classes Java et des points d'entrée pour le WS ;
+ # Créer un Web Service et indiquer les points d'entrée crées en paramétrant la création du SEI. Pas besoin de créer le client. Il faut aussi publier le WS ;
+ # Après la création du WS, un Web Service Explorer apparait. Noter l'URL du WSDL ;
+ # Utiliser le Web Services Explorer pour tester le WS créé. Cet explorer est accessible via le menu Run, si on est dans la Java EE Perspective. Utiliser l'URL du WSDL précédemment noté.
 
 
 =Utilisation Postgres=
