@@ -1,8 +1,12 @@
 package com.inpranet.mobile;
 
+
+
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import android.app.Service;
 import android.content.Context;
@@ -46,6 +50,9 @@ public class LocalizationService extends Service {
 		return null;
 	}
 	
+	/** 
+	 * Charger les paramètres de l'application
+	 */
 	private void loadParameters() {
 		
 	}
@@ -62,9 +69,24 @@ public class LocalizationService extends Service {
 		
 		// Si connexion internet établie
 		if(isOnline()) {
+			Log.d(TAG, "Connexion internet");
 			// TODO Envoie de données
+			
+			JSONObject j1 = new JSONObject();
+			try {
+				j1.put("longitude", longitude);
+				j1.put("latitude", latitude);
+				j1.put("time", new Date());
+				Log.d(TAG, j1.toString());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		} // Sinon
 		else {
+			Log.d(TAG, "Pas de connexion");
 			// TODO Sauvegarde en local
 		}
 	}
