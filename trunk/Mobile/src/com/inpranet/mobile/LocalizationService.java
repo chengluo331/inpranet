@@ -2,16 +2,31 @@ package com.inpranet.mobile;
 
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -23,14 +38,16 @@ import android.util.Log;
 /**
  * Service de localisation qui s'exécute au démarrage de mobile
  * il enregistre les déplacements de l'utilisateur et les envoie au système central
- * @author yqzhou
+ * @author yqzhoum, cluo
  *
  */
 public class LocalizationService extends Service {
 
 	/** Tag pour le log */
 	private static final String TAG = "LocalizationService";
-	
+
+	private static final int TIME_OUT = 1000;
+
 	/** Le timer pour déclencher l'opération */
 	//private Timer timer = new Timer();
 	
@@ -43,6 +60,9 @@ public class LocalizationService extends Service {
 	/** Objet LocationManager qui fournit l'accès au service de localisation du système Android */
 	private LocationManager mgr;
 	
+	private HttpClient mHttpClient;
+
+	private URI mLocationServiceURL;
 	
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -72,13 +92,39 @@ public class LocalizationService extends Service {
 			Log.d(TAG, "Connexion internet");
 			// TODO Envoie de données
 			
+			HttpPost post = new HttpPost(mLocationServiceURL);
+			HttpResponse mHttpResponse;
 			JSONObject j1 = new JSONObject();
 			try {
 				j1.put("longitude", longitude);
 				j1.put("latitude", latitude);
 				j1.put("time", new Date());
 				Log.d(TAG, j1.toString());
+				
+				StringEntity se = new StringEntity( "JSON: " + j1.toString());  
+				
+	            se.setContentEncoding((Header) new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+	            post.setEntity(se);
+	            Log.d(TAG, "http client is null: " +(mHttpClient == null));
+	            mHttpResponse = mHttpClient.execute(post);
+	            /*Checking response */
+	            if(mHttpResponse!=null){
+	            	Log.d(TAG, "response received");
+	                InputStream in = mHttpResponse.getEntity().getContent(); //Get
+	                BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+	                Log.d(TAG, "response: " + reader.readLine());
+	            }
+				
 			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -132,8 +178,7 @@ public class LocalizationService extends Service {
 					Bundle extras) {
 				// TODO Auto-generated method stub
 				
-			}
-			
+			}			
 		};
 		
 		minTime = 0;
@@ -144,6 +189,17 @@ public class LocalizationService extends Service {
 		
 		// Planifier le timer qui appelle la procédure UpdatePosition à une période
 		//timer.schedule(new UpdatePosition(), 0, 5000);
+		
+		mHttpClient = new DefaultHttpClient();
+		HttpConnectionParams.setConnectionTimeout(mHttpClient.getParams(), TIME_OUT); 
+		try {
+			// TODO utiliser le vrai url, un exemple pour l'instant
+			mLocationServiceURL =  new URI("http://www.magpiemobile.com/cgi-bin/book_post.cgi");
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
