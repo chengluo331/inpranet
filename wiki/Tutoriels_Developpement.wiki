@@ -26,3 +26,9 @@
 
  A propos du mappings, deux type de mappings sont possibles: xml ou annotation. On utilise plutôt les annotations comme ce qu'on a fait en 3IF avec TopLink
  * http://docs.jboss.org/hibernate/stable/annotations/reference/en/html_single/
+
+= Maven/Spring/Hibernate =
+
+*Utiliser le marketplace d'Eclipse pour installer Maven + les aides dans l'autre page du wiki concernant Maven*
+
+[http://blog.netapsys.fr/index.php/post/2008/04/13/Introduction-A-Spring-MVC maven + spring]
