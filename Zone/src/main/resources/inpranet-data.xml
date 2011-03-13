@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+        default-autowire="byName">
+	
+	<!-- utilisation des annotations Repository, Controller, Service, etc. -->
+    <context:annotation-config/>      
+    <!-- indication de l'empacement des annotations -->
+    <context:component-scan base-package="com.inpranet"/>
+    
+	<!--  
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/com/inpranet/zone/dao/db.properties</value>
+			</list>
+		</property>
+	</bean>
+	-->
+
+	<!-- C'est important de le nommer "dataSource" car ce bean est automatiquement 
+		utilise -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/postgis" />
+		<property name="username" value="postgres" />
+		<property name="password" value="soprasopra" />
+	</bean>
+	
+	<!--  Déclaration des DAO JDBC-->
+
+	<bean id="jdbcZoneDao"
+		class="com.inpranet.zone.dao.JdbcZoneDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+<!--  Déclaration Session Factory -->
+
+<!-- 
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>Profile.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.PosgreSqlDialect
+				</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="hibernateProfileDao"
+		class="com.inpranet.profile.dao.HibernateProfileDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	 -->
+
+</beans>
