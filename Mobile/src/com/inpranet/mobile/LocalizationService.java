@@ -90,24 +90,25 @@ public class LocalizationService extends Service {
 		// Si connexion internet établie
 		if(isOnline()) {
 			Log.d(TAG, "Connexion internet");
-			// TODO Envoie de données
-			
+			// creer post, declarer reponse
 			HttpPost post = new HttpPost(mLocationServiceURL);
 			HttpResponse mHttpResponse;
+			// creer json
 			JSONObject j1 = new JSONObject();
 			try {
+				// ajouter coordonnees, date
 				j1.put("longitude", longitude);
 				j1.put("latitude", latitude);
 				j1.put("time", new Date());
 				Log.d(TAG, j1.toString());
-				
-				StringEntity se = new StringEntity( "JSON: " + j1.toString());  
-				
+				// configurer type json selon RFC 4627 
+				StringEntity se = new StringEntity( "JSON: " + j1.toString()); 
 	            se.setContentEncoding((Header) new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+	            // poster json
 	            post.setEntity(se);
 	            Log.d(TAG, "http client is null: " +(mHttpClient == null));
 	            mHttpResponse = mHttpClient.execute(post);
-	            /*Checking response */
+	            /* Checking response */
 	            if(mHttpResponse!=null){
 	            	Log.d(TAG, "response received");
 	                InputStream in = mHttpResponse.getEntity().getContent(); //Get
@@ -129,7 +130,6 @@ public class LocalizationService extends Service {
 				e.printStackTrace();
 			}
 			
-			
 		} // Sinon
 		else {
 			Log.d(TAG, "Pas de connexion");
@@ -141,6 +141,7 @@ public class LocalizationService extends Service {
 		 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		 return cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
+	
 	/**
 	 * Procédure appelée lorsque le processus du service est créé
 	 */
