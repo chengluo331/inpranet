@@ -1,0 +1,17 @@
+-- Schema: profile
+
+-- DROP SCHEMA profile;
+
+CREATE SCHEMA profile
+  AUTHORIZATION postgres;
+
+
+
+-- Schema: habitude
+
+-- DROP SCHEMA habitude;
+
+CREATE SCHEMA habitude
+  AUTHORIZATION postgres;
+
+
