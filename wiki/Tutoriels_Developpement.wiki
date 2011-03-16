@@ -45,3 +45,4 @@ Utiliser le marketplace d'Eclipse pour installer Maven + les aides dans l'autre 
  * http://www.laliluna.de/articles/first-hibernate-example-tutorial.html
  * [http://www.objis.com/formation-java/tutoriel-web-services-integration-cxf-spring-maven.html CXF + Spring + maven]
  * [http://bdoughan.blogspot.com/2010/08/creating-restful-web-service-part-15.html rest mapping xml/json]
+ * [http://sushantworld.wordpress.com/2011/01/23/apache-cxf-restful-web-service/ cxf rest]
