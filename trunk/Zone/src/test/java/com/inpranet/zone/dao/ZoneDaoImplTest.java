@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.inpranet.zone.model.Zone;
 
+/*
 public class ZoneDaoImplTest  extends TestCase { 
 	
 	private IZoneDAO zoneDao ;
@@ -41,5 +42,6 @@ public class ZoneDaoImplTest  extends TestCase {
 		assertEquals(4, 4);
 	}
 }
+*/
 
 
