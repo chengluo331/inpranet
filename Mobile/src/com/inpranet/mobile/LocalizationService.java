@@ -48,6 +48,8 @@ public class LocalizationService extends Service {
 
 	private static final int TIME_OUT = 1000;
 
+	private static final String URI_WS_STOCK_DATA = "http://10.0.2.2:7259/Habit/services/stockdataservice";
+
 	/** Le timer pour déclencher l'opération */
 	//private Timer timer = new Timer();
 	
@@ -115,6 +117,9 @@ public class LocalizationService extends Service {
 	                BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 	                Log.d(TAG, "response: " + reader.readLine());
 	            }
+	            else {
+	            	Log.d(TAG, "no response");
+	            }
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -132,14 +137,20 @@ public class LocalizationService extends Service {
 			
 		} // Sinon
 		else {
-			Log.d(TAG, "Pas de connexion");
+			Log.d(TAG, "No connexion");
 			// TODO Sauvegarde en local
 		}
 	}
 	
 	public boolean isOnline() {
 		 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		 return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+		 if (cm.getActiveNetworkInfo() != null) {
+			 return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+		 }
+		 else {
+			 return false;
+		 }
+		 
 	}
 	
 	/**
@@ -195,7 +206,7 @@ public class LocalizationService extends Service {
 		HttpConnectionParams.setConnectionTimeout(mHttpClient.getParams(), TIME_OUT); 
 		try {
 			// TODO utiliser le vrai url, un exemple pour l'instant
-			mLocationServiceURL =  new URI("http://www.magpiemobile.com/cgi-bin/book_post.cgi");
+			mLocationServiceURL =  new URI(URI_WS_STOCK_DATA);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
