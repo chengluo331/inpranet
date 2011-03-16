@@ -27,10 +27,31 @@ public class FrontService implements IFrontService {
 
 	@POST
 	@Path("/geo")
+	@Produces("application/json")
+@Consumes("application/json")
 	public void serviceGeo(GeoPos pos) {
 		// TODO Auto-generated method stub
 		
 		Logger.getLogger("FrontService").log(Level.INFO, "CA MARCHE : " + pos.getLatitude());
+	}
+	
+	@POST
+	@Path("/test2")
+	@Produces("application/json")
+@Consumes("application/json")
+	public void serviceGeo() {
+		// TODO Auto-generated method stub
+		Logger.getLogger("FrontService").log(Level.INFO, "CA MARCHE test2: ");
+	}
+	
+	@POST
+	@Path("/test3")
+	@Produces("application/json")
+@Consumes("application/json")
+	public void serviceGeo(int value) {
+		// TODO Auto-generated method stub
+		
+		Logger.getLogger("FrontService").log(Level.INFO, "CA MARCHE test3 : "  + value);
 	}
 	
 	@GET
