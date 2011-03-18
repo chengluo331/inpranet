@@ -16,6 +16,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
@@ -48,7 +49,7 @@ public class LocalizationService extends Service {
 
 	private static final int TIME_OUT = 1000;
 
-	private static final String URI_WS_STOCK_DATA = "http://10.0.2.2:7259/Habit/services/stockdataservice";
+	private static final String URI_WS_STOCK_DATA = "http://10.0.2.2:9999/inpranet/services/geo";
 
 	/** Le timer pour déclencher l'opération */
 	//private Timer timer = new Timer();
@@ -96,18 +97,22 @@ public class LocalizationService extends Service {
 			HttpPost post = new HttpPost(mLocationServiceURL);
 			HttpResponse mHttpResponse;
 			// creer json
-			JSONObject j1 = new JSONObject();
+			JSONObject oJson = new JSONObject();
 			try {
 				// ajouter coordonnees, date
-				j1.put("longitude", longitude);
-				j1.put("latitude", latitude);
-				j1.put("time", new Date());
-				Log.d(TAG, j1.toString());
+				oJson.put("longitude", longitude);
+				oJson.put("latitude", latitude);
+				oJson.put("time", new Date());
+				
+				Log.d(TAG, oJson.toString());
 				// configurer type json selon RFC 4627 
-				StringEntity se = new StringEntity( "JSON: " + j1.toString()); 
+				
+				
+				StringEntity se = new StringEntity("JSON: "+oJson.toString()); 
 	            se.setContentEncoding((Header) new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 	            // poster json
 	            post.setEntity(se);
+				
 	            Log.d(TAG, "http client is null: " +(mHttpClient == null));
 	            mHttpResponse = mHttpClient.execute(post);
 	            /* Checking response */
@@ -115,7 +120,11 @@ public class LocalizationService extends Service {
 	            	Log.d(TAG, "response received");
 	                InputStream in = mHttpResponse.getEntity().getContent(); //Get
 	                BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-	                Log.d(TAG, "response: " + reader.readLine());
+	                String str;
+	                do{
+	                	str = reader.readLine();
+	                	Log.d(TAG, "response: " + str);
+	                }while (!str.equals("")); 
 	            }
 	            else {
 	            	Log.d(TAG, "no response");

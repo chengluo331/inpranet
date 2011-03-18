@@ -1,7 +1,5 @@
 package com.inpranet.mobile;
 
-import javax.security.auth.PrivateCredentialPermission;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;

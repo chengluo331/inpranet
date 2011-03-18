@@ -14,8 +14,8 @@
 		<ViewFlipper android:id="@android:id/tabcontent"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
 			android:padding="5dp" android:layout_below="@id/imageButton_search">
-			<include layout="@layout/document_lists"/>
-		</ViewFlipper>
+			<include layout="@layout/doc_lists"/>
+		</ViewFlipper> 
 
 	</RelativeLayout>
 </TabHost>
