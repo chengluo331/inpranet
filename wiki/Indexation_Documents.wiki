@@ -1,6 +1,40 @@
 #summary Etude/Faisabilité/Recherche sur la problématique des documents
 #labels Phase-Requirements
 
+=Script PostgreSQL=
+
+ * À exécuter en ligne de commande dans le shell Postgre.
+
+{{{
+-- Schema: indexation
+
+-- DROP SCHEMA indexation;
+
+CREATE SCHEMA indexation
+  AUTHORIZATION postgres;
+
+-- Table: indexation."document"
+
+-- DROP TABLE indexation."document";
+
+CREATE TABLE indexation."document"
+(
+  id integer NOT NULL,
+  title character varying,
+  uri character varying,
+  start_date timestamp without time zone,
+  end_date timestamp without time zone,
+  latitude real,
+  longitude real,
+  data character varying,
+  CONSTRAINT document_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE indexation."document" OWNER TO postgres;
+}}}
+
 =Fichiers de tests=
 
 ==Document à analyser==
