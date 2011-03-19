@@ -62,7 +62,9 @@ Utiliser le marketplace d'Eclipse pour installer Maven + les aides dans l'autre 
 Utiliser l'utilitaire *curl*
 
 Exemple de requete :
+{{{
 curl.exe --header "content-type: application/json" --data @req.json  -X POST http://localhost:8080/inpranet/services/geo
+}}}
 
 avec @req.json un fichier :
 {{{
