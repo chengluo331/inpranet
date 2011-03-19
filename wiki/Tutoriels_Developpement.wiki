@@ -59,7 +59,7 @@ Utiliser le marketplace d'Eclipse pour installer Maven + les aides dans l'autre 
 
 == References ==
 
-[http://cxf.apache.org/ CXF]
+[http://cxf.apache.org/docs/index.html Doc CXF]
 
 == Simuler requete depuis commande ==
 
