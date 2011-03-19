@@ -1,5 +1,8 @@
 package com.inpranet.frontservice.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "geopos")
 public class GeoPos {
 
 	private double longitude;
