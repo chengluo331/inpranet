@@ -57,6 +57,10 @@ Utiliser le marketplace d'Eclipse pour installer Maven + les aides dans l'autre 
 
 = CXF =
 
+== References ==
+
+[http://cxf.apache.org/ CXF]
+
 == Simuler requete depuis commande ==
 
 Utiliser l'utilitaire *curl*
