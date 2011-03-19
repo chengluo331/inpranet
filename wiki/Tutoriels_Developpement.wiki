@@ -83,3 +83,8 @@ avec @req.json un fichier :
 }}}
 
 [http://docs.jboss.org/resteasy/docs/1.0.1.GA/userguide/html/Content_Marshalling_Providers.html#JAXB_+_JSON_provider JAXB + JSON Provider]
+
+Lancer jetty sur un autre port :
+{{{
+mvn -Djetty.port=9000 jetty:run
+}}}
