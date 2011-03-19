@@ -54,3 +54,26 @@ Utiliser le marketplace d'Eclipse pour installer Maven + les aides dans l'autre 
  * [http://www.objis.com/formation-java/tutoriel-web-services-integration-cxf-spring-maven.html CXF + Spring + maven]
  * [http://bdoughan.blogspot.com/2010/08/creating-restful-web-service-part-15.html rest mapping xml/json]
  * [http://sushantworld.wordpress.com/2011/01/23/apache-cxf-restful-web-service/ cxf rest]
+
+= CXF =
+
+== Simuler requete depuis commande ==
+
+Utiliser l'utilitaire *curl*
+
+Exemple de requete :
+curl.exe --header "content-type: application/json" --data @req.json  -X POST http://localhost:8080/inpranet/services/geo
+
+avec @req.json un fichier :
+{{{
+{
+	"geopos":
+	{
+		"longitude": 2,
+		"latitude" : 3,
+		"time" : 4
+	}
+}
+}}}
+
+[http://docs.jboss.org/resteasy/docs/1.0.1.GA/userguide/html/Content_Marshalling_Providers.html#JAXB_+_JSON_provider JAXB + JSON Provider]
