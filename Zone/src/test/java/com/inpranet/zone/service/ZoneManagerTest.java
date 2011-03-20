@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.inpranet.zone.model.Zone;
-/*
+
 public class ZoneManagerTest  extends TestCase { 
 	
 	private IZoneManager zoneManager ;
@@ -40,7 +40,11 @@ public class ZoneManagerTest  extends TestCase {
 		
 		assertEquals(4, 4);
 	}
+	
+	public void testService() {
+		
+	}
 }
-*/
+
 
 

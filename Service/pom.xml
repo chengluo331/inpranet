@@ -26,22 +26,22 @@
 		</dependency>
 
 
-<dependency>
-		    <!-- Dependences Apache JAX-WS CXF pour WAR et Client JAX-WS-->
+		<dependency>
+			<!-- Dependences Apache JAX-WS CXF pour WAR et Client JAX-WS -->
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-		
-	
-			<dependency>
-		    <!-- Dependences Apache JAX-WS CXF pour WAR et Client JAX-WS-->
+
+
+		<dependency>
+			<!-- Dependences Apache JAX-WS CXF pour WAR et Client JAX-WS -->
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxws</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
 		<dependency>
-		    <!-- Dependences Apache JAX-WS CXF pour Client JAX-WS-->
+			<!-- Dependences Apache JAX-WS CXF pour Client JAX-WS -->
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
@@ -201,8 +201,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>2.0</source>
+					<target>2.0</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -212,6 +212,28 @@
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf.version}</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${basedir}/src/main/java/</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/zone.wsdl</wsdl>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
