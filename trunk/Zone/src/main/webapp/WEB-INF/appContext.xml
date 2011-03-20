@@ -5,17 +5,17 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
-	<!-- Chargement modules CXF à partir du jar cxf.jar . Permet chargement 
-		rapide du runtime CXF et service lecteur WSDL.. -->
+	<!-- Charge les beans de CXF -->
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
 
-	<!-- Définition du Endpoint JAX-WS. Le développeur Java n'aura pas besoin 
-		d'écrire une classe pour publier le WS -->
+	<!-- Définition du Endpoint JAX-WS => pas besoin d'ecrire une classe pour publier le WS
+		Reference une classe annotee @WebService 
+		adress: adresse relative, ici domain-name:port/war-name/zone
+	-->
 	<jaxws:endpoint 
 	  id="zoneService" 
 	  implementor="com.inpranet.zone.service.ZoneService" 
 	  address="/zone" />
-
 </beans>
