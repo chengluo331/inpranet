@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 import com.inpranet.frontservice.model.GeoPos;
-import com.inpranet.zone.service.IZoneManager;
+import com.inpranet.habit.service.IHabitService;
 import com.inpranet.zone.service.IZoneService;
 import com.inpranet.zone.service.Zone;
 
@@ -33,6 +33,7 @@ public class FrontService implements IFrontService {
 		
 		ClassPathXmlApplicationContext     context =
 		    new ClassPathXmlApplicationContext(new String[]     {"inpranet-service.xml"});
+		
 		IZoneService zoneManager =     (IZoneService)context.getBean("serviceZone");
 		
 		List<Zone> zones = zoneManager.getZonesFromPos(2, 3);
@@ -41,6 +42,12 @@ public class FrontService implements IFrontService {
 		for (Zone zone : zones) {
 			log.info(zone.toString());
 		}
+		
+		IHabitService habitManager = (IHabitService)context.getBean("serviceHabit");
+		String response = habitManager.deduceZone(1,2,3);
+		
+		log.info(response);
+		
 	}
 
 	@GET

@@ -18,5 +18,5 @@
         
 	<jaxws:endpoint id="habitService"
 		implementor="com.inpranet.habit.service.HabitServiceImp"
-		address="/habitService" />
+		address="/habit" />
 </beans>

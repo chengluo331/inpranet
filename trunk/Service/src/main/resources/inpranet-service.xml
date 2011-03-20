@@ -15,4 +15,7 @@ http://cxf.apache.org/schemas/jaxws.xsd"
 	<jaxws:client id="serviceZone" serviceClass="com.inpranet.zone.service.IZoneService"
 		address="http://localhost:9000/inpranet/zone">
 	</jaxws:client>
+	<jaxws:client id="serviceHabit" serviceClass="com.inpranet.habit.service.IHabitService"
+		address="http://localhost:8080/inpranet/habit">
+	</jaxws:client>
 </beans>

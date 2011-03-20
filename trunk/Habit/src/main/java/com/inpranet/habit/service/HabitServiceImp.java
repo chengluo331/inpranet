@@ -14,6 +14,6 @@ public class HabitServiceImp implements IHabitService {
 	
 	public String DeduceZone(int userId, int planningHorizon, int interestId) {
 		System.out.println("deduce destination zone");
-		return "idZone";
+		return "idZone deduced";
 	}
 }

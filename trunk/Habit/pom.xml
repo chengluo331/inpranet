@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.inpranet</groupId>
-	<artifactId>geohabit</artifactId>
+	<artifactId>inpranet</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>geohabit Spring-WS Application</name>
@@ -38,9 +38,6 @@
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-
-
-
 
 		<!-- Core utilities used by other modules. Define this if you use Spring 
 			Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
@@ -130,10 +127,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
-
-
-
 		<dependency>
 			<groupId>ant</groupId>
 			<artifactId>ant-apache-log4j</artifactId>
@@ -205,6 +198,30 @@
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 				</configuration>
 			</plugin>
+			<!-- plugin>
+			    <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>${cxf.version}</version>
+                <executions>
+                                     <execution>
+                                             <id>generate-sources</id>
+                                             <phase>generate-sources</phase>
+                                             <configuration>
+                                                     <sourceRoot>${basedir}/src/main/java/</sourceRoot>
+                                                     <wsdlOptions>
+                                                             <wsdlOption>
+                                                                     <wsdl>${basedir}/src/main/resources/wsdl/monwsdl.wsdl</wsdl>
+                                                             </wsdlOption>
+                                                     </wsdlOptions>
+                                             </configuration>
+                                             <goals>
+                                                     <goal>wsdl2java</goal>
+                                             </goals>
+                                     </execution>
+                             </executions>
+                     </plugin-->
 		</plugins>
 	</build>
+	
+	
 </project>
