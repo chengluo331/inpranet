@@ -78,3 +78,8 @@ Gestion des documents ?
 *A faire :*
 
  * définir au plus tôt l'ensemble des interfaces de services/wsdl 
+
+
+= Question =
+
+* qui défini la classe java? qui défini le WSDL? *
