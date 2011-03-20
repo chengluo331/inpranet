@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import com.inpranet.zone.dao.IZoneDAO;
 import com.inpranet.zone.model.Zone;
 
 // lets CXF know which interface to use when creating WSDL
-@WebService(endpointInterface = "com.inpranet.zone.service.IZoneManager")
-public class ZoneManager implements IZoneManager {
+@WebService(endpointInterface = "com.inpranet.zone.service.IZoneService")
+public class ZoneService implements IZoneService {
 	
 	private IZoneDAO zoneDAO;
 
@@ -19,7 +20,6 @@ public class ZoneManager implements IZoneManager {
 		this.zoneDAO = zoneDAO;
 	}
 
-	//@WebEndpoint
 	public List<Zone> getZones(double longitude, double latitude) {
 		Logger log = Logger.getLogger(this.getClass().getName());
 		log.info("Service getZones");

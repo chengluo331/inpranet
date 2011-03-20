@@ -14,8 +14,8 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 	<!-- Définition du Endpoint JAX-WS. Le développeur Java n'aura pas besoin 
 		d'écrire une classe pour publier le WS -->
 	<jaxws:endpoint 
-	  id="zoneManager" 
-	  implementor="com.inpranet.zone.service.ZoneManager" 
+	  id="zoneService" 
+	  implementor="com.inpranet.zone.service.ZoneService" 
 	  address="/zone" />
 
 </beans>

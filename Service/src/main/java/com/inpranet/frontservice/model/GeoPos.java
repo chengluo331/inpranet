@@ -1,43 +1,43 @@
 package com.inpranet.frontservice.model;
 
+import java.util.Date;
+
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "geopos")
+@XmlRootElement
 public class GeoPos {
 
+	@XmlElement
 	private double longitude;
+	@XmlElement
 	private double latitude;
-	private String time;
-	
+	@XmlElement
+	private Date time;
+
 	public GeoPos() {
-		
+
 	}
-	
-	public GeoPos(double longitude, double latitude, String time) {
+
+	public GeoPos(double longitude, double latitude, Date time) {
 		super();
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.time = time;
 	}
 
-
-
 	public double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
+
+
 	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-	public String getTime() {
+
+
+	public Date getTime() {
 		return time;
 	}
-	public void setTime(String time) {
-		this.time = time;
-	}
+
 }

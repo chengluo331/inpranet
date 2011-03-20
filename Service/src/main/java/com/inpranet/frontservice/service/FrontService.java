@@ -1,10 +1,12 @@
 package com.inpranet.frontservice.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -25,8 +27,7 @@ public class FrontService implements IFrontService {
 	@Consumes({ "application/json", "application/xml" })
 	@Produces({ "application/json", "application/xml" })
 	public void serviceGeo(GeoPos pos) {
-		// TODO Auto-generated method stub
-
+		
 		Logger.getLogger("FrontService").log(Level.INFO,
 				"CA MARCHE : " + pos.getLatitude());
 		
@@ -40,6 +41,13 @@ public class FrontService implements IFrontService {
 		for (Zone zone : zones) {
 			log.info(zone.toString());
 		}
+	}
 
+	@GET
+	@Path("/json")
+	@Consumes({ "application/json", "application/xml" })
+	@Produces({ "application/json", "application/xml" })
+	public GeoPos testJSON() {
+		return new GeoPos(4, 5, new Date());
 	}
 }
