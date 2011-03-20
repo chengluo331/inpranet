@@ -15,8 +15,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 import com.inpranet.frontservice.model.GeoPos;
-
 import com.inpranet.zone.service.IZoneManager;
+import com.inpranet.zone.service.IZoneService;
 import com.inpranet.zone.service.Zone;
 
 @Path("/services/")
@@ -33,9 +33,9 @@ public class FrontService implements IFrontService {
 		
 		ClassPathXmlApplicationContext     context =
 		    new ClassPathXmlApplicationContext(new String[]     {"inpranet-service.xml"});
-		IZoneManager zoneManager =     (IZoneManager)context.getBean("serviceZone");
+		IZoneService zoneManager =     (IZoneService)context.getBean("serviceZone");
 		
-		List<Zone> zones = zoneManager.getZones(2, 3);
+		List<Zone> zones = zoneManager.getZonesFromPos(2, 3);
 		
 		Logger log = Logger.getLogger(this.getClass().getName());
 		for (Zone zone : zones) {
@@ -50,4 +50,5 @@ public class FrontService implements IFrontService {
 	public GeoPos testJSON() {
 		return new GeoPos(4, 5, new Date());
 	}
+
 }

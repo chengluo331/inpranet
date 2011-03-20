@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import com.inpranet.zone.dao.IZoneDAO;
