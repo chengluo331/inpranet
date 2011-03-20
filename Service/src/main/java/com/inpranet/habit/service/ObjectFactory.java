@@ -37,27 +37,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link StockData }
-     * 
-     */
-    public StockData createStockData() {
-        return new StockData();
-    }
-
-    /**
      * Create an instance of {@link DeduceZoneResponse }
      * 
      */
     public DeduceZoneResponse createDeduceZoneResponse() {
         return new DeduceZoneResponse();
-    }
-
-    /**
-     * Create an instance of {@link DeduceZone }
-     * 
-     */
-    public DeduceZone createDeduceZone() {
-        return new DeduceZone();
     }
 
     /**
@@ -74,6 +58,22 @@ public class ObjectFactory {
      */
     public StockDataResponse createStockDataResponse() {
         return new StockDataResponse();
+    }
+
+    /**
+     * Create an instance of {@link DeduceZone }
+     * 
+     */
+    public DeduceZone createDeduceZone() {
+        return new DeduceZone();
+    }
+
+    /**
+     * Create an instance of {@link StockData }
+     * 
+     */
+    public StockData createStockData() {
+        return new StockData();
     }
 
     /**
