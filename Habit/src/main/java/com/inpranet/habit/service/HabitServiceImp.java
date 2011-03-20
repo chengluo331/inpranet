@@ -4,11 +4,8 @@ import javax.jws.WebService;
 
 import com.inpranet.habit.model.Coordinate;
 
-@WebService(
-		targetNamespace = "http://service.habit.inpranet.com/", 
-		endpointInterface = "com.inpranet.habit.service.IHabitService", 
-		portName = "HabitServicePort", 
-		serviceName = "HabitServiceService")		
+@WebService(endpointInterface = "com.inpranet.habit.service.IHabitService")
+		
 public class HabitServiceImp implements IHabitService {
 	
 	public void StockData(int userId, Coordinate coordinate) {
