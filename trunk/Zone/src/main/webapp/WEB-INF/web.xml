@@ -3,38 +3,27 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
 
-	<display-name>Archetype Created Web Application</display-name>
 
-    <servlet>
-        <servlet-name>frontal</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>frontal</servlet-name>
-        <url-pattern>/*</url-pattern>
-    </servlet-mapping>
-    <session-config>
-        <session-timeout>60</session-timeout>
-    </session-config>
-    
-    
-    
-   	<listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/appContext.xml</param-value>
+	</context-param>
+	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
-		<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
-		<!--  
-			/WEB-INF/inpranet-data.xml
-			/WEB-INF/inpranet-service.xml 
-			-->
-			/WEB-INF/inpranet-servlet.xml 
-		</param-value>
-	</context-param>
-		
+
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+
 
 
 </web-app>

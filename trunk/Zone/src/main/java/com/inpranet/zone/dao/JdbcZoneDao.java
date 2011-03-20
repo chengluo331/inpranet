@@ -11,25 +11,20 @@ import org.springframework.stereotype.Repository;
 import com.inpranet.zone.model.Zone;
 
 
-/**
- * dilazgdu
- * @author sopra
- *
- */
-/*
+
 @Repository("zoneDao")
 public class JdbcZoneDao extends JdbcDaoSupport implements IZoneDAO {
 
-	public class ZoneRowMapper implements RowMapper {
+	public class ZoneRowMapper implements RowMapper<Zone> {
 
-		public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+		public Zone mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Zone zone = new Zone(rs.getString("isInside"));
 			return zone;
 		}
 	}
 	
-	public List<Zone>  getZones(int lon, int lat) {
+	public List<Zone>  getZones(double longitude , double latitude) {
 		String sql = "select geog && ST_GeomFromText('SRID=4326;POINT(4.8768 45.7766)') as isInside from decoupage3";
 		return getJdbcTemplate().query(sql, new ZoneRowMapper());
 	}
-}*/
+}

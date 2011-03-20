@@ -12,5 +12,5 @@ import com.inpranet.zone.model.Zone;
 public interface IZoneDAO {
 
 	@WebMethod
-	List<Zone> getZones(int lon , int lat);
+	List<Zone> getZones(double longitude , double latitude);
 }
