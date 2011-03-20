@@ -90,3 +90,90 @@ Lancer jetty sur un autre port :
 {{{
 mvn -Djetty.port=9000 jetty:run
 }}}
+
+== Web Service ==
+
+*WEB-INF/web.xml*
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<!-- Lien vers le fichier qui gere les beans -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/appContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- utilisation d'une servlet CXF comme "dispatcher" -->
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- URL mapping. Toutes les requetes de type domain-name:port/war-name/* seront routees sur cette servlet -->
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+</web-app>
+}}}
+
+*WEB-INF/appContext*
+{{{
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<!-- Charge les beans de CXF -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+
+	<!-- Définition du Endpoint JAX-WS => pas besoin d'ecrire une classe pour publier le WS
+		Reference une classe annotee @WebService 
+		adress: adresse relative, ici domain-name:port/war-name/zone
+	-->
+	<jaxws:endpoint 
+	  id="zoneService" 
+	  implementor="com.inpranet.zone.service.ZoneService" 
+	  address="/zone" />
+</beans>
+}}}
+
+*IService*
+{{{
+@WebService
+public interface IService{
+  public String hello(String name);
+}}}
+
+*ServiceImpl*
+{{{
+@WebService(endpointInterface = "com.inpranet.etc.etc.ServiceImpl")
+public class ServiceImplimplements IService{
+  public String hello(String name) {
+    return "Hello " + name;
+  }
+}}}
+
+*Lancer le WS*
+{{{
+mvn jetty:run
+}}}
+
+*Accès :*
+{{{
+http://localhost:8080/inpranet/zone
+}}}
+
+
+== Client ==
