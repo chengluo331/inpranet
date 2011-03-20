@@ -23,7 +23,7 @@ http://cxf.apache.org/schemas/jaxws.xsd"
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	-->
 		
-	<jaxws:client id="serviceZone" serviceClass="com.inpranet.zone.service.IZoneManager"
+	<jaxws:client id="serviceZone" serviceClass="com.inpranet.zone.service.IZoneService"
   address="http://localhost:9000/inpranet/zone">
  </jaxws:client>
  

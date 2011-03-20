@@ -11,7 +11,7 @@ import com.inpranet.zone.model.Zone;
 
 public class ZoneManagerTest  extends TestCase { 
 	
-	private IZoneManager zoneManager ;
+	private IZoneService zoneManager ;
 	private ClassPathXmlApplicationContext appContext;
 
 	@Override
@@ -20,7 +20,7 @@ public class ZoneManagerTest  extends TestCase {
 		appContext = new ClassPathXmlApplicationContext("inpranet-service.xml");
 		
 		// Récupération du bean DAO 
-		zoneManager = (IZoneManager) appContext.getBean("zoneManager"); 
+		zoneManager = (IZoneService) appContext.getBean("zoneService"); 
 	}
 
 	@Override
@@ -39,10 +39,6 @@ public class ZoneManagerTest  extends TestCase {
 		}
 		
 		assertEquals(4, 4);
-	}
-	
-	public void testService() {
-		
 	}
 }
 
