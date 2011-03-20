@@ -203,7 +203,7 @@ Entrer "ant -version" pour voir si Ant a bien été installé.
 
 *Configuration*
  * On peut avoir un peu plus d'intégration avec Eclipse en utilisant le plugin STS, mais ce n'est pas nécessaire (et en plus, pas très clean lors de l'installation), il n'y a que les JARs qui nous intéressent.
- * Liens : http://dist.springsource.com/release/TOOLS/update/e3.6 et http://dist.springsource.com/release/TOOLS/composite/e3.6
+ * Liens : http://dist.springsource.com/release/TOOLS/update/e3.6 et http://dist.springsource.com/release/TOOLS/composite/e3.6 (il faut avoir ces deux liens en même temps dans la liste des sites disponibles avec le lien Helios, se référer aux instructions d'installation).
 
 *Installation du SpringTools Suite (STS)*<br/>
 Ne cocher que les cases qui sont affichées ci-dessous sinon l'installation ne se fera pas...<br/>
