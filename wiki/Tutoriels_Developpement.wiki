@@ -170,10 +170,76 @@ public class ServiceImplimplements IService{
 mvn jetty:run
 }}}
 
-*Accès :*
+*Exemple d'accès :*
 {{{
 http://localhost:8080/inpranet/zone
 }}}
 
+*exemple wsdl*
+{{{
+http://localhost:8080/inpranet/zone?wsdl
+}}}
+
 
 == Client ==
+
+Utiliser le wsdl créé précédemment pour générer les classes utiles à la contruction du client
+
+=> *pom.xml*
+{{{
+<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf.version}</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${basedir}/src/main/java/</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/monwsdl.wsdl</wsdl>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+}}}
+
+*web.xml => idem qu'au dessus*
+
+*package com/resources, ajout du fichier inpranet-service.xml*
+{{{
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://cxf.apache.org/jaxrs
+http://cxf.apache.org/schemas/jaxrs.xsd
+http://cxf.apache.org/jaxws 
+http://cxf.apache.org/schemas/jaxws.xsd"
+	default-lazy-init="false">
+
+	<!-- com.inpranet.zone.service.IZoneService a ete genere par le plugin maven à partir du wsdl 
+	adress : point d'entree du service -->
+	<jaxws:client id="monservice" serviceClass="com.inpranet.etc.etc.IService"
+		address="http://localhost:port/inpranet/monservice">
+	</jaxws:client>
+</beans>
+}}}
+
+*utilisation du client dans le code java*
+{{{
+		ClassPathXmlApplicationContext     context =
+		    new ClassPathXmlApplicationContext(new String[]     {"inpranet-service.xml"});
+		IService service =     (IService)context.getBean("monservice");
+		
+		String ret = service.hello("lolilol");
+}}}
