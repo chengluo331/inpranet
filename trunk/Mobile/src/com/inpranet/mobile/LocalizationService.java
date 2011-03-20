@@ -49,7 +49,7 @@ public class LocalizationService extends Service {
 
 	private static final int TIME_OUT = 1000;
 
-	private static final String URI_WS_STOCK_DATA = "http://10.0.2.2:9999/inpranet/services/geo";
+	private static final String URI_WS_STOCK_DATA = "http://10.0.2.2:8080/inpranet/services/geo";
 
 	/** Le timer pour déclencher l'opération */
 	//private Timer timer = new Timer();
@@ -97,42 +97,36 @@ public class LocalizationService extends Service {
 			HttpPost post = new HttpPost(mLocationServiceURL);
 			HttpResponse mHttpResponse;
 			// creer json
-			JSONObject oJson = new JSONObject();
+//			JSONObject oJson = new JSONObject();
 			try {
 				// ajouter coordonnees, date
-				oJson.put("longitude", longitude);
-				oJson.put("latitude", latitude);
-				oJson.put("time", new Date());
+//				oJson.put("longitude", longitude);
+//				oJson.put("latitude", latitude);
+//				oJson.put("time", new Date());
 				
-				Log.d(TAG, oJson.toString());
-				// configurer type json selon RFC 4627 
-				
-				
-				StringEntity se = new StringEntity("JSON: "+oJson.toString()); 
+//				Log.d(TAG, oJson.toString());
+//				// configurer type json selon RFC 4627 				
+//				StringEntity se = new StringEntity("JSON: "+oJson.toString()); 
+				String oJson = "{ \"geopos\": {\"longitude\":2, \"latitude\":3,\"time\": "+"4}}";
+				Log.d(TAG, oJson);
+				StringEntity se = new StringEntity(oJson);				
 	            se.setContentEncoding((Header) new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+	            se.setContentType("application/json");
 	            // poster json
 	            post.setEntity(se);
-				
-	            Log.d(TAG, "http client is null: " +(mHttpClient == null));
+//	            Log.d(TAG, "http client is null: " +(mHttpClient == null));
 	            mHttpResponse = mHttpClient.execute(post);
 	            /* Checking response */
 	            if(mHttpResponse!=null){
-	            	Log.d(TAG, "response received");
-	                InputStream in = mHttpResponse.getEntity().getContent(); //Get
-	                BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-	                String str;
-	                do{
-	                	str = reader.readLine();
-	                	Log.d(TAG, "response: " + str);
-	                }while (!str.equals("")); 
+	            	//TODO gestion d'erreur
 	            }
 	            else {
 	            	Log.d(TAG, "no response");
 	            }
 				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
