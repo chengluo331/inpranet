@@ -18,8 +18,4 @@
 <import resource="inpranet-data.xml"/>
 
 
-<bean id="zoneManager" class="com.inpranet.zone.service.ZoneManager">
-<property name="zoneDAO" ref="jdbcZoneDao"></property>
-</bean>
-
 </beans>
