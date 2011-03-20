@@ -59,7 +59,9 @@ Utiliser le marketplace d'Eclipse pour installer Maven + les aides dans l'autre 
 
 == References ==
 
-[http://cxf.apache.org/docs/index.html Doc CXF]
+ * [http://cxf.apache.org/docs/index.html Doc CXF]
+ * [http://www.kezen.fr/webservice-java-avec-cxf-et-spring-partie1/ WS CXF Spring]
+ * [http://www.kezen.fr/client-webservice-cxf-spring-partie2/ Client CXF Spring] 
 
 == Simuler requete depuis commande ==
 
