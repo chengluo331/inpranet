@@ -1,4 +1,4 @@
-package com.inpranet.habit.dao;
+/**package com.inpranet.habit.dao;
 
 import java.util.Calendar;
 import java.sql.Timestamp;
@@ -37,3 +37,4 @@ public class HabitDaoImplTest extends TestCase{
 	
 	
 }
+*/

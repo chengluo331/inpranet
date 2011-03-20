@@ -6,9 +6,9 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<jaxws:endpoint id="habitService"
-			implementor="com.inpranet.habit.service.HabitServiceImp"
-		address="/habitService">
-	</jaxws:endpoint>
+	<!--jaxws:endpoint id="habitService"
+		implementor="com.inpranet.habit.service.HabitServiceImp"
+		address="/habitService"
+	</jaxws:endpoint-->
 
 </beans>
