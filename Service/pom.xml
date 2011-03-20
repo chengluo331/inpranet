@@ -227,6 +227,9 @@
 								<wsdlOption>
 									<wsdl>${basedir}/src/main/resources/wsdl/zone.wsdl</wsdl>
 								</wsdlOption>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/habit.wsdl</wsdl>
+								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
 						<goals>
