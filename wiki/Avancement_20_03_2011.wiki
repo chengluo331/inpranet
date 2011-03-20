@@ -1,6 +1,17 @@
 #summary avancement du projet au 20/03/2011
 #labels Phase-Requirements
 
+= Scénarios implémentés =
+
+Envoi d'une coordonnées GPS  :
+
+ * Mobile => Frontal (envoi donnes geospatiale)
+ * Frontal => Habitude (envoi donnes geospatiale)
+ * Habitude : stockage brut
+ * Habitude <=> Zone (recuperation des zones de la coordonnées)
+ * Habitude : stockage evenement
+
+Gestion des documents ?
 
 = BDD =
 
