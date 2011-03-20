@@ -1,0 +1,60 @@
+#summary avancement du projet au 20/03/2011
+#labels Phase-Requirements
+
+
+
+= Mobile =
+
+*Fait :*
+
+ * interface 
+  * onglets
+ * envoie des coordonnées GPS par intervalles de temps réguliers + distance minimum
+
+*A faire :*
+
+= Zone =
+
+*Fait :*
+ * definitions des zones depuis UDig
+ * import dans la BDD
+ * requete SQL spatial des zones à partir d'un point (à finir)
+ * WS CXF
+
+*A faire :*
+
+= Service Frontal =
+
+*Fait :*
+ * WS CXF REST
+ * Uniquement ajout coordonnées GPS
+ * client CXF à partir de wsdl Habitude
+ * JSON => Java => SOAP/XML
+
+*A faire :*
+
+= Habitude =
+
+*Fait :*
+ * service CXF ajout coodonnées brutes
+
+*A faire :*
+ * persistence coordonnées brutes
+ * persistence evenements
+
+= Indexation =
+
+*Fait :*
+ * localisation
+ * datation
+ * persistence données
+
+*A faire :*
+ * WS CXF
+
+= Profil =
+
+*Fait :*
+
+*A faire :*
+
