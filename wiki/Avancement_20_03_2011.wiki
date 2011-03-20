@@ -2,6 +2,10 @@
 #labels Phase-Requirements
 
 
+= BDD =
+
+ * postgis
+ * tables zones + habitudes
 
 = Mobile =
 
@@ -58,3 +62,8 @@
 
 *A faire :*
 
+= Global = 
+
+*A faire :*
+
+ * définir au plus tôt l'ensemble des interfaces de services/wsdl 
