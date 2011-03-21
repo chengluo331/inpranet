@@ -64,6 +64,8 @@ Gestion des documents ?
 *A faire :*
  * quelques bugs à corriger pour la persistance evenements et habitude
  * intégrer les services pour les persistances définis
+ * communiquer avec d'autre module par le service web
+ * verifier construction d'objet commun aux differents modules (cf. Question)
 
 = Indexation =
 
