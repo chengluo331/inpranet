@@ -69,12 +69,14 @@ Gestion des documents ?
 = Indexation =
 
 *Fait :*
- * localisation
- * datation
- * persistence données
+ * localisation (par coordonnées)
+ * datation (dates et expressions)
+ * persistence document
+ * recuperer documents suivant date aujourd'hui
 
 *A faire :*
- * WS CXF
+ * recuperer zone a partir coordonnées
+ * prendre en compte les zones
 
 = Profil =
 
