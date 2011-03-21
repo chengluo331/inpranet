@@ -11,15 +11,6 @@
     <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<!--  Declaration du PropertyPlaceholderConfigurer -->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:indexation-db.properties</value>
-			</list>
-		</property>
-	</bean>
-
 	<!--  Declaration des dataSources -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
