@@ -96,3 +96,4 @@ Gestion des documents ?
  * qui défini la classe java? qui défini le WSDL?
  * le frontal fait l'orchestration ? ou bien chaque module connait l'autre ?
  * comment gérer les objets métiers transversaux aux modules ?
+ * stage pour Stéphane
