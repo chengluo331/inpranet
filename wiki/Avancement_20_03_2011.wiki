@@ -24,10 +24,15 @@ Gestion des documents ?
 
  * interface 
   * onglets
- * envoie des coordonnées GPS par intervalles de temps réguliers + distance minimum
-
+  * afficher la liste des documents depuis la base de donneés
+  * visualiser le document séléctionné
+  * paramétrage
+ * service: envoie des coordonnées GPS par intervalles de temps réguliers + distance minimum
+ 
 *A faire :*
-
+ * service: acquisition + sauvegarde des données
+ * finaliser la page de param
+ * authentification
 = Zone =
 
 *Fait :*
