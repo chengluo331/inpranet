@@ -57,10 +57,13 @@ Gestion des documents ?
 
 *Fait :*
  * service CXF ajout coodonnées brutes
+ * persistance coordonnées brutes
+ * persistance evenements
+ * persistance habitude hebdomadaire
 
 *A faire :*
- * persistence coordonnées brutes
- * persistence evenements
+ * quelques bugs à corriger pour la persistance evenements et habitude
+ * intégrer les services pour les persistances définis
 
 = Indexation =
 
