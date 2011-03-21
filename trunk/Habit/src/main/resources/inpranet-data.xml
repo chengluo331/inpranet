@@ -43,5 +43,9 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<bean id="jdbcWeeklyHabitDao"
+		class="com.inpranet.habit.dao.JdbcWeeklyHabitDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 </beans>
