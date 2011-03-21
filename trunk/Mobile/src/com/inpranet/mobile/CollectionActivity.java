@@ -1,7 +1,7 @@
 package com.inpranet.mobile;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import android.app.TabActivity;
 import android.content.Context;
@@ -16,13 +16,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-public class CollectionActivity extends TabActivity {
+public class CollectionActivity extends TabActivity implements OnItemClickListener {
 	private static final int INDEX_ACCEUIL = 0;
 	private static final int INDEX_COMMERCE = 1;
 	private static final int INDEX_SPORT = 2;
@@ -35,6 +37,12 @@ public class CollectionActivity extends TabActivity {
 	private ListView mAcceuilListView;
 	private ListView mCommerceListView;
 	private ListView mSportListView;
+	
+	private DocumentListAdapter mAcceuilListAdapter;
+	private DocumentListAdapter mCommerceListAdapter;
+	private DocumentListAdapter mSportListAdapter;
+	
+	private DocumentDBHelper mDBHelper;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -56,6 +64,29 @@ public class CollectionActivity extends TabActivity {
         mAcceuilListView = (ListView) findViewById(R.id.listView_acceuil);
         mCommerceListView = (ListView) findViewById(R.id.listView_commerce);
         mSportListView = (ListView) findViewById(R.id.listView_sport);
+        
+		//acceder db
+		mDBHelper = new DocumentDBHelper(this);
+		try {
+            mDBHelper.createDataBase();
+            mDBHelper.openRODB();
+	    } catch (IOException e) {
+	            Log.d(TAG, "erreur IO db");
+	    }
+		mAcceuilListAdapter = new DocumentListAdapter(this, 
+				mDBHelper.getAllDocumentsByCategory(DocumentDBHelper.CAT_WELCOME));
+		mAcceuilListView.setAdapter(mAcceuilListAdapter);
+		mAcceuilListView.setOnItemClickListener(this);
+		
+		mCommerceListAdapter = new DocumentListAdapter(this, 
+				mDBHelper.getAllDocumentsByCategory(DocumentDBHelper.CAT_COMMERCIAL));
+		mCommerceListView.setAdapter(mCommerceListAdapter);
+		mCommerceListView.setOnItemClickListener(this);
+		
+		mSportListAdapter = new DocumentListAdapter(this, 
+				mDBHelper.getAllDocumentsByCategory(DocumentDBHelper.CAT_SPORT));
+		mSportListView.setAdapter(mSportListAdapter);
+		mSportListView.setOnItemClickListener(this);
 	}
 	
 	/**
@@ -100,10 +131,10 @@ public class CollectionActivity extends TabActivity {
 	
 	// adapteur de liste pour les documents
 	private class DocumentListAdapter extends BaseAdapter{
-		private List<Document> mLocalDocumentList;
+		private List<DocumentInfo> mLocalDocumentList;
 		private LayoutInflater mInflater;
 		
-		public DocumentListAdapter(Context context, List<Document> docList){
+		public DocumentListAdapter(Context context, List<DocumentInfo> docList){
 			mInflater = LayoutInflater.from(context);
 			mLocalDocumentList = docList;
 		}
@@ -117,7 +148,7 @@ public class CollectionActivity extends TabActivity {
 		}
 
 		public long getItemId(int position) {
-			return position;
+			return ((DocumentInfo)getItem(position)).getDocID();
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -133,7 +164,7 @@ public class CollectionActivity extends TabActivity {
 			}else{
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			Document doc = mLocalDocumentList.get(position);
+			DocumentInfo doc = mLocalDocumentList.get(position);
 			if(doc!=null){
 				// TODO affecter la vraie icone
 				viewHolder.icon.setImageResource(R.drawable.icon);
@@ -147,6 +178,19 @@ public class CollectionActivity extends TabActivity {
 			ImageView icon;		// icone d'un doc sur la liste
 			TextView title;		// titre d'un doc sur la liste
 			TextView firstLine;	// la première phrase d'un doc sur la liste 
+		}
+	}
+
+	public void onItemClick(AdapterView<?> parent, View arg1, int arg2, long id) {
+		Intent intent = new Intent(this, DocumentActivity.class);
+		intent.putExtra(DocumentActivity.EXTRA_KEY, id);
+		startActivity(intent);
+	}
+	
+	public void onStop(){
+		super.onStop();
+		if(mDBHelper!=null){
+			mDBHelper.close();
 		}
 	}
 }

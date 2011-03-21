@@ -21,6 +21,7 @@
 			</intent-filter>
 		</receiver>
 		<activity android:name="Prefs"></activity>
+		<activity android:name="DocumentActivity"></activity>
 	</application>
 
 
