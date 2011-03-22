@@ -49,7 +49,7 @@ public class LocalizationService extends Service {
 
 	private static final int TIME_OUT = 1000;
 
-	private static final String URI_WS_STOCK_DATA = "http://10.0.2.2:8080/inpranet/services/geo";
+	private static final String URI_WS_STOCK_DATA = "http://10.0.2.2:9999/inpranet/services/geo";
 
 	/** Le timer pour déclencher l'opération */
 	//private Timer timer = new Timer();

@@ -26,7 +26,7 @@ public class JdbcHabitDAO extends JdbcDaoSupport implements IHabitDAO {
 	
 	public int StockRawHabit(int userId, Date dateTime, double longitude, double latitude) {
 		String sCurrentTime = DateToString(dateTime);
-		String sql = "INSERT INTO habitude.localisation_raw(\"userID\", date_time, longitude, latitude) VALUES (" +userId+", '"+sCurrentTime+"', "+longitude+", "+latitude+");";	
+		String sql = "INSERT INTO " + TABLE_LOCALIZATION_RAW_DATA + " (\"userID\", date_time, longitude, latitude) VALUES (" +userId+", '"+sCurrentTime+"', "+longitude+", "+latitude+");";	
 		return getJdbcTemplate().update(sql);
 	}
 	
