@@ -12,8 +12,7 @@ CREATE TABLE zone.interest
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE zone.zone OWNER TO postgres;
-
+ALTER TABLE zone.interest OWNER TO postgres;
 
 -- Table: zone.zone
 
@@ -30,3 +29,4 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE zone.zone OWNER TO postgres;
+
