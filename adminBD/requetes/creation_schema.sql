@@ -1,16 +1,16 @@
--- Schema: profile
+-- Schema: profil
 
--- DROP SCHEMA profile;
+-- DROP SCHEMA profil;
 
-CREATE SCHEMA profile
+CREATE SCHEMA profil
   AUTHORIZATION postgres;
 
 
--- Schema: habitude
+-- Schema: habit
 
--- DROP SCHEMA habitude;
+-- DROP SCHEMA habit;
 
-CREATE SCHEMA habitude
+CREATE SCHEMA habit
   AUTHORIZATION postgres;
 
   

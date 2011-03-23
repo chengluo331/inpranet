@@ -1,8 +1,8 @@
-﻿-- Table: habitude.position
+﻿-- Table: habit.position
 
--- DROP TABLE habitude.position;
+-- DROP TABLE habit.position;
 
-CREATE TABLE habitude.position
+CREATE TABLE habit.position
 (
   user_id integer NOT NULL,
   date_time timestamp without time zone NOT NULL,
@@ -13,32 +13,32 @@ CREATE TABLE habitude.position
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE habitude.position OWNER TO postgres;
+ALTER TABLE habit.position OWNER TO postgres;
 
 
--- Table: habitude.event
+-- Table: habit.event
 
--- DROP TABLE habitude.event;
+-- DROP TABLE habit.event;
 
-CREATE TABLE habitude.event
+CREATE TABLE habit.event
 (
   user_id integer NOT NULL,
   time_in timestamp without time zone NOT NULL,
   time_out timestamp without time zone,
   zone_id integer,
-  CONSTRAINT pkey_events PRIMARY KEY (user_id, time_in)
+  CONSTRAINT pkey_event PRIMARY KEY (user_id, time_in, zone_id)
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE habitude.event OWNER TO postgres;
+ALTER TABLE habit.event OWNER TO postgres;
 
 
--- Table: habitude.weekly_habit
+-- Table: habit.weekly_habit
 
--- DROP TABLE habitude.weekly_habit;
+-- DROP TABLE habit.weekly_habit;
 
-CREATE TABLE habitude.weekly_habit
+CREATE TABLE habit.weekly_habit
 (
   user_id integer NOT NULL,
   day_of_week integer NOT NULL,
@@ -50,4 +50,4 @@ CREATE TABLE habitude.weekly_habit
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE habitude.weekly_habit OWNER TO postgres;
+ALTER TABLE habit.weekly_habit OWNER TO postgres;
