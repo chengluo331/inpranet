@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="HabitServiceImpService" targetNamespace="http://service.habit.inpranet.com/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.habit.inpranet.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://service.habit.inpranet.com/" version="1.0" xmlns:tns="http://service.habit.inpranet.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="DeduceZone" type="tns:DeduceZone" />
+<xs:element name="DeduceZoneResponse" type="tns:DeduceZoneResponse" />
+<xs:element name="StockData" type="tns:StockData" />
+<xs:element name="StockDataResponse" type="tns:StockDataResponse" />
+<xs:complexType name="StockData">
+    <xs:sequence>
+      <xs:element name="userId" type="xs:int" />
+      <xs:element minOccurs="0" name="coordinate" type="tns:coordinate" />
+    </xs:sequence>
+
+  </xs:complexType>
+<xs:complexType name="coordinate">
+    <xs:sequence>
+      <xs:element name="latitude" type="xs:double" />
+      <xs:element name="longtitude" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="StockDataResponse">
+    <xs:sequence />
+  </xs:complexType>
+
+<xs:complexType name="DeduceZone">
+    <xs:sequence>
+      <xs:element name="userId" type="xs:int" />
+      <xs:element name="planningHorizon" type="xs:int" />
+      <xs:element name="interest" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="DeduceZoneResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="DeduceZoneResponse">
+    <wsdl:part element="tns:DeduceZoneResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StockDataResponse">
+
+    <wsdl:part element="tns:StockDataResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeduceZone">
+    <wsdl:part element="tns:DeduceZone" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StockData">
+    <wsdl:part element="tns:StockData" name="parameters">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IHabitService">
+    <wsdl:operation name="StockData">
+      <wsdl:input message="tns:StockData" name="StockData">
+    </wsdl:input>
+      <wsdl:output message="tns:StockDataResponse" name="StockDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="DeduceZone">
+      <wsdl:input message="tns:DeduceZone" name="DeduceZone">
+    </wsdl:input>
+      <wsdl:output message="tns:DeduceZoneResponse" name="DeduceZoneResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HabitServiceImpServiceSoapBinding" type="tns:IHabitService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <wsdl:operation name="StockData">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="StockData">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="StockDataResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="DeduceZone">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="DeduceZone">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DeduceZoneResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+
+  </wsdl:binding>
+  <wsdl:service name="HabitServiceImpService">
+    <wsdl:port binding="tns:HabitServiceImpServiceSoapBinding" name="HabitServiceImpPort">
+      <soap:address location="http://localhost:8080/inpranet/habit" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
