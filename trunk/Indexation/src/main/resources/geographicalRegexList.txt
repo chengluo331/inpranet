@@ -1,0 +1,23 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Regex geographiques (A classer par priorite)                                %
+% Mettre les plus grands d'abord et les sous-ensembles ensuite                %
+% Pour l'instant, le fichier doit etre dans C:\Temp                           %
+% Format : Regex \n Format Mapper                                             %
+% Attention aux valeurs negatives, a faire au cas par cas                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Latitude et longitude                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+-(\d?)(\d?)\d.\d\d\d\d\d\d, -(\d?)(\d?)\d.\d\d\d\d\d\d
+l -1 l -0.000001 L -1 L -0.000001
+
+-(\d?)(\d?)\d.\d\d\d\d\d\d, (\d?)(\d?)\d.\d\d\d\d\d\d
+l -1 l -0.000001 L 1 L 0.000001
+
+(\d?)(\d?)\d.\d\d\d\d\d\d, -(\d?)(\d?)\d.\d\d\d\d\d\d
+l 1 l 0.000001 L -1 L -0.000001
+
+(\d?)(\d?)\d.\d\d\d\d\d\d, (\d?)(\d?)\d.\d\d\d\d\d\d
+l 1 l 0.000001 L 1 L 0.000001
