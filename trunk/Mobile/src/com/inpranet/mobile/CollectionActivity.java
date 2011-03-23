@@ -42,7 +42,7 @@ public class CollectionActivity extends TabActivity implements OnItemClickListen
 	private DocumentListAdapter mCommerceListAdapter;
 	private DocumentListAdapter mSportListAdapter;
 	
-	private DocumentDBHelper mDBHelper;
+	private InpranetDBHelper mDBHelper;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -66,7 +66,7 @@ public class CollectionActivity extends TabActivity implements OnItemClickListen
         mSportListView = (ListView) findViewById(R.id.listView_sport);
         
 		//acceder db
-		mDBHelper = new DocumentDBHelper(this);
+		mDBHelper = new InpranetDBHelper(this);
 		try {
             mDBHelper.createDataBase();
             mDBHelper.openRODB();
@@ -74,17 +74,17 @@ public class CollectionActivity extends TabActivity implements OnItemClickListen
 	            Log.d(TAG, "erreur IO db");
 	    }
 		mAcceuilListAdapter = new DocumentListAdapter(this, 
-				mDBHelper.getAllDocumentsByCategory(DocumentDBHelper.CAT_WELCOME));
+				mDBHelper.getAllDocumentsByCategory(InpranetDBHelper.CAT_WELCOME));
 		mAcceuilListView.setAdapter(mAcceuilListAdapter);
 		mAcceuilListView.setOnItemClickListener(this);
 		
 		mCommerceListAdapter = new DocumentListAdapter(this, 
-				mDBHelper.getAllDocumentsByCategory(DocumentDBHelper.CAT_COMMERCIAL));
+				mDBHelper.getAllDocumentsByCategory(InpranetDBHelper.CAT_COMMERCIAL));
 		mCommerceListView.setAdapter(mCommerceListAdapter);
 		mCommerceListView.setOnItemClickListener(this);
 		
 		mSportListAdapter = new DocumentListAdapter(this, 
-				mDBHelper.getAllDocumentsByCategory(DocumentDBHelper.CAT_SPORT));
+				mDBHelper.getAllDocumentsByCategory(InpranetDBHelper.CAT_SPORT));
 		mSportListView.setAdapter(mSportListAdapter);
 		mSportListView.setOnItemClickListener(this);
 	}

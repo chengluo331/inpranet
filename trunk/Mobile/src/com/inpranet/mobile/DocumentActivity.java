@@ -12,7 +12,7 @@ public class DocumentActivity extends Activity {
 
 	private static final String TAG = "DocumentActivity";
 	
-	private DocumentDBHelper mDBHelper;
+	private InpranetDBHelper mDBHelper;
 	
 	private long mDocID;
 	private Document mDoc;
@@ -23,7 +23,7 @@ public class DocumentActivity extends Activity {
 		mDocID = getIntent().getExtras().getLong(EXTRA_KEY);
 		Log.d(TAG, "document ID: "+mDocID);
 		
-		mDBHelper = new DocumentDBHelper(this);
+		mDBHelper = new InpranetDBHelper(this);
 		try {
             mDBHelper.createDataBase();
             mDBHelper.openRODB();
