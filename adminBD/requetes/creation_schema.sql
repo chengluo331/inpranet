@@ -14,4 +14,11 @@ CREATE SCHEMA profile
 CREATE SCHEMA habitude
   AUTHORIZATION postgres;
 
+  
+-- Schema: zone
+
+-- DROP SCHEMA zone;
+
+CREATE SCHEMA zone
+  AUTHORIZATION postgres;
 
