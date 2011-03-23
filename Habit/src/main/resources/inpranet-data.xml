@@ -14,17 +14,6 @@
     <!-- indication de l'empacement des annotations -->
     <context:component-scan base-package="com.inpranet"/>
     
-	<!--  
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:/com/inpranet/zone/dao/db.properties</value>
-			</list>
-		</property>
-	</bean>
-	-->
-
 	<!-- C'est important de le nommer "dataSource" car ce bean est automatiquement 
 		utilise -->
 	<bean id="dataSource"
@@ -36,8 +25,6 @@
 	</bean>
 	
 	<!--  Déclaration des DAO JDBC-->
-
-
 	<bean id="jdbcHabitDao"
 		class="com.inpranet.habit.dao.JdbcHabitDAO">
 		<property name="dataSource" ref="dataSource" />
@@ -47,5 +34,12 @@
 		class="com.inpranet.habit.dao.JdbcWeeklyHabitDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="positionDao"
+		class="com.inpranet.habit.dao.PositionDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
 
 </beans>

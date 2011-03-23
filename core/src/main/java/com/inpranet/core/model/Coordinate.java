@@ -1,5 +1,6 @@
 package com.inpranet.core.model;
 
+
 public class Coordinate {
 
 	private double longtitude;
