@@ -1,13 +1,12 @@
 package com.inpranet.zone.service;
 
-import java.util.List;
-import java.util.logging.Logger;
+import java.util.Collection;
 
 import junit.framework.TestCase;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.inpranet.zone.model.Zone;
+import com.inpranet.core.model.Zone;
 
 public class ZoneManagerTest  extends TestCase { 
 	
@@ -17,7 +16,7 @@ public class ZoneManagerTest  extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		appContext = new ClassPathXmlApplicationContext("inpranet-service.xml");
+		appContext = new ClassPathXmlApplicationContext("appContext.xml");
 		
 		// Récupération du bean DAO 
 		zoneManager = (IZoneService) appContext.getBean("zoneService"); 
@@ -30,15 +29,11 @@ public class ZoneManagerTest  extends TestCase {
 		zoneManager = null;
 	}
 		
-	public void testTest(){
-		List<Zone> zones = zoneManager.getZones(2, 3);
-			
-		Logger log = Logger.getLogger(this.getClass().getName());
-		for (Zone zone : zones) {
-			log.info(zone.getId());
-		}
+	public void testGetZoneListFromPos(){
+		Collection<Zone> zones = zoneManager.getZoneListFromPos(4.8567, 45.7607);
 		
-		assertEquals(4, 4);
+		/* 2 zones englobent ce point */
+		assertEquals(zones.size(), 2);
 	}
 }
 
