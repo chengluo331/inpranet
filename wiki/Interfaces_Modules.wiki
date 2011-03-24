@@ -1,0 +1,11 @@
+#summary Les interfaces des modules
+
+= Zone =
+
+ * List<Zone> getZoneListFromPos(double lng, double lat)
+
+= Habitude =
+
+= Indexation =
+
+ * List<Document> getDocumentList(User user, List<Zone> zones)
