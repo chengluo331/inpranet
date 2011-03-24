@@ -27,6 +27,7 @@ public class ObjectFactory {
     private final static QName _DeduceZoneResponse_QNAME = new QName("http://service.habit.inpranet.com/", "DeduceZoneResponse");
     private final static QName _StockDataResponse_QNAME = new QName("http://service.habit.inpranet.com/", "StockDataResponse");
     private final static QName _DeduceZone_QNAME = new QName("http://service.habit.inpranet.com/", "DeduceZone");
+    private final static QName _Geopos_QNAME = new QName("http://service.habit.inpranet.com/", "geopos");
     private final static QName _StockData_QNAME = new QName("http://service.habit.inpranet.com/", "StockData");
 
     /**
@@ -37,27 +38,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DeduceZoneResponse }
+     * Create an instance of {@link StockData }
      * 
      */
-    public DeduceZoneResponse createDeduceZoneResponse() {
-        return new DeduceZoneResponse();
+    public StockData createStockData() {
+        return new StockData();
     }
 
     /**
-     * Create an instance of {@link Coordinate }
+     * Create an instance of {@link Zone }
      * 
      */
-    public Coordinate createCoordinate() {
-        return new Coordinate();
-    }
-
-    /**
-     * Create an instance of {@link StockDataResponse }
-     * 
-     */
-    public StockDataResponse createStockDataResponse() {
-        return new StockDataResponse();
+    public Zone createZone() {
+        return new Zone();
     }
 
     /**
@@ -69,11 +62,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link StockData }
+     * Create an instance of {@link DeduceZoneResponse }
      * 
      */
-    public StockData createStockData() {
-        return new StockData();
+    public DeduceZoneResponse createDeduceZoneResponse() {
+        return new DeduceZoneResponse();
+    }
+
+    /**
+     * Create an instance of {@link Interest }
+     * 
+     */
+    public Interest createInterest() {
+        return new Interest();
+    }
+
+    /**
+     * Create an instance of {@link StockDataResponse }
+     * 
+     */
+    public StockDataResponse createStockDataResponse() {
+        return new StockDataResponse();
+    }
+
+    /**
+     * Create an instance of {@link User }
+     * 
+     */
+    public User createUser() {
+        return new User();
+    }
+
+    /**
+     * Create an instance of {@link GeoPos }
+     * 
+     */
+    public GeoPos createGeoPos() {
+        return new GeoPos();
     }
 
     /**
@@ -101,6 +126,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service.habit.inpranet.com/", name = "DeduceZone")
     public JAXBElement<DeduceZone> createDeduceZone(DeduceZone value) {
         return new JAXBElement<DeduceZone>(_DeduceZone_QNAME, DeduceZone.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GeoPos }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.habit.inpranet.com/", name = "geopos")
+    public JAXBElement<GeoPos> createGeopos(GeoPos value) {
+        return new JAXBElement<GeoPos>(_Geopos_QNAME, GeoPos.class, null, value);
     }
 
     /**
