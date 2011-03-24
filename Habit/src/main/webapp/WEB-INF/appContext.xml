@@ -15,7 +15,8 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 		address: adresse relative, ici domain-name:port/war-name/zone
 	-->
 	<jaxws:endpoint 
-		id="habitService"
-		implementor="com.inpranet.habit.service.HabitServiceImp"
+		id="habitService"	
+		implementor="com.inpranet.habit.service.HabitServiceImp" 	
 		address="/habit" />
+				
 </beans>
