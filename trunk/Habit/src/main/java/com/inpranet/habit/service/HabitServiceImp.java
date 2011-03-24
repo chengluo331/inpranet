@@ -14,8 +14,10 @@ import com.inpranet.core.model.Interest;
 import com.inpranet.core.model.User;
 import com.inpranet.core.model.Zone;
 import com.inpranet.habit.dao.IPositionDAO;
+import com.inpranet.habit.dao.IWeeklyHabitDAO;
 import com.inpranet.habit.dao.PositionDAO;
 import com.inpranet.habit.model.Position;
+import com.inpranet.habit.model.WeeklyHabit;
 
 /**
  * 
@@ -31,6 +33,8 @@ public class HabitServiceImp implements IHabitService {
 	
 	private IPositionDAO positionDao;
 	
+	private IWeeklyHabitDAO weeklyHabitDao;
+	
 	private ClassPathXmlApplicationContext appContext;
 	
 	public void StockData(User user, GeoPos geoPos, Collection<Zone> zones) {
@@ -38,12 +42,20 @@ public class HabitServiceImp implements IHabitService {
 		
 		// Récupération du bean DAO 
 		positionDao = (IPositionDAO) appContext.getBean("positionDao"); 
+		weeklyHabitDao = (IWeeklyHabitDAO) appContext.getBean("jdbcWeeklyHabitDao");
 		
 		log.info("---------------------begin stock raw data------------------------------");
 		Position position = new Position(user.getIdUser(), geoPos.getLongitude(), geoPos.getLatitude(), geoPos.getTime());
 		positionDao.createPosition(position);
 		
-		//Integer timeOfWeek = time2Int(geoPos.getTime());
+		int timeOfWeek = time2Int(geoPos.getTime());
+		
+		for (Zone z:zones) {
+			log.info("-------------une zone!");
+			WeeklyHabit weeklyHabit = new WeeklyHabit(user.getIdUser(), timeOfWeek, z.getIdZone(), 0, 0);
+			weeklyHabitDao.InsertWeeklyHabit(weeklyHabit);
+		}
+		
 		
 	}
 
@@ -60,11 +72,11 @@ public class HabitServiceImp implements IHabitService {
 	 * @param date
 	 * @return entier
 	 */
-	private Integer time2Int(Date date) {
+	private int time2Int(Date date) {
 		if (date != null) {
 			Calendar c = Calendar.getInstance();
 			c.setTime(date);
-			Integer i = (c.get(Calendar.DAY_OF_WEEK)-1)*24 + c.get(Calendar.HOUR_OF_DAY);
+			int i = (c.get(Calendar.DAY_OF_WEEK)-1)*24 + c.get(Calendar.HOUR_OF_DAY);
 			return i; 
 		}
 		else {

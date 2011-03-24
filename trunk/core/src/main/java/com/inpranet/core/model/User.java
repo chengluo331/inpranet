@@ -9,7 +9,7 @@ package com.inpranet.core.model;
 
 public class User {
 
-	private Integer idUser;
+	private int idUser;
 	
 	private String login;
 	
@@ -24,11 +24,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Integer getIdUser() {
+	public int getIdUser() {
 		return idUser;
 	}
 
-	public void setIdUser(Integer idUser) {
+	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
 
