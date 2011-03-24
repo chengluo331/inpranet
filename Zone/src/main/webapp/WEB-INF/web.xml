@@ -6,7 +6,7 @@
 	<!-- Lien vers le fichier qui gere les beans -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/appContext.xml</param-value>
+		<param-value>classpath:appContext.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

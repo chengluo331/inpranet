@@ -1,15 +1,14 @@
 package com.inpranet.zone.dao;
 
-import java.util.List;
-import java.util.logging.Logger;
+import java.util.Collection;
 
 import junit.framework.TestCase;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.inpranet.zone.model.Zone;
+import com.inpranet.core.model.Zone;
 
-public class ZoneDaoImplTest  extends TestCase { 
+public class ZoneDaoTest  extends TestCase { 
 	
 	private IZoneDAO zoneDao ;
 	private ClassPathXmlApplicationContext appContext;
@@ -17,7 +16,7 @@ public class ZoneDaoImplTest  extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		appContext = new ClassPathXmlApplicationContext("inpranet-data.xml");
+		appContext = new ClassPathXmlApplicationContext("appContext.xml");
 		
 		// Récupération du bean DAO 
 		zoneDao = (IZoneDAO) appContext.getBean("zoneDao"); 
@@ -30,15 +29,11 @@ public class ZoneDaoImplTest  extends TestCase {
 		zoneDao = null;
 	}
 		
-	public void testTest(){
-		List<Zone> zones = zoneDao.getZones(2, 3);
-			
-		Logger log = Logger.getLogger(this.getClass().getName());
-		for (Zone zone : zones) {
-			log.info(zone.getId());
-		}
+	public void testGetZones(){
+		Collection<Zone> zones = zoneDao.getZones(4.8567, 45.7607);
 		
-		assertEquals(4, 4);
+		/* 2 zones englobent ce point */
+		assertEquals(zones.size(), 2);
 	}
 }
 
