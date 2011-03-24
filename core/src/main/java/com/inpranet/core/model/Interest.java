@@ -13,6 +13,10 @@ public class Interest {
 		this.name = name;
 		this.description = description;
 	}
+	
+	public Interest() {
+		
+	}
 
 	public long getIdInterest() {
 		return idInterest;
