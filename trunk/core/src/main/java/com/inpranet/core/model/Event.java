@@ -21,6 +21,10 @@ public class Event {
 		this.timeIn = timeIn;
 		this.timeOut = timeOut;
 	}
+	
+	public Event() {
+		
+	}
 
 	public long getIdEvent() {
 		return idEvent;
