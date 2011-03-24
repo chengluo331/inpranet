@@ -7,9 +7,12 @@ Collection<Zone> getZoneListFromPos(double lng, double lat)
 }}}
 
 = Habitude =
-{{{public void StockData(User user, GeoPos geoPos, Collection<Zone> zones) }}}
-{{{public Collection<Zone> DeduceZone(User user, int planningHorizon,
-			Collection<Interest> interests) }}}
+{{{
+public void StockData(User user, GeoPos geoPos, Collection<Zone> zones) }}}
+{{{
+public Collection<Zone> DeduceZone(User user, int planningHorizon,
+			Collection<Interest> interests) 
+}}}
 
 = Indexation =
 
