@@ -1,7 +1,5 @@
 package com.inpranet.core.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +13,7 @@ public class Zone {
 	
 	
 	private Interest zoneInterest;
-
+	
 	public Zone(Interest zoneInterest) {
 		super();
 		this.zoneInterest = zoneInterest;
