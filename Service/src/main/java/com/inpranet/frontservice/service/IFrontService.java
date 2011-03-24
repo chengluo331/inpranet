@@ -1,13 +1,13 @@
 package com.inpranet.frontservice.service;
 
-import com.inpranet.frontservice.model.GeoPos;
-
-
-
+import com.inpranet.habit.service.GeoPos;
 
 public interface IFrontService {
 
-	public void serviceGeo(GeoPos pos);
-	public GeoPos testJSON();
+	void postGeoPos(String id, GeoPos pos);
+	
+	void getDocumentList(String id);
+	
+	public GeoPos  testJSON();
 	
 }
