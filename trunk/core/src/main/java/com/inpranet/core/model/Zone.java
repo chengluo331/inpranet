@@ -14,9 +14,10 @@ public class Zone {
 	
 	private Interest zoneInterest;
 	
-	public Zone(Interest zoneInterest) {
+	public Zone(long id, Interest zoneInterest) {
 		super();
 		this.zoneInterest = zoneInterest;
+		this.idZone = id;
 	}
 	
 	public Zone() {
