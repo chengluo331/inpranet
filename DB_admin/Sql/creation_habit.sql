@@ -41,11 +41,11 @@ ALTER TABLE habit.event OWNER TO postgres;
 CREATE TABLE habit.weekly_habit
 (
   user_id integer NOT NULL,
-  day_of_week integer NOT NULL,
-  time_of_day time without time zone NOT NULL,
+  time_of_week integer NOT NULL,
   zone_id integer NOT NULL,
   nb_occurrence integer NOT NULL,
-  CONSTRAINT pkey_events PRIMARY KEY (user_id, day_of_week, time_of_day)
+  flag integer NOT NULL,
+  CONSTRAINT pkey_events PRIMARY KEY (user_id, time_of_week, zone_id)
 )
 WITH (
   OIDS=FALSE
