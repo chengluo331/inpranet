@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.ListIterator;
 
-
 /**
  * Container pour les resultats d'une analyse Regex portant sur les dates
  * @author Stephane

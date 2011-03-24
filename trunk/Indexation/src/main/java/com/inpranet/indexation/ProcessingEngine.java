@@ -123,7 +123,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	}
 	
 	/**
-	 * Recherche une position g�ographique dans un document
+	 * Recherche une position geographique dans un document
 	 * @param documentPath Le chemin d'acces au document a traiter
 	 */
 	private static String geographicalProcessing(InputDocument inputDocument) {
