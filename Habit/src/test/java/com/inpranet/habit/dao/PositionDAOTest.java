@@ -32,4 +32,5 @@ public class PositionDAOTest extends TestCase {
 		Position p = new Position(1, 3, 2, new Date());
 		positionDao.createPosition(p);
 	}
+
 }

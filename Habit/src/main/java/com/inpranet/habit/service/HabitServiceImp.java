@@ -40,8 +40,7 @@ public class HabitServiceImp implements IHabitService {
 		positionDao = (IPositionDAO) appContext.getBean("positionDao"); 
 		
 		log.info("---------------------begin stock raw data------------------------------");
-		Position position = new Position(user.getIdUser(), geoPos.getLongitude(), 
-				geoPos.getLatitude(), geoPos.getTime());
+		Position position = new Position(user.getIdUser(), geoPos.getLongitude(), geoPos.getLatitude(), geoPos.getTime());
 		positionDao.createPosition(position);
 		
 		//Integer timeOfWeek = time2Int(geoPos.getTime());

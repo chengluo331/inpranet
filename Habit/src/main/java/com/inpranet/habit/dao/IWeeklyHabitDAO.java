@@ -6,11 +6,13 @@ import java.util.Date;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.inpranet.habit.model.WeeklyHabit;
 import com.inpranet.zone.model.Zone;
 
 public interface IWeeklyHabitDAO {
 	
-	public String DateToTimeString(Date dateTime);
-	public int CountOccurrence(int dayOfWeek, int userId, Date dateTime, int zoneId, String interest);
-	public int StockWeeklyHabit(int dayOfWeek, int userId, Date dateTime, int zoneId, String interest, int nbrOcc);
+//	public String DateToTimeString(Date dateTime);
+//	public int CountOccurrence(int dayOfWeek, int userId, Date dateTime, int zoneId, String interest);
+//	public int StockWeeklyHabit(int dayOfWeek, int userId, Date dateTime, int zoneId, String interest, int nbrOcc);
+	public void InsertWeeklyHabit(WeeklyHabit weeklyHabit);
 }
