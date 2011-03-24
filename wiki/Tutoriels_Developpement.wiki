@@ -243,3 +243,12 @@ http://cxf.apache.org/schemas/jaxws.xsd"
 		
 		String ret = service.hello("lolilol");
 }}}
+
+== Marshalling ==
+
+{{{
+JAXBContext context = JAXBContext.newInstance(MyPerson.class);
+    Marshaller marshaller = context.createMarshaller();
+    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+    marshaller.marshal(p, System.out);
+}}}
