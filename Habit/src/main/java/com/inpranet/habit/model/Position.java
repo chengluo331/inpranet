@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Position {
 	/** reference l'id du user */
-	private Integer userId;
+	private int userId;
 	
 	/** la longitude */
 	private double longitude;
@@ -24,7 +24,7 @@ public class Position {
 		
 	}
 	
-	public Position(Integer userId, double longitude, double latitude, Date time) {
+	public Position(int userId, double longitude, double latitude, Date time) {
 		this.userId = userId;
 		this.longitude = longitude;
 		this.latitude = latitude;

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Zone {
 
 	
-	private long idZone;
+	private int idZone;
 	
 	
 	private Interest zoneInterest;
@@ -25,11 +25,11 @@ public class Zone {
 	}
 
 	@XmlElement
-	public long getIdZone() {
+	public int getIdZone() {
 		return idZone;
 	}
 
-	public void setIdZone(long idZone) {
+	public void setIdZone(int idZone) {
 		this.idZone = idZone;
 	}
 
