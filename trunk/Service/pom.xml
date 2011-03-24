@@ -225,10 +225,17 @@
 							<sourceRoot>${basedir}/src/main/java/</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
+									
 									<wsdl>${basedir}/src/main/resources/wsdl/zone.wsdl</wsdl>
-								</wsdlOption>
-								<wsdlOption>
 									<wsdl>${basedir}/src/main/resources/wsdl/habit.wsdl</wsdl>
+									 <!-- 
+									<wsdlArtifact>
+								        <groupId>com.inpranet.core</groupId>
+									<artifactId>core</artifactId>
+									<version>0.0.1-SNAPSHOT</version>
+							       </wsdlArtifact>
+							       	 -->
+								
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
