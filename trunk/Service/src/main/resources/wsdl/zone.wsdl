@@ -1,136 +1,78 @@
 <?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="ZoneServiceService" targetNamespace="http://service.zone.inpranet.com/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.zone.inpranet.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsdl:types>
-<xs:schema elementFormDefault="unqualified" targetNamespace="http://service.zone.inpranet.com/" version="1.0" xmlns:tns="http://service.zone.inpranet.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xs:element name="getZonesFromPos" type="tns:getZonesFromPos" />
-<xs:element name="getZonesFromPosResponse" type="tns:getZonesFromPosResponse" />
-<xs:element name="hello" type="tns:hello" />
-<xs:element name="helloResponse" type="tns:helloResponse" />
-<xs:element name="test" type="tns:test" />
-<xs:element name="testResponse" type="tns:testResponse" />
-<xs:element name="zone" type="tns:zone" />
-<xs:complexType name="test">
-    <xs:sequence />
-  </xs:complexType>
-<xs:complexType name="testResponse">
+<xs:schema targetNamespace="http://www.inpranet.com/zone" version="1.0" xmlns:ns1="http://service.zone.inpranet.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:import namespace="http://service.zone.inpranet.com/" />
+<xs:element name="zone" type="ns1:zone" />
 
-    <xs:sequence />
-  </xs:complexType>
-<xs:complexType name="hello">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="helloResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:string" />
-
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="getZonesFromPos">
+</xs:schema>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://service.zone.inpranet.com/" version="1.0" xmlns:ns1="http://www.inpranet.com/zone" xmlns:tns="http://service.zone.inpranet.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:import namespace="http://www.inpranet.com/zone" />
+<xs:element name="getZoneListFromPos" type="tns:getZoneListFromPos" />
+<xs:element name="getZoneListFromPosResponse" type="tns:getZoneListFromPosResponse" />
+<xs:complexType name="getZoneListFromPos">
     <xs:sequence>
       <xs:element name="longitude" type="xs:double" />
+
       <xs:element name="latitude" type="xs:double" />
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="getZonesFromPosResponse">
+<xs:complexType name="getZoneListFromPosResponse">
     <xs:sequence>
-
       <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:zone" />
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="zone">
     <xs:sequence>
-      <xs:element minOccurs="0" name="id" type="xs:string" />
+
+      <xs:element name="idZone" type="xs:long" />
+      <xs:element minOccurs="0" name="zoneInterest" type="tns:interest" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="interest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" type="xs:string" />
+      <xs:element name="idInterest" type="xs:long" />
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+
     </xs:sequence>
   </xs:complexType>
 </xs:schema>
   </wsdl:types>
+  <wsdl:message name="getZoneListFromPosResponse">
+    <wsdl:part element="tns:getZoneListFromPosResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getZoneListFromPos">
 
-  <wsdl:message name="hello">
-    <wsdl:part element="tns:hello" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="helloResponse">
-    <wsdl:part element="tns:helloResponse" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="test">
-
-    <wsdl:part element="tns:test" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getZonesFromPos">
-    <wsdl:part element="tns:getZonesFromPos" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="testResponse">
-    <wsdl:part element="tns:testResponse" name="parameters">
-
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getZonesFromPosResponse">
-    <wsdl:part element="tns:getZonesFromPosResponse" name="parameters">
+    <wsdl:part element="tns:getZoneListFromPos" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="IZoneService">
-    <wsdl:operation name="test">
-      <wsdl:input message="tns:test" name="test">
-
+    <wsdl:operation name="getZoneListFromPos">
+      <wsdl:input message="tns:getZoneListFromPos" name="getZoneListFromPos">
     </wsdl:input>
-      <wsdl:output message="tns:testResponse" name="testResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="hello">
-      <wsdl:input message="tns:hello" name="hello">
-    </wsdl:input>
-      <wsdl:output message="tns:helloResponse" name="helloResponse">
+      <wsdl:output message="tns:getZoneListFromPosResponse" name="getZoneListFromPosResponse">
     </wsdl:output>
 
-    </wsdl:operation>
-    <wsdl:operation name="getZonesFromPos">
-      <wsdl:input message="tns:getZonesFromPos" name="getZonesFromPos">
-    </wsdl:input>
-      <wsdl:output message="tns:getZonesFromPosResponse" name="getZonesFromPosResponse">
-    </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ZoneServiceServiceSoapBinding" type="tns:IZoneService">
-
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="test">
+    <wsdl:operation name="getZoneListFromPos">
       <soap:operation soapAction="" style="document" />
-      <wsdl:input name="test">
+      <wsdl:input name="getZoneListFromPos">
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="testResponse">
+
+      <wsdl:output name="getZoneListFromPosResponse">
         <soap:body use="literal" />
       </wsdl:output>
-
-    </wsdl:operation>
-    <wsdl:operation name="hello">
-      <soap:operation soapAction="" style="document" />
-      <wsdl:input name="hello">
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="helloResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-
-    </wsdl:operation>
-    <wsdl:operation name="getZonesFromPos">
-      <soap:operation soapAction="" style="document" />
-      <wsdl:input name="getZonesFromPos">
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="getZonesFromPosResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ZoneServiceService">
     <wsdl:port binding="tns:ZoneServiceServiceSoapBinding" name="ZoneServicePort">
-      <soap:address location="http://localhost:8080/inpranet/zone" />
+      <soap:address location="http://localhost:9000/inpranet/zone" />
     </wsdl:port>
+
   </wsdl:service>
 </wsdl:definitions>

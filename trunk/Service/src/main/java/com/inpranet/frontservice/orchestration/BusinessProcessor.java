@@ -24,7 +24,7 @@ public class BusinessProcessor implements IBusinessProcessor {
 		    new ClassPathXmlApplicationContext(new String[]     {"inpranet-service.xml"});
 		IZoneService service =     (IZoneService)context.getBean("serviceZone");
 		
-		Collection<Zone> zones = service.getZonesFromPos(pos.getLatitude(), pos.getLongitude());
+		Collection<Zone> zones = service.getZoneListFromPos(pos.getLongitude(), pos.getLatitude());
 		
 		Logger.getLogger("BP").log(Level.INFO,
 				"CA MARCHE : " + zones.size());

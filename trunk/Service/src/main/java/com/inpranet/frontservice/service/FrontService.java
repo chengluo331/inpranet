@@ -1,7 +1,5 @@
 package com.inpranet.frontservice.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,10 +8,8 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 
 import com.inpranet.frontservice.orchestration.BusinessProcessor;
 import com.inpranet.frontservice.orchestration.IBusinessProcessor;
@@ -30,16 +26,17 @@ public class FrontService implements IFrontService {
 	
 	
 	@POST
+	//@Path("/geo/{id}")
 	@Path("/geo")
 	@Consumes({ "application/json", "application/xml" })
 	@Produces({ "application/json", "application/xml" })
-	public void postGeoPos(@PathParam("id")String id, GeoPos pos) {
+	public void postGeoPos(/*@PathParam("id")String id,*/ GeoPos pos) {
 		
 		Logger.getLogger("FrontService").log(Level.INFO,
-				"CA MARCHE : " + pos.getLatitude());
+				"CA MARCHE : ");
 		
 		User u = new User();
-		u.setIdUser(Long.parseLong(id));
+		u.setIdUser(Long.parseLong("12"));
 		bp.receiveRawPositions(u, pos);
 	}
 
@@ -90,17 +87,19 @@ public class FrontService implements IFrontService {
 	@Produces({ "application/json", "application/xml" })
 	public List<GeoPos> testMulti(List<GeoPos> pos) {
 		Logger log = Logger.getLogger(this.getClass().getName());
-		log.info("lol" + pos.get(0).getLatitude());
+		//log.info("lol" + pos.get(0).getLatitude());
 		return pos;
 	}
 
 	@GET
 	@Path("/json")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
 	public GeoPos  testJSON() {
 
-		 return new GeoPos();
+		GeoPos pos = new GeoPos();
+		pos.setLongitude(564846);
+		 return pos;
 	}
 
 	
