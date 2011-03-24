@@ -52,7 +52,7 @@ public class GeographicalRegexEngine extends RegexEngine {
 				try {
 					coordinate = SimpleCoordinateFormat.Parse(matcher.group().trim(), formatMappers.get(i));
 					
-					// Conservation de la date trouvee
+					// Conservation des coordonnees trouvees
 					geographicalRegexResults.AddResult(coordinate, formatMappers.get(i), matcher.start());
 					
 					// Effacement de l'expression trouvee dans le texte source

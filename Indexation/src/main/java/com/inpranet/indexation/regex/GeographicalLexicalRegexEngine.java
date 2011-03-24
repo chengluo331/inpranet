@@ -1,13 +1,14 @@
 package com.inpranet.indexation.regex;
 
-/*import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;*/
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.geonames.Toponym;
+import org.geonames.ToponymSearchCriteria;
+import org.geonames.ToponymSearchResult;
+import org.geonames.WebService;
+import org.geonames.WikipediaArticle;
 
 /**
  * Moteur de recherche d'expressions lexicales pour les lieux
@@ -27,84 +28,54 @@ public class GeographicalLexicalRegexEngine extends RegexEngine {
 	 * Genere le texte de remplacement en fonction du format mapper
 	 * @param formatMapper Le format mapper concerne 
 	 */
-	private String generateGeographicalReplacement(String formatMapper) {
+	private String generateGeographicalReplacement(String formatMapper, String matchedGroup) {
 		// Le format mapper peut indiquer une formule temporelle
-		if (formatMapper.startsWith("ï¿½")) {
-			/*
-			// Enleve le caractere ï¿½
-			formatMapper = formatMapper.substring(1);
+		if (formatMapper.startsWith("§")) {
+			// Lance une requete vers le service GeoNames
+			ToponymSearchCriteria toponymSearchCriteria;
+			ToponymSearchResult toponymSearchResult;
+			List<WikipediaArticle> wikipediaArticlesList;
+			WikipediaArticle wikipediaArticle;
 			
-			// La methode nextInt de Scanner ne supporte pas le symoble '+'
-			formatMapper = formatMapper.replace('+', ' ');
-			
-			// Gere le cas ou le formatMapper n'est pas l'information a generer
-			Scanner scanner = new Scanner(formatMapper);
-			
-			// Lecture des variables de decalage, c'est l'operation a effectuer sur la date de reference
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(referenceDate);
-			System.out.println(">> " + calendar.get(Calendar.DAY_OF_WEEK));
-			
-			// Planifie les operations de transformations
-			List<Integer> operationList = new ArrayList<Integer>();
-			operationList.add(Calendar.YEAR);
-			operationList.add(Calendar.MONTH);
-			operationList.add(Calendar.DAY_OF_WEEK);
-			operationList.add(Calendar.HOUR);
-			operationList.add(Calendar.MINUTE);
-			
-			// Effectue les transformations sur la date de reference
-			String readOperation;
-			int readShift;
-			boolean dayModification = false;
-			boolean hourModification = false;
-			for (int i = 0; i < 5; i++) {
-				// Lit l'operation passee en parametre
-				readOperation = scanner.next();
-				
-				// Lit la valeur passee en parametre
-				readShift = scanner.nextInt();
-				
-				// Garde une trace des modifications qui ont ete effectuees
-				if (readShift != 0) {
-					if (i <= 2) {
-						dayModification = true;
+			try {
+				toponymSearchCriteria = new ToponymSearchCriteria();
+				toponymSearchCriteria.setQ(matchedGroup);
+				toponymSearchCriteria.setCountryCode("FR");
+				toponymSearchResult = WebService.search(toponymSearchCriteria);
+
+				// On a au moins un resultat trouve, on s'en contente
+				if (toponymSearchResult.getTotalResultsCount() != 0) {
+					// Debug
+					for (Toponym toponym : toponymSearchResult.getToponyms()) {
+						System.out.println("GeographicalLexicalRegexEngine : Position de " + toponym.getName() + " = (" + toponym.getLatitude() + ", " + toponym.getLongitude() + ")");
+					}
+					
+					// On ne s'interesse qu'au premier resultat
+					return "(" + toponymSearchResult.getToponyms().get(0).getLatitude() + ", " + toponymSearchResult.getToponyms().get(0).getLongitude() + ")";
+				} else {
+					// Cas ou aucun resultat n'a ete trouve, on utilise Wikipedia
+					wikipediaArticlesList = WebService.wikipediaSearch(matchedGroup, "FR");
+					
+					// On ne garde que le premier article trouve
+					if (wikipediaArticlesList.size() != 0) {
+						wikipediaArticle = wikipediaArticlesList.get(0);
 					} else {
-						hourModification = true;
+						// Echec de la localisation
+						// On n'effectue aucun changement dans le texte source
+						return matchedGroup;
 					}
+					
+					// Debug
+					System.out.println("GeographicalLexicalRegexEngine : Position de " + wikipediaArticle.getTitle() + " = (" + wikipediaArticle.getLatitude() + ", " + wikipediaArticle.getLongitude() + ")");
+					
+					return "(" + wikipediaArticle.getLatitude() + ", " + wikipediaArticle.getLongitude() + ")";
 				}
-				
-				if (readOperation.equals("s")) {
-					// Effectue un decalage sur un champ
-					calendar.add(operationList.get(i), readShift);
-				} else if (readOperation.equals("e")) {
-					// Effectue une succession de decalage jusqu'a obtenir la valeur desiree sur le champ
-					System.out.println(">> " + calendar.get(Calendar.DAY_OF_WEEK));
-					while (calendar.get(operationList.get(i)) != readShift) {
-						calendar.add(operationList.get(i), 1);
-						System.out.println(">> " + calendar.get(Calendar.DAY_OF_WEEK));
-					}
-				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			
-			// Cree le nouveau format d'affichage
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-			if ((dayModification) && (!hourModification)) {
-				simpleDateFormat.applyPattern("yyyy-MM-dd");
-			} else if ((!dayModification) && (hourModification)) {
-				simpleDateFormat.applyPattern("HH:mm");
-			} else {
-				simpleDateFormat.applyPattern("yyyy-MM-dd HH:mm");
-			}
-			
-			// Debug
-			System.out.println("TemporalLexicalRegexEngine : Ancienne date : " + referenceDate.toString());
-			System.out.println("TemporalLexicalRegexEngine : Nouvelle date : " + calendar.getTime().toString());
-			
-			// Effectue le remplacement
-			return simpleDateFormat.format(calendar.getTime());
-			*/
-			return new String();
+			// En cas d'erreur, ne remplace pas le texte
+			return matchedGroup;
 		} else {
 			// Cas ou le formatMapper contient directement les informations a generer
 			return formatMapper;
@@ -133,11 +104,11 @@ public class GeographicalLexicalRegexEngine extends RegexEngine {
 			// Lance la recherche pour une expression reguliere
 			System.out.println("GeographicalLexicalEngine : Recherche de '" + pattern.toString() + "'...");
 			while (matcher.find()) {
-				// Si une date a ete identifiee
+				// Si un lieu a ete identifie
 				System.out.println("GeographicalLexicalEngine : > Trouve '" + matcher.group().trim() + "'");
 				
 				// Remplacement du resultat selon le mapper
-				text = matcher.replaceFirst(generateGeographicalReplacement(formatMappers.get(i)));
+				text = matcher.replaceFirst(generateGeographicalReplacement(formatMappers.get(i), matcher.group()));
 				matcher = pattern.matcher(text);
 				System.out.println("GeographicalLexicalEngine : > Nouveau texte : " + text);
 			}
