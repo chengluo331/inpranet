@@ -3,7 +3,7 @@
 = Zone =
 
 {{{
-List<Zone> getZoneListFromPos(double lng, double lat)
+Collection<Zone> getZoneListFromPos(double lng, double lat)
 }}}
 
 = Habitude =
@@ -11,5 +11,5 @@ List<Zone> getZoneListFromPos(double lng, double lat)
 = Indexation =
 
 {{{
-List<Document> getDocumentList(User user, List<Zone> zones)
+Collection<Document> getDocumentList(User user, Collection<Zone> zones)
 }}}
