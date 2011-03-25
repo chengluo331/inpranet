@@ -1,0 +1,5 @@
+#summary demos à présenter le 25/03/2011
+
+
+ * (requete zones depuis mobile = 1 partie du scenario ajout geo-position) : Mobile => Frontal => Zone
+ * 
