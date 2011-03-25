@@ -1,9 +1,8 @@
 ﻿-- Function: habit.insertweeklyhabit(integer, integer, integer)
-
 -- DROP FUNCTION habit.insertweeklyhabit(integer, integer, integer);
 
 CREATE OR REPLACE FUNCTION habit.insertweeklyhabit(uid integer, ptime integer, pzone integer)
-  RETURNS integer AS
+ RETURNS integer  AS
 $BODY$
 DECLARE
 	rt1 habit.weekly_habit%ROWTYPE;
@@ -17,17 +16,12 @@ BEGIN
 	IF rt1 is NOT NULL AND rt1.flag=0 THEN
 		UPDATE habit.weekly_habit SET nb_occurrence = nb_occurrence+1, flag = 1 WHERE CURRENT OF curs1;
 		CLOSE curs1;
-		return 40;
 	ELSE 
 		IF rt1 is NULL THEN
-			INSERT INTO habit.weekly_habit VALUES (uid,ptime,pzone,1,0);
-			return 41;
+			INSERT INTO habit.weekly_habit VALUES (uid,ptime,pzone,1,1);
 		END IF;
 	END IF;
- 	
-	return 42;
-
-	
+	RETURN 1;
 END;$BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
