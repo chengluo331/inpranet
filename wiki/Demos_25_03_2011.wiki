@@ -2,4 +2,4 @@
 
 
  * (requete zones depuis mobile = 1 partie du scenario ajout geo-position) : Mobile => Frontal => Zone
- * 
+ * appel WS Stock Data du Habit avec SoapUI => ajout des donnees dans DB (position + habit)
