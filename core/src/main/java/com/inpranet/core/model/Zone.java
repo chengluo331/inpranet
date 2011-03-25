@@ -17,7 +17,7 @@ public class Zone {
 	public Zone(int id, Interest zoneInterest) {
 		super();
 		this.zoneInterest = zoneInterest;
-		this.idZone = id;
+		this.idZone = (int) id;
 	}
 	
 	public Zone() {
