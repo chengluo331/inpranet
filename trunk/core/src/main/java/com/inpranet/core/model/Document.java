@@ -88,7 +88,7 @@ public class Document {
 	 * @param longitude La longitude de la position spatiale du document
 	 * @param data Le texte du document 
 	 */
-	public Document(int id, String title, boolean important, String category, String uri, Date start_date, Date end_date, float latitude, float longitude, String data) {
+	public Document(int id, String title, boolean important, String category, String uri, Date start_date, Date end_date, float longitude,float latitude, String data) {
 		// Initialisation des attributs
 		this.id = id;
 		this.title = title;
@@ -97,8 +97,8 @@ public class Document {
 		this.uri = uri;
 		this.start_date = start_date;
 		this.end_date = end_date;
-		this.latitude = latitude;
 		this.longitude = longitude;
+		this.latitude = latitude;
 		this.data = data;
 		
 		// Correction de l'id
