@@ -1,25 +1,33 @@
 package com.inpranet.core.model;
 
-import java.util.Date;
-
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "geoPos", propOrder = {
+    "longitude",
+    "latitude",
+    "time"
+})
 @XmlRootElement(name="geopos")
 public class GeoPos {
 
-	@XmlElement
 	private double longitude;
-	@XmlElement
+
 	private double latitude;
-	@XmlElement
-	private Date time;
+	@XmlSchemaType(name = "dateTime")
+	private XMLGregorianCalendar time;
 
 	public GeoPos() {
 
 	}
 
-	public GeoPos(double longitude, double latitude, Date time) {
+	public GeoPos(double longitude, double latitude, XMLGregorianCalendar time) {
 		super();
 		this.longitude = longitude;
 		this.latitude = latitude;
@@ -36,7 +44,7 @@ public class GeoPos {
 	}
 
 
-	public Date getTime() {
+	public XMLGregorianCalendar getTime() {
 		return time;
 	}
 

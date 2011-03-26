@@ -1,46 +1,84 @@
 package com.inpranet.core.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "interest", propOrder = {
+    "description",
+    "idInterest",
+    "name"
+})
 public class Interest {
 
-	private long idInterest;
-	
-	private String name;
-	
-	private String description;
+    protected String description;
+    protected long idInterest;
+    protected String name;
 
-	public Interest(String name, String description) {
-		super();
-		this.name = name;
-		this.description = description;
-	}
-	
-	public Interest() {
-		
-	}
+    /**
+     * Gets the value of the description property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	public long getIdInterest() {
-		return idInterest;
-	}
+    /**
+     * Sets the value of the description property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDescription(String value) {
+        this.description = value;
+    }
 
-	public void setIdInterest(long idInterest) {
-		this.idInterest = idInterest;
-	}
+    /**
+     * Gets the value of the idInterest property.
+     * 
+     */
+    public long getIdInterest() {
+        return idInterest;
+    }
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * Sets the value of the idInterest property.
+     * 
+     */
+    public void setIdInterest(long value) {
+        this.idInterest = value;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Gets the value of the name property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getName() {
+        return name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Sets the value of the name property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setName(String value) {
+        this.name = value;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	
 }
