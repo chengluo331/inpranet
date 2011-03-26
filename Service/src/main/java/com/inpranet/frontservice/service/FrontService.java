@@ -1,8 +1,5 @@
 package com.inpranet.frontservice.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,11 +11,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.inpranet.core.model.Document;
+import com.inpranet.core.model.GeoPos;
+import com.inpranet.core.model.User;
 import com.inpranet.frontservice.orchestration.BusinessProcessor;
 import com.inpranet.frontservice.orchestration.IBusinessProcessor;
-import com.inpranet.habit.service.GeoPos;
-import com.inpranet.habit.service.User;
 
 @Path("/services/")
 public class FrontService implements IFrontService {
@@ -35,16 +31,17 @@ public class FrontService implements IFrontService {
 		Logger.getLogger("FrontService").log(Level.INFO, "CA MARCHE : ");
 
 		User u = new User();
-		u.setIdUser(Long.parseLong("12"));
+		u.setIdUser(Integer.parseInt("12"));
 		bp.receiveRawPositions(u, pos);
 	}
 
+	/*
 	@GET
 	// @Path("/geo/{id}")
 	@Path("/doc")
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Collection<Document> getDocumentList(/*String id*/) {
+	public Collection<Document> getDocumentList(String id) {
 
 		Collection<Document> c = new ArrayList<Document>();
 		Document doc1 = new Document(10,"Server test1",true, "acceuil","http://www.test.com",new Date(),new Date(),123,123,"this is a server test");
@@ -53,6 +50,7 @@ public class FrontService implements IFrontService {
 		c.add(doc2);
 		return c;
 	}
+	*/
 
 	/*
 	 * @POST
@@ -109,7 +107,6 @@ public class FrontService implements IFrontService {
 	public GeoPos testJSON() {
 
 		GeoPos pos = new GeoPos();
-		pos.setLongitude(564846);
 		return pos;
 	}
 
