@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 
-import com.inpranet.indexation.model.Document;
+import com.inpranet.core.model.Document;
 import com.inpranet.indexation.service.DocumentManager;
 
 import javax.jws.WebService;

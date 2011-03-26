@@ -3,7 +3,7 @@ package com.inpranet.indexation.service;
 import java.util.Date;
 import java.util.List;
 
-import com.inpranet.indexation.model.Document;
+import com.inpranet.core.model.Document;
 
 /**
  * Interface offrant des services metiers pour la gestion des objets Documents

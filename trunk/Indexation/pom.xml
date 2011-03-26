@@ -7,6 +7,9 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Indexation Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -181,6 +184,13 @@
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
+    <dependency>
+    	<groupId>com.inpranet.core</groupId>
+    	<artifactId>core</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>Indexation</finalName>
@@ -321,6 +331,15 @@
 	            </execution>
 	            -->
 			</executions>
+  		</plugin>
+  		<plugin>
+  			<groupId>org.codehaus.mojo</groupId>
+  			<artifactId>tomcat-maven-plugin</artifactId>
+  			<version>1.1</version>
+  			<configuration>
+  				<!-- L'URI par defaut n'est plus utilisable, modification -->
+  				<url>http://localhost:8080/manager/html</url>
+  			</configuration>
   		</plugin>
     </plugins>
   	<pluginManagement>

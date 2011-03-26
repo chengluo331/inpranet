@@ -3,7 +3,7 @@ package com.inpranet.indexation.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.inpranet.indexation.model.*;
+import com.inpranet.core.model.*;
 
 /**
  * Inteface DAO pour la gestion de l'acces au donnes relatives aux documents

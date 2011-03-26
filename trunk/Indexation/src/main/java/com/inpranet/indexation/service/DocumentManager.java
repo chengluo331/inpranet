@@ -3,8 +3,8 @@ package com.inpranet.indexation.service;
 import java.util.Date;
 import java.util.List;
 
+import com.inpranet.core.model.Document;
 import com.inpranet.indexation.dao.DocumentDAO;
-import com.inpranet.indexation.model.Document;
 
 /**
  * @author Stephane

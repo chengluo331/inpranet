@@ -27,6 +27,12 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<!-- Lecuture de sequences depuis la base de donnees pour la generation d'id -->
+	<bean id="documentIncrementer" class="org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer">  
+        <constructor-arg ref="dataSource"/>  
+        <constructor-arg value="indexation.document_id_sequence"/>  
+    </bean>  
+	
 	<!-- Ajout d'un bean Spring pour le SEI -->
     <bean id="processingEngineServ" class="com.inpranet.indexation.ProcessingEngine" />
     <bean id="requestEngineServ" class="com.inpranet.indexation.RequestEngine" />
