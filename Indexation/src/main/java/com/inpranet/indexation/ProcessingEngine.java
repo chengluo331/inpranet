@@ -3,7 +3,7 @@ package com.inpranet.indexation;
 import java.util.Date;
 import java.util.Scanner;
 
-import com.inpranet.indexation.model.Document;
+import com.inpranet.core.model.Document;
 import com.inpranet.indexation.regex.GeographicalLexicalRegexEngine;
 import com.inpranet.indexation.regex.GeographicalRegexEngine;
 import com.inpranet.indexation.regex.GeographicalRegexResults;
@@ -14,7 +14,7 @@ import com.inpranet.indexation.service.DocumentManager;
 
 import javax.jws.WebService;
 
-import com.vividsolutions.jts.geom.Coordinate;;
+import com.vividsolutions.jts.geom.Coordinate;
 
 /**
  * Moteur de traitement de documents
@@ -124,7 +124,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	
 	/**
 	 * Recherche une position geographique dans un document
-	 * @param documentPath Le chemin d'acces au document a traiter
+	 * @param inputDocument Le chemin d'acces au document a traiter
 	 */
 	private static String geographicalProcessing(InputDocument inputDocument) {
 		GeographicalRegexResults geographicalRegexResults;
@@ -196,8 +196,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 			// Ajout du document dans la base de donnees
 			// TODO : Traitements d'erreurs
 			// TODO : Passer les dates en float
-			// TODO : Ameliorer l'automatisation de la generation d'id pour les tables
-			Document document = new Document(1, inputDocument.GetTitle(), inputDocument.GetUri(), startDate, endDate, (float)coordinate.x, (float)coordinate.y, inputDocument.GetData());
+			Document document = new Document(inputDocument.GetReference(), inputDocument.GetTitle(), inputDocument.IsUrgent(), "Category", inputDocument.GetUri(), startDate, endDate, (float)coordinate.x, (float)coordinate.y, inputDocument.GetData());
 			documentManager.saveDocument(document);
 		}
 		

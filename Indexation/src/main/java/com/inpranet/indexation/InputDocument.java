@@ -36,7 +36,7 @@ public class InputDocument {
 	
 	// Donnees brutes extraites du document
 	private String _urgent;
-	private String id;
+	private String reference;
 	private String title;
 	private String uri;
 	private String temporalCreationData;
@@ -76,7 +76,7 @@ public class InputDocument {
 			
 			// Lecture des metadonnees
 			_urgent = xPath.evaluate("//@urgent", document.getDocumentElement());
-			id = xPath.evaluate("//metaData/id/text()", document.getDocumentElement());
+			reference = xPath.evaluate("//metaData/reference/text()", document.getDocumentElement());
 			title = xPath.evaluate("//metaData/title/text()", document.getDocumentElement());
 			uri = xPath.evaluate("//metaData/uri/text()", document.getDocumentElement());
 			temporalCreationData = xPath.evaluate("//metaData/temporalCreationData/text()", document.getDocumentElement());
@@ -123,10 +123,10 @@ public class InputDocument {
 	}
 	
 	/**
-	 * @return L'identifiant du document
+	 * @return La reference du document
 	 */
-	public String GetId() {
-		return id;
+	public String GetReference() {
+		return reference;
 	}
 	
 	/**

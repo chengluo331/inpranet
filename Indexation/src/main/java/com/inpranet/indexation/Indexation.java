@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Stephane
  */
 public class Indexation {
-	/**
+	/**	
 	 * Variables statiques
 	 */
 	private static ProcessingEngine processingEngine = new ProcessingEngine();

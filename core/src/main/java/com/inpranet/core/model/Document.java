@@ -11,12 +11,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="document")
 public class Document {
-	
 	/**
-	 * L'identifiant du document
+	 * La reference du document (non utilise comme cle primaire lors du stockage)
 	 */
 	@XmlElement
-	private int id;
+	private String reference;
 	
 	/**
 	 * Le titre du document
@@ -25,13 +24,13 @@ public class Document {
 	private String title;
 	
 	/**
-	 * L'importance du document
+	 * L'urgence du document
 	 */
 	@XmlElement
-	private boolean important;
+	private boolean urgent;
 	
 	/**
-	 * Le category du document
+	 * La categorie du document
 	 */
 	@XmlElement
 	private String category;
@@ -79,20 +78,21 @@ public class Document {
 	
 	/**
 	 * Constructeur par defaut de la classe Document
-	 * @param id L'identifiant du document
+	 * Attention a l'ordre de passage des parametres longitude et latitude
+	 * @param reference La réference du document
 	 * @param title Le titre du document
 	 * @param uri L'URI du document
 	 * @param start_date La date de debut du document
 	 * @param end_date La date de fin du document
-	 * @param latitude La latitude de la position spatiale du document
 	 * @param longitude La longitude de la position spatiale du document
+	 * @param latitude La latitude de la position spatiale du document
 	 * @param data Le texte du document 
 	 */
-	public Document(int id, String title, boolean important, String category, String uri, Date start_date, Date end_date, float longitude,float latitude, String data) {
+	public Document(String reference, String title, boolean urgent, String category, String uri, Date start_date, Date end_date, float longitude, float latitude, String data) {
 		// Initialisation des attributs
-		this.id = id;
+		this.reference = reference;
 		this.title = title;
-		this.important = important;
+		this.urgent = urgent;
 		this.category = category;
 		this.uri = uri;
 		this.start_date = start_date;
@@ -100,16 +100,13 @@ public class Document {
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.data = data;
-		
-		// Correction de l'id
-//		this.id = generated_id++;
 	}
 	
 	/**
-	 * @return L'identifiant du document
+	 * @return La reference du document
 	 */
-	public int getId() {
-		return id;
+	public String getReference() {
+		return reference;
 	}
 
 	/**
@@ -126,14 +123,14 @@ public class Document {
 	}
 	
 	/**
-	 * @return l'importance du document
+	 * @return L'urgence du document
 	 */
-	public boolean isImportant(){
-		return important;
+	public boolean isUrgent(){
+		return urgent;
 	}
 
 	/**
-	 * @return le category du document
+	 * @return La categorie du document
 	 */
 	public String getCategory(){
 		return category;
