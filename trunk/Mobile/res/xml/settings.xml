@@ -15,4 +15,12 @@
     android:entries="@array/entries_precisions"
     android:entryValues="@array/entryValues_precisions"
     android:dialogTitle="@string/pref_habit_precision_dialog_title" />
+    
+    <ListPreference
+    android:key="refreshFrequence"
+    android:title="@string/pref_refresh_freq_title"
+    android:summary="@string/pref_refresh_freq_summary"
+    android:entries="@array/entries_frequences"
+    android:entryValues="@array/entryValues_frequences"
+    android:dialogTitle="@string/pref_refresh_freq_diaglog_title" />
 </PreferenceScreen>

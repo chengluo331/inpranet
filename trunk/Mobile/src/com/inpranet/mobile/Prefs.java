@@ -30,6 +30,8 @@ public class Prefs extends PreferenceActivity{
 	/** Identifiant de listPrefHabitPrecision */
 	public static final String KEY_LISTPREF_HABIT_PRECISION = "habitPrecision";
 	
+	/** Identifiant de listPrefRefreshFrequence	 */
+	
 	/** L'objet persistent pour sauvegarder les preferences*/
 	SharedPreferences settings;
 	
@@ -38,6 +40,9 @@ public class Prefs extends PreferenceActivity{
 	
 	/** Objet listPreference pour choisir le niveau de précision d'habitude */
 	private ListPreference listPrefHabitPrecision;
+	
+	/** Objet listPreference pour choisir le niveau de fréquence de rechargement des documents */
+	private ListPreference listPrefRefreshFrequence;
 	
 	/**
 	 * Charger le fichier res.xml.settings.xml qui décrit cette page de configuration 
@@ -57,16 +62,19 @@ public class Prefs extends PreferenceActivity{
 		checkBoxLocalizationService.setChecked(settings.getBoolean("localizationService", true));
 		
 		listPrefHabitPrecision = (ListPreference)prefScreen.findPreference(KEY_LISTPREF_HABIT_PRECISION);
+		listPrefHabitPrecision.setValue(settings.getString(KEY_LISTPREF_HABIT_PRECISION, "medium"));
 		
+		listPrefRefreshFrequence = (ListPreference)prefScreen.findPreference(KEY_LISTPREF_HABIT_PRECISION);
 	}
 	
 	@Override
 	protected void onStop() {
 		super.onStop();
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);		
+		//SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);		
 		
 		SharedPreferences.Editor ed = settings.edit();
-		ed.putBoolean("localizationService", checkBoxLocalizationService.isChecked());
+		ed.putBoolean(KEY_CHECKBOX_LOCALISATION_SERVICE, checkBoxLocalizationService.isChecked());
+		ed.putString(KEY_LISTPREF_HABIT_PRECISION, listPrefHabitPrecision.getValue());
 		ed.commit();
 	}
 }

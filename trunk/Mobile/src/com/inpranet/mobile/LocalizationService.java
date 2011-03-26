@@ -178,7 +178,10 @@ public class LocalizationService extends Service {
 	}
 
 	
-
+	/**
+	 * Vérifier si le mobile est connecté à internet
+	 * @return boolean indiquant la connexion ou pas
+	 */
 	public boolean isOnline() {
 		 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		 if (cm.getActiveNetworkInfo() != null) {
@@ -210,8 +213,7 @@ public class LocalizationService extends Service {
 		
 		mgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 		
-		LocationListener gpsListener = new LocationListener() {
-			
+		final class GPSListener implements LocationListener {
 			public void onLocationChanged(Location newLocation) {
 				Log.d(TAG, "Location changed");
 				registerLocation(newLocation);
@@ -236,7 +238,10 @@ public class LocalizationService extends Service {
 				// TODO Auto-generated method stub
 				
 			}			
-		};
+		}
+		
+		GPSListener gpsListener = new GPSListener();
+
 		
 		minTime = 0;
 		minDistance = 0;
