@@ -15,15 +15,22 @@ WITH (
 
 ALTER TABLE profil.user OWNER TO postgres;
 
--- Table: profil.habitType
+
+CREATE SEQUENCE seq_user_id INCREMENT BY 1 NO MAXVALUE START 100 NO CYCLE;
+
 
 -- DROP TABLE profil.habitType;
 CREATE TABLE profil.habitType
 (
   user_id integer NOT NULL,
-  day_of_week integer NOT NULL,
-  habit_type integer NOT NULL,
-  CONSTRAINT pkey_habitType PRIMARY KEY (user_id, day_of_week, habit_type),
+  monday integer,
+  tuesday integer,
+  wednesday integer,
+  thursday integer,
+  friday integer,
+  saturday integer,
+  sunday integer,
+  CONSTRAINT pkey_habitType PRIMARY KEY (user_id),
   CONSTRAINT fkey_habitType_user FOREIGN KEY (user_id) REFERENCES profil.user(id)
 )
 WITH (
