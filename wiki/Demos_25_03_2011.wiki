@@ -3,3 +3,18 @@
 
  * (requete zones depuis mobile = 1 partie du scenario ajout geo-position) : Mobile => Frontal => Zone
  * appel WS Stock Data du Habit avec SoapUI => ajout des donnees dans DB (position + habit)
+
+
+=A faire:=
+
+== Service frontal ==
+ *Générer tous les clients web service dans un seul package, modifier à la main les classes métiers dans core et faire pointer les objets dans d'autres classes vers ces classes. Supprimer les classes métiers générées.
+
+== Mobile ==
+ * Pas de inline classe 
+ * Travail sur interface pour la rendre plus joli: fond blanc etc
+ * Utilisateur peut configurer le temps de garder ses données
+
+== Habit == 
+ * Utilisateur peut donner au système pour chaque jour de la semaine, il a plutôt une habitude quotidienne ou hebdomadaire. Donc il faut prévenir une requête un peu plus compliquée.
+ * Suppression des données après la durée maximale autorisée par utilisateur. (Trigger, -1 )
