@@ -1,12 +1,21 @@
 package com.inpranet.core.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+
 
 /**
  * Classe d'entite utilisateur
  * @author yqzhou
  *
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "user", propOrder = {
+    "idUser",
+    "login",
+    "password"
+})
 public class User {
 
 	private int idUser;

@@ -1,11 +1,16 @@
 package com.inpranet.core.model;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "zone", namespace =
-    "http://www.inpranet.com/zone")
-//@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "zone", propOrder = {
+    "idZone",
+    "zoneInterest"
+})
+@XmlRootElement(name="zone")
 public class Zone {
 
 	
@@ -24,7 +29,6 @@ public class Zone {
 		
 	}
 
-	@XmlElement
 	public int getIdZone() {
 		return idZone;
 	}
@@ -33,7 +37,6 @@ public class Zone {
 		this.idZone = idZone;
 	}
 
-	@XmlElement
 	public Interest getZoneInterest() {
 		return zoneInterest;
 	}
