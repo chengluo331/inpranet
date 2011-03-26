@@ -12,6 +12,7 @@ CREATE TABLE profil.user
 WITH (
   OIDS=FALSE
 );
+
 ALTER TABLE profil.user OWNER TO postgres;
 
 -- Table: profil.habitType
@@ -29,3 +30,4 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE profil.habitType OWNER TO postgres;
+
