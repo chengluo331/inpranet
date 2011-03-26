@@ -27,6 +27,12 @@ public class User {
 	public User() {
 	}
 
+	public User(int id, String login, String password) {
+		this.idUser = id;
+		this.login = login;
+		this.password = password;
+	}
+	
 	public User(String login, String password) {
 		super();
 		this.login = login;

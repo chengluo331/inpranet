@@ -1,4 +1,4 @@
-package com.inpranet.habit.dao;
+/**package com.inpranet.habit.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,3 +63,4 @@ public class JdbcHabitDAO extends JdbcDaoSupport implements IHabitDAO {
 		return resZones;
 	}
 }
+*/
