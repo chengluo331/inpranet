@@ -1,7 +1,7 @@
 package com.inpranet.frontservice.orchestration;
 
-import com.inpranet.habit.service.GeoPos;
-import com.inpranet.habit.service.User;
+import com.inpranet.core.model.GeoPos;
+import com.inpranet.core.model.User;
 
 
 public interface IBusinessProcessor {

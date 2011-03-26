@@ -1,15 +1,17 @@
 package com.inpranet.frontservice.orchestration;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.inpranet.habit.service.GeoPos;
-import com.inpranet.habit.service.User;
-import com.inpranet.zone.service.IZoneService;
-import com.inpranet.zone.service.Zone;
+import com.inpranet.core.model.GeoPos;
+import com.inpranet.core.model.User;
+import com.inpranet.core.model.Zone;
+import com.inpranet.core.ws.habit.IHabitService;
+import com.inpranet.core.ws.zone.IZoneService;
 
 
 
@@ -24,10 +26,19 @@ public class BusinessProcessor implements IBusinessProcessor {
 		    new ClassPathXmlApplicationContext(new String[]     {"inpranet-service.xml"});
 		IZoneService service =     (IZoneService)context.getBean("serviceZone");
 		
+		Logger.getLogger("BP").log(Level.INFO,
+				"AVANT APPEL SERVICE");
+		
 		Collection<Zone> zones = service.getZoneListFromPos(pos.getLongitude(), pos.getLatitude());
 		
 		Logger.getLogger("BP").log(Level.INFO,
 				"CA MARCHE : " + zones.size());
+		
+		IHabitService habitService =     (IHabitService)context.getBean("serviceHabit");
+		
+		
+		habitService.stockData(user, pos, (List<Zone>)zones);
+		
 	}
 
 	/*
