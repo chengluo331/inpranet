@@ -40,15 +40,15 @@ public class HabitServiceImp implements IHabitService {
 	public void StockData(User user, GeoPos geoPos, Collection<Zone> zones) {
 		 appContext = new ClassPathXmlApplicationContext("inpranet-data.xml");
 		
-		// Récupération du bean DAO 
+		// Rï¿½cupï¿½ration du bean DAO 
 		positionDao = (IPositionDAO) appContext.getBean("positionDao"); 
 		weeklyHabitDao = (IWeeklyHabitDAO) appContext.getBean("jdbcWeeklyHabitDao");
 		
 		log.info("---------------------begin stock raw data------------------------------");
-		Position position = new Position(user.getIdUser(), geoPos.getLongitude(), geoPos.getLatitude(), geoPos.getTime());
+		Position position = new Position(user.getIdUser(), geoPos.getLongitude(), geoPos.getLatitude(), new Date()/*geoPos.getTime().toGregorianCalendar().getTime()*/);
 		positionDao.createPosition(position);
 		
-		int timeOfWeek = time2Int(geoPos.getTime());
+		int timeOfWeek = time2Int(/*geoPos.getTime().toGregorianCalendar().getTime()*/new Date());
 		
 		for (Zone z:zones) {
 			log.info("-------------une zone!");
