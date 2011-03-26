@@ -11,5 +11,17 @@
         <item>medium</item>
         <item>low</item>
     </string-array>
+    
+    <string-array name="entries_frequences">
+        <item>Haute</item>
+        <item>Moyenne</item>
+        <item>Basse</item>
+    </string-array>
+
+	<string-array name="entryValues_frequences">
+        <item>high</item>
+        <item>medium</item>
+        <item>low</item>
+    </string-array>
 	
 </resources>
