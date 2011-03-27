@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Interest {
 
     protected String description;
-    protected long idInterest;
+    protected int idInterest;
     protected String name;
 
     /**
@@ -45,7 +45,7 @@ public class Interest {
      * Gets the value of the idInterest property.
      * 
      */
-    public long getIdInterest() {
+    public int getIdInterest() {
         return idInterest;
     }
 
@@ -53,7 +53,7 @@ public class Interest {
      * Sets the value of the idInterest property.
      * 
      */
-    public void setIdInterest(long value) {
+    public void setIdInterest(int value) {
         this.idInterest = value;
     }
 

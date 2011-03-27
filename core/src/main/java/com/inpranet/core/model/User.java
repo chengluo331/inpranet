@@ -1,5 +1,7 @@
 package com.inpranet.core.model;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -23,6 +25,10 @@ public class User {
 	private String login;
 	
 	private String password;
+	
+	private int planningHorizon;
+	
+	private List<Interest> interests;
 
 	public User() {
 	}
@@ -61,6 +67,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getPlanningHorizon() {
+		return planningHorizon;
+	}
+
+	public void setPlanningHorizon(int planningHorizon) {
+		this.planningHorizon = planningHorizon;
+	}
+
+	public List<Interest> getInterests() {
+		return interests;
+	}
+
+	public void setInterests(List<Interest> interests) {
+		this.interests = interests;
 	}
 	
 	

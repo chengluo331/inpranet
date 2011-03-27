@@ -25,8 +25,8 @@
 	</bean>
 	
 	<!--  Déclaration des DAO JDBC-->
-	<bean id="jdbcWeeklyHabitDao"
-		class="com.inpranet.habit.dao.JdbcWeeklyHabitDAO">
+	<bean id="weeklyHabitDao"
+		class="com.inpranet.habit.dao.WeeklyHabitDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
