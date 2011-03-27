@@ -27,6 +27,7 @@ Thèmes :
   * BDD décisionnel/data-mining
   * Java
   * similitudes avec engineering, SOA, PLD
+ * bilans (humains, techniques, etc).
 
 == Demo ==
 
@@ -59,4 +60,3 @@ Solutions :
   * creation d'un shapefile dans uDig avec les features : user_id, date_time et coordinate
   * chargement du shapefile via sql dans la table position
   * execution d'une procédure stockée qui parcourt les positions, et pour chaque position parcourt les zones pour peupler la table habit
-
