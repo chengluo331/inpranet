@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Expressions lexicales temporelles (A classer par priorite)                  %
 % Pour l'instant, le fichier doit etre dans C:\Temp                           %
-% Format : Regex lexicale \n Texte remplaçant                                 %
-%          Regex lexicale \n §Formule temporelle O y O M O d O H O m [O = s/e]%
+% Format : Regex lexicale \n Texte remplacant                                 %
+%          Regex lexicale \n Â§Formule temporelle O y O M O d O H O m [O = s/e]%
 % Rq : Dimanche = 1, Janvier = 1                                              %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -11,76 +11,76 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 dimanche
-§s 0 s 0 e 1 s 0 s 0
+Â§s 0 s 0 e 1 s 0 s 0
 
 lundi
-§s 0 s 0 e 2 s 0 s 0
+Â§s 0 s 0 e 2 s 0 s 0
 
 lundi
-§s 0 s 0 e 3 s 0 s 0
+Â§s 0 s 0 e 3 s 0 s 0
 
 mardi
-§s 0 s 0 e 4 s 0 s 0
+Â§s 0 s 0 e 4 s 0 s 0
 
 mercredi
-§s 0 s 0 e 5 s 0 s 0
+Â§s 0 s 0 e 5 s 0 s 0
 
 jeudi
-§s 0 s 0 e 6 s 0 s 0
+Â§s 0 s 0 e 6 s 0 s 0
 
 vendredi
-§s 0 s 0 e 7 s 0 s 0
+Â§s 0 s 0 e 7 s 0 s 0
 
 janvier
-§s 0 e 1 s 0 s 0 s 0
+Â§s 0 e 1 s 0 s 0 s 0
 
 fevrier
-§s 0 e 2 s 0 s 0 s 0
+Â§s 0 e 2 s 0 s 0 s 0
 
 mars
-§s 0 e 3 s 0 s 0 s 0
+Â§s 0 e 3 s 0 s 0 s 0
 
 avril
-§s 0 e 4 s 0 s 0 s 0
+Â§s 0 e 4 s 0 s 0 s 0
 
 mai
-§s 0 e 5 s 0 s 0 s 0
+Â§s 0 e 5 s 0 s 0 s 0
 
 juin
-§s 0 e 6 s 0 s 0 s 0
+Â§s 0 e 6 s 0 s 0 s 0
 
 juillet
-§s 0 e 7 s 0 s 0 s 0
+Â§s 0 e 7 s 0 s 0 s 0
 
 aout
-§s 0 e 8 s 0 s 0 s 0
+Â§s 0 e 8 s 0 s 0 s 0
 
 septembre
-§s 0 e 9 s 0 s 0 s 0
+Â§s 0 e 9 s 0 s 0 s 0
 
 octobre
-§s 0 e 10 s 0 s 0 s 0
+Â§s 0 e 10 s 0 s 0 s 0
 
 novembre
-§s 0 e 11 s 0 s 0 s 0
+Â§s 0 e 11 s 0 s 0 s 0
 
 decembre
-§s 0 e 12 s 0 s 0 s 0
+Â§s 0 e 12 s 0 s 0 s 0
 
 hier
-§s 0 s 0 s -1 s 0 s 0
+Â§s 0 s 0 s -1 s 0 s 0
 
 demain
-§s 0 s 0 s 1 s 0 s 0
+Â§s 0 s 0 s 1 s 0 s 0
 
 mois prochain
-§s 0 s 1 s 0 s 0 s 0
-
-l'année prochaine
-§s 1 s 0 s 0 s 0 s 0
+Â§s 0 s 1 s 0 s 0 s 0
 
 l'annee prochaine
-§s 1 s 0 s 0 s 0 s 0
+Â§s 1 s 0 s 0 s 0 s 0
+
+l'annee prochaine
+Â§s 1 s 0 s 0 s 0 s 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Heures                                                                      %

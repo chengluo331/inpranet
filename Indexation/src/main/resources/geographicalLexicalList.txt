@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Expressions lexicales geographiques (A classer par priorite)                %
 % Pour l'instant, le fichier doit etre dans C:\Temp                           %
-% Format : Regex geographique \n Texte remplaçant                             %
-%          Regex lexicale \n § Indique qu'une recherche doit etre faite       %
+% Format : Regex geographique \n Texte remplacant                             %
+%          Regex lexicale \n Â§ Indique qu'une recherche doit etre faite       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -17,4 +17,4 @@ INSA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \d\d\d\d\d [a-zA-Z\-]+
-§
+Â§

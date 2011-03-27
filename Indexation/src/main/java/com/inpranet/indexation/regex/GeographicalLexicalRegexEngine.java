@@ -30,7 +30,7 @@ public class GeographicalLexicalRegexEngine extends RegexEngine {
 	 */
 	private String generateGeographicalReplacement(String formatMapper, String matchedGroup) {
 		// Le format mapper peut indiquer une formule temporelle
-		if (formatMapper.startsWith("ง")) {
+		if (formatMapper.startsWith("ยง")) {
 			// Lance une requete vers le service GeoNames
 			ToponymSearchCriteria toponymSearchCriteria;
 			ToponymSearchResult toponymSearchResult;

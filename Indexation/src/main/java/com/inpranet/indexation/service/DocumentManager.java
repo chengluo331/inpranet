@@ -27,7 +27,7 @@ public class DocumentManager implements IDocumentManager {
 	 * Recupere les documents qui couvrent une certaine date
 	 * @param date La date a couvrir
 	 */
-	public List<Document> getDocumentByDate(Date date) {
+	public List<Document> getDocumentByDateCategories(Date date/*, List<Category> categories*/) {
 		return documentDao.findDocumentByDate(date);
 	}
 }

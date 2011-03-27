@@ -1,6 +1,12 @@
 package com.inpranet.indexation;
 
+import java.util.List;
+
 import javax.jws.WebService;
+
+import com.inpranet.core.model.Document;
+import com.inpranet.core.model.User;
+import com.inpranet.core.model.Zone;
 
 /**
  * Interface utilisee pour la generation du Web Service a l'aide de CXF
@@ -9,8 +15,9 @@ import javax.jws.WebService;
 @WebService
 public interface RequestEngineSEI {
 	/**
-	 * Lance le traitement d'un document
-	 * @param documentPath Le chemin d'acces au document a traiter
+	 * Lance le requetage d'un document pour une recherche normale (mode predictif)
+	 * @param user L'utilisateur qui a effectue la requete
+	 * @param zone Les zones dans lequelles on cherche des documents
 	 */
-	public StringBuffer LaunchRequest();
+	public List<Document> LaunchRequest(User user, List<Zone> zone);
 }

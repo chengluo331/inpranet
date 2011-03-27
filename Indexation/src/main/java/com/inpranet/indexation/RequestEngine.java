@@ -1,13 +1,16 @@
 package com.inpranet.indexation;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 
-import com.inpranet.core.model.Document;
-import com.inpranet.indexation.service.DocumentManager;
-
 import javax.jws.WebService;
+
+import com.inpranet.core.model.Document;
+import com.inpranet.core.model.User;
+import com.inpranet.core.model.Zone;
+import com.inpranet.indexation.service.DocumentManager;
 
 /**
  * Moteur de requetes de documents
@@ -16,11 +19,6 @@ import javax.jws.WebService;
 @WebService(endpointInterface = "com.inpranet.indexation.RequestEngineSEI")
 public class RequestEngine implements RequestEngineSEI {
 	/**
-	 * Parametrage de la fin de ligne
-	 */
-	private final String EOL = "\n";
-	
-	/**
 	 * Utilisation des services metiers lies aux objets Documents
 	 */
 	private static DocumentManager documentManager = new DocumentManager();
@@ -28,24 +26,28 @@ public class RequestEngine implements RequestEngineSEI {
 	/**
 	 * Lance une requete pour recuperer des documents
 	 */
-	public StringBuffer LaunchRequest() {
-		// Recuperation des resultats de la requete
-		List<Document> documents;
-		StringBuffer awnser = new StringBuffer();
+	public List<Document> LaunchRequest(User user, List<Zone> zone) {
+		// Variable chargee de la recuperation des resultats de la requete
+		List<Document> documents = new ArrayList<Document>();
 		
-		// Lance la requete
-		documents = documentManager.getDocumentByDate(new Date());
+		// Recuperation des informations propres a l'utilisateur
+		// Date planificationHorizon = user.getPlanificationHorizon();
+		// List<Interest> userInterests = user.getInterests();
+		
+		// Lance la requete à partir de la date d'aujourd'hui
+		//documents = documentManager.getDocumentByDateCategories(new Date()/*, new List<Category>()*/);
 		
 		// Interpretation des resultats
-		Document document;
+		/*Document document;
 		ListIterator<Document> i = documents.listIterator();
 		while (i.hasNext()) {
 			document = i.next();
 			System.out.println("RequestEngine : Document trouve : " + document.getTitle() + ", " + document.getData());
-			awnser.append("Document trouve : " + document.getTitle() + ", " + document.getData() + EOL);
-		}
+		}*/
 		
-		System.out.println("RequestEngine : " + awnser);
-		return awnser;
+		//return documents;
+		Document document = new Document("DOC-ID", "Titre", true, "Category", "www.a.com", new Date(), new Date(), (float)0.1, (float)0.2, "Azerty");
+		documents.add(document);
+		return documents;
 	}
 }
