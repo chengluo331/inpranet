@@ -2,7 +2,6 @@ package com.inpranet.habit.model;
 
 import java.util.Date;
 
-import com.inpranet.zone.model.Zone;
 
 public class WeeklyHabit {
 	private int mUserId;
