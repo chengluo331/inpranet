@@ -74,14 +74,7 @@ curl.exe --header "content-type: application/json" --data @req.json  -X POST htt
 
 avec @req.json un fichier :
 {{{
-{
-	"geopos":
-	{
-		"longitude": 2,
-		"latitude" : 3,
-		"time" : 4
-	}
-}
+{"geopos":{"longitude":4.857,"latitude":45.76,"time":"2011-03-27T16:47:15.523+02:00"}}
 }}}
 
 [http://docs.jboss.org/resteasy/docs/1.0.1.GA/userguide/html/Content_Marshalling_Providers.html#JAXB_+_JSON_provider JAXB + JSON Provider]
