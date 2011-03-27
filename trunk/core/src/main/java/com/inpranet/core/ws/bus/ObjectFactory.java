@@ -6,6 +6,10 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
+import com.inpranet.core.model.GeoPos;
+import com.inpranet.core.model.Interest;
+import com.inpranet.core.model.Zone;
+
 
 /**
  * This object contains factory methods for each 
