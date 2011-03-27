@@ -6,8 +6,7 @@ CREATE TABLE habit.position
 (
   user_id integer NOT NULL,
   date_time timestamp without time zone NOT NULL,
-  longitude real,
-  latitude real,
+  point geography(POINT,4326),
   CONSTRAINT pkey_position PRIMARY KEY (user_id, date_time)
 )
 WITH (

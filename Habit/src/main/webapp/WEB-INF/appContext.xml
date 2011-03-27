@@ -16,7 +16,7 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 	-->
 	<jaxws:endpoint 
 		id="habitService"	
-		implementor="com.inpranet.habit.service.HabitServiceImp" 	
+		implementor="com.inpranet.habit.service.HabitService" 	
 		address="/habit" />
 				
 </beans>

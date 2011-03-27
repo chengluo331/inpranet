@@ -1,6 +1,6 @@
 CREATE TABLE zone.interest
 (
-  id integer NOT NULL,
+  id SERIAL,
   name varchar(30),
   description text,
   CONSTRAINT pkey_interest PRIMARY KEY (id)

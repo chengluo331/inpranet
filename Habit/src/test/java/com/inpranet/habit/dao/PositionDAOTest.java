@@ -29,7 +29,7 @@ public class PositionDAOTest extends TestCase {
 	}
 	
 	public void testCreate() {
-		Position p = new Position(1, 3, 2, new Date());
+		Position p = new Position(100, 3, 2, new Date());
 		positionDao.createPosition(p);
 	}
 
