@@ -37,7 +37,7 @@ public class BusinessProcessor implements IBusinessProcessor {
 		IHabitService habitService =     (IHabitService)context.getBean("serviceHabit");
 		
 		
-		habitService.stockData(user, pos, (List<Zone>)zones);
+		habitService.stockData(user, pos,(List<Zone>) zones);
 		
 	}
 
@@ -50,3 +50,4 @@ public class BusinessProcessor implements IBusinessProcessor {
 	}*/
 
 }
+
