@@ -4,7 +4,7 @@
 
 CREATE TABLE profil.user
 (
-  id integer NOT NULL,
+  id SERIAL,
   login varchar(30) NOT NULL,
   password varchar(30) NOT NULL,
   CONSTRAINT pkey_user PRIMARY KEY (id)
@@ -14,10 +14,6 @@ WITH (
 );
 
 ALTER TABLE profil.user OWNER TO postgres;
-
-
-CREATE SEQUENCE seq_user_id INCREMENT BY 1 NO MAXVALUE START 100 NO CYCLE;
-
 
 -- DROP TABLE profil.habitType;
 CREATE TABLE profil.habitType

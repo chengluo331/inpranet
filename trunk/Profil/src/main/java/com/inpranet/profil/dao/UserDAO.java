@@ -29,7 +29,7 @@ public class UserDAO implements IUserDAO {
     
 	public void createUser(User user) {
 		final String INSERT_USER = "INSERT INTO " + TABLE_USER 
-		+ "(id, login, password) VALUES (nextval('" + SEQ_USER_ID + "'), ?, ?)";
+		+ "(login, password) VALUES (?, ?)";
 		try {
 		jdbcTemplate.update(INSERT_USER, new Object[] {
 				user.getLogin(), user.getPassword()});

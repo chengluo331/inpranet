@@ -1,16 +1,13 @@
 package com.inpranet.habit.dao;
 
-import java.util.Date;
+
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.inpranet.habit.model.Position;
-import com.inpranet.habit.service.HabitServiceImp;
+import com.inpranet.habit.service.HabitService;
 
 /**
  * Implementation de la couche d'acces aux donnees relatives aux positions
@@ -19,7 +16,7 @@ import com.inpranet.habit.service.HabitServiceImp;
 public class PositionDAO implements IPositionDAO{
 
 	/** Logger */
-	static Logger log = Logger.getLogger(HabitServiceImp.class.getName());
+	static Logger log = Logger.getLogger(HabitService.class.getName());
 	
 	private JdbcTemplate jdbcTemplate;
 	
@@ -27,7 +24,7 @@ public class PositionDAO implements IPositionDAO{
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 	
-	public void createPosition(Position position) {
+	/*public void createPosition(Position position) {
 		final String INSERT_POSITION = "INSERT INTO " + TABLE_POSITION + "(user_id, date_time, longitude, latitude) VALUES (?, ?, ?, ?)";
 		try {
 			jdbcTemplate.update(INSERT_POSITION, new Object[] {
@@ -36,6 +33,17 @@ public class PositionDAO implements IPositionDAO{
 		} catch (Exception e) {
 			e.printStackTrace();		
 		}
-
+	}*/
+    
+    public void createPosition(Position position) {
+		final String INSERT_POSITION = "INSERT INTO " + TABLE_POSITION + "(user_id, date_time, point) " +
+				"VALUES (?, ?, ST_GeographyFromText('SRID=4326;POINT(" + 
+				position.getLongitude() + " " + position.getLatitude() + ")'))";
+		try {
+			jdbcTemplate.update(INSERT_POSITION, new Object[] {
+					position.getUserId(), position.getTime()});
+		} catch (Exception e) {
+			e.printStackTrace();		
+		}
 	}
 }

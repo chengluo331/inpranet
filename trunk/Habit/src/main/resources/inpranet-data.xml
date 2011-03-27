@@ -25,11 +25,6 @@
 	</bean>
 	
 	<!--  Déclaration des DAO JDBC-->
-	<bean id="jdbcHabitDao"
-		class="com.inpranet.habit.dao.JdbcHabitDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
 	<bean id="jdbcWeeklyHabitDao"
 		class="com.inpranet.habit.dao.JdbcWeeklyHabitDAO">
 		<property name="dataSource" ref="dataSource" />
