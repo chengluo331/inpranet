@@ -6,7 +6,7 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import com.inpranet.zone.model.Zone;
+import com.inpranet.core.model.Zone;
 
 
 public interface IHabitDAO {
