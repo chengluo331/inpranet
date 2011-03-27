@@ -93,10 +93,48 @@
 							<sourceRoot>${basedir}/src/main/java/</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/habit.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										<extraarg>com.inpranet.core.ws.habit</extraarg>
+									</extraargs>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>generate-sources-bus</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${basedir}/src/main/java/</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
 									<wsdl>${basedir}/src/main/resources/bus.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-p</extraarg>
 										<extraarg>com.inpranet.core.ws.bus</extraarg>
+									</extraargs>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>generate-sources-indexation</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${basedir}/src/main/java/</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/indexation.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										<extraarg>com.inpranet.core.ws.indexation</extraarg>
 									</extraargs>
 								</wsdlOption>
 							</wsdlOptions>
