@@ -1,0 +1,62 @@
+#summary presentation 31/03/2001
+
+== Contenu ==
+
+Ressources :
+
+ * MCD
+ * Schémas d'architecture (2)
+  * scénario 1 : stocker geo-position
+  * scénario 2 : recuperer documents
+
+Thèmes :
+
+ * objectifs de l'application
+ * objectifs de l'équipe
+ * spécification
+ * choix technique
+ * environnement de developpement
+ * montée en compétence
+ * développement
+ * suivi de projet
+ * la suite
+ * parralèles avec le programme de IF
+  * SOA
+  * BDD sql/admin
+  * BDD semi structurées
+  * BDD décisionnel/data-mining
+  * Java
+  * similitudes avec engineering, SOA, PLD
+
+== Demo ==
+
+Deux scénarios :
+
+ * scénario 1 : stocker geo-position
+ * scénario 2 : recuperer documents
+
+Pour chaque scénario :
+ * traces d'execution sur modules
+ * parallèle avec la BDD
+ * parallèle avec les schémas d'architecture
+
+Plusieurs machine ? (si réseau)
+Avantage d'une machine : présentation à l'écran de toutes les executions
+
+Présenter l'IHM avec le mobile de Stéphane
+ 
+
+== Donnees test =
+
+ * 1 seul utilisateur
+ * 1 seul interet
+ * 4-5 documents
+ * geopositions : uniquement sur la plage du Jeudi 31 de 14h-18h
+
+Solutions :
+ * rentrer les données manuellement
+ * automatisée :
+  * creation d'un shapefile dans uDig avec les features : user_id, date_time et coordinate
+  * chargement du shapefile via sql dans la table position
+  * execution d'une procédure stockée qui parcourt les positions, et pour chaque position parcourt les zones pour peupler la table habit
+
