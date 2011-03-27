@@ -28,10 +28,13 @@ public class BusinessProcessor implements IBusinessProcessor {
 	private static Logger log = Logger.getLogger(BusinessProcessor.class
 			.getName());
 
+	/** WS Habit */
 	private IHabitService habitService;
 
+	/** WS Zone */
 	private IZoneService zoneService;
 	
+	/** WS Indexation */
 	private RequestEngineSEI indexationService;
 	
 	private static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
@@ -66,7 +69,7 @@ public class BusinessProcessor implements IBusinessProcessor {
 	}
 
 	/**
-	 * Processus metuer d'authentification de l'utilisateur via un token
+	 * Processus metier d'authentification de l'utilisateur via un token
 	 * (session)
 	 * 
 	 * @param pos
@@ -74,25 +77,28 @@ public class BusinessProcessor implements IBusinessProcessor {
 	public User authenticateUser(String token) throws ServiceException {
 		// TODO: a connecter au module Profil
 
-		// code temporaire : creation d'un user avec comme id son token
-		return new User(Integer.parseInt(token), null, null);
+		// ====== code temporaire==================
+		//  creation d'un user avec comme id son token
+		User user = new User();
+		user.setIdUser(Integer.parseInt(token));
+		user.setPlanningHorizon(60); // 60 minutes;
+		List<Interest> interestList = new ArrayList<Interest>();
+		Interest i = new Interest();
+		i.setIdInterest(1); // 1st id 
+		interestList.add(i);
+		user.setInterests(interestList);
+		// ====== fin code temporaire==================
+		
+		return user;
 	}
 
 	@Override
 	public Collection<Document> receiveDocumentOrder(User user) {
 		log.info("Business Process: get documents connected to predicted zones");
 		
-		// TODO: changer ces par les bonnes
-		// pas deja connu dans User ???
-		int planningHorizon = 45;
-		List<Interest> interestList = new ArrayList<Interest>();
-		Interest i = new Interest();
-		i.setName("Commercial");
-		interestList.add(i);
-
 		log.info("Step1: call Zone module to get list of zones from a geoposition");
-		List<Zone> zones = habitService.deduceZone(user, planningHorizon,
-				interestList);
+		// TODO: changer interface de ce service : il n'a plus que user
+		List<Zone> zones = habitService.deduceZone(user, 0, null);
 		log.info("Zone module returned " + zones.size() + " zones");
 
 		log.info("Step2: call Indexation module to get best documents from predicted zones");
