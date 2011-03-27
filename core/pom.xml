@@ -93,10 +93,10 @@
 							<sourceRoot>${basedir}/src/main/java/</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>${basedir}/src/main/resources/habit.wsdl</wsdl>
+									<wsdl>${basedir}/src/main/resources/bus.wsdl</wsdl>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										<extraarg>com.inpranet.core.ws.habit</extraarg>
+										<extraarg>com.inpranet.core.ws.bus</extraarg>
 									</extraargs>
 								</wsdlOption>
 							</wsdlOptions>
