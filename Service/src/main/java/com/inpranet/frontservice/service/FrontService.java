@@ -34,7 +34,11 @@ public class FrontService implements IFrontService {
 	/**
 	 * bp est le gestionnaire de processus metier
 	 */
-	private IBusinessProcessor bp = new BusinessProcessor();
+	private IBusinessProcessor bp;
+	
+	public FrontService() {
+		bp = new BusinessProcessor();
+	}
 
 	
 	/**
@@ -52,6 +56,7 @@ public class FrontService implements IFrontService {
 		} catch(ServiceException e) {
 			if (e.getErrorCode() == ErrorCode.BAD_TOKEN) {
 				// TODO: renvoyer une erreur a l'utilisateur
+				e.printStackTrace();
 			}
 		} 
 	}
@@ -59,18 +64,24 @@ public class FrontService implements IFrontService {
 	/**
 	 * See interface {IFrontService}
 	 */
-	public Collection<Document> getDocumentList(String id) {
+	public Collection<Document> getDocumentList(String token) {
 
 		log.info("Received the request to give back a list of documents");
 		
-		Collection<Document> c = new ArrayList<Document>();
-		/*
-		Document doc1 = new Document(10,"Server test1",true, "acceuil","http://www.test.com",new Date(),new Date(),123,123,"this is a server test");
-		Document doc2 = new Document(11,"Server test2",true, "sport","http://www.test.com",new Date(),new Date(),123,123,"this is a server test");
-		c.add(doc1);
-		c.add(doc2);
-		*/
-		return c;
+		// recherche l'utilisateur lié au token
+		User user;
+		try {
+			user = bp.authenticateUser(token);
+		} catch (ServiceException e) {
+			// TODO: renvoyer une erreur a l'utilisateur
+			e.printStackTrace();
+			return null;
+		}
+		
+		// lance le processus de recuperation de documnts adapte a l'utilisateur
+		Collection<Document> documents  = bp.receiveDocumentOrder(user);
+
+		return documents;
 	}
 
 

@@ -7,8 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd
 http://cxf.apache.org/jaxrs
 http://cxf.apache.org/schemas/jaxrs.xsd
 http://cxf.apache.org/jaxws 
-http://cxf.apache.org/schemas/jaxws.xsd"
-	>
+http://cxf.apache.org/schemas/jaxws.xsd">
 
 
 	<!-- com.inpranet.zone.service.IZoneService a ete genere par le plugin maven 
@@ -16,17 +15,20 @@ http://cxf.apache.org/schemas/jaxws.xsd"
 	<jaxws:client id="zoneService" serviceClass="com.inpranet.core.ws.zone.IZoneService"
 		address="http://localhost:9000/zone/zone">
 	</jaxws:client>
+
 	<jaxws:client id="habitService"
 		serviceClass="com.inpranet.core.ws.habit.IHabitService" address="http://localhost:9001/habit/habit">
 	</jaxws:client>
 
+	<jaxws:client id="indexationService"
+		serviceClass="com.inpranet.core.ws.indexation.RequestEngineSEI"
+		address="http://localhost:9002/requestEngineService">
+	</jaxws:client>
+
 
 	<!-- chargement du business processor avec les services definis ci-dessus 
-	<bean class="com.inpranet.frontservice.orchestration.BusinessProcessor"
-		id="bp" autowire="byName">
-	
-	</bean>
-	-->
-	
+		<bean class="com.inpranet.frontservice.orchestration.BusinessProcessor" id="bp" 
+		autowire="byName"> </bean> -->
+
 
 </beans>

@@ -13,6 +13,7 @@ import com.inpranet.core.model.Interest;
 import com.inpranet.core.model.User;
 import com.inpranet.core.model.Zone;
 import com.inpranet.core.ws.habit.IHabitService;
+import com.inpranet.core.ws.indexation.RequestEngineSEI;
 import com.inpranet.core.ws.zone.IZoneService;
 
 /**
@@ -31,6 +32,8 @@ public class BusinessProcessor implements IBusinessProcessor {
 
 	private IZoneService zoneService;
 	
+	private RequestEngineSEI indexationService;
+	
 	private static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 	new String[] { "inpranet-service.xml" });
 
@@ -40,6 +43,7 @@ public class BusinessProcessor implements IBusinessProcessor {
 		
 		zoneService = (IZoneService) context.getBean("zoneService");
 		habitService = (IHabitService) context.getBean("habitService");
+		indexationService = (RequestEngineSEI) context.getBean("indexationService");
 	}
 
 	/**
@@ -57,7 +61,7 @@ public class BusinessProcessor implements IBusinessProcessor {
 				pos.getLatitude());
 		log.info("Zone module returned " + zones.size() + " zones");
 
-		log.info("Step1: call Habit module to store geoposition and zones");
+		log.info("Step2: call Habit module to store geoposition and zones");
 		habitService.stockData(user, pos, zones);
 	}
 
@@ -76,7 +80,8 @@ public class BusinessProcessor implements IBusinessProcessor {
 
 	@Override
 	public Collection<Document> receiveDocumentOrder(User user) {
-
+		log.info("Business Process: get documents connected to predicted zones");
+		
 		// TODO: changer ces par les bonnes
 		// pas deja connu dans User ???
 		int planningHorizon = 45;
@@ -85,12 +90,15 @@ public class BusinessProcessor implements IBusinessProcessor {
 		i.setName("Commercial");
 		interestList.add(i);
 
+		log.info("Step1: call Zone module to get list of zones from a geoposition");
 		List<Zone> zones = habitService.deduceZone(user, planningHorizon,
 				interestList);
+		log.info("Zone module returned " + zones.size() + " zones");
 
-		// TODO: appeller service d'indexation
-
-		return null;
+		log.info("Step2: call Indexation module to get best documents from predicted zones");
+		List<Document> documents = indexationService.launchRequest(user, zones);
+		
+		return documents;
 	}
 
 	public void setHabitService(IHabitService habitService) {
