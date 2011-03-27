@@ -6,10 +6,6 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-import com.inpranet.core.model.GeoPos;
-import com.inpranet.core.model.Interest;
-import com.inpranet.core.model.Zone;
-
 
 /**
  * This object contains factory methods for each 
@@ -41,22 +37,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetZoneListFromGeoPosResponse }
-     * 
-     */
-    public GetZoneListFromGeoPosResponse createGetZoneListFromGeoPosResponse() {
-        return new GetZoneListFromGeoPosResponse();
-    }
-
-    /**
-     * Create an instance of {@link Interest }
-     * 
-     */
-    public Interest createInterest() {
-        return new Interest();
-    }
-
-    /**
      * Create an instance of {@link GeoPos }
      * 
      */
@@ -73,11 +53,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetZoneListFromGeoPosResponse }
+     * 
+     */
+    public GetZoneListFromGeoPosResponse createGetZoneListFromGeoPosResponse() {
+        return new GetZoneListFromGeoPosResponse();
+    }
+
+    /**
      * Create an instance of {@link GetZoneListFromGeoPos }
      * 
      */
     public GetZoneListFromGeoPos createGetZoneListFromGeoPos() {
         return new GetZoneListFromGeoPos();
+    }
+
+    /**
+     * Create an instance of {@link Interest }
+     * 
+     */
+    public Interest createInterest() {
+        return new Interest();
     }
 
     /**

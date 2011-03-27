@@ -1,5 +1,7 @@
 package com.inpranet.habit.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -55,18 +57,29 @@ public class HabitService implements IHabitService {
 		// Sauvegarde des habitudes
 		for (Zone z:zones) {
 			WeeklyHabit weeklyHabit = new WeeklyHabit(user.getIdUser(), timeOfWeek, z.getIdZone(), 0, 0);
-			weeklyHabitDao.InsertWeeklyHabit(weeklyHabit);
+			weeklyHabitDao.createWeeklyHabit(weeklyHabit);
 		}	
 	}
 
 	public Collection<Zone> DeduceZone(User user, int planningHorizon,
 			Collection<Interest> interests) {
-		log.info("deduction");			
+		log.info("deduction");		
 		
-		for (Interest i : interests) {
-			
+		// Instancier les zones a retoune
+		Collection<Zone> zones = new ArrayList<Zone>();
+		
+		// L'heure requetee est l'heure actuelle plus l'horizon de planification
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.MINUTE, user.getPlanningHorizon());
+		
+		// Pour chaque centre d'interet de l'utilisateur, recuperer la zone la plus probable
+		for (Interest i : user.getInterests()) {
+			int idZone = weeklyHabitDao.DeduceIdZoneByInterest(user.getIdUser(), i.getIdInterest(), c.getTime());
+			Zone z = new Zone(idZone, i);
+			zones.add(z);
 		}
-		return null;
+		// Renvoie la liste des zones interessantes
+		return zones;
 	}
 	
 	/**

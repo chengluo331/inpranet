@@ -5,8 +5,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import com.inpranet.core.model.GeoPos;
-
 
 /**
  * <p>Java class for getZoneListFromGeoPos complex type.
