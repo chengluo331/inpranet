@@ -51,7 +51,7 @@ public interface IFrontService {
 	@GET
 	@Path("/doc/{token}")
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
 	public Collection<Document> getDocumentList(@PathParam("token") String token);
 	
 	
