@@ -21,9 +21,12 @@ http://cxf.apache.org/schemas/jaxws.xsd"
 	</jaxws:client>
 
 
-	<!-- chargement du business processor avec les services definis ci-dessus -->
+	<!-- chargement du business processor avec les services definis ci-dessus 
 	<bean class="com.inpranet.frontservice.orchestration.BusinessProcessor"
 		id="bp" autowire="byName">
 	
 	</bean>
+	-->
+	
+
 </beans>

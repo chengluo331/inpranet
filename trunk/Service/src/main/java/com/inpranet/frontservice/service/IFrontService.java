@@ -23,7 +23,7 @@ import com.inpranet.core.model.GeoPos;
  * @author inpranet team
  *
  */
-@Path("/ws/")
+@Path("/")
 public interface IFrontService {
 
 	/**
