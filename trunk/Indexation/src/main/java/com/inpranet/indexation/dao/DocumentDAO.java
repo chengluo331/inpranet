@@ -23,16 +23,21 @@ public class DocumentDAO implements IDocumentDAO {
 	 * @param document Le document a creer dans la base
 	 */
 	public void createDocument(Document document) {
-		// Construction de la requete
+		// Construction des requetes
 		final String INSERT_DOCUMENT = "INSERT INTO indexation.document (id, reference, title, urgent, category, uri, start_date, end_date, latitude, longitude, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		final String INSERT_CATEGORY = "INSERT INTO indexation.category (document_id, category_id) VALUES (?, ?)";
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
 		
 		// Generation de la cle primaire
 		PostgreSQLSequenceMaxValueIncrementer documentIncrementer = (PostgreSQLSequenceMaxValueIncrementer) applicationContext.getBean("documentIncrementer");
 		JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
 		
+		// Conservation de la cle qui a ete generee
+		int documentPrimaryKey = documentIncrementer.nextIntValue();
+		
 		// Execution de la requete
-		jdbcTemplate.update(INSERT_DOCUMENT, new Object[] {documentIncrementer.nextIntValue(), document.getTitle(), document.getUri(), document.getStart_date(), document.getEnd_date(), document.getLatitude(), document.getLongitude(), document.getData()});
+		jdbcTemplate.update(INSERT_DOCUMENT, new Object[] {documentPrimaryKey, document.getTitle(), document.getUri(), document.getStart_date(), document.getEnd_date(), document.getLatitude(), document.getLongitude(), document.getData()});
+		jdbcTemplate.update(INSERT_CATEGORY, new Object[] {documentPrimaryKey, 1});
 	}
 	
 	/**

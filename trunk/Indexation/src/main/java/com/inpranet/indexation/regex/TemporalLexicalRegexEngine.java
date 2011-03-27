@@ -31,8 +31,8 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 	 */
 	private String generateTemporalReplacement(String formatMapper, Date referenceDate) {
 		// Le format mapper peut indiquer une formule temporelle
-		if (formatMapper.startsWith("�")) {
-			// Enleve le caractere �
+		if (formatMapper.startsWith("§")) {
+			// Enleve le caractere §
 			formatMapper = formatMapper.substring(1);
 			
 			// La methode nextInt de Scanner ne supporte pas le symoble '+'

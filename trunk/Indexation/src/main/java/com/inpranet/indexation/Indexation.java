@@ -2,6 +2,9 @@ package com.inpranet.indexation;
 
 import java.util.Scanner;
 
+import com.inpranet.core.model.User;
+import com.inpranet.core.model.Zone;
+
 /**
  * Lance le traitement des documents injectes
  * @author Stephane
@@ -68,7 +71,7 @@ public class Indexation {
 				System.out.println();
 				
 				// Appelle le moteur de requete de documents
-				requestEngine.LaunchRequest();
+				//requestEngine.LaunchRequest(new User(), new Zone());
 			} else if (!menuChoice.equals("0")) {
 				System.out.println("Commande inconnue");
 				System.out.println();
