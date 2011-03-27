@@ -17,19 +17,24 @@ http://cxf.apache.org/schemas/jaxws.xsd"
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
 	<!-- Service defined with @WebService -->
-	<bean id="monservice" class="com.inpranet.frontservice.service.FrontService" />
+	<bean id="frontService" class="com.inpranet.frontservice.service.FrontService" />
 
 	<!-- Defines endpoint -->
-	<jaxrs:server id="inpranetService" address="/">
+	<jaxrs:server id="inpranetService" address="/public">
 		<jaxrs:serviceBeans>
-			<ref bean="monservice" />
+			<ref bean="frontService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="xml" value="application/xml" />
 			<entry key="json" value="application/json" />
 		</jaxrs:extensionMappings>
 	</jaxrs:server>
-
-
-
+	
+	<bean class="com.inpranet.frontservice.service.InternalService" id="internalService"> 
+	</bean>
+	
+	<jaxws:endpoint 
+	  id="internalServiceEndPoint" 
+	  implementor="#internalService" 
+	  address="/bus" />
 </beans>
