@@ -8,14 +8,22 @@ http://cxf.apache.org/jaxrs
 http://cxf.apache.org/schemas/jaxrs.xsd
 http://cxf.apache.org/jaxws 
 http://cxf.apache.org/schemas/jaxws.xsd"
-	default-lazy-init="false">
+	>
 
-	<!-- com.inpranet.zone.service.IZoneService a ete genere par le plugin maven à partir du wsdl 
-	adress : point d'entree du service -->
-	<jaxws:client id="serviceZone" serviceClass="com.inpranet.core.ws.zone.IZoneService"
+
+	<!-- com.inpranet.zone.service.IZoneService a ete genere par le plugin maven 
+		à partir du wsdl adress : point d'entree du service -->
+	<jaxws:client id="zoneService" serviceClass="com.inpranet.core.ws.zone.IZoneService"
 		address="http://localhost:9000/zone/zone">
 	</jaxws:client>
-	<jaxws:client id="serviceHabit" serviceClass="com.inpranet.core.ws.habit.IHabitService"
-		address="http://localhost:9001/habit/habit">
+	<jaxws:client id="habitService"
+		serviceClass="com.inpranet.core.ws.habit.IHabitService" address="http://localhost:9001/habit/habit">
 	</jaxws:client>
+
+
+	<!-- chargement du business processor avec les services definis ci-dessus -->
+	<bean class="com.inpranet.frontservice.orchestration.BusinessProcessor"
+		id="bp" autowire="byName">
+	
+	</bean>
 </beans>
