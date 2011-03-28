@@ -1,6 +1,6 @@
 ﻿﻿-- Table: habit.position
 
-DROP TABLE IF EXIST habit.position;
+DROP TABLE IF EXISTS habit.position;
 
 CREATE TABLE habit.position
 (
@@ -19,7 +19,7 @@ ALTER TABLE habit.position OWNER TO postgres;
 
 -- Table: habit.weekly_habit
 
-DROP TABLE IF EXIST habit.weekly_habit;
+DROP TABLE IF EXISTS habit.weekly_habit;
 
 CREATE TABLE habit.weekly_habit
 (
@@ -38,7 +38,7 @@ ALTER TABLE habit.weekly_habit OWNER TO postgres;
 
 -- Table: habit.interval
 
-DROP TABLE IF EXIST habit.interval;
+DROP TABLE IF EXISTS habit.interval;
 
 CREATE TABLE habit.interval
 (
@@ -90,4 +90,4 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT init_interval();
+SELECT init_interval(60);

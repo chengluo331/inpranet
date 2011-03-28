@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS indexation."document"
 CREATE TABLE indexation."document"
 (
   id integer NOT NULL,

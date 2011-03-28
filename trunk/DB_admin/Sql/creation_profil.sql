@@ -1,6 +1,6 @@
 ﻿-- Table: profil.user
 
-DROP TABLE IF EXIST profil.user;
+DROP TABLE IF EXISTS profil.user;
 
 CREATE TABLE profil.user
 (
@@ -37,7 +37,7 @@ ALTER TABLE profil.habitType OWNER TO postgres;*/
 
 -- Table: profil.habit_choice
 
-DROP TABLE IF EXIST profil.habit_choice;
+DROP TABLE IF EXISTS profil.habit_choice;
 
 CREATE TABLE profil.habit_choice
 (
