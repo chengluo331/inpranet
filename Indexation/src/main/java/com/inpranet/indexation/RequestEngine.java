@@ -27,6 +27,8 @@ public class RequestEngine implements RequestEngineSEI {
 	 * Lance une requete pour recuperer des documents
 	 */
 	public List<Document> LaunchRequest(User user, List<Zone> zone) {
+		// TODO : Changer le nom de zone en zonesList
+		
 		// Variable chargee de la recuperation des resultats de la requete
 		List<Document> documents = new ArrayList<Document>();
 		
@@ -34,8 +36,9 @@ public class RequestEngine implements RequestEngineSEI {
 		// Date planificationHorizon = user.getPlanificationHorizon();
 		// List<Interest> userInterests = user.getInterests();
 		
-		// Lance la requete à partir de la date d'aujourd'hui
-		documents = documentManager.getDocumentByDate(new Date());
+		// Lance la requete à partir de la date d'aujourd'hui et en selectionnant les zones passees en parametre
+		// documents = documentManager.getDocumentByDate(new Date());
+		documents = documentManager.getDocumentByDateZones(new Date(), zone);
 		
 		// Filtrage des resultats selon la categorie
 		

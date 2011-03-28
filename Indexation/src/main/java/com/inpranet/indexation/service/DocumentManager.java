@@ -3,7 +3,9 @@ package com.inpranet.indexation.service;
 import java.util.Date;
 import java.util.List;
 
+import com.inpranet.core.model.Category;
 import com.inpranet.core.model.Document;
+import com.inpranet.core.model.Zone;
 import com.inpranet.indexation.dao.DocumentDAO;
 
 /**
@@ -30,5 +32,29 @@ public class DocumentManager implements IDocumentManager {
 	 */
 	public List<Document> getDocumentByDate(Date date) {
 		return documentDao.findDocumentByDate(date);
+	}
+	
+	/**
+	 * Recupere les documents qui correspondent a certaines categories
+	 * @param zonesList Les categories a couvrir
+	 */
+	public List<Document> getDocumentByCategories(List<Category> categoriesList) {
+		return documentDao.findDocumentByCategories(categoriesList);
+	}
+	
+	/**
+	 * Recupere les documents qui correspondent a certaines zones
+	 * @param zonesList Les zones a couvrir
+	 */
+	public List<Document> getDocumentByZones(List<Zone> zonesList) {
+		return documentDao.findDocumentByZones(zonesList);
+	}
+	
+	/**
+	 * Recupere les documents qui correspondent a une certaine date et a certaines zones
+	 * @param zonesList Les zones a couvrir
+	 */
+	public List<Document> getDocumentByDateZones(Date date, List<Zone> zonesList) {
+		return documentDao.findDocumentByDateZones(date, zonesList);
 	}
 }

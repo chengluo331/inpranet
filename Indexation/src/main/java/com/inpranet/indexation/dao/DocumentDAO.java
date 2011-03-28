@@ -11,10 +11,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer;
 
 import com.inpranet.core.model.Category;
 import com.inpranet.core.model.Document;
+import com.inpranet.core.model.Zone;
 import com.inpranet.indexation.service.CategoryManager;
 
 /**
@@ -33,7 +35,7 @@ public class DocumentDAO implements IDocumentDAO {
 	 */
 	public void createDocument(Document document) {
 		// Construction des requetes
-		final String INSERT_DOCUMENT = "INSERT INTO indexation.document (id, reference, title, urgent, uri, start_date, end_date, latitude, longitude, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";		
+		final String INSERT_DOCUMENT = "INSERT INTO indexation.\"document\" (id, reference, title, urgent, uri, start_date, end_date, latitude, longitude, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";		
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
 		
 		// Generation de la cle primaire
@@ -51,6 +53,13 @@ public class DocumentDAO implements IDocumentDAO {
 		List<Category> categoriesList = document.getCategoriesList();
 		for (int i = 0; i < categoriesList.size(); i++) {
 			jdbcTemplate.update(INSERT_DOCUMENT_CATEGORY, new Object[] {documentPrimaryKey, categoriesList.get(i).getIdCategory()});
+		}
+		
+		// Lie le document ajoute a ses differentes zones
+		final String INSERT_DOCUMENT_ZONE = "INSERT INTO indexation.document_zone (document_id, zone_id) VALUES (?, ?)";
+		List<Zone> zonesList = document.getZonesList();
+		for (int i = 0; i < zonesList.size(); i++) {
+			jdbcTemplate.update(INSERT_DOCUMENT_ZONE, new Object[] {documentPrimaryKey, zonesList.get(i).getIdZone()});
 		}
 	}
 	
@@ -91,15 +100,16 @@ public class DocumentDAO implements IDocumentDAO {
 		 * Realise le mapping entre les resultats et les objets Documents
 		 */
 		public Document mapRow(ResultSet rs, int rowNum) throws SQLException {
-			// TODO : Recuperer les categories auxquelles sont attachees un document
 			// Constuction de la requete pour la recuperation des categories
-			final String SELECT_DOCUMENT_CATEGORY = "SELECT * FROM indexation.\"document_category\" WHERE document_id = ?";
+			final String SELECT_DOCUMENT_CATEGORY = "SELECT category_id FROM indexation.document_category, indexation.category WHERE indexation.document_category.category_id = indexation.category.id AND indexation.document_category.document_id = ?";
 			ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
 			JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
 			List<Category> categoriesList = jdbcTemplate.query(SELECT_DOCUMENT_CATEGORY, new Object[] {rs.getInt("id")}, new DocumentCategoryRowMapper());
 			
+			// Les zones sont la pour accelerer la recherche, pas besoin de les recuperer ici
+			
 			// Construction de l'objet Document
-			Document document = new Document(rs.getInt("id"), rs.getString("reference"), rs.getString("title"), rs.getBoolean("urgent"), categoriesList, rs.getString("uri"), rs.getDate("start_date"), rs.getDate("end_date"), rs.getFloat("latitude"), rs.getFloat("longitude"), rs.getString("data"));
+			Document document = new Document(rs.getInt("id"), rs.getString("reference"), rs.getString("title"), rs.getBoolean("urgent"), categoriesList, rs.getString("uri"), rs.getDate("start_date"), rs.getDate("end_date"), rs.getFloat("latitude"), rs.getFloat("longitude"), new ArrayList<Zone>(), rs.getString("data"));
 			return document;
 		}
 	}
@@ -122,9 +132,74 @@ public class DocumentDAO implements IDocumentDAO {
 	}
 	
 	/**
-	 * Recherche des documents qui correspondent a une certaine categorie
+	 * Recherche des documents qui correspondent a certaines categories
 	 */
-	public List<Document> findDocumentByCategory(Category category) {
-		return new ArrayList<Document>();
+	public List<Document> findDocumentByCategories(List<Category> categoriesList) {
+		// Construction de la requete
+		final String SELECT_DOCUMENT_CATEGORY = "SELECT * FROM indexation.\"document\", indexation.document_category WHERE indexation.\"document\".id = indexation.document_category.document_id AND indexation.document_category.category_id IN (:categoriesIdsList)";
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
+		
+		// Recupere les id des categories pour la parametrisation
+		List<Integer> categoriesIdsList = new ArrayList<Integer>();
+		for (int i = 0; i < categoriesList.size(); i++) {
+			categoriesIdsList.add(categoriesList.get(i).getIdCategory());
+		}
+		
+		// Parametrisation de la liste des categories
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+		parameters.addValue("categoriesIdsList", categoriesIdsList);
+		
+		// Execution de la requete
+		return jdbcTemplate.query(SELECT_DOCUMENT_CATEGORY, new DocumentRowMapper(), parameters);
+	}
+	
+	/**
+	 * Recherche des documents qui correspondent a certaines zones
+	 */
+	public List<Document> findDocumentByZones(List<Zone> zonesList) {
+		// Construction de la requete
+		final String SELECT_DOCUMENT_ZONE = "SELECT * FROM indexation.\"document\", indexation.document_zone WHERE indexation.\"document\".id = indexation.document_zone.document_id AND indexation.document_zone.zone_id IN (:zonesIdsList)";
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
+		
+		// Recupere les id des zones pour la parametrisation
+		List<Integer> zonesIdsList = new ArrayList<Integer>();
+		for (int i = 0; i < zonesList.size(); i++) {
+			zonesIdsList.add(zonesList.get(i).getIdZone());
+		}
+		
+		// Parametrisation de la liste des categories
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+		parameters.addValue("zonesIdsList", zonesIdsList);
+		
+		// Execution de la requete
+		return jdbcTemplate.query(SELECT_DOCUMENT_ZONE, new DocumentRowMapper());
+	}
+	
+	/**
+	 * Recherche des documents qui correspondent a une certaine date et a certaines zones
+	 */
+	public List<Document> findDocumentByDateZones(Date date, List<Zone> zonesList) {
+		// Formattage de la date
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		// Construction de la requete
+		final String SELECT_DOCUMENT_DATE_ZONE = "SELECT * FROM indexation.\"document\", indexation.document_zone WHERE indexation.\"document\".id = indexation.document_zone.document_id AND indexation.document_zone.zone_id IN (:zonesIdsList) AND start_date <= '" + simpleDateFormat.format(date) + "' AND end_date >= '" + simpleDateFormat.format(date) + "'";
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
+		
+		// Recupere les id des zones pour la parametrisation
+		List<Integer> zonesIdsList = new ArrayList<Integer>();
+		for (int i = 0; i < zonesList.size(); i++) {
+			zonesIdsList.add(zonesList.get(i).getIdZone());
+		}
+		
+		// Parametrisation de la liste des categories
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+		parameters.addValue("zonesIdsList", zonesIdsList);
+		
+		// Execution de la requete
+		return jdbcTemplate.query(SELECT_DOCUMENT_DATE_ZONE, new DocumentRowMapper());
 	}
 }

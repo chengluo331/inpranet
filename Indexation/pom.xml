@@ -272,7 +272,7 @@
         	</configuration>
         	<executions>
           		<execution>
-          			<id>truncate-document</id>
+          			<id>truncate</id>
             		<phase>process-resources</phase>
             		<goals>
               			<goal>execute</goal>
@@ -281,6 +281,7 @@
             		<configuration>
               			<!-- specify your SQL commands, can be all of the following configurations -->
               			<srcFiles>
+              				<srcFile>src/main/sql/truncate-category.sql</srcFile>
 	                		<srcFile>src/main/sql/truncate-document.sql</srcFile>
               			</srcFiles>
             		</configuration>
@@ -345,11 +346,6 @@
   			<groupId>org.apache.maven.plugins</groupId>
   			<artifactId>maven-compiler-plugin</artifactId>
   			<version>2.3.2</version>
-  		</plugin>
-  		<plugin>
-  			<groupId>org.apache.maven.plugins</groupId>
-  			<artifactId>maven-site-plugin</artifactId>
-  			<version>3.0-beta-3</version>
   		</plugin>
     </plugins>
   	<pluginManagement>

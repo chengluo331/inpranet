@@ -73,6 +73,12 @@ public class Document {
 	private float longitude;
 	
 	/**
+	 * Les zones du document
+	 */
+	@XmlElement
+	private List<Zone> zonesList;
+	
+	/**
 	 * Le texte du document
 	 */
 	@XmlElement
@@ -96,9 +102,10 @@ public class Document {
 	 * @param end_date La date de fin du document
 	 * @param longitude La longitude de la position spatiale du document
 	 * @param latitude La latitude de la position spatiale du document
+	 * @param zonesList La liste des zones auxquelles sont ratachees le document
 	 * @param data Le texte du document
 	 */
-	public Document(int idDocument, String reference, String title, boolean urgent, List<Category> categoriesList, String uri, Date start_date, Date end_date, float longitude, float latitude, String data) {
+	public Document(int idDocument, String reference, String title, boolean urgent, List<Category> categoriesList, String uri, Date start_date, Date end_date, float longitude, float latitude, List<Zone> zonesList, String data) {
 		// Initialisation des attributs
 		this.idDocument = idDocument;
 		this.reference = reference;
@@ -110,6 +117,7 @@ public class Document {
 		this.end_date = end_date;
 		this.longitude = longitude;
 		this.latitude = latitude;
+		this.zonesList = zonesList;
 		this.data = data;
 	}
 	
@@ -125,9 +133,10 @@ public class Document {
 	 * @param end_date La date de fin du document
 	 * @param longitude La longitude de la position spatiale du document
 	 * @param latitude La latitude de la position spatiale du document
+	 * @param zonesList La liste des zones auxquelles sont ratachees le document
 	 * @param data Le texte du document
 	 */
-	public Document(String reference, String title, boolean urgent, List<Category> categoriesList, String uri, Date start_date, Date end_date, float longitude, float latitude, String data) {
+	public Document(String reference, String title, boolean urgent, List<Category> categoriesList, String uri, Date start_date, Date end_date, float longitude, float latitude, List<Zone> zonesList, String data) {
 		// Initialisation des attributs
 		this.reference = reference;
 		this.title = title;
@@ -138,6 +147,7 @@ public class Document {
 		this.end_date = end_date;
 		this.longitude = longitude;
 		this.latitude = latitude;
+		this.zonesList = zonesList;
 		this.data = data;
 	}
 	
@@ -211,6 +221,13 @@ public class Document {
 		return longitude;
 	}
 
+	/**
+	 * @return zonesList La liste des zones auxquelles sont ratachees le document
+	 */
+	public List<Zone> getZonesList() {
+		return zonesList;
+	}
+	
 	/**
 	 * @return Le texte du document
 	 */
