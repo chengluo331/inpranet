@@ -6,9 +6,12 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -47,13 +50,22 @@ public class LocalizationService extends Service {
 
 	private static final String URI_WS_STOCK_DATA = "http://10.0.2.2:9999/inpranet/services/geo";
 
+	/** Le gps listener */
+	GPSListener gpsListener = new GPSListener();
+	
+	/** Le timer */
+	Timer timer = new Timer();
+	
 	/** L'id d'utilisateur qui utilise le service */
 	private long mUserID;
 	
-	/** Le temps minimum de maj de position */
+	/** Le temps minimum de maj de position en milliseconde */
 	private long minTime;
 	
-	/** La distance minimum de maj de position */
+	/** Le temps maximum entre deux maj de position en milliseconde */
+	private long maxTime;
+	
+	/** La distance minimum de maj de position en metre */
 	private float minDistance;
 
 	/** Objet LocationManager qui fournit l'accès au service de localisation du système Android */
@@ -64,6 +76,9 @@ public class LocalizationService extends Service {
 	private URI mLocationServiceURL;
 	
 	private InpranetDBHelper mDBHelper;
+	
+	/** L'heure du dernier enregistrement de geo-localisation */
+	private Calendar lastRecordTime;
 	
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -194,15 +209,77 @@ public class LocalizationService extends Service {
 	}
 	
 	/**
+	 * Classe fille de locationListener qui détecte l'état de GPS 
+	 * et le changement de localisation
+	 * @author yiquan
+	 *
+	 */
+	final class GPSListener implements LocationListener {
+		/**
+		 * méthode appelé lorsque la position change
+		 */
+		public void onLocationChanged(Location newLocation) {
+			Log.d(TAG, "Location changed");
+			// Enregistrer la nouvelle position
+			registerLocation(newLocation);	
+			// Mise à jour l'heure du dernier enregistrement
+			lastRecordTime = Calendar.getInstance();	
+		}
+
+		/**
+		 * méthode appelée lorsque le provider est désactivé
+		 */
+		public void onProviderDisabled(String provider) {
+			Log.d(TAG, "GPS disabled");				
+		}
+
+		/**
+		 * Méthode appelée lorsque le provider est activé
+		 */
+		public void onProviderEnabled(String provider) {
+			Log.d(TAG, "GPS enabled");				
+		}
+
+		/**
+		 * méthode appelée lorsque le status du provider change
+		 */
+		public void onStatusChanged(String provider, int status,
+				Bundle extras) {
+		}			
+	}
+	
+	final class registerTask extends TimerTask {
+		public void run() {
+			Calendar now = Calendar.getInstance();
+			// Le temps passé depuis le dernier enregistrement en milliseconde
+			long diff = (now.getTimeInMillis() - lastRecordTime.getTimeInMillis());
+			Log.i(TAG, "Time since last update: " + String.valueOf(diff));				
+			
+			if (diff >= maxTime-1000) {
+				Log.i(TAG, "Must update");
+				// Mise à jour l'heure du dernier enregistrement
+				lastRecordTime = Calendar.getInstance();	
+				Log.i(TAG, "last record time = " + lastRecordTime.toString());
+				// Enregistrer la nouvelle position
+				gpsListener.onLocationChanged(mgr.getLastKnownLocation(LocationManager.GPS_PROVIDER));	
+			}
+		}
+	}
+	
+	/**
 	 * Procédure appelée lorsque le processus du service est créé
 	 */
 	@Override
 	public void onCreate(){
 		super.onCreate();
 		Log.i(TAG, "Localization service started...");
+		// Initialiser l'heure du dernier envoie à l'heure actuelle
+		lastRecordTime = Calendar.getInstance();
 		
+		// Charger les paramètres
 		loadParameters();
 		
+		// Connexion à la base de données Sqlite
 		mDBHelper = new InpranetDBHelper(this);
 		try {
             mDBHelper.createDataBase();
@@ -211,39 +288,20 @@ public class LocalizationService extends Service {
 	            Log.d(TAG, "erreur IO db");
 	    }
 		
+	    // Location manager
 		mgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 		
-		final class GPSListener implements LocationListener {
-			public void onLocationChanged(Location newLocation) {
-				Log.d(TAG, "Location changed");
-				registerLocation(newLocation);				
-			}
-
-			public void onProviderDisabled(String provider) {
-				Log.d(TAG, "GPS disabled");				
-			}
-
-			public void onProviderEnabled(String provider) {
-				Log.d(TAG, "GPS enabled");				
-			}
-
-			public void onStatusChanged(String provider, int status,
-					Bundle extras) {
-			}			
-		}
 		
-		GPSListener gpsListener = new GPSListener();
-
-		
-		minTime = 0;
-		minDistance = 0;
+		minTime = 10*60*1000; // 10minutes 
+		maxTime = 15*60*1000; // 15 minutes
+		minDistance = 20;  // 20 meters
 		
 		// TODO Si GPS autorise dans le paramétrage
 		mgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
 		
-		// Planifier le timer qui appelle la procédure UpdatePosition à une période
-		//timer.schedule(new UpdatePosition(), 0, 5000);
-		
+		// Planifier le timer qui appelle la procédure registerLocation à une période maxTime
+		timer.schedule(new registerTask(), 0, maxTime);	
+		 	
 		mHttpClient = new DefaultHttpClient();
 		HttpConnectionParams.setConnectionTimeout(mHttpClient.getParams(), TIME_OUT); 
 		try {
@@ -261,8 +319,9 @@ public class LocalizationService extends Service {
 	 */
 	@Override
 	public void onDestroy(){
-		// TODO relacher des ressources
 		super.onDestroy();
+		// Desarmer le timer
+		timer.cancel();
 		Log.i(TAG, "Localization service ended...");
 	}
 
