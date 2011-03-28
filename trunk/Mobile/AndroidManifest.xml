@@ -10,7 +10,7 @@
 			</intent-filter>
 		</activity>
 		
-		<activity android:name=".CollectionActivity"/>
+		<activity android:name=".CollectionActivity" android:theme="@android:style/Theme.Light"/>
 		
 		<service android:name=".LocalizationService"></service>
 
@@ -20,8 +20,8 @@
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 			</intent-filter>
 		</receiver>
-		<activity android:name="Prefs"></activity>
-		<activity android:name="DocumentActivity"></activity>
+		<activity android:name="Prefs" android:theme="@android:style/Theme.Light"></activity>
+		<activity android:name="DocumentActivity" android:theme="@android:style/Theme.Light"></activity>
 	</application>
 
 

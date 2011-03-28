@@ -11,8 +11,11 @@ import com.inpranet.habit.model.WeeklyHabit;
  */
 public interface IWeeklyHabitDAO {
 	
+	/** Le nom de la fonction pour ajouter une habitude */
+	public static final String FUNCTION_INSERT_HABIT = "insertweeklyhabit";
+	
 	/** Le nom de fonction pour requeter la zone la plus probable d'apres les habitudes */
-	public static final String FUNCTION_GET_HABIT_NAME = "getweeklyhabit";
+	public static final String FUNCTION_GET_HABIT_NAME = "gethabit";
 	
 	/** Le nom du schéma ou est stockée la fonction */
 	public static final String SCHEMA_NAME = "habit";

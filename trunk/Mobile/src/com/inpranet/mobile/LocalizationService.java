@@ -35,7 +35,7 @@ import android.util.Log;
 /**
  * Service de localisation qui s'exécute au démarrage de mobile
  * il enregistre les déplacements de l'utilisateur et les envoie au système central
- * @author yqzhoum, cluo
+ * @author yqzhou, cluo
  *
  */
 public class LocalizationService extends Service {
@@ -216,27 +216,19 @@ public class LocalizationService extends Service {
 		final class GPSListener implements LocationListener {
 			public void onLocationChanged(Location newLocation) {
 				Log.d(TAG, "Location changed");
-				registerLocation(newLocation);
-				// TODO Auto-generated method stub
-				
+				registerLocation(newLocation);				
 			}
 
 			public void onProviderDisabled(String provider) {
-				Log.d(TAG, "GPS disabled");
-				// TODO Auto-generated method stub
-				
+				Log.d(TAG, "GPS disabled");				
 			}
 
 			public void onProviderEnabled(String provider) {
-				Log.d(TAG, "GPS enabled");
-				// TODO Auto-generated method stub
-				
+				Log.d(TAG, "GPS enabled");				
 			}
 
 			public void onStatusChanged(String provider, int status,
 					Bundle extras) {
-				// TODO Auto-generated method stub
-				
 			}			
 		}
 		

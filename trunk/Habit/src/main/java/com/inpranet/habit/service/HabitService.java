@@ -75,8 +75,10 @@ public class HabitService implements IHabitService {
 		// Pour chaque centre d'interet de l'utilisateur, recuperer la zone la plus probable
 		for (Interest i : user.getInterests()) {
 			int idZone = weeklyHabitDao.DeduceIdZoneByInterest(user.getIdUser(), i.getIdInterest(), c.getTime());
-			Zone z = new Zone(idZone, i);
-			zones.add(z);
+			if (idZone != 0) {
+				Zone z = new Zone(idZone, i);
+				zones.add(z);
+			}			
 		}
 		// Renvoie la liste des zones interessantes
 		return zones;
