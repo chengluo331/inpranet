@@ -20,10 +20,11 @@ BEGIN
 	OPEN c_pos FOR SELECT * FROM habit.position ORDER BY date_time;
 	LOOP
 		FETCH c_pos INTO rt_pos;
+		EXIT WHEN NOT FOUND;
 			-- Recuperer id intervalle
-			SELECT EXTRACT(DOW FROM date_time) INTO t_dow;
-			SELECT EXTRACT(HOUR FROM date_time) INTO t_hour;
-			SELECT EXTRACT(MINUTE FROM date_time) INTO t_minute;
+			SELECT EXTRACT(DOW FROM rt_pos.date_time) INTO t_dow;
+			SELECT EXTRACT(HOUR FROM rt_pos.date_time) INTO t_hour;
+			SELECT EXTRACT(MINUTE FROM rt_pos.date_time) INTO t_minute;
 			SELECT id INTO idInterval FROM habit.interval 
 				WHERE day_of_week=t_dow+1
 				AND hour_of_day=t_hour
@@ -35,11 +36,11 @@ BEGIN
 			LOOP
 				-- Pour chaque zone
 				FETCH c_zone INTO t_idZone;
-					select insertweeklyhabit(rt_pos.user_id, idInterval, t_idZone);				
 				EXIT WHEN NOT FOUND;
+					PERFORM habit.insertweeklyhabit(rt_pos.user_id, idInterval, t_idZone);							
 			END LOOP;
 			CLOSE c_zone;
-		EXIT WHEN NOT FOUND;
+		
 	END LOOP;
 	CLOSE c_pos;
 	RETURN 1;
@@ -47,3 +48,6 @@ END;$BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
 ALTER FUNCTION habit.loadHabitFromPos() OWNER TO postgres;
+
+select habit.loadHabitFromPos();
+
