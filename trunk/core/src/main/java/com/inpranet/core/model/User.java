@@ -16,7 +16,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "user", propOrder = {
     "idUser",
     "login",
-    "password"
+    "password",
+    "planningHorizon",
+    "interests"
 })
 public class User {
 

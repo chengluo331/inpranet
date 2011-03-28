@@ -42,7 +42,7 @@ public class CategoryDAO {
 		System.out.println("CategoryDao : Lancement de la recherche avec " + id);
 		
 		// Construction de la requete
-		final String SELECT_CATEGORY = "SELECT * FROM indexation.\"category\" WHERE id = ?";
+		final String SELECT_CATEGORY = "SELECT * FROM indexation.category WHERE id = ?";
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
 		JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
 		
@@ -59,7 +59,7 @@ public class CategoryDAO {
 		System.out.println("CategoryDao : Lancement de la recherche avec " + name);
 		
 		// Construction de la requete
-		final String SELECT_CATEGORY = "SELECT * FROM indexation.\"category\" WHERE name = '" + name + "'";
+		final String SELECT_CATEGORY = "SELECT * FROM indexation.category WHERE name = '" + name + "'";
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
 		JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
 		

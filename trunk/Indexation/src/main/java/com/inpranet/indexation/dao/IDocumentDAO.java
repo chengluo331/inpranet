@@ -29,7 +29,12 @@ public interface IDocumentDAO {
 	public List<Document> findDocumentByDate(Date date);
 	
 	/**
-	 * Recherche des documents qui correspondent a une certaine categorie
+	 * Recherche des documents qui correspondent a certaines categories
 	 */
-	public List<Document> findDocumentByCategory(Category category);
+	public List<Document> findDocumentByCategories(List<Category> categoriesList);
+	
+	/**
+	 * Recherche des documents qui correspondent a certaines zones
+	 */
+	public List<Document> findDocumentByZones(List<Zone> zonesList);
 }

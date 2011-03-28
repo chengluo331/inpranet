@@ -1,3 +1,7 @@
+-- Table: indexation."document"
+
+DROP TABLE indexation."document" CASCADE;
+
 CREATE TABLE indexation."document"
 (
   id integer NOT NULL,
@@ -8,6 +12,8 @@ CREATE TABLE indexation."document"
   latitude real,
   longitude real,
   data character varying,
+  reference character varying,
+  urgent boolean,
   CONSTRAINT document_pkey PRIMARY KEY (id)
 )
 WITH (

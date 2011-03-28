@@ -186,13 +186,11 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	 */
 	private static List<Zone> zoneProcessing() {
 		// TODO : Uniformiser les types de donnees
-		// TODO : Changer le type de GeoPos (mauvais import)
 		GeoPos geoPos = new GeoPos(coordinate.x, coordinate.y, null);
 		
 		// Lance une requete vers le bus pour l'identification des coordonnees
 		List<Zone> mappedZonesList = internalService.getZoneListFromGeoPos(geoPos);
 		
-		//return mappedZonesList;
 		return mappedZonesList;
 	}
 	
@@ -261,7 +259,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 			// Ajout du document dans la base de donnees
 			// TODO : Traitements d'erreurs
 			// TODO : Passer les dates en float
-			Document document = new Document(inputDocument.GetReference(), inputDocument.GetTitle(), inputDocument.IsUrgent(), mappedCategoriesList, inputDocument.GetUri(), startDate, endDate, (float)coordinate.x, (float)coordinate.y, inputDocument.GetData());
+			Document document = new Document(inputDocument.GetReference(), inputDocument.GetTitle(), inputDocument.IsUrgent(), mappedCategoriesList, inputDocument.GetUri(), startDate, endDate, (float)coordinate.x, (float)coordinate.y, mappedZonesList, inputDocument.GetData());
 			documentManager.saveDocument(document);
 		}
 		
