@@ -1,6 +1,6 @@
 -- Schema: profil
 
--- DROP SCHEMA profil;
+DROP SCHEMA IF EXISTS profil CASCADE;
 
 CREATE SCHEMA profil
   AUTHORIZATION postgres;
@@ -8,7 +8,7 @@ CREATE SCHEMA profil
 
 -- Schema: habit
 
--- DROP SCHEMA habit;
+DROP SCHEMA IF EXISTS habit CASCADE;
 
 CREATE SCHEMA habit
   AUTHORIZATION postgres;
@@ -16,7 +16,7 @@ CREATE SCHEMA habit
   
 -- Schema: zone
 
--- DROP SCHEMA zone;
+DROP SCHEMA IF EXISTS zone CASCADE;
 
 CREATE SCHEMA zone
   AUTHORIZATION postgres;
@@ -24,7 +24,7 @@ CREATE SCHEMA zone
   
 -- Schema: indexation
 
--- DROP SCHEMA indexation;
+DROP SCHEMA IF EXISTS indexation CASCADE;
 
 CREATE SCHEMA indexation
   AUTHORIZATION postgres;

@@ -1,6 +1,6 @@
 ﻿-- Table: profil.user
 
--- DROP TABLE profil.user;
+DROP TABLE IF EXIST profil.user;
 
 CREATE TABLE profil.user
 (
@@ -15,7 +15,7 @@ WITH (
 
 ALTER TABLE profil.user OWNER TO postgres;
 
--- DROP TABLE profil.habitType;
+/*DROP TABLE IF EXIST profil.habitType;
 CREATE TABLE profil.habitType
 (
   user_id integer NOT NULL,
@@ -32,12 +32,12 @@ CREATE TABLE profil.habitType
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE profil.habitType OWNER TO postgres;
+ALTER TABLE profil.habitType OWNER TO postgres;*/
 
 
 -- Table: profil.habit_choice
 
--- DROP TABLE profil.habit_choice;
+DROP TABLE IF EXIST profil.habit_choice;
 
 CREATE TABLE profil.habit_choice
 (

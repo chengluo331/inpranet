@@ -1,3 +1,5 @@
+
+DROP TABLE IF EXISTS zone.interest;
 CREATE TABLE zone.interest
 (
   id SERIAL,
