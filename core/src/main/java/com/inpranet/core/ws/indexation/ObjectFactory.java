@@ -42,14 +42,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LaunchRequestResponse }
-     * 
-     */
-    public LaunchRequestResponse createLaunchRequestResponse() {
-        return new LaunchRequestResponse();
-    }
-
-    /**
      * Create an instance of {@link Zone }
      * 
      */
@@ -58,11 +50,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Document }
+     * Create an instance of {@link LaunchRequest }
      * 
      */
-    public Document createDocument() {
-        return new Document();
+    public LaunchRequest createLaunchRequest() {
+        return new LaunchRequest();
     }
 
     /**
@@ -82,11 +74,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LaunchRequest }
+     * Create an instance of {@link Document }
      * 
      */
-    public LaunchRequest createLaunchRequest() {
-        return new LaunchRequest();
+    public Document createDocument() {
+        return new Document();
+    }
+
+    /**
+     * Create an instance of {@link LaunchRequestResponse }
+     * 
+     */
+    public LaunchRequestResponse createLaunchRequestResponse() {
+        return new LaunchRequestResponse();
     }
 
     /**

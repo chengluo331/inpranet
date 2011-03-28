@@ -41,27 +41,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GeoPos }
-     * 
-     */
-    public GeoPos createGeoPos() {
-        return new GeoPos();
-    }
-
-    /**
-     * Create an instance of {@link Zone }
-     * 
-     */
-    public Zone createZone() {
-        return new Zone();
-    }
-
-    /**
      * Create an instance of {@link GetZoneListFromGeoPosResponse }
      * 
      */
     public GetZoneListFromGeoPosResponse createGetZoneListFromGeoPosResponse() {
         return new GetZoneListFromGeoPosResponse();
+    }
+
+    /**
+     * Create an instance of {@link GeoPos }
+     * 
+     */
+    public GeoPos createGeoPos() {
+        return new GeoPos();
     }
 
     /**
@@ -78,6 +70,14 @@ public class ObjectFactory {
      */
     public Interest createInterest() {
         return new Interest();
+    }
+
+    /**
+     * Create an instance of {@link Zone }
+     * 
+     */
+    public Zone createZone() {
+        return new Zone();
     }
 
     /**

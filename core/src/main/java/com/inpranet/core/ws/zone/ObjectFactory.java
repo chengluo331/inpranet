@@ -47,19 +47,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Interest }
-     * 
-     */
-    public Interest createInterest() {
-        return new Interest();
-    }
-
-    /**
      * Create an instance of {@link Zone }
      * 
      */
     public Zone createZone() {
         return new Zone();
+    }
+
+    /**
+     * Create an instance of {@link Interest }
+     * 
+     */
+    public Interest createInterest() {
+        return new Interest();
     }
 
     /**

@@ -44,27 +44,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link User }
+     * Create an instance of {@link DeduceZone }
      * 
      */
-    public User createUser() {
-        return new User();
-    }
-
-    /**
-     * Create an instance of {@link Interest }
-     * 
-     */
-    public Interest createInterest() {
-        return new Interest();
-    }
-
-    /**
-     * Create an instance of {@link GeoPos }
-     * 
-     */
-    public GeoPos createGeoPos() {
-        return new GeoPos();
+    public DeduceZone createDeduceZone() {
+        return new DeduceZone();
     }
 
     /**
@@ -76,11 +60,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DeduceZone }
+     * Create an instance of {@link GeoPos }
      * 
      */
-    public DeduceZone createDeduceZone() {
-        return new DeduceZone();
+    public GeoPos createGeoPos() {
+        return new GeoPos();
     }
 
     /**
@@ -92,11 +76,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link User }
+     * 
+     */
+    public User createUser() {
+        return new User();
+    }
+
+    /**
      * Create an instance of {@link StockData }
      * 
      */
     public StockData createStockData() {
         return new StockData();
+    }
+
+    /**
+     * Create an instance of {@link Interest }
+     * 
+     */
+    public Interest createInterest() {
+        return new Interest();
     }
 
     /**
