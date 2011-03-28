@@ -266,7 +266,7 @@
 	        <!-- common configuration shared by all executions -->
         	<configuration>
           		<driver>org.postgresql.Driver</driver>
-          		<url>jdbc:postgresql://localhost:5432/postgres</url>
+          		<url>jdbc:postgresql://localhost:5432/postgis</url>
           		<username>postgres</username>
           		<password>soprasopra</password>
         	</configuration>
@@ -281,7 +281,6 @@
             		<configuration>
               			<!-- specify your SQL commands, can be all of the following configurations -->
               			<srcFiles>
-              				<srcFile>src/main/sql/truncate-category.sql</srcFile>
 	                		<srcFile>src/main/sql/truncate-document.sql</srcFile>
               			</srcFiles>
             		</configuration>

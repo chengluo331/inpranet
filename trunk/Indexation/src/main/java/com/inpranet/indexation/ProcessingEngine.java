@@ -186,10 +186,16 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	 */
 	private static List<Zone> zoneProcessing() {
 		// TODO : Uniformiser les types de donnees
-		GeoPos geoPos = new GeoPos(coordinate.x, coordinate.y, null);
+		GeoPos geoPos = new GeoPos(coordinate.y, coordinate.x, null);
 		
 		// Lance une requete vers le bus pour l'identification des coordonnees
+		System.out.println("ProcessingEngine : Lance une requête vers le Bus");
 		List<Zone> mappedZonesList = internalService.getZoneListFromGeoPos(geoPos);
+		
+		// Debug
+		System.out.println("ProcessingEngine : La requête a bien ete lancee");
+		System.out.println("ProcessingEngine : Nombre de zones : " + mappedZonesList.size());
+		System.out.println("ProcessingEngine : Premiere zone trouvee : " + mappedZonesList.get(0).getIdZone());
 		
 		return mappedZonesList;
 	}

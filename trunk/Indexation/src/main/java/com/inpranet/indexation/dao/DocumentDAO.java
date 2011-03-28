@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer;
 
 import com.inpranet.core.model.Category;
@@ -138,7 +139,7 @@ public class DocumentDAO implements IDocumentDAO {
 		// Construction de la requete
 		final String SELECT_DOCUMENT_CATEGORY = "SELECT * FROM indexation.\"document\", indexation.document_category WHERE indexation.\"document\".id = indexation.document_category.document_id AND indexation.document_category.category_id IN (:categoriesIdsList)";
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
-		JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = (NamedParameterJdbcTemplate) applicationContext.getBean("namedParameterJdbcTemplate");
 		
 		// Recupere les id des categories pour la parametrisation
 		List<Integer> categoriesIdsList = new ArrayList<Integer>();
@@ -151,7 +152,7 @@ public class DocumentDAO implements IDocumentDAO {
 		parameters.addValue("categoriesIdsList", categoriesIdsList);
 		
 		// Execution de la requete
-		return jdbcTemplate.query(SELECT_DOCUMENT_CATEGORY, new DocumentRowMapper(), parameters);
+		return namedParameterJdbcTemplate.query(SELECT_DOCUMENT_CATEGORY, parameters, new DocumentRowMapper());
 	}
 	
 	/**
@@ -161,7 +162,7 @@ public class DocumentDAO implements IDocumentDAO {
 		// Construction de la requete
 		final String SELECT_DOCUMENT_ZONE = "SELECT * FROM indexation.\"document\", indexation.document_zone WHERE indexation.\"document\".id = indexation.document_zone.document_id AND indexation.document_zone.zone_id IN (:zonesIdsList)";
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
-		JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = (NamedParameterJdbcTemplate) applicationContext.getBean("namedParameterJdbcTemplate");
 		
 		// Recupere les id des zones pour la parametrisation
 		List<Integer> zonesIdsList = new ArrayList<Integer>();
@@ -174,7 +175,7 @@ public class DocumentDAO implements IDocumentDAO {
 		parameters.addValue("zonesIdsList", zonesIdsList);
 		
 		// Execution de la requete
-		return jdbcTemplate.query(SELECT_DOCUMENT_ZONE, new DocumentRowMapper());
+		return namedParameterJdbcTemplate.query(SELECT_DOCUMENT_ZONE, parameters, new DocumentRowMapper());
 	}
 	
 	/**
@@ -187,7 +188,7 @@ public class DocumentDAO implements IDocumentDAO {
 		// Construction de la requete
 		final String SELECT_DOCUMENT_DATE_ZONE = "SELECT * FROM indexation.\"document\", indexation.document_zone WHERE indexation.\"document\".id = indexation.document_zone.document_id AND indexation.document_zone.zone_id IN (:zonesIdsList) AND start_date <= '" + simpleDateFormat.format(date) + "' AND end_date >= '" + simpleDateFormat.format(date) + "'";
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
-		JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = (NamedParameterJdbcTemplate) applicationContext.getBean("namedParameterJdbcTemplate");
 		
 		// Recupere les id des zones pour la parametrisation
 		List<Integer> zonesIdsList = new ArrayList<Integer>();
@@ -200,6 +201,6 @@ public class DocumentDAO implements IDocumentDAO {
 		parameters.addValue("zonesIdsList", zonesIdsList);
 		
 		// Execution de la requete
-		return jdbcTemplate.query(SELECT_DOCUMENT_DATE_ZONE, new DocumentRowMapper());
+		return namedParameterJdbcTemplate.query(SELECT_DOCUMENT_DATE_ZONE, parameters, new DocumentRowMapper());
 	}
 }
