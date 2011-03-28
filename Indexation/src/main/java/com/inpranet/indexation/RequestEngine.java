@@ -37,7 +37,6 @@ public class RequestEngine implements RequestEngineSEI {
 		// List<Interest> userInterests = user.getInterests();
 		
 		// Lance la requete à partir de la date d'aujourd'hui et en selectionnant les zones passees en parametre
-		// documents = documentManager.getDocumentByDate(new Date());
 		documents = documentManager.getDocumentByDateZones(new Date(), zone);
 		
 		// Filtrage des resultats selon la categorie

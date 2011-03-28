@@ -18,10 +18,9 @@ psql -h %url% -d %db_name% -U %username% -w %password%<./creation_habit.sql
 # create functions
 psql -h %url% -d %db_name% -U %username% -w %password%<./function_insertweeklyhabit.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./function_loadHabitFromPos.sql
-psql -h %url% -d %db_name% -U %username% -w %password%<./requete_gethabit.sql
+psql -h %url% -d %db_name% -U %username% -W %password%<./requete_gethabit.sql
 
 # load some data
-psql -h %url% -d %db_name% -U %username% -w %password%<./load_interests.sql
-psql -h %url% -d %db_name% -U %username% -w %password%<./load_user_habit_choice.sql
-psql -h %url% -d %db_name% -U %username% -w %password%<./load_zone.sql
+psql -h %url% -d %db_name% -U %username% -W %password%<./load_interests.sql
+psql -h %url% -d %db_name% -U %username% -W %password%<./load_zone.sql
 psql -h %url% -d %db_name% -U %username% -W %password%<./load_positions.sql

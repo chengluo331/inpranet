@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.inpranet.core.model.Interest;
 import com.inpranet.core.model.User;
 import com.inpranet.core.model.Zone;
 
@@ -74,6 +75,8 @@ public class Indexation {
 				
 				// Appelle le moteur de requete de documents
 				List<Zone> zones = new ArrayList<Zone>();
+				// Debug pour pouvoir essayer une requete
+				zones.add(new Zone(9, new Interest()));
 				requestEngine.LaunchRequest(new User(), zones);
 			} else if (!menuChoice.equals("0")) {
 				System.out.println("Commande inconnue");
