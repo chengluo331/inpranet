@@ -3,20 +3,29 @@
 -- DROP FUNCTION habit.gethabit(integer, integer, integer, integer, integer);
 
 CREATE OR REPLACE FUNCTION habit.gethabit(uid integer, idinter integer, pday integer, phour integer, pminutes integer)
+-- cette fonction prend en parametre (
+-- 	identifiant_utilisateur, 
+-- 	centre_interet qui lui interesse, 
+-- 	id jour, // 1..7 (dimanche jusqu'à lundi) correspndant à le jour ajourd'hui
+-- 	id heure // 0..23 correspondant à l'heure actuelle
+-- 	id minutes // 0..59 correspondant à la minute actuelle)
+
   RETURNS integer AS
 $BODY$
 DECLARE
-	maxbuffer integer;
-	rtuser habit.habit_choice%rowtype;
-	curs refcursor;
-	today_daily boolean;
+	maxbuffer integer; --stocker la valeur de retour de requete
+	rtuser profil.habit_choice%rowtype;
+	today_daily boolean; --variable de verification de choix utilisateur concernant le temps requetee
 	
 BEGIN
-	SELECT daily INTO today_daily FROM habit.habit_choice WHERE user_id=uid AND day_of_week=pday;
-	
+	--recuperer la valeur du choix du jour
+	-- si c'est un choix habitude quotidien, on recupere le max de somme correspondant au nbr_occurrence sur un centre interet donné
+	-- sinon, si c'est un choix habitude hebdomadaire, on recupere le max correspondant au nbr_occurrence sur un centre interet donné
+	SELECT daily INTO today_daily FROM profil.habit_choice WHERE user_id=uid AND day_of_week=pday;
+
 	IF today_daily = TRUE THEN 
 	SELECT MAX(sum) INTO maxbuffer FROM (
-			SELECT SUM(nb_occurrence) AS sum FROM habit.weekly_habit, zone.zone, habit.interval, habit.habit_choice
+			SELECT SUM(nb_occurrence) AS sum FROM habit.weekly_habit, zone.zone, habit.interval, profil.habit_choice
 				WHERE weekly_habit.zone_id=zone.id 
 					AND weekly_habit.time_of_week=interval.id
 					AND weekly_habit.user_id=habit_choice.user_id
@@ -29,7 +38,7 @@ BEGIN
 					GROUP BY zone_id)
 					AS sumbuffer;
 	ELSE
-		SELECT MAX(nb_occurrence) INTO maxbuffer FROM habit.weekly_habit, zone.zone, habit.interval, habit.habit_choice
+		SELECT MAX(nb_occurrence) INTO maxbuffer FROM habit.weekly_habit, zone.zone, habit.interval, profil.habit_choice
 			WHERE weekly_habit.zone_id=zone.id 
 				AND weekly_habit.time_of_week=interval.id
 				AND weekly_habit.user_id=habit_choice.user_id
