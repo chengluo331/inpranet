@@ -34,3 +34,24 @@ WITH (
 );
 ALTER TABLE profil.habitType OWNER TO postgres;
 
+
+-- Table: profil.habit_choice
+
+-- DROP TABLE profil.habit_choice;
+
+CREATE TABLE profil.habit_choice
+(
+  user_id integer NOT NULL,
+  day_of_week integer NOT NULL,
+  daily boolean NOT NULL,
+  weekly boolean NOT NULL,
+  CONSTRAINT pkey_choice PRIMARY KEY (user_id, day_of_week),
+  CONSTRAINT fkey_choice FOREIGN KEY (user_id)
+      REFERENCES profil.user (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE profil.habit_choice OWNER TO postgres;
+
