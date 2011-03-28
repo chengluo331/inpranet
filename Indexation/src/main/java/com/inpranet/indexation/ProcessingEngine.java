@@ -1,19 +1,27 @@
 package com.inpranet.indexation;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
+import javax.jws.WebService;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.inpranet.core.model.Category;
 import com.inpranet.core.model.Document;
+import com.inpranet.core.model.GeoPos;
+import com.inpranet.core.model.Zone;
+import com.inpranet.core.ws.bus.IInternalService;
 import com.inpranet.indexation.regex.GeographicalLexicalRegexEngine;
 import com.inpranet.indexation.regex.GeographicalRegexEngine;
 import com.inpranet.indexation.regex.GeographicalRegexResults;
 import com.inpranet.indexation.regex.TemporalLexicalRegexEngine;
 import com.inpranet.indexation.regex.TemporalRegexEngine;
 import com.inpranet.indexation.regex.TemporalRegexResults;
+import com.inpranet.indexation.service.CategoryManager;
 import com.inpranet.indexation.service.DocumentManager;
-
-import javax.jws.WebService;
-
 import com.vividsolutions.jts.geom.Coordinate;
 
 /**
@@ -52,6 +60,19 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	private static Coordinate coordinate;
 	
 	/**
+	 * Le module Indexation est client du Bus
+	 */
+	private static IInternalService internalService;
+	
+	/**
+	 * Constructeur statique
+	 */
+	static {
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
+		internalService = (IInternalService) applicationContext.getBean("busService");
+	}
+	
+	/**
 	 * Recherche une periode temporelle dans un document
 	 * @param documentPath Le chemin d'acces au document a traiter
 	 */
@@ -64,7 +85,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		System.out.println();
 		
 		// Verifie si les donnees de la source sont suffisantes
-		if (inputDocument.GetTemporalSourceReliable()) {
+		if (inputDocument.IsTemporalSourceReliable()) {
 			// Cas ou les donnees de la source sont suffisantes
 			// On ne va pas analyser le texte du document mais que les donnees liees a la source
 			startDateRegexResults = temporalRegexEngine.TemporalRegexSearch(temporalLexicalRegexEngine.TemporalLexicalSearch(inputDocument.GetTemporalSourceStartData(), inputDocument.GetCreationDate()));
@@ -133,7 +154,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		System.out.println();
 		
 		// Verifie si les donnees de la source sont suffisantes
-		if (inputDocument.GetGeographicalSourceReliable()) {
+		if (inputDocument.IsGeographicalSourceReliable()) {
 			// Cas ou les donnees de la source sont suffisantes
 			// On ne va pas analyser le texte du document mais que les donnees liees a la source
 			geographicalRegexResults = geographicalRegexEngine.GeographicalRegexSearch(geographicalLexicalRegexEngine.GeographicalLexicalSearch(inputDocument.GetGeographicalSourceData()));
@@ -161,6 +182,42 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	}
 	
 	/**
+	 * Realise un mapping entre les coordonnes trouvees dans le document et les objet Zone
+	 */
+	private static List<Zone> zoneProcessing() {
+		// TODO : Uniformiser les types de donnees
+		// TODO : Changer le type de GeoPos (mauvais import)
+		//GeoPos geoPos = new GeoPos(coordinate.x, coordinate.y, null);
+		
+		// Lance une requete vers le bus pour l'identification des coordonnees
+		//List<Zone> mappedZonesList = internalService.getZoneListFromGeoPos(geoPos);
+		
+		//return mappedZonesList;
+		return new ArrayList<Zone>();
+	}
+	
+	/**
+	 * Realise un mapping entre les categories trouvees dans le document et les objet Category
+	 */
+	private static List<Category> categoryProcessing(InputDocument inputDocument) {
+		// Utilisation des services metiers des categories
+		CategoryManager categoryManager = new CategoryManager();
+		List<Category> mappedCategoriesList = new ArrayList<Category>();
+		
+		// Realise la mapping pour toutes les categories detectees
+		List<String> categoriesList = inputDocument.GetCategoriesList();
+		for (int i = 0; i < categoriesList.size(); i++) {
+			// Debug
+			System.out.println("InputDocument : Categorie trouvee : " + categoriesList.get(i).toString()); 
+			
+			// On ne recupere qu'un seul resultat
+			mappedCategoriesList.add(categoryManager.getCategoryByName(categoriesList.get(i)).get(0));
+		}
+		
+		return mappedCategoriesList;
+	}
+	
+	/**
 	 * Lance le traitement d'un document
 	 * @param documentPath Le chemin d'acces au document a traiter
 	 */
@@ -168,6 +225,8 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		// Stocke les retours des analyseurs
 		String temporalProcessingResults = "";
 		String geographicalProcessingResults = "";
+		List<Category> mappedCategoriesList;
+		List<Zone> mappedZonesList;
 		
 		Scanner scanner = new Scanner(System.in);
 		
@@ -193,10 +252,16 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 			// Recherche de donnees geographiques
 			geographicalProcessingResults = geographicalProcessing(inputDocument);
 			
+			// Realise le mapping entre les donnees geographiques et les objets Zone
+			mappedZonesList = zoneProcessing();
+			
+			// Realise le mapping entre les categories donnees dans le document et les objets Category
+			mappedCategoriesList = categoryProcessing(inputDocument);
+			
 			// Ajout du document dans la base de donnees
 			// TODO : Traitements d'erreurs
 			// TODO : Passer les dates en float
-			Document document = new Document(inputDocument.GetReference(), inputDocument.GetTitle(), inputDocument.IsUrgent(), "Category", inputDocument.GetUri(), startDate, endDate, (float)coordinate.x, (float)coordinate.y, inputDocument.GetData());
+			Document document = new Document(inputDocument.GetReference(), inputDocument.GetTitle(), inputDocument.IsUrgent(), mappedCategoriesList, inputDocument.GetUri(), startDate, endDate, (float)coordinate.x, (float)coordinate.y, inputDocument.GetData());
 			documentManager.saveDocument(document);
 		}
 		

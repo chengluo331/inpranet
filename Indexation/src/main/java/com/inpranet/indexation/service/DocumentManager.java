@@ -7,6 +7,7 @@ import com.inpranet.core.model.Document;
 import com.inpranet.indexation.dao.DocumentDAO;
 
 /**
+ * Implementation des services objet metier relatives aux documents
  * @author Stephane
  */
 public class DocumentManager implements IDocumentManager {
@@ -27,7 +28,7 @@ public class DocumentManager implements IDocumentManager {
 	 * Recupere les documents qui couvrent une certaine date
 	 * @param date La date a couvrir
 	 */
-	public List<Document> getDocumentByDateCategories(Date date/*, List<Category> categories*/) {
+	public List<Document> getDocumentByDate(Date date) {
 		return documentDao.findDocumentByDate(date);
 	}
 }

@@ -1,15 +1,20 @@
 package com.inpranet.indexation;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import com.inpranet.indexation.regex.TemporalRegexEngine;
 import com.inpranet.indexation.regex.TemporalRegexResults;
@@ -39,6 +44,8 @@ public class InputDocument {
 	private String reference;
 	private String title;
 	private String uri;
+	private List<String> categoriesList = new ArrayList<String>();
+	private String _categoriesSourceReliable;
 	private String temporalCreationData;
 	private String _temporalSourceReliable;
 	private String temporalSourceStartData;
@@ -50,6 +57,7 @@ public class InputDocument {
 	// Interpretation des elements lus
 	private boolean urgent;
 	private Date creationDate;
+	private boolean categoriesSourceReliable;
 	private boolean temporalSourceReliable;
 	private boolean geographicalSourceReliable;
 	
@@ -74,11 +82,12 @@ public class InputDocument {
 			XPathFactory xPathFactory = XPathFactory.newInstance();
 			XPath xPath = xPathFactory.newXPath();
 			
-			// Lecture des metadonnees
+			// Lecture des metadonnees unitaires
 			_urgent = xPath.evaluate("//@urgent", document.getDocumentElement());
 			reference = xPath.evaluate("//metaData/reference/text()", document.getDocumentElement());
 			title = xPath.evaluate("//metaData/title/text()", document.getDocumentElement());
 			uri = xPath.evaluate("//metaData/uri/text()", document.getDocumentElement());
+			_categoriesSourceReliable = xPath.evaluate("//metaData/categories/@categoriesSourceReliable", document.getDocumentElement());
 			temporalCreationData = xPath.evaluate("//metaData/temporalCreationData/text()", document.getDocumentElement());
 			_temporalSourceReliable = xPath.evaluate("//metaData/temporalSourceData/@temporalSourceReliable", document.getDocumentElement());
 			temporalSourceStartData = xPath.evaluate("//metaData/temporalSourceData/temporalSourceStartData/text()", document.getDocumentElement());
@@ -86,11 +95,21 @@ public class InputDocument {
 			_geographicalSourceReliable = xPath.evaluate("//metaData/geographicalSourceData/@geographicalSourceReliable", document.getDocumentElement());
 			geographicalSourceData = xPath.evaluate("//metaData/geographicalSourceData/text()", document.getDocumentElement());
 			
+			// Lecture des metadonnees en liste
+			XPathExpression xPathExpression;
+			xPathExpression = xPath.compile("//metaData/categoriesList/category/text()");
+			Object result = xPathExpression.evaluate(document.getDocumentElement(), XPathConstants.NODESET);
+			NodeList nodesList = (NodeList) result;
+			for (int i = 0; i < nodesList.getLength(); i++) {
+				categoriesList.add(nodesList.item(i).getNodeValue());
+			}
+			
 			// Lecture du texte du document
 			data = xPath.evaluate("//data/text()", document.getDocumentElement());
 			
 			// Interpretation de la valeur des elements lus
 			urgent = Boolean.parseBoolean(_urgent);
+			categoriesSourceReliable = Boolean.parseBoolean(_categoriesSourceReliable);
 			temporalSourceReliable = Boolean.parseBoolean(_temporalSourceReliable);
 			geographicalSourceReliable = Boolean.parseBoolean(_geographicalSourceReliable);
 			
@@ -144,6 +163,20 @@ public class InputDocument {
 	}
 	
 	/**
+	 * @return Les categories auxquelles sont attachees le document d'apres la source
+	 */
+	public List<String> GetCategoriesList() {
+		return categoriesList;
+	}
+	
+	/**
+	 * @return true si l'analyse des categories ne doit pas etre effectuee, false sinon
+	 */
+	public boolean IsCategoriesSourceReliable() {
+		return categoriesSourceReliable;
+	}
+	
+	/**
 	 * @return La date de creation du document
 	 */
 	public Date GetCreationDate() {
@@ -153,7 +186,7 @@ public class InputDocument {
 	/**
 	 * @return true si l'analyse temporelle ne doit pas etre effectuee, false sinon
 	 */
-	public boolean GetTemporalSourceReliable() {
+	public boolean IsTemporalSourceReliable() {
 		return temporalSourceReliable;
 	}
 	
@@ -174,7 +207,7 @@ public class InputDocument {
 	/**
 	 * @return true si l'analyse geographique ne doit pas etre effectuee, false sinon
 	 */
-	public boolean GetGeographicalSourceReliable() {
+	public boolean IsGeographicalSourceReliable() {
 		return geographicalSourceReliable;
 	}
 	
