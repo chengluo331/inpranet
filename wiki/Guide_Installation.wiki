@@ -1,1 +1,33 @@
 #summary Guide d'installation de l'application
+#labels Phase-Deploy
+
+ # DB_admin/Sql :
+{{{
+// mise en place du contenu de la base de données
+
+// linux
+./db_init.sh
+
+// windows
+db_init.bat
+}}}
+ # core : 
+{{{
+// creation du jar core et mis à disposition du jar dans le repository maven
+mvn install
+}}}
+ # Service :
+{{{
+// lancement du module service sur le port par defaut : 8080
+mvn jetty:run
+}}}
+ # Zone :
+{{{
+// lancement du module zone sur le port 9000
+mvn -Djetty.port=9000 jetty:run
+}}}
+ # Habit :
+{{{
+// lancement du module habit sur le port 9000
+mvn -Djetty.port=9001 jetty:run
+}}}
