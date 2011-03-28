@@ -1,13 +1,16 @@
 package com.inpranet.habit.dao;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 import junit.framework.TestCase;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class WeeklyHabitDaoImplTest extends TestCase {
-
+public class WeeklyHabitDaoTest extends TestCase {
+	/** Logger */ 
+	static Logger log = Logger.getLogger(WeeklyHabitDAO.class.getName());
+	
 	private IWeeklyHabitDAO weeklyHabitDao;
 	private ClassPathXmlApplicationContext appContext;
 	
@@ -39,9 +42,18 @@ public class WeeklyHabitDaoImplTest extends TestCase {
 	}*/
 	
 	public void testGetIdInterval() {
+		log.info("--------------- TestGetIdInterval started --------------");
 		Date now = new Date();
 		int id = weeklyHabitDao.GetIdInterval(now);
-		System.out.println("-------------id = " + id);
-		
+		log.info("id = " + id);
+		log.info("--------------- TestGetIdInterval ended --------------");
+	}
+	
+	public void testDeduceIdZoneByInterest() {
+		log.info("--------------- TestDeduceIdZoneByInterest started --------------");
+		Date now = new Date();
+		int idZone = weeklyHabitDao.DeduceIdZoneByInterest(100, 1, now);
+		log.info(Integer.toString(idZone));
+		log.info("--------------- TestDeduceIdZoneByInterest ended --------------");
 	}
 }
