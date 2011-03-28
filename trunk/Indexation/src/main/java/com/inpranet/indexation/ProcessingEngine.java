@@ -187,13 +187,13 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	private static List<Zone> zoneProcessing() {
 		// TODO : Uniformiser les types de donnees
 		// TODO : Changer le type de GeoPos (mauvais import)
-		//GeoPos geoPos = new GeoPos(coordinate.x, coordinate.y, null);
+		GeoPos geoPos = new GeoPos(coordinate.x, coordinate.y, null);
 		
 		// Lance une requete vers le bus pour l'identification des coordonnees
-		//List<Zone> mappedZonesList = internalService.getZoneListFromGeoPos(geoPos);
+		List<Zone> mappedZonesList = internalService.getZoneListFromGeoPos(geoPos);
 		
 		//return mappedZonesList;
-		return new ArrayList<Zone>();
+		return mappedZonesList;
 	}
 	
 	/**
