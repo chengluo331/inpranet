@@ -11,7 +11,7 @@
 // windows
 db_init.bat
 }}}
- # core : 
+ # /core : 
 {{{
 // creation du jar core et mis à disposition du jar dans le repository maven
 mvn install
@@ -28,12 +28,12 @@ mvn -Djetty.port=9000 jetty:run
 }}}
  # /Habit :
 {{{
-// lancement du module habit sur le port 9000
+// lancement du module habit sur le port 9001
 mvn -Djetty.port=9001 jetty:run
 }}}
  # /Indexation :
 {{{
-// lancement du module habit sur le port 9000
+// lancement du module habit sur le port 9002
 mvn -Djetty.port=9002 jetty:run
 }}}
 
@@ -56,6 +56,9 @@ http://localhost:8080/service/public?_wadl&_type=xml
 // simulation de la requete POST pour simuler l'envoi d'une donnée GPS par le mobile
 // req.json contient la donner GPS sous format JSON (voir exemple dessous)
 curl --header "content-type: application/json" --data @req.json  -X POST http://localhost:8080/service/public/geo/1234567890
+
+// simulation de la requete GET pour recuperer les documents
+http://localhost:8080/service/public/doc/1234567890
 }}}
 
 
