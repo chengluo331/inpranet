@@ -1,40 +1,17 @@
 ﻿﻿-- Table: habit.position
-
 DROP TABLE IF EXISTS habit.position;
 
 CREATE TABLE habit.position
 (
   user_id integer NOT NULL,
   date_time timestamp without time zone NOT NULL,
-  longitude real,
-  latitude real,
+  point geography(POINT,4326),
   CONSTRAINT pkey_position PRIMARY KEY (user_id, date_time)
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE habit.position OWNER TO postgres;
-
-
-
--- Table: habit.weekly_habit
-
-DROP TABLE IF EXISTS habit.weekly_habit;
-
-CREATE TABLE habit.weekly_habit
-(
-  user_id integer NOT NULL,
-  time_of_week integer NOT NULL,
-  zone_id integer NOT NULL,
-  nb_occurrence integer NOT NULL,
-  flag integer NOT NULL,
-  CONSTRAINT pkey_weekly_habit PRIMARY KEY (user_id, time_of_week, zone_id),
-  CONSTRAINT fkey_weekly_habit_interval FOREIGN KEY habit.interval(
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE habit.weekly_habit OWNER TO postgres;
 
 -- Table: habit.interval
 
@@ -54,7 +31,7 @@ WITH (
 );
 ALTER TABLE habit.interval OWNER TO postgres;
 
-CREATE OR REPLACE FUNCTION init_interval(integer minutes) RETURNS integer
+CREATE OR REPLACE FUNCTION init_interval(minutes integer) RETURNS integer
 AS $$
 DECLARE
         id integer;
@@ -91,3 +68,25 @@ END;
 $$ LANGUAGE plpgsql;
 
 SELECT init_interval(60);
+
+-- Table: habit.weekly_habit
+
+DROP TABLE IF EXISTS habit.weekly_habit;
+
+CREATE TABLE habit.weekly_habit
+(
+  user_id integer NOT NULL,
+  time_of_week integer NOT NULL,
+  zone_id integer NOT NULL,
+  nb_occurrence integer NOT NULL,
+  flag integer NOT NULL,
+  CONSTRAINT pkey_weekly_habit PRIMARY KEY (user_id, time_of_week, zone_id),
+  CONSTRAINT fkey_weekly_habit_interval FOREIGN KEY (time_of_week) REFERENCES habit.interval(id),
+  CONSTRAINT fkey_weekly_habit_user FOREIGN KEY (user_id) REFERENCES profil.user(id)
+  )
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE habit.weekly_habit OWNER TO postgres;
+
+

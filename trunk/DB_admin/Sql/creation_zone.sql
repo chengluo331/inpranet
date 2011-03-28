@@ -17,7 +17,7 @@ DROP TABLE zone.zone;
 SET CLIENT_ENCODING TO UTF8;
 SET STANDARD_CONFORMING_STRINGS TO ON;
 BEGIN;
-CREATE TABLE "zone"."zone" (
+CREATE TABLE zone.zone (
   id serial NOT NULL,
   interest_id integer NOT NULL,
   geog geography(MULTIPOLYGON,4326),
