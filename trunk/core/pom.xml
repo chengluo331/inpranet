@@ -66,6 +66,7 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
 				<version>${cxf.version}</version>
+				<!--  
 				<executions>
 					<execution>
 						<id>generate-sources-zone</id>
@@ -144,6 +145,7 @@
 						</goals>
 					</execution>
 				</executions>
+				-->
 			</plugin>
 		</plugins>
 	</build>
