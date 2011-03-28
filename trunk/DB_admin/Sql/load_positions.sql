@@ -1,5 +1,5 @@
-# load 5 positions from INSA (30/03)
-# load 5 positions from Part-Dieu (31/03)
+--load 5 positions from INSA (30/03)
+--load 5 positions from Part-Dieu (31/03)
 
 SET CLIENT_ENCODING TO UTF8;
 SET STANDARD_CONFORMING_STRINGS TO ON;
