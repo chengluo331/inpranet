@@ -20,12 +20,12 @@ psql -h localhost -d postgis -U postgres -W soprasopra < creation_habit.sql
 # fonctions
 psql -h localhost -d postgis -U postgres -W soprasopra < function_insertweeklyhabit.sql
 psql -h localhost -d postgis -U postgres -W soprasopra < function_loadHabitFromPos.sql
-psql -hlocalhost -d postgis -U postgres -W soprasopra < requete_gethabit.sql
+psql -h localhost -d postgis -U postgres -W soprasopra < requete_gethabit.sql
 
 # load some data
-psql -hlocalhost -d postgis -U postgres -W soprasopra < load_interests.sql
-psql -hlocalhost -d postgis -U postgres -W soprasopra < load_zone.sql
-psql -hlocalhost -d postgis -U postgres -W soprasopra < load_positions.sql
+psql -h localhost -d postgis -U postgres -W soprasopra < load_interests.sql
+psql -h localhost -d postgis -U postgres -W soprasopra < load_zone.sql
+psql -h localhost -d postgis -U postgres -W soprasopra < load_positions.sql
 
 # doc : http://postgis.refractions.net/docs/ch04.html
 # Chargement du shapefile dans la bonne table
