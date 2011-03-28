@@ -35,19 +35,18 @@ public class RequestEngine implements RequestEngineSEI {
 		// List<Interest> userInterests = user.getInterests();
 		
 		// Lance la requete à partir de la date d'aujourd'hui
-		//documents = documentManager.getDocumentByDateCategories(new Date()/*, new List<Category>()*/);
+		documents = documentManager.getDocumentByDate(new Date());
+		
+		// Filtrage des resultats selon la categorie
 		
 		// Interpretation des resultats
-		/*Document document;
+		Document document;
 		ListIterator<Document> i = documents.listIterator();
 		while (i.hasNext()) {
 			document = i.next();
 			System.out.println("RequestEngine : Document trouve : " + document.getTitle() + ", " + document.getData());
-		}*/
+		}
 		
-		//return documents;
-		Document document = new Document("DOC-ID", "Titre", true, "Category", "www.a.com", new Date(), new Date(), (float)0.1, (float)0.2, "Azerty");
-		documents.add(document);
 		return documents;
 	}
 }

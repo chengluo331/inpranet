@@ -1,5 +1,7 @@
 package com.inpranet.indexation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.inpranet.core.model.User;
@@ -71,7 +73,8 @@ public class Indexation {
 				System.out.println();
 				
 				// Appelle le moteur de requete de documents
-				//requestEngine.LaunchRequest(new User(), new Zone());
+				List<Zone> zones = new ArrayList<Zone>();
+				requestEngine.LaunchRequest(new User(), zones);
 			} else if (!menuChoice.equals("0")) {
 				System.out.println("Commande inconnue");
 				System.out.println();

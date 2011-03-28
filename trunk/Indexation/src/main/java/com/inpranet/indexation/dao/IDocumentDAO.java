@@ -27,4 +27,9 @@ public interface IDocumentDAO {
 	 * @param date La date a couvrir
 	 */
 	public List<Document> findDocumentByDate(Date date);
+	
+	/**
+	 * Recherche des documents qui correspondent a une certaine categorie
+	 */
+	public List<Document> findDocumentByCategory(Category category);
 }

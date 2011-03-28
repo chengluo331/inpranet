@@ -1,6 +1,7 @@
 package com.inpranet.core.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,6 +12,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="document")
 public class Document {
+	/**
+	 * L'identifiant du document (au niveau de la base de donnees)
+	 */
+	@XmlElement
+	private int idDocument;
+	
 	/**
 	 * La reference du document (non utilise comme cle primaire lors du stockage)
 	 */
@@ -30,10 +37,10 @@ public class Document {
 	private boolean urgent;
 	
 	/**
-	 * La categorie du document
+	 * Les categories du document
 	 */
 	@XmlElement
-	private String category;
+	private List<Category> categoriesList;
 	
 	/**
 	 * L'URI du document
@@ -79,27 +86,66 @@ public class Document {
 	/**
 	 * Constructeur par defaut de la classe Document
 	 * Attention a l'ordre de passage des parametres longitude et latitude
+	 * @param idDocument L'identifiant du document
 	 * @param reference La réference du document
 	 * @param title Le titre du document
+	 * @param urgent L'urgence du document
+	 * @param categories Les categories auxquelles sont rattachees le document
 	 * @param uri L'URI du document
 	 * @param start_date La date de debut du document
 	 * @param end_date La date de fin du document
 	 * @param longitude La longitude de la position spatiale du document
 	 * @param latitude La latitude de la position spatiale du document
-	 * @param data Le texte du document 
+	 * @param data Le texte du document
 	 */
-	public Document(String reference, String title, boolean urgent, String category, String uri, Date start_date, Date end_date, float longitude, float latitude, String data) {
+	public Document(int idDocument, String reference, String title, boolean urgent, List<Category> categoriesList, String uri, Date start_date, Date end_date, float longitude, float latitude, String data) {
 		// Initialisation des attributs
+		this.idDocument = idDocument;
 		this.reference = reference;
 		this.title = title;
 		this.urgent = urgent;
-		this.category = category;
+		this.categoriesList = categoriesList;
 		this.uri = uri;
 		this.start_date = start_date;
 		this.end_date = end_date;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.data = data;
+	}
+	
+	/**
+	 * Constructeur par defaut de la classe Document
+	 * Attention a l'ordre de passage des parametres longitude et latitude
+	 * @param reference La réference du document
+	 * @param title Le titre du document
+	 * @param urgent L'urgence du document
+	 * @param categories Les categories auxquelles sont rattachees le document
+	 * @param uri L'URI du document
+	 * @param start_date La date de debut du document
+	 * @param end_date La date de fin du document
+	 * @param longitude La longitude de la position spatiale du document
+	 * @param latitude La latitude de la position spatiale du document
+	 * @param data Le texte du document
+	 */
+	public Document(String reference, String title, boolean urgent, List<Category> categoriesList, String uri, Date start_date, Date end_date, float longitude, float latitude, String data) {
+		// Initialisation des attributs
+		this.reference = reference;
+		this.title = title;
+		this.urgent = urgent;
+		this.categoriesList = categoriesList;
+		this.uri = uri;
+		this.start_date = start_date;
+		this.end_date = end_date;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.data = data;
+	}
+	
+	/**
+	 * @return L'identifiant du document
+	 */
+	public int getIdDocument() {
+		return idDocument;
 	}
 	
 	/**
@@ -130,10 +176,10 @@ public class Document {
 	}
 
 	/**
-	 * @return La categorie du document
+	 * @return Les categories du document
 	 */
-	public String getCategory(){
-		return category;
+	public List<Category> getCategoriesList(){
+		return categoriesList;
 	}
 
 	/**

@@ -11,9 +11,6 @@
     <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<!--  Declaration du PropertyPlaceholderConfigurer -->
-
-
 	<!--  Declaration des dataSources -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
@@ -32,6 +29,11 @@
         <constructor-arg ref="dataSource"/>  
         <constructor-arg value="indexation.document_id_sequence"/>  
     </bean>  
+	
+	<!-- Le module Indexation est client du Bus lorsqu'on fait une demande de zones -->
+	<jaxws:client id="busService" serviceClass="com.inpranet.core.ws.bus.IInternalService"
+		address="http://localhost:8080/service/bus/">
+	</jaxws:client>
 	
 	<!-- Ajout d'un bean Spring pour le SEI -->
     <bean id="processingEngineServ" class="com.inpranet.indexation.ProcessingEngine" />

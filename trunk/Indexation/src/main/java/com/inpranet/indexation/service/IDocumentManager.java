@@ -20,5 +20,5 @@ public interface IDocumentManager {
 	 * Recupere les documents qui couvrent une certaine date
 	 * @param date La date a couvrir
 	 */
-	public List<Document> getDocumentByDateCategories(Date date);
+	public List<Document> getDocumentByDate(Date date);
 }
