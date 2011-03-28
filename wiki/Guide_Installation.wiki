@@ -50,6 +50,7 @@ http://localhost:8080/service/public?_wadl&_type=xml
 
 == Simulation requetes HTTP sur le service frontal ==
 
+Télécharger curl : [http://code.google.com/p/inpranet/downloads/detail?name=curl-7.21.4-ssl-sspi-zlib-static-bin-w32.zip&can=2&q=#makechanges curl]
 {{{
 // utilisation de l'utilitaire curl (curl.exe pour windows)
 
