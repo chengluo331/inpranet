@@ -31,9 +31,22 @@ mvn -Djetty.port=9000 jetty:run
 // lancement du module habit sur le port 9000
 mvn -Djetty.port=9001 jetty:run
 }}}
+ # /Indexation :
+{{{
+// lancement du module habit sur le port 9000
+mvn -Djetty.port=9002 jetty:run
+}}}
 
 
+== URL des Services ==
 
+Service :
+{{{
+// WSDL 
+http://localhost:8080/service/bus?wsdl
+// WADL (description des web services REST
+http://localhost:8080/service/public?_wadl&_type=xml
+}}}
 
 == Simulation requetes HTTP sur le service frontal ==
 
@@ -42,7 +55,7 @@ mvn -Djetty.port=9001 jetty:run
 
 // simulation de la requete POST pour simuler l'envoi d'une donnée GPS par le mobile
 // req.json contient la donner GPS sous format JSON (voir exemple dessous)
-curl --header "content-type: application/json" --data @req.json  -X POST http://localhost:8080/service/public/geo
+curl --header "content-type: application/json" --data @req.json  -X POST http://localhost:8080/service/public/geo/1234567890
 }}}
 
 
