@@ -1,6 +1,6 @@
 ﻿﻿-- Table: habit.position
 
--- DROP TABLE habit.position;
+DROP TABLE IF EXIST habit.position;
 
 CREATE TABLE habit.position
 (
@@ -19,7 +19,7 @@ ALTER TABLE habit.position OWNER TO postgres;
 
 -- Table: habit.weekly_habit
 
--- DROP TABLE habit.weekly_habit;
+DROP TABLE IF EXIST habit.weekly_habit;
 
 CREATE TABLE habit.weekly_habit
 (
@@ -38,7 +38,7 @@ ALTER TABLE habit.weekly_habit OWNER TO postgres;
 
 -- Table: habit.interval
 
--- DROP TABLE habit.interval;
+DROP TABLE IF EXIST habit.interval;
 
 CREATE TABLE habit.interval
 (
@@ -54,28 +54,35 @@ WITH (
 );
 ALTER TABLE habit.interval OWNER TO postgres;
 
-CREATE OR REPLACE FUNCTION init_interval() RETURNS integer
+CREATE OR REPLACE FUNCTION init_interval(integer minutes) RETURNS integer
 AS $$
 DECLARE
         id integer;
         day_of_week integer;
         time_of_day integer;
+		nb_interval_hour integer;
 BEGIN
         id := 1;
   FOR day_of_week IN 1..7 LOOP
         FOR time_of_day IN 0..23 LOOP
-                INSERT INTO habit.interval
-                VALUES (id, day_of_week, time_of_day, 0, 15);
-                id := id + 1;
-                INSERT INTO habit.interval
-                VALUES (id, day_of_week, time_of_day, 15, 30);
-                id := id + 1;
-                INSERT INTO habit.interval
-                VALUES (id, day_of_week, time_of_day, 30, 45);
-                id := id + 1;
-                INSERT INTO habit.interval
-                VALUES (id, day_of_week, time_of_day, 45, 59);
-                id := id + 1;
+				nb_interval_hour = 60/minutes;
+				FOR nb IN 0..nb_interval_hour-1 LOOP
+					INSERT INTO habit.interval
+					VALUES (id, day_of_week, time_of_day, 0+minutes*nb, minutes+minutes*nb-1);
+					id := id + 1;
+					/*INSERT INTO habit.interval
+					VALUES (id, day_of_week, time_of_day, 0, 15);
+					id := id + 1;
+					INSERT INTO habit.interval
+					VALUES (id, day_of_week, time_of_day, 15, 30);
+					id := id + 1;
+					INSERT INTO habit.interval
+					VALUES (id, day_of_week, time_of_day, 30, 45);
+					id := id + 1;
+					INSERT INTO habit.interval
+					VALUES (id, day_of_week, time_of_day, 45, 59);
+					id := id + 1;*/
+				END LOOP;
         END LOOP;
   END LOOP;
 
