@@ -17,14 +17,14 @@ Thèmes :
    * localisation
    * habitudes
  * nombreux scénarios possibles
- * objectifs de l'équipe
-  * dimension client
-  * projet complet : spécifications + code
-  * projet de longue durée
-  * travail d'équipe
-  * challenge technique
-  * mise en application des concepts vus en IF
-  * faire un produit simple mais fonctionnel
+ * ~~objectifs de l'équipe~~
+  * ~~dimension client~~
+  * ~~projet complet : spécifications + code~~
+  * ~~projet de longue durée~~
+  * ~~travail d'équipe~~
+  * ~~challenge technique~~
+  * ~~mise en application des concepts vus en IF~~
+  * ~~faire un produit simple mais fonctionnel~~
  * spécification
   * specifications fonctionnelles détaillées
  * choix technique
