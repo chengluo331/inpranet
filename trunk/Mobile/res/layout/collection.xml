@@ -9,7 +9,7 @@
 			android:layout_alignParentRight="true" android:layout_alignParentTop="true" />
 		<TabWidget android:id="@android:id/tabs"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:layout_toLeftOf="@id/imageButton_search">
+			android:layout_toLeftOf="@id/imageButton_search" >
 		</TabWidget>
 		<ViewFlipper android:id="@android:id/tabcontent"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"

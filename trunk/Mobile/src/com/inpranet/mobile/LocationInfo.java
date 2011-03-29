@@ -1,34 +1,35 @@
 package com.inpranet.mobile;
 
+
 import java.util.Date;
 
+
 public class LocationInfo {
-	private long mUserID;
-	private Date mTime;
-	private double longitude;
-	private double latitude;
+	private long mSessionID;
+	private GeoPos mGeoPos;
 	
-	public LocationInfo(long id, Date time, double lg, double la){
-		mUserID = id;
-		mTime = time;
-		longitude = lg;
-		latitude = la;
+	public LocationInfo(long id, GeoPos geoPos){
+		mSessionID = id;
+		mGeoPos = geoPos;
 	}
 	
 	public long getUserID(){
-		return mUserID;
+		return mSessionID;
 	}
 	
-	public Date getTime(){
-		return mTime;
+	public Date getDate(){
+		return mGeoPos.getDate();
 	}
 	
 	public double getLongitude(){
-		return longitude;
+		return mGeoPos.getLongitude();
 	}
 	
 	public double getLatitude(){
-		return latitude;
+		return mGeoPos.getLatitude();
+	}
+	
+	public GeoPos getGeoPos(){
+		return mGeoPos;
 	}
 }
-

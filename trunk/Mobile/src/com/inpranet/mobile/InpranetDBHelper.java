@@ -1,6 +1,8 @@
 package com.inpranet.mobile;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,24 +10,26 @@ import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.zip.DataFormatException;
+
+import com.inpranet.core.model.Category;
+import com.inpranet.core.model.Document;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class InpranetDBHelper extends SQLiteOpenHelper {
 	public static final String CAT_WELCOME = "acceuil";
-	public static final String CAT_SPORT = "sport";
-	public static final String CAT_COMMERCIAL = "commerce";
+	public static final String CAT_SHOPPING = "shopping";
+	public static final String CAT_SCOLAIRE = "scolaire";
 
-	private static final String TAG = "DocumentDBHelper";
+	private static final String TAG = "InpranetDBHelper";
 
 	private static final int DB_VERSION = 1;
 	private static final String DATABASE_NAME = "inpranet_db";
@@ -35,14 +39,14 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 	private static final String TABLE_DOCUMENT = "document";
 	private static final String TABLE_CACHE = "cache";
 
-	private static final String KEY_DOCID = "_id";
+	private static final String KEY_ROWID = "rowid";
+	private static final String KEY_DOCREF = "_ref";
 	private static final String KEY_TITLE = "title";
-	private static final String KEY_ZONE = "zone";
-	private static final String KEY_EVENT_IMPORTANCE = "eventImportance";
+	private static final String KEY_URI = "uri";
+	private static final String KEY_URGENT = "urgent";
 	private static final String KEY_CATEGORY = "category";
 	private static final String KEY_START_DATE = "startDate";
 	private static final String KEY_END_DATE = "endDate";
-	private static final String KEY_FIRST_LINE = "firstLine";
 	private static final String KEY_HTML_DATA = "htmlData";
 
 	private static final String KEY_USERID = "_userID";
@@ -159,6 +163,16 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 		return mDataBase.query(distinct, table, columns, selection,
 				selectionArgs, groupBy, having, orderBy, limit);
 	}
+	
+	/**
+	 * @param table
+	 * @param columns
+	 * @param selection
+	 * @return
+	 */
+	private Cursor query(String table, String[] columns, String selection) {
+		return query(true, table, columns, selection, null, null, null, null, null);
+	}
 
 	/**
 	 * fonction interne utilise pour requeter(2eme niveau)
@@ -168,7 +182,7 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 	 * @return
 	 */
 	private Cursor query(String table, String selection) {
-		return query(true, table, null, selection, null, null, null, null, null);
+		return query(table, null, selection);
 	}
 
 	/**
@@ -180,38 +194,44 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 	 * @throws ParseException
 	 */
 	public List<DocumentInfo> getAllDocumentsByCategory(String category) {
-		Cursor c = query(TABLE_DOCUMENT, KEY_CATEGORY + "='" + category + "'");
+		String[] columns = new String[]{
+				KEY_ROWID,KEY_TITLE,KEY_URGENT,KEY_CATEGORY,KEY_HTML_DATA
+		};
+		Cursor c = query(TABLE_DOCUMENT, columns,KEY_CATEGORY + "='" + category + "'");
 		List<DocumentInfo> docList = new ArrayList<DocumentInfo>();
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
 			docList.add(new DocumentInfo(c.getLong(c
-					.getColumnIndexOrThrow(KEY_DOCID)), c.getString(c
+					.getColumnIndexOrThrow(KEY_ROWID)), c.getString(c
 					.getColumnIndexOrThrow(KEY_TITLE)), c.getInt(c
-					.getColumnIndexOrThrow(KEY_EVENT_IMPORTANCE)) != 0, c
-					.getString(c.getColumnIndexOrThrow(KEY_CATEGORY)), c
-					.getString(c.getColumnIndexOrThrow(KEY_FIRST_LINE))));
+					.getColumnIndexOrThrow(KEY_URGENT)) != 0, c
+					.getString(c.getColumnIndexOrThrow(KEY_CATEGORY)), 
+					DocumentInfo.retrevieFL(c.getString(c.getColumnIndexOrThrow(KEY_HTML_DATA)))));
 		}
 		return docList;
 	}
 
 	public Document getDocumentByID(long id) {
-		Cursor c = query(TABLE_DOCUMENT, KEY_DOCID + "=" + id);
+		Cursor c = query(TABLE_DOCUMENT, KEY_ROWID + "=" + id);
 		Document doc = null;
 		c.moveToFirst();
 		if (!c.isAfterLast()) {
 			try {
+				// TODO gerer multi-category, ajouter long, lat dans la base
+				// pour pouvoir afficher sur une carte
+				List<Category> catList=	new ArrayList<Category>();
+				catList.add(new Category(c.getString(c.getColumnIndexOrThrow(KEY_CATEGORY))));
 				doc = new Document(
-						c.getLong(c.getColumnIndexOrThrow(KEY_DOCID)),
+						c.getString(c.getColumnIndexOrThrow(KEY_DOCREF)),
 						c.getString(c.getColumnIndexOrThrow(KEY_TITLE)),
-						c.getString(c.getColumnIndexOrThrow(KEY_ZONE)),
-						c.getInt(c.getColumnIndexOrThrow(KEY_EVENT_IMPORTANCE)) != 0,
-						c.getString(c.getColumnIndexOrThrow(KEY_CATEGORY)),
+						c.getInt(c.getColumnIndexOrThrow(KEY_URGENT)) != 0,
+						catList,
+						c.getString(c.getColumnIndexOrThrow(KEY_URI)),
 						dateFormat.parse(c.getString(c
 								.getColumnIndexOrThrow(KEY_START_DATE))),
 						dateFormat.parse(c.getString(c
 								.getColumnIndexOrThrow(KEY_END_DATE))),
-						c.getString(c.getColumnIndexOrThrow(KEY_FIRST_LINE)), c
-								.getString(c
-										.getColumnIndexOrThrow(KEY_HTML_DATA)));
+								0,0, 
+								c.getString(c.getColumnIndexOrThrow(KEY_HTML_DATA)));
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -237,13 +257,13 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 		Cursor c = query(TABLE_CACHE, KEY_USERID + "="+id);
 		List<LocationInfo> cache = new ArrayList<LocationInfo>();
 		try {
+			GeoPos gp;
 			for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-
-				cache.add(new LocationInfo(c.getLong(c
-						.getColumnIndexOrThrow(KEY_USERID)), dateFormat.parse(c
-						.getString(c.getColumnIndexOrThrow(KEY_TIME))), c
-						.getDouble(c.getColumnIndexOrThrow(KEY_LOGITUDE)), c
-						.getDouble(c.getColumnIndexOrThrow(KEY_LATITUDE))));
+				gp = new GeoPos(c.getDouble(c.getColumnIndexOrThrow(KEY_LOGITUDE)),
+						 c.getDouble(c.getColumnIndexOrThrow(KEY_LATITUDE)),
+						 dateFormat.parse(c.getString(c.getColumnIndexOrThrow(KEY_TIME))));
+				cache.add(new LocationInfo(c.getLong(c.getColumnIndexOrThrow(KEY_USERID)),
+						gp));
 
 			}
 		} catch (IllegalArgumentException e) {
@@ -252,9 +272,31 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		return cache;
 	}
+	
+	public void insertDocument(Document document) throws SQLiteConstraintException{
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_DOCREF, document.getReference());
+		cv.put(KEY_TITLE, document.getTitle());
+		cv.put(KEY_URGENT, document.isUrgent());
+		cv.put(KEY_URI, document.getUri());
+		// TODO gestion multi-category
+		cv.put(KEY_CATEGORY, document.getCategoriesList().get(0).getName());
+		cv.put(KEY_START_DATE, dateFormat.format(document.getStart_date()));
+		cv.put(KEY_END_DATE, dateFormat.format(document.getEnd_date()));
+		cv.put(KEY_LOGITUDE, document.getLongitude());
+		cv.put(KEY_LATITUDE, document.getLatitude());
+		cv.put(KEY_HTML_DATA, document.getData());
+		try{
+			insert(TABLE_DOCUMENT, cv);
+		} catch (SQLiteConstraintException e) {
+			Log.d(TAG, "document exist");
+			throw e;
+		}
+	}
+	
 	
 	private void insert(String table, ContentValues values){
 		mDataBase.insertOrThrow(table, null, values);
@@ -263,7 +305,7 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 	public void insertLocationCache(LocationInfo cache){
 		ContentValues cv = new ContentValues();
 		cv.put(KEY_USERID, cache.getUserID());
-		cv.put(KEY_TIME, dateFormat.format(cache.getTime()));
+		cv.put(KEY_TIME, dateFormat.format(cache.getDate()));
 		cv.put(KEY_LOGITUDE, cache.getLongitude());
 		cv.put(KEY_LATITUDE, cache.getLatitude());
 		insert(TABLE_CACHE, cv);
@@ -285,5 +327,32 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 	// TODO debugger avec delete
 	public void deleteLocationCacheByID(long id){
 		mDataBase.execSQL("delete from "+ TABLE_CACHE + " where "+KEY_USERID+" = "+id);
+	}
+	
+	public void backupDB(){
+		String inputFile = DATABASE_PATH + DATABASE_NAME;
+		InputStream input;
+		try {
+			input = new FileInputStream(inputFile);
+			OutputStream output = new FileOutputStream("sdcard/inpranet_db");
+
+			// transferer donnees de la db
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = input.read(buffer)) > 0) {
+				output.write(buffer, 0, length);
+			}
+			// fermeture
+			output.flush();
+			output.close();
+			input.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
