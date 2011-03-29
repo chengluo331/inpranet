@@ -36,7 +36,7 @@ public class DocumentService extends Service {
 	public static final String INSERT_DOCUMENT = "extra_msg";
 	
 	private static final String TAG = "DocumentService";
-	private static final String DOC_WS_URI = "http://10.0.2.2:8080/inpranet/services/doc";
+	private static final String DOC_WS_URI = "http://10.0.2.2:8080/service/public/doc/";
 		
 	private long mSessionID;
 	private long mRequestPeriod;
@@ -68,7 +68,7 @@ public class DocumentService extends Service {
 		mRequestTimerTask = new RequestDocumentTask();
 		mRequestTimer.schedule(mRequestTimerTask, 5000, mRequestPeriod);
 		mHttpClient = new DefaultHttpClient();
-		mHttpRequest = new HttpGet(DOC_WS_URI);
+		mHttpRequest = new HttpGet(DOC_WS_URI+mSessionID);
 		
 	}
 	
@@ -91,41 +91,45 @@ public class DocumentService extends Service {
 	
 	private void requestDocument(){
 		Log.d(TAG, "request document for session: "+mSessionID);
-//		try {
-//			mHttpResponse = mHttpClient.execute(mHttpRequest);
-//			InputStream input =	mHttpResponse.getEntity().getContent();
-//			byte[] buffer = new byte[1024];
-//			int length;
-//			StringBuilder builder = new StringBuilder();
-//			while ((length = input.read(buffer)) > 0) {
-//				builder.append(new String(buffer, 0, length));
-//			}
-//			String json = builder.toString();
-//			Log.d(TAG, "received: "+ json);
-//			JSONObject ojson = new JSONObject(json);
-//			
-//		} catch (ClientProtocolException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		List<Category> catList = new ArrayList<Category>();
-		catList.add(new Category("acceuil"));
-		Document doc = new Document(
-				"ref11",
-				"test service",
-				true,
-				catList,
-				"www.test.com",
-				new Date(),
-				new Date(),
-				0,0,"contenu");
-		insertDocument(doc);
+		try {
+			mHttpResponse = mHttpClient.execute(mHttpRequest);
+			InputStream input =	mHttpResponse.getEntity().getContent();
+			byte[] buffer = new byte[1024];
+			int length;
+			StringBuilder builder = new StringBuilder();
+			while ((length = input.read(buffer)) > 0) {
+				builder.append(new String(buffer, 0, length));
+			}
+			String json = builder.toString();
+			Log.d(TAG, "received: "+ json);
+			JSONObject ojson = new JSONObject(json);
+//			JSONObject documents = ojson.get("document");
+//			Log.d(TAG,)
+			
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+//		List<Category> catList = new ArrayList<Category>();
+//		catList.add(new Category("acceuil"));
+//		Document doc = new Document(
+//				"ref11",
+//				"test service",
+//				true,
+//				catList,
+//				"www.test.com",
+//				new Date(),
+//				new Date(),
+//				0,0,"contenu");
+//		insertDocument(doc);
 	}
 	
 	private void insertDocument(Document doc){

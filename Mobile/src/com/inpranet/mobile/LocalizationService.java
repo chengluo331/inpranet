@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -45,14 +44,14 @@ public class LocalizationService extends Service {
 
 	private static final int TIME_OUT = 2000;
 
-	private static final String URI_WS_GEOPOS_BASE = "http://10.0.2.2:9000/inpranet/services/geo";
-
+	private static final String URI_WS_GEOPOS_BASE = "http://10.0.2.2:8080/service/public/geo";
+		
 	/** Le gps listener */
 	GPSListener gpsListener = new GPSListener();
-	
+
 	/** Le timer */
 	Timer timer = new Timer();
-	
+
 	/** L'id d'utilisateur qui utilise le service */
 	private long mSessionID;
 
@@ -61,7 +60,7 @@ public class LocalizationService extends Service {
 
 	/** Le temps maximum entre deux maj de position en milliseconde */
 	private long maxTime;
-	
+
 	/** La distance minimum de maj de position en metre */
 	private float minDistance;
 
@@ -79,7 +78,7 @@ public class LocalizationService extends Service {
 
 	/** L'heure du dernier enregistrement de geo-localisation */
 	private Calendar lastRecordTime;
-	
+
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
@@ -102,15 +101,15 @@ public class LocalizationService extends Service {
 	 * 
 	 * @param newLocation
 	 *            la dernière position utilisateur
-	 * @throws DatatypeConfigurationException 
+	 * @throws DatatypeConfigurationException
 	 */
-	private void registerLocation(Location newLocation) throws DatatypeConfigurationException {
+	private void registerLocation(Location newLocation){
 		double longitude = newLocation.getLongitude();
 		double latitude = newLocation.getLatitude();
 		LocationInfo locationInfo = null;
-		
-		locationInfo = new LocationInfo(mSessionID, new GeoPos(longitude, latitude, new Date()));
-		
+
+		locationInfo = new LocationInfo(mSessionID, new GeoPos(longitude,
+				latitude, new Date()));
 
 		// Si connexion internet établie
 		if (isOnline()) {
@@ -129,9 +128,11 @@ public class LocalizationService extends Service {
 	}
 
 	private void sendLocationInfo(LocationInfo locationInfo) {
-		String str_json = "{\"ns2.geoPos\":{\"longitude\":"
+		String str_json = "{\"geopos\":{\"longitude\":"
 				+ locationInfo.getLongitude() + ",\"latitude\":"
-				+ locationInfo.getLatitude() + "}}";
+				+ locationInfo.getLatitude()
+				+ ",\"time\":"
+				+ "\""+ locationInfo.getTimeInCalendarFormat() + "\"}}";
 		Log.d(TAG, str_json);
 
 		// creer post, declarer reponse
@@ -175,6 +176,7 @@ public class LocalizationService extends Service {
 		for (int i = 0; i != cache.size(); i++) {
 			Log.d(TAG, "cache info: " + cache.get(i).getLongitude() + " "
 					+ cache.get(i).getLatitude());
+			sendLocationInfo(cache.get(i));
 		}
 	}
 
@@ -192,9 +194,9 @@ public class LocalizationService extends Service {
 		}
 	}
 
-	
 	/**
 	 * Vérifier si le mobile est connecté à internet
+	 * 
 	 * @return boolean indiquant la connexion ou pas
 	 */
 	public boolean isOnline() {
@@ -207,10 +209,11 @@ public class LocalizationService extends Service {
 	}
 
 	/**
-	 * Classe fille de locationListener qui détecte l'état de GPS 
-	 * et le changement de localisation
+	 * Classe fille de locationListener qui détecte l'état de GPS et le
+	 * changement de localisation
+	 * 
 	 * @author yiquan
-	 *
+	 * 
 	 */
 	final class GPSListener implements LocationListener {
 		/**
@@ -219,59 +222,55 @@ public class LocalizationService extends Service {
 		public void onLocationChanged(Location newLocation) {
 			Log.d(TAG, "Location changed");
 			// Enregistrer la nouvelle position
+
+			registerLocation(newLocation);
+			// Mise à jour l'heure du dernier enregistrement
+			lastRecordTime = Calendar.getInstance();
 			
-			try {
-				registerLocation(newLocation);
-				// Mise à jour l'heure du dernier enregistrement
-				lastRecordTime = Calendar.getInstance();	
-			} catch (DatatypeConfigurationException e) {
-				// TODO Auto-generated catch block
-				Log.d(TAG,"can't register location");
-				e.printStackTrace();
-			}	
 		}
 
 		/**
 		 * méthode appelée lorsque le provider est désactivé
 		 */
 		public void onProviderDisabled(String provider) {
-			Log.d(TAG, "GPS disabled");				
+			Log.d(TAG, "GPS disabled");
 		}
 
 		/**
 		 * Méthode appelée lorsque le provider est activé
 		 */
 		public void onProviderEnabled(String provider) {
-			Log.d(TAG, "GPS enabled");				
+			Log.d(TAG, "GPS enabled");
 		}
 
 		/**
 		 * méthode appelée lorsque le status du provider change
 		 */
-		public void onStatusChanged(String provider, int status,
-				Bundle extras) {
-		}			
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+		}
 	}
-	
+
 	final class registerTask extends TimerTask {
 		public void run() {
 			Calendar now = Calendar.getInstance();
 			// Le temps passé depuis le dernier enregistrement en milliseconde
-			long diff = (now.getTimeInMillis() - lastRecordTime.getTimeInMillis());
-			Log.i(TAG, "Time since last update: " + String.valueOf(diff));				
-			
-			if (diff >= maxTime-1000) {
+			long diff = (now.getTimeInMillis() - lastRecordTime
+					.getTimeInMillis());
+			Log.i(TAG, "Time since last update: " + String.valueOf(diff));
+
+			if (diff >= maxTime - 1000) {
 				Log.i(TAG, "Must update");
-//				// Mise à jour l'heure du dernier enregistrement
-//				lastRecordTime = Calendar.getInstance();	
-				
+				// // Mise à jour l'heure du dernier enregistrement
+				// lastRecordTime = Calendar.getInstance();
+
 				// Enregistrer la nouvelle position
-				gpsListener.onLocationChanged(mgr.getLastKnownLocation(LocationManager.GPS_PROVIDER));	
+				gpsListener.onLocationChanged(mgr
+						.getLastKnownLocation(LocationManager.GPS_PROVIDER));
 				Log.i(TAG, "last record time = " + lastRecordTime.toString());
 			}
 		}
 	}
-	
+
 	/**
 	 * Procédure appelée lorsque le processus du service est créé
 	 */
@@ -281,7 +280,7 @@ public class LocalizationService extends Service {
 		Log.i(TAG, "Localization service started...");
 		// Initialiser l'heure du dernier envoie à l'heure actuelle
 		lastRecordTime = Calendar.getInstance();
-		
+
 		// Charger les paramètres
 		loadParameters();
 
@@ -294,21 +293,23 @@ public class LocalizationService extends Service {
 			Log.d(TAG, "erreur IO db");
 		}
 
-	    // Location manager
+		// Location manager
 		mgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 
 		LocationListener gpsListener = new GPSListener();
-		
-		minTime = 10*60*1000; // 10 minutes 
-		maxTime = 15*60*1000; // 15 minutes
-		minDistance = 0;  // 20 meters
-		
+
+		minTime = 10 * 60 * 1000; // 10 minutes
+		maxTime = 15 * 60 * 1000; // 15 minutes
+		minDistance = 0; // 20 meters
+
 		// TODO Si GPS autorise dans le paramétrage
-		mgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
-		
-		// Planifier le timer qui appelle la procédure registerLocation à une période maxTime
-		timer.schedule(new registerTask(), 0, maxTime);	
-		 	
+		mgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime,
+				minDistance, gpsListener);
+
+		// Planifier le timer qui appelle la procédure registerLocation à une
+		// période maxTime
+		timer.schedule(new registerTask(), 0, maxTime);
+
 		mHttpClient = new DefaultHttpClient();
 		HttpConnectionParams.setConnectionTimeout(mHttpClient.getParams(),
 				TIME_OUT);
@@ -319,8 +320,8 @@ public class LocalizationService extends Service {
 		URI locationServiceURL = null;
 		try {
 			// TODO gerer session ID
-//			String uri = URI_WS_GEOPOS_BASE + "/" + mSessionID;
-			locationServiceURL = new URI(URI_WS_GEOPOS_BASE);
+			String uri = URI_WS_GEOPOS_BASE + "/" + mSessionID;
+			locationServiceURL = new URI(uri);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
