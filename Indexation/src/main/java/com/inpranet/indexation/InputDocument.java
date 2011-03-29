@@ -1,6 +1,7 @@
 package com.inpranet.indexation;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,6 +14,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -25,9 +27,14 @@ import com.inpranet.indexation.regex.TemporalRegexResults;
  */
 public class InputDocument {
 	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(InputDocument.class);
+	
+	/**
 	 * Utilisation de moteurs Regex
 	 */
-	private TemporalRegexEngine temporalRegexEngine = new TemporalRegexEngine();
+	private TemporalRegexEngine temporalRegexEngine;
 	
 	/**
 	 * Fichier representant le document traite (chemin d'acces, etc.)
@@ -68,7 +75,7 @@ public class InputDocument {
 	public boolean IsValid() {
 		// Teste si le fichier existe
 		if (!file.exists()) {
-			System.out.println("n'existe pas");
+			logger.error("Le fichier " + file.getAbsolutePath() + " n'existe pas");
 			return false;
 		}
 		
@@ -118,14 +125,11 @@ public class InputDocument {
 			TemporalRegexResults creationDateRegexResults = temporalRegexEngine.TemporalRegexSearch(temporalCreationData);
 			creationDateRegexResults.FormatResults(Calendar.getInstance().getTime());
 			
-			System.out.println("InputDocument : Dates de creation :");
+			logger.debug("Dates de creation :");
 			creationDateRegexResults.DisplayResults();
-			System.out.println();
-			
 			creationDate = creationDateRegexResults.GetStartDate();
 			
-			System.out.println("InputDocument : Date de creation : " + creationDate.toString());
-			System.out.println();
+			logger.debug("Date de creation :" + creationDate.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -232,5 +236,11 @@ public class InputDocument {
 	InputDocument(String inputDocumentPath) {
 		// Initialisation des attributs
 		this.file = new File(inputDocumentPath);
+		
+		try {
+			temporalRegexEngine = new TemporalRegexEngine();
+		} catch (FileNotFoundException e) {
+			logger.error("L'un des fichiers contenant les listes Regex n'a pas pu etre trouve");
+		}
 	}
 }

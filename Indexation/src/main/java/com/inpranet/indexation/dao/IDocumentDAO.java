@@ -37,4 +37,9 @@ public interface IDocumentDAO {
 	 * Recherche des documents qui correspondent a certaines zones
 	 */
 	public List<Document> findDocumentByZones(List<Zone> zonesList);
+	
+	/**
+	 * Recherche des documents qui correspondent a une certaine date et a certaines zones
+	 */
+	public List<Document> findDocumentByDateZones(Date date, List<Zone> zonesList);
 }

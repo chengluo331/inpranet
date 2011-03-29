@@ -1,9 +1,11 @@
 package com.inpranet.indexation.regex;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.geonames.Toponym;
 import org.geonames.ToponymSearchCriteria;
 import org.geonames.ToponymSearchResult;
@@ -16,9 +18,14 @@ import org.geonames.WikipediaArticle;
  */
 public class GeographicalLexicalRegexEngine extends RegexEngine {
 	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(GeographicalLexicalRegexEngine.class);
+	
+	/**
 	 * Constructeur de la classe GeographicalLexicalRegexEngine
 	 */
-	public GeographicalLexicalRegexEngine() {
+	public GeographicalLexicalRegexEngine() throws FileNotFoundException {
 		// Initialisation des patterns et des format mappers
 		// Lecture des fichiers contenant les expressions lexicales geographiques
 		loadRegexLists("src/main/resources/geographicalLexicalList.txt");
@@ -47,7 +54,7 @@ public class GeographicalLexicalRegexEngine extends RegexEngine {
 				if (toponymSearchResult.getTotalResultsCount() != 0) {
 					// Debug
 					for (Toponym toponym : toponymSearchResult.getToponyms()) {
-						System.out.println("GeographicalLexicalRegexEngine : Position de " + toponym.getName() + " = (" + toponym.getLatitude() + ", " + toponym.getLongitude() + ")");
+						logger.debug("> Position de " + toponym.getName() + " = (" + toponym.getLatitude() + ", " + toponym.getLongitude() + ")");
 					}
 					
 					// On ne s'interesse qu'au premier resultat
@@ -66,7 +73,7 @@ public class GeographicalLexicalRegexEngine extends RegexEngine {
 					}
 					
 					// Debug
-					System.out.println("GeographicalLexicalRegexEngine : Position de " + wikipediaArticle.getTitle() + " = (" + wikipediaArticle.getLatitude() + ", " + wikipediaArticle.getLongitude() + ")");
+					logger.debug("> Position de " + wikipediaArticle.getTitle() + " = (" + wikipediaArticle.getLatitude() + ", " + wikipediaArticle.getLongitude() + ")");
 					
 					return "(" + wikipediaArticle.getLatitude() + ", " + wikipediaArticle.getLongitude() + ")";
 				}
@@ -93,8 +100,7 @@ public class GeographicalLexicalRegexEngine extends RegexEngine {
 		Matcher matcher;
 		
 		// Debug
-		System.out.println("GeographicalLexicalEngine : > Texte a examiner : " + text);
-		System.out.println();
+		logger.debug("Texte a examiner : " + text);
 		
 		// Recherche toutes les expressions lexicales
 		for (int i = 0; i < patterns.size(); i++) {
@@ -102,19 +108,19 @@ public class GeographicalLexicalRegexEngine extends RegexEngine {
 			matcher = pattern.matcher(text);
 			
 			// Lance la recherche pour une expression reguliere
-			System.out.println("GeographicalLexicalEngine : Recherche de '" + pattern.toString() + "'...");
+			logger.debug("Recherche de '" + pattern.toString() + "'...");
 			while (matcher.find()) {
 				// Si un lieu a ete identifie
-				System.out.println("GeographicalLexicalEngine : > Trouve '" + matcher.group().trim() + "'");
+				logger.debug("> Trouve '" + matcher.group().trim() + "'");
 				
 				// Remplacement du resultat selon le mapper
 				text = matcher.replaceFirst(generateGeographicalReplacement(formatMappers.get(i), matcher.group()));
 				matcher = pattern.matcher(text);
-				System.out.println("GeographicalLexicalEngine : > Nouveau texte : " + text);
+				
+				logger.debug("> Nouveau texte : " + text);
 			}
 			
-			System.out.println("GeographicalLexicalEngine : Aucun autre resultat trouve");
-			System.out.println();
+			logger.debug("Aucun autre resultat trouve");
 		}
 		
 		// Fin de la recherche
