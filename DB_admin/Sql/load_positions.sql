@@ -17,3 +17,5 @@ COPY "habit"."position" ("user_id","date_time",point) FROM stdin;
 1	2011-03-30 17:15:00	0101000020E610000050762E159C7D134092ACDE2300E44640
 \.
 COMMIT;
+
+SELECT habit.loadHabitFromPos();

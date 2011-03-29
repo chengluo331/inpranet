@@ -25,4 +25,4 @@ psql -h %url% -d %db_name% -U %username% -w %password%<./load_interests.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./load_user_habit_choice.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./load_zone.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./load_positions.sql
-psql -h %url% -d %db_name% -U %username% -w %password%<./load_document.sql
+psql -h %url% -d %db_name% -U %username% -W %password%<./load_document.sql
