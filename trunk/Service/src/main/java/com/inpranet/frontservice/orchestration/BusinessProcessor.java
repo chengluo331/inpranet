@@ -99,10 +99,11 @@ public class BusinessProcessor implements IBusinessProcessor {
 		log.info("Step1: call Zone module to get list of zones from a geoposition");
 		// TODO: changer interface de ce service : il n'a plus que user
 		List<Zone> zones = habitService.deduceZone(user, 0, null);
-		log.info("Zone module returned " + zones.size() + " zones");
+		log.info("Zone module returned " + zones.size() + " zones " + zones.get(0).getIdZone());
 
 		log.info("Step2: call Indexation module to get best documents from predicted zones");
 		List<Document> documents = indexationService.launchRequest(user, zones);
+		log.info("Indexation module returned " + documents.size() + "zones");
 		
 		return documents;
 	}
