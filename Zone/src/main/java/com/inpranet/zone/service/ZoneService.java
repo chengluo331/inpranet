@@ -13,6 +13,10 @@ import com.inpranet.zone.dao.IZoneDAO;
 @WebService(endpointInterface = "com.inpranet.zone.service.IZoneService")
 public class ZoneService implements IZoneService {
 	
+	/** Logger */
+	private static Logger log = Logger.getLogger(ZoneService.class
+			.getName());
+	
 	private IZoneDAO zoneDAO;
 
 	public void setZoneDAO(IZoneDAO zoneDAO) {
@@ -24,15 +28,14 @@ public class ZoneService implements IZoneService {
 	}
 
 	public Collection<Zone> getZoneListFromPos(double longitude, double latitude) {
-		Logger log = Logger.getLogger(this.getClass().getName());
-		log.info("Service getZones");
+		log.info("Appel du service getZones");
 
-		if (zoneDAO == null) {
-			return null;
-			
-		}
-		log.info("Bonne requete !!!");
-		return zoneDAO.getZones(longitude, latitude);
+		log.info("Execution de la requete dans postgresql");
+		Collection<Zone> zones = zoneDAO.getZones(longitude, latitude);
+		
+		log.info(zones.size() + " zones correspondent à cette coordonnee");
+		
+		return zones; 
 	}
 	
 
