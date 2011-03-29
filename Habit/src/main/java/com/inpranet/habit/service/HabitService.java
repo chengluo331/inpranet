@@ -46,7 +46,7 @@ public class HabitService implements IHabitService {
 		
 		// Rï¿½cupï¿½ration du bean DAO 
 		positionDao = (IPositionDAO) appContext.getBean("positionDao"); 
-		weeklyHabitDao = (IWeeklyHabitDAO) appContext.getBean("jdbcWeeklyHabitDao");
+		weeklyHabitDao = (IWeeklyHabitDAO) appContext.getBean("weeklyHabitDao");
 		
 		// Sauvegarde des données positions */
 		Position position = new Position(user.getIdUser(), geoPos.getLongitude(), geoPos.getLatitude(), geoPos.getTime().toGregorianCalendar().getTime());
