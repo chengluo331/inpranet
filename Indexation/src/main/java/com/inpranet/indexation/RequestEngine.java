@@ -35,6 +35,10 @@ public class RequestEngine implements RequestEngineSEI {
 	 */
 	public List<Document> LaunchRequest(User user, List<Zone> zone) {
 		// TODO : Changer le nom de zone en zonesList
+		logger.info("Requete de documents en provenance de " + user.getIdUser() + " recue");
+		for (int i = 0; i < zone.size(); i++) {
+			logger.info("> Zone passee en parametre : " + zone.get(i).getIdZone());			
+		}
 		
 		// Variable chargee de la recuperation des resultats de la requete
 		List<Document> documents = new ArrayList<Document>();
@@ -43,7 +47,8 @@ public class RequestEngine implements RequestEngineSEI {
 		// Date planificationHorizon = user.getPlanificationHorizon();
 		// List<Interest> userInterests = user.getInterests();
 		
-		// Lance la requete à partir de la date d'aujourd'hui et en selectionnant les zones passees en parametre
+		// Lance la requete a partir de la date d'aujourd'hui et en selectionnant les zones passees en parametre
+		logger.info("Lancement de la requete...");
 		documents = documentManager.getDocumentByDateZones(new Date(), zone);
 		
 		// Filtrage des resultats selon la categorie
@@ -51,6 +56,12 @@ public class RequestEngine implements RequestEngineSEI {
 		// Interpretation des resultats
 		Document document;
 		ListIterator<Document> i = documents.listIterator();
+		
+		if (documents.size() == 0) {
+			logger.info("Aucun document n'a ete trouve");
+			return documents;
+		}
+		
 		while (i.hasNext()) {
 			document = i.next();
 			
