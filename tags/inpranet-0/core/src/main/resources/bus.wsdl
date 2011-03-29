@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="InternalServiceService" targetNamespace="http://service.frontservice.inpranet.com/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.frontservice.inpranet.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://service.frontservice.inpranet.com/" version="1.0" xmlns:tns="http://service.frontservice.inpranet.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="geopos" type="tns:geoPos" />
+<xs:element name="getZoneListFromGeoPos" type="tns:getZoneListFromGeoPos" />
+<xs:element name="getZoneListFromGeoPosResponse" type="tns:getZoneListFromGeoPosResponse" />
+<xs:element name="zone" type="tns:zone" />
+<xs:complexType name="getZoneListFromGeoPos">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="geopos" type="tns:geoPos" />
+    </xs:sequence>
+  </xs:complexType>
+
+<xs:complexType name="geoPos">
+    <xs:sequence>
+      <xs:element name="longitude" type="xs:double" />
+      <xs:element name="latitude" type="xs:double" />
+      <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getZoneListFromGeoPosResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:zone" />
+
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="zone">
+    <xs:sequence>
+      <xs:element name="idZone" type="xs:int" />
+      <xs:element minOccurs="0" name="zoneInterest" type="tns:interest" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="interest">
+    <xs:sequence>
+
+      <xs:element minOccurs="0" name="description" type="xs:string" />
+      <xs:element name="idInterest" type="xs:long" />
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getZoneListFromGeoPosResponse">
+    <wsdl:part element="tns:getZoneListFromGeoPosResponse" name="parameters">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getZoneListFromGeoPos">
+    <wsdl:part element="tns:getZoneListFromGeoPos" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IInternalService">
+    <wsdl:operation name="getZoneListFromGeoPos">
+      <wsdl:input message="tns:getZoneListFromGeoPos" name="getZoneListFromGeoPos">
+
+    </wsdl:input>
+      <wsdl:output message="tns:getZoneListFromGeoPosResponse" name="getZoneListFromGeoPosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InternalServiceServiceSoapBinding" type="tns:IInternalService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getZoneListFromGeoPos">
+      <soap:operation soapAction="" style="document" />
+
+      <wsdl:input name="getZoneListFromGeoPos">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getZoneListFromGeoPosResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InternalServiceService">
+
+    <wsdl:port binding="tns:InternalServiceServiceSoapBinding" name="InternalServicePort">
+      <soap:address location="http://localhost:8080/service/bus" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

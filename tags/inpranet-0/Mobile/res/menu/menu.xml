@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ce fichier décrit les élements du menu qui sera affiché lorsque l'utilisateur appuie sur le boutton menu de son téléphone -->
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <item 
+  	android:id="@+id/settings"
+  	android:title="@string/menu_settings" />
+  
+  <item
+  	android:id="@+id/exit"
+  	android:title="@string/menu_exit" />
+</menu>

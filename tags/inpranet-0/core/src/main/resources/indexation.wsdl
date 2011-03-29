@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="RequestEngineSEIService" targetNamespace="http://indexation.inpranet.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://indexation.inpranet.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://indexation.inpranet.com/" elementFormDefault="unqualified" targetNamespace="http://indexation.inpranet.com/" version="1.0">
+<xs:element name="LaunchRequest" type="tns:LaunchRequest"/>
+<xs:element name="LaunchRequestResponse" type="tns:LaunchRequestResponse"/>
+<xs:element name="document" type="tns:document"/>
+<xs:element name="zone" type="tns:zone"/>
+<xs:complexType name="LaunchRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:user"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="arg1" type="tns:zone"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="user">
+    <xs:sequence>
+      <xs:element name="idUser" type="xs:int"/>
+      <xs:element minOccurs="0" name="login" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="zone">
+    <xs:sequence>
+      <xs:element name="idZone" type="xs:int"/>
+      <xs:element minOccurs="0" name="zoneInterest" type="tns:interest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="interest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element name="idInterest" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="LaunchRequestResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:document"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="document">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="reference" type="xs:string"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element name="urgent" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="category" type="xs:string"/>
+      <xs:element minOccurs="0" name="uri" type="xs:string"/>
+      <xs:element minOccurs="0" name="start_date" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="end_date" type="xs:dateTime"/>
+      <xs:element name="latitude" type="xs:float"/>
+      <xs:element name="longitude" type="xs:float"/>
+      <xs:element minOccurs="0" name="data" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="LaunchRequest">
+    <wsdl:part name="parameters" element="tns:LaunchRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LaunchRequestResponse">
+    <wsdl:part name="parameters" element="tns:LaunchRequestResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RequestEngineSEI">
+    <wsdl:operation name="LaunchRequest">
+      <wsdl:input name="LaunchRequest" message="tns:LaunchRequest">
+    </wsdl:input>
+      <wsdl:output name="LaunchRequestResponse" message="tns:LaunchRequestResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RequestEngineSEIServiceSoapBinding" type="tns:RequestEngineSEI">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="LaunchRequest">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="LaunchRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="LaunchRequestResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RequestEngineSEIService">
+    <wsdl:port name="RequestEngineSEIPort" binding="tns:RequestEngineSEIServiceSoapBinding">
+      <soap:address location="http://localhost:9090/RequestEngineSEIPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
