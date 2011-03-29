@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Jours                                                                       %
+% Expressions lexicales sur les jours                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 dimanche
@@ -55,6 +55,9 @@ juillet
 aout
 §s 0 e 8 s 0 s 0 s 0
 
+août
+§s 0 e 8 s 0 s 0 s 0
+
 septembre
 §s 0 e 9 s 0 s 0 s 0
 
@@ -67,11 +70,20 @@ novembre
 decembre
 §s 0 e 12 s 0 s 0 s 0
 
+décembre
+§s 0 e 12 s 0 s 0 s 0
+
+avant-hier
+§s 0 s 0 s -2 s 0 s 0
+
 hier
 §s 0 s 0 s -1 s 0 s 0
 
 demain
 §s 0 s 0 s 1 s 0 s 0
+
+apres-demain
+§s 0 s 0 s 2 s 0 s 0
 
 mois prochain
 §s 0 s 1 s 0 s 0 s 0
@@ -83,7 +95,59 @@ l'annee prochaine
 §s 1 s 0 s 0 s 0 s 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Heures                                                                      %
+% Jours particuliers                                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+jour de l'an
+01-01
+
+saint valentin
+14-02
+
+fête du travail
+01-05
+
+fete du travail
+01-05
+
+fête de la victoire
+08-05
+
+fete de la victoire
+08-05
+
+fête de la musique
+21-06
+
+fete de la musique
+21-06
+
+fête nationale
+14-07
+
+fete nationale
+14-07
+
+assomption
+15-08
+
+halloween
+31-10
+
+toussaint
+01-11
+
+armistice de 1918
+11-11
+
+noël
+25-12
+
+noel
+25-12
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Expressions lexicales sur les heures                                        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 matin
@@ -91,3 +155,9 @@ matin
 
 midi
 12:00
+
+apres-midi
+14:00 18:00
+
+soir
+18:00 23:59

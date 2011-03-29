@@ -55,7 +55,7 @@ public class RequestEngine implements RequestEngineSEI {
 			document = i.next();
 			
 			// Debug
-			logger.debug("Document trouve : " + document.getTitle() + ", " + document.getData());
+			logger.info("Document trouve : " + document.getReference() + ", " + document.getTitle());
 		}
 		
 		return documents;

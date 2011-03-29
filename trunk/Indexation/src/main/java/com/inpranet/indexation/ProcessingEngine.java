@@ -156,7 +156,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	 * Recherche une position geographique dans un document
 	 * @param inputDocument Le chemin d'acces au document a traiter
 	 */
-	private static String geographicalProcessing(InputDocument inputDocument) {
+	private static String geographicalProcessing(InputDocument inputDocument) throws NullPointerException {
 		GeographicalRegexResults geographicalRegexResults;
 		
 		logger.debug("Recherche de lieux...");
@@ -178,8 +178,15 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		logger.debug("Lieux trouves :");
 		geographicalRegexResults.DisplayResults();
 		
-		// Interpretation des resultats obtenus (par exemple, on sait que la date de fin ne peut pas etre depassee)
+		// Interpretation des resultats obtenus
 		coordinate = geographicalRegexResults.GetBestResult();
+		
+		// Il se peut que la recherche de lieux ne soit pas concluante
+		// TODO : Gerer ce cas
+		if (coordinate == null) {
+			logger.error("Aucun lieu n'a ete trouve pour ce document");
+			throw new NullPointerException();
+		}
 		
 		// Debug
 		logger.debug("Lieu trouve : " + coordinate.toString());
@@ -190,7 +197,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	/**
 	 * Realise un mapping entre les coordonnes trouvees dans le document et les objet Zone
 	 */
-	private static List<Zone> zoneProcessing() {
+	private static List<Zone> zoneProcessing() throws NullPointerException {
 		// TODO : Uniformiser les types de donnees
 		GeoPos geoPos = new GeoPos(coordinate.y, coordinate.x, null);
 		
@@ -201,6 +208,13 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		// Debug
 		logger.debug("La requête a bien ete lancee");
 		logger.debug("Nombre de zones : " + mappedZonesList.size());
+		
+		// Il se peut que la recherche de lieux ne soit pas concluante
+		if (mappedZonesList.size() == 0) {
+			logger.error("Aucun lieu n'a ete trouve pour ce document");
+			throw new NullPointerException();
+		}
+		
 		logger.debug("Premiere zone trouvee : " + mappedZonesList.get(0).getIdZone());
 		
 		return mappedZonesList;
@@ -255,23 +269,28 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 			// Selon le type d'erreur, le document est soit detruit, soit mis de cote
 			logger.error("Le fichier n'est pas valide");
 		} else {
-			// Recherche de donnees temporelles
-			temporalProcessingResults = temporalProcessing(inputDocument);
-			
-			// Recherche de donnees geographiques
-			geographicalProcessingResults = geographicalProcessing(inputDocument);
-			
-			// Realise le mapping entre les donnees geographiques et les objets Zone
-			mappedZonesList = zoneProcessing();
-			
-			// Realise le mapping entre les categories donnees dans le document et les objets Category
-			mappedCategoriesList = categoryProcessing(inputDocument);
-			
-			// Ajout du document dans la base de donnees
-			// TODO : Traitements d'erreurs
-			// TODO : Passer les dates en float
-			Document document = new Document(inputDocument.GetReference(), inputDocument.GetTitle(), inputDocument.IsUrgent(), mappedCategoriesList, inputDocument.GetUri(), startDate, endDate, (float)coordinate.x, (float)coordinate.y, mappedZonesList, inputDocument.GetData());
-			documentManager.saveDocument(document);
+			try {
+				// Recherche de donnees temporelles
+				temporalProcessingResults = temporalProcessing(inputDocument);
+				
+				// Recherche de donnees geographiques
+				geographicalProcessingResults = geographicalProcessing(inputDocument);
+				
+				// Realise le mapping entre les donnees geographiques et les objets Zone
+				mappedZonesList = zoneProcessing();
+				
+				// Realise le mapping entre les categories donnees dans le document et les objets Category
+				mappedCategoriesList = categoryProcessing(inputDocument);
+				
+				// Ajout du document dans la base de donnees
+				// TODO : Traitements d'erreurs
+				// TODO : Passer les dates en float
+				Document document = new Document(inputDocument.GetReference(), inputDocument.GetTitle(), inputDocument.IsUrgent(), mappedCategoriesList, inputDocument.GetUri(), startDate, endDate, (float)coordinate.x, (float)coordinate.y, mappedZonesList, inputDocument.GetData());
+				documentManager.saveDocument(document);
+			} catch (NullPointerException e) {
+				System.out.println("Erreur : Le document est inutilisable");
+				System.out.println();
+			}
 		}
 		
 		// Fin du traitement
