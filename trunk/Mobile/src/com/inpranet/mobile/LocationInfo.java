@@ -1,12 +1,15 @@
 package com.inpranet.mobile;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class LocationInfo {
 	private long mSessionID;
 	private GeoPos mGeoPos;
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat(
+	"yyyy-MM-dd'T'HH:mm:ss");
 	
 	public LocationInfo(long id, GeoPos geoPos){
 		mSessionID = id;
@@ -31,5 +34,9 @@ public class LocationInfo {
 	
 	public GeoPos getGeoPos(){
 		return mGeoPos;
+	}
+
+	public String getTimeInCalendarFormat() {
+		return dateFormat.format(mGeoPos.getDate());
 	}
 }

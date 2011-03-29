@@ -4,16 +4,14 @@
 	android:layout_height="fill_parent">
 	<RelativeLayout android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
-		<ImageButton android:src="@drawable/icon" android:id="@+id/imageButton_search"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_alignParentRight="true" android:layout_alignParentTop="true" />
+		
 		<TabWidget android:id="@android:id/tabs"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:layout_toLeftOf="@id/imageButton_search" >
+			>
 		</TabWidget>
 		<ViewFlipper android:id="@android:id/tabcontent"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:padding="5dp" android:layout_below="@id/imageButton_search">
+			android:padding="5dp" android:layout_below="@android:id/tabs">
 			<include layout="@layout/doc_lists"/>
 		</ViewFlipper> 
 

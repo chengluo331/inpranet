@@ -207,6 +207,7 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 					.getString(c.getColumnIndexOrThrow(KEY_CATEGORY)), 
 					DocumentInfo.retrevieFL(c.getString(c.getColumnIndexOrThrow(KEY_HTML_DATA)))));
 		}
+		c.close();
 		return docList;
 	}
 
@@ -240,6 +241,7 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 				e.printStackTrace();
 			}
 		}
+		c.close();
 		return doc;
 	}
 
@@ -247,8 +249,10 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 		Cursor c = query(TABLE_CACHE, KEY_USERID + "="+id);
 		c.moveToFirst();
 		if(c.isAfterLast()){
+			c.close();
 			return false;
 		}else{
+			c.close();
 			return true;
 		}		
 	}
@@ -273,6 +277,7 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		c.close();
 		return cache;
 	}
 	
