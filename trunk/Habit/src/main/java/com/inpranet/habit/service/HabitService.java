@@ -1,10 +1,9 @@
 package com.inpranet.habit.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.jws.WebService;
@@ -32,7 +31,6 @@ public class HabitService implements IHabitService {
 	/** Logger */
 	static Logger log = Logger.getLogger(HabitService.class.getName());
 	
-	
 	/** Les dao utilisés */
 	private IPositionDAO positionDao;
 	
@@ -41,27 +39,38 @@ public class HabitService implements IHabitService {
 	/** Context de l'application */
 	private ClassPathXmlApplicationContext appContext;
 	
-	public void StockData(User user, GeoPos geoPos, Collection<Zone> zones) {
-		log.info("-------------- WS Habit.StockData -----------------");
-		 appContext = new ClassPathXmlApplicationContext("inpranet-data.xml");
-		
+	public HabitService() {
 		// Rï¿½cupï¿½ration du bean DAO 
 		positionDao = (IPositionDAO) appContext.getBean("positionDao"); 
 		weeklyHabitDao = (IWeeklyHabitDAO) appContext.getBean("weeklyHabitDao");
-		
+	}
+	
+	public void StockData(User user, GeoPos geoPos, Collection<Zone> zones) {
+		log.info("-------------- WS Habit.StockData -----------------");
+		 appContext = new ClassPathXmlApplicationContext("inpranet-data.xml");
+				
 		// Sauvegarde des données positions */
-		Position position = new Position(user.getIdUser(), geoPos.getLongitude(), geoPos.getLatitude(), geoPos.getTime().toGregorianCalendar().getTime());
-		log.info("Stock des données positions : userId=" + user.getIdUser() + " longitude=" + 
-				position.getLongitude() + " , latitude=" + position.getLatitude());
-		positionDao.createPosition(position);
-		
-		// Récupérer l'identifiant de l'interval où se trouve l'heure 
-		int timeOfWeek = weeklyHabitDao.GetIdInterval(geoPos.getTime().toGregorianCalendar().getTime());	
-		// Sauvegarde des habitudes
-		for (Zone z:zones) {
-			WeeklyHabit weeklyHabit = new WeeklyHabit(user.getIdUser(), timeOfWeek, z.getIdZone(), 0, 0);
-			weeklyHabitDao.createWeeklyHabit(weeklyHabit);
-		}	
+		try {
+			Position position = new Position(user.getIdUser(), geoPos.getLongitude(), geoPos.getLatitude(), geoPos.getTime().toGregorianCalendar().getTime());
+			log.info("Stock des données positions : userId=" + user.getIdUser() + " longitude=" + 
+					position.getLongitude() + " , latitude=" + position.getLatitude());
+			positionDao.createPosition(position);
+			
+			// Récupérer l'identifiant de l'interval où se trouve l'heure 
+			int timeOfWeek = weeklyHabitDao.GetIdInterval(geoPos.getTime().toGregorianCalendar().getTime());	
+			// Sauvegarde des habitudes
+			for (Zone z:zones) {
+				WeeklyHabit weeklyHabit = new WeeklyHabit(user.getIdUser(), timeOfWeek, z.getIdZone(), 0, 0);
+				weeklyHabitDao.createWeeklyHabit(weeklyHabit);
+			}
+		} catch (NullPointerException e1) {
+			log.info("Champ null, pas de stockage !!!");
+			return;
+		} catch (SQLException e2) {
+			return;
+		}
+				
+			
 	}
 
 	public Collection<Zone> DeduceZone(User user, int planningHorizon,

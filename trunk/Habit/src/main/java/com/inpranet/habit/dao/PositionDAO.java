@@ -1,6 +1,7 @@
 package com.inpranet.habit.dao;
 
 
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
@@ -35,15 +36,11 @@ public class PositionDAO implements IPositionDAO{
 		}
 	}*/
     
-    public void createPosition(Position position) {
+    public void createPosition(Position position) throws SQLException {
 		final String INSERT_POSITION = "INSERT INTO " + TABLE_POSITION + "(user_id, date_time, point) " +
 				"VALUES (?, ?, ST_GeographyFromText('SRID=4326;POINT(" + 
 				position.getLongitude() + " " + position.getLatitude() + ")'))";
-		try {
-			jdbcTemplate.update(INSERT_POSITION, new Object[] {
+		jdbcTemplate.update(INSERT_POSITION, new Object[] {
 					position.getUserId(), position.getTime()});
-		} catch (Exception e) {
-			e.printStackTrace();		
 		}
-	}
 }

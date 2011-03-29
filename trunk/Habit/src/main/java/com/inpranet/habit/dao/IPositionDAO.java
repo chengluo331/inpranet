@@ -1,5 +1,7 @@
 package com.inpranet.habit.dao;
 
+import java.sql.SQLException;
+
 import com.inpranet.habit.model.Position;
 
 /**
@@ -14,8 +16,9 @@ public interface IPositionDAO {
 	/**
 	 * Cree une position dans la base
 	 * @param position La position a creer dans la base
+	 * @throws SQLException 
 	 */
-	public void createPosition(Position position);
+	public void createPosition(Position position) throws SQLException;
 	
 	
 
