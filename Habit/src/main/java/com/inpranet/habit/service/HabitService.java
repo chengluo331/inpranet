@@ -40,14 +40,15 @@ public class HabitService implements IHabitService {
 	private ClassPathXmlApplicationContext appContext;
 	
 	public HabitService() {
-		// Rï¿½cupï¿½ration du bean DAO 
+		// Rï¿½cupï¿½ration du bean DAO
+		appContext = new ClassPathXmlApplicationContext("inpranet-data.xml");
 		positionDao = (IPositionDAO) appContext.getBean("positionDao"); 
 		weeklyHabitDao = (IWeeklyHabitDAO) appContext.getBean("weeklyHabitDao");
 	}
 	
 	public void StockData(User user, GeoPos geoPos, Collection<Zone> zones) {
 		log.info("-------------- WS Habit.StockData -----------------");
-		 appContext = new ClassPathXmlApplicationContext("inpranet-data.xml");
+		 
 				
 		// Sauvegarde des données positions */
 		try {
