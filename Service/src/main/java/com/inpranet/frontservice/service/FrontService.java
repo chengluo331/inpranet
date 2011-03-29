@@ -1,14 +1,9 @@
 package com.inpranet.frontservice.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.inpranet.core.model.Document;
 import com.inpranet.core.model.GeoPos;
@@ -83,16 +78,8 @@ public class FrontService implements IFrontService {
 
 		return documents;
 	}
-
-
-	@GET
-	@Path("/json")
-	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.APPLICATION_JSON })
-	public GeoPos testJSON() {
-
-		GeoPos pos = new GeoPos();
-		return pos;
+	
+	public void testDate(XMLGregorianCalendar date) {
+		log.info(date.toGregorianCalendar().getTime().toString());
 	}
-
 }
