@@ -57,7 +57,7 @@ public class BusinessProcessor implements IBusinessProcessor {
 	 */
 	public void receiveRawPositions(final User user, final GeoPos pos) {
 
-		log.info("Business Process: handling new geoposition");
+		log.info("Business Process: handling new geoposition. Date: " + pos.getTime().toGregorianCalendar().getTime().toString());
 
 		log.info("Step1: call Zone module to get list of zones from a geoposition");
 		// recuperation des zones qui englobent le point GPS
