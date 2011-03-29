@@ -68,3 +68,8 @@ http://localhost:8080/service/public/doc/1234567890
 // aux environs de la Part-Dieu
 {"geopos":{"longitude":4.857,"latitude":45.76,"time":"2011-03-27T16:47:15.523+02:00"}}
 }}}
+
+{{{
+// exemple retour documents
+{"document":[{"idDocument":13,"reference":"ELITE-2011","title":"La Part-Dieu accueille Elite Model Look","urgent":false,"categoriesList":{"idCategory":6,"name":"Shopping"},"uri":"http:\/\/www.centrecommercial-partdieu.com\/W\/do\/centre\/evenements-centre","start_date":"2011-02-05T00:00:00+01:00","end_date":"2011-08-06T00:00:00+02:00","latitude":45.76,"longitude":4.85967,"data":"- Decouvrez l`univers des top models : Conseils, make up, coiffure, colorimetrie, photos...\r\n- Prenez des cours de marche en talons\r\n- Devenez top model : Participez au concours international de la prestigieuse agence de mannequins Elite\r\nCasting Elite du samedi 05\/02 au vendredi 09\/04 de 11h a 14h en place centrale."}]}
+}}}
