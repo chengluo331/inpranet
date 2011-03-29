@@ -152,6 +152,34 @@ public class Document {
 	}
 	
 	/**
+	 * Constructeur par defaut de la classe Document
+	 * Attention a l'ordre de passage des parametres longitude et latitude
+	 * @param reference La réference du document
+	 * @param title Le titre du document
+	 * @param urgent L'urgence du document
+	 * @param categories Les categories auxquelles sont rattachees le document
+	 * @param uri L'URI du document
+	 * @param start_date La date de debut du document
+	 * @param end_date La date de fin du document
+	 * @param longitude La longitude de la position spatiale du document
+	 * @param latitude La latitude de la position spatiale du document
+	 * @param data Le texte du document
+	 */
+	public Document(String reference, String title, boolean urgent, List<Category> categoriesList, String uri, Date start_date, Date end_date, float longitude, float latitude, String data) {
+		// Initialisation des attributs
+		this.reference = reference;
+		this.title = title;
+		this.urgent = urgent;
+		this.categoriesList = categoriesList;
+		this.uri = uri;
+		this.start_date = start_date;
+		this.end_date = end_date;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.data = data;
+	}
+	
+	/**
 	 * @return L'identifiant du document
 	 */
 	public int getIdDocument() {
