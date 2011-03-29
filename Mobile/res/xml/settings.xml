@@ -2,6 +2,14 @@
 <!-- Ce fichier décrit les élements dans la page de configuration des paramètres -->
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceScreen
+   android:title="@string/pref_account_title"
+   android:summary="@string/pref_account_summary">
+ 	<intent android:action="android.intent.action.VIEW" 
+	 	android:targetPackage="com.inpranet.mobile"
+	 	android:targetClass="com.inpranet.mobile.Authentification"/>
+  </PreferenceScreen>
+  
   <CheckBoxPreference
   	android:key="localizationService"
   	android:title="@string/pref_localizationService_title"
@@ -23,4 +31,13 @@
     android:entries="@array/entries_frequences"
     android:entryValues="@array/entryValues_frequences"
     android:dialogTitle="@string/pref_refresh_freq_diaglog_title" />
+    
+  <PreferenceScreen
+   android:title="@string/pref_account_title"
+   android:summary="@string/pref_account_summary">
+ 	<intent android:action="android.intent.action.VIEW" 
+	 	android:targetPackage="com.inpranet.mobile"
+	 	android:targetClass="com.inpranet.mobile.Authentification"/>
+  </PreferenceScreen>
+    
 </PreferenceScreen>

@@ -1,28 +1,24 @@
 package com.inpranet.mobile;
 
-
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.apache.http.Header;
+import javax.xml.datatype.DatatypeConfigurationException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.protocol.HTTP;
 
 import android.app.Service;
 import android.content.Context;
@@ -36,19 +32,20 @@ import android.os.IBinder;
 import android.util.Log;
 
 /**
- * Service de localisation qui s'exécute au démarrage de mobile
- * il enregistre les déplacements de l'utilisateur et les envoie au système central
+ * Service de localisation qui s'exécute au démarrage de mobile il enregistre
+ * les déplacements de l'utilisateur et les envoie au système central
+ * 
  * @author yqzhou, cluo
- *
+ * 
  */
 public class LocalizationService extends Service {
 
 	/** Tag pour le log */
 	private static final String TAG = "LocalizationService";
 
-	private static final int TIME_OUT = 1000;
+	private static final int TIME_OUT = 2000;
 
-	private static final String URI_WS_STOCK_DATA = "http://10.0.2.2:9999/inpranet/services/geo";
+	private static final String URI_WS_GEOPOS_BASE = "http://10.0.2.2:9000/inpranet/services/geo";
 
 	/** Le gps listener */
 	GPSListener gpsListener = new GPSListener();
@@ -57,26 +54,29 @@ public class LocalizationService extends Service {
 	Timer timer = new Timer();
 	
 	/** L'id d'utilisateur qui utilise le service */
-	private long mUserID;
-	
+	private long mSessionID;
+
 	/** Le temps minimum de maj de position en milliseconde */
 	private long minTime;
-	
+
 	/** Le temps maximum entre deux maj de position en milliseconde */
 	private long maxTime;
 	
 	/** La distance minimum de maj de position en metre */
 	private float minDistance;
 
-	/** Objet LocationManager qui fournit l'accès au service de localisation du système Android */
+	/**
+	 * Objet LocationManager qui fournit l'accès au service de localisation du
+	 * système Android
+	 */
 	private LocationManager mgr;
-	
+
 	private HttpClient mHttpClient;
 
 	private URI mLocationServiceURL;
-	
+
 	private InpranetDBHelper mDBHelper;
-	
+
 	/** L'heure du dernier enregistrement de geo-localisation */
 	private Calendar lastRecordTime;
 	
@@ -85,30 +85,35 @@ public class LocalizationService extends Service {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	/** 
+
+	/**
 	 * Charger les paramètres de l'application
 	 */
 	private void loadParameters() {
 		// charger le compte utilisateur
 		// TODO charger depuis le param
-		mUserID = 1;
+		mSessionID = 1;
 	}
-	
+
 	/**
-	 * Enregistrer la dernière position obtenue de l'utilisateur
-	 * si la connexion internet est disponible, on l'envoie au système central 
-	 * sinon on la sauvegarde en local pour envoyer utérieurement
-	 * @param newLocation la dernière position utilisateur
+	 * Enregistrer la dernière position obtenue de l'utilisateur si la connexion
+	 * internet est disponible, on l'envoie au système central sinon on la
+	 * sauvegarde en local pour envoyer utérieurement
+	 * 
+	 * @param newLocation
+	 *            la dernière position utilisateur
+	 * @throws DatatypeConfigurationException 
 	 */
-	private void registerLocation(Location newLocation) {
+	private void registerLocation(Location newLocation) throws DatatypeConfigurationException {
 		double longitude = newLocation.getLongitude();
 		double latitude = newLocation.getLatitude();
-		LocationInfo locationInfo = new LocationInfo(mUserID, 
-				new Date(), longitude, latitude);
+		LocationInfo locationInfo = null;
 		
+		locationInfo = new LocationInfo(mSessionID, new GeoPos(longitude, latitude, new Date()));
+		
+
 		// Si connexion internet établie
-		if(isOnline()) {
+		if (isOnline()) {
 			Log.d(TAG, "Connexion internet");
 			localCacheProcess();
 			sendLocationInfo(locationInfo);
@@ -118,77 +123,72 @@ public class LocalizationService extends Service {
 			saveLocationInfo(locationInfo);
 		}
 	}
-	
+
 	private void saveLocationInfo(LocationInfo locationInfo) {
 		mDBHelper.insertLocationCache(locationInfo);
 	}
 
 	private void sendLocationInfo(LocationInfo locationInfo) {
-		// TODO Auto-generated method stub
+		String str_json = "{\"ns2.geoPos\":{\"longitude\":"
+				+ locationInfo.getLongitude() + ",\"latitude\":"
+				+ locationInfo.getLatitude() + "}}";
+		Log.d(TAG, str_json);
+
 		// creer post, declarer reponse
-//		HttpPost post = new HttpPost(mLocationServiceURL);
-//		HttpResponse mHttpResponse;
-//		// creer json
-////		JSONObject oJson = new JSONObject();
-//		try {
-//			// ajouter coordonnees, date
-////			oJson.put("longitude", longitude);
-////			oJson.put("latitude", latitude);
-////			oJson.put("time", new Date());
-//			
-////			Log.d(TAG, oJson.toString());
-////			// configurer type json selon RFC 4627 				
-////			StringEntity se = new StringEntity("JSON: "+oJson.toString()); 
-//			String oJson = "{ \"geopos\": {\"longitude\":2, \"latitude\":3,\"time\": "+"4}}";
-//			Log.d(TAG, oJson);
-//			StringEntity se = new StringEntity(oJson);				
-//            se.setContentEncoding((Header) new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-//            se.setContentType("application/json");
-//            // poster json
-//            post.setEntity(se);
-//////            Log.d(TAG, "http client is null: " +(mHttpClient == null));
-//            mHttpResponse = mHttpClient.execute(post);
-//            /* Checking response */
-//            if(mHttpResponse!=null){
-//            	//TODO gestion d'erreur
-//            }
-//            else {
-//            	Log.d(TAG, "no response");
-//            }
-//			
-////		} catch (JSONException e) {
-////			// TODO Auto-generated catch block
-////			e.printStackTrace();
-//		} catch (UnsupportedEncodingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (ClientProtocolException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
+		HttpResponse mHttpResponse = null;
+		HttpPost post = new HttpPost(mLocationServiceURL);
+
+		StringEntity se;
+		try {
+			se = new StringEntity(str_json);
+		} catch (UnsupportedEncodingException e) {
+			Log.d(TAG, "unsported encoding");
+			return;
+		}
+		post.setHeader("Accept", "application/json");
+		post.setHeader("Content-type", "application/json");
+		se.setContentType("application/json");
+
+		// poster json
+		post.setEntity(se);
+		try {
+			Log.d(TAG, "uri: " + post.getURI().toString());
+			mHttpResponse = mHttpClient.execute(post);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/* Checking response */
+		if (mHttpResponse != null) {
+			// TODO gestion d'erreur
+			Log.d(TAG, "response received");
+		} else {
+			Log.d(TAG, "no response");
+		}
 	}
-	
+
 	private void sendLocationInfo(List<LocationInfo> cache) {
-		// TODO Auto-generated method stub
-		for (int i=0; i!=cache.size();i++){
-			Log.d(TAG, "cache info: "+cache.get(i).getLongitude()+" "+cache.get(i).getLatitude());
+		// TODO gerer envoie d'une liste de geopos
+		for (int i = 0; i != cache.size(); i++) {
+			Log.d(TAG, "cache info: " + cache.get(i).getLongitude() + " "
+					+ cache.get(i).getLatitude());
 		}
 	}
 
 	private void localCacheProcess() {
 		// vérifier la cache dans db
-		boolean locationCached = mDBHelper.hasLocationCacheByID(mUserID);
-		if(locationCached){
-		// recuperer la liste de cache
-			List<LocationInfo> cache = mDBHelper.getLocationCacheByID(mUserID);
-			mDBHelper.deleteLocationCacheByID(mUserID);
+		boolean locationCached = mDBHelper.hasLocationCacheByID(mSessionID);
+		if (locationCached) {
+			// recuperer la liste de cache
+			List<LocationInfo> cache = mDBHelper
+					.getLocationCacheByID(mSessionID);
+			mDBHelper.deleteLocationCacheByID(mSessionID);
 			sendLocationInfo(cache);
-		}else{
-			Log.d(TAG, "cache vide pour utilisateur: "+mUserID);
+		} else {
+			Log.d(TAG, "cache vide pour utilisateur: " + mSessionID);
 		}
 	}
 
@@ -198,16 +198,14 @@ public class LocalizationService extends Service {
 	 * @return boolean indiquant la connexion ou pas
 	 */
 	public boolean isOnline() {
-		 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		 if (cm.getActiveNetworkInfo() != null) {
-			 return cm.getActiveNetworkInfo().isConnectedOrConnecting();
-		 }
-		 else {
-			 return false;
-		 }
-		 
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (cm.getActiveNetworkInfo() != null) {
+			return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+		} else {
+			return false;
+		}
 	}
-	
+
 	/**
 	 * Classe fille de locationListener qui détecte l'état de GPS 
 	 * et le changement de localisation
@@ -221,9 +219,16 @@ public class LocalizationService extends Service {
 		public void onLocationChanged(Location newLocation) {
 			Log.d(TAG, "Location changed");
 			// Enregistrer la nouvelle position
-			registerLocation(newLocation);	
-			// Mise à jour l'heure du dernier enregistrement
-			lastRecordTime = Calendar.getInstance();	
+			
+			try {
+				registerLocation(newLocation);
+				// Mise à jour l'heure du dernier enregistrement
+				lastRecordTime = Calendar.getInstance();	
+			} catch (DatatypeConfigurationException e) {
+				// TODO Auto-generated catch block
+				Log.d(TAG,"can't register location");
+				e.printStackTrace();
+			}	
 		}
 
 		/**
@@ -257,11 +262,12 @@ public class LocalizationService extends Service {
 			
 			if (diff >= maxTime-1000) {
 				Log.i(TAG, "Must update");
-				// Mise à jour l'heure du dernier enregistrement
-				lastRecordTime = Calendar.getInstance();	
-				Log.i(TAG, "last record time = " + lastRecordTime.toString());
+//				// Mise à jour l'heure du dernier enregistrement
+//				lastRecordTime = Calendar.getInstance();	
+				
 				// Enregistrer la nouvelle position
 				gpsListener.onLocationChanged(mgr.getLastKnownLocation(LocationManager.GPS_PROVIDER));	
+				Log.i(TAG, "last record time = " + lastRecordTime.toString());
 			}
 		}
 	}
@@ -270,7 +276,7 @@ public class LocalizationService extends Service {
 	 * Procédure appelée lorsque le processus du service est créé
 	 */
 	@Override
-	public void onCreate(){
+	public void onCreate() {
 		super.onCreate();
 		Log.i(TAG, "Localization service started...");
 		// Initialiser l'heure du dernier envoie à l'heure actuelle
@@ -278,23 +284,24 @@ public class LocalizationService extends Service {
 		
 		// Charger les paramètres
 		loadParameters();
-		
+
 		// Connexion à la base de données Sqlite
 		mDBHelper = new InpranetDBHelper(this);
 		try {
-            mDBHelper.createDataBase();
-            mDBHelper.openRWDB();
-	    } catch (IOException e) {
-	            Log.d(TAG, "erreur IO db");
-	    }
-		
+			mDBHelper.createDataBase();
+			mDBHelper.openRWDB();
+		} catch (IOException e) {
+			Log.d(TAG, "erreur IO db");
+		}
+
 	    // Location manager
 		mgr = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+		LocationListener gpsListener = new GPSListener();
 		
-		
-		minTime = 10*60*1000; // 10minutes 
+		minTime = 10*60*1000; // 10 minutes 
 		maxTime = 15*60*1000; // 15 minutes
-		minDistance = 20;  // 20 meters
+		minDistance = 0;  // 20 meters
 		
 		// TODO Si GPS autorise dans le paramétrage
 		mgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
@@ -303,29 +310,33 @@ public class LocalizationService extends Service {
 		timer.schedule(new registerTask(), 0, maxTime);	
 		 	
 		mHttpClient = new DefaultHttpClient();
-		HttpConnectionParams.setConnectionTimeout(mHttpClient.getParams(), TIME_OUT); 
+		HttpConnectionParams.setConnectionTimeout(mHttpClient.getParams(),
+				TIME_OUT);
+		mLocationServiceURL = setUpwsURI();
+	}
+
+	private URI setUpwsURI() {
+		URI locationServiceURL = null;
 		try {
-			// TODO utiliser le vrai url, un exemple pour l'instant
-			mLocationServiceURL =  new URI(URI_WS_STOCK_DATA);
+			// TODO gerer session ID
+//			String uri = URI_WS_GEOPOS_BASE + "/" + mSessionID;
+			locationServiceURL = new URI(URI_WS_GEOPOS_BASE);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return locationServiceURL;
 	}
-		
+
 	/**
 	 * Méthode appelée lorsque le service est éteint
 	 */
 	@Override
-	public void onDestroy(){
+	public void onDestroy() {
 		super.onDestroy();
 		// Desarmer le timer
 		timer.cancel();
 		Log.i(TAG, "Localization service ended...");
 	}
 
-
-
-	
 }

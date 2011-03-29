@@ -2,6 +2,8 @@ package com.inpranet.mobile;
 
 import java.io.IOException;
 
+import com.inpranet.core.model.Document;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,13 +34,12 @@ public class DocumentActivity extends Activity {
 	    }
 	    mDoc = mDBHelper.getDocumentByID(mDocID);
 	    if(mDoc!=null){
-	    	((TextView)findViewById(R.id.title)).setText(mDoc.getDocTitle());
+	    	((TextView)findViewById(R.id.title)).setText(mDoc.getTitle());
 	    	((TextView)findViewById(R.id.date)).setText(
-	    			mDoc.getDocStartDate().toLocaleString()+" - "+
-	    			mDoc.getDocEndDate().toLocaleString());
-	    	((TextView)findViewById(R.id.zone)).setText(mDoc.getDocZone());
+	    			mDoc.getStart_date().toLocaleString()+" - "+
+	    			mDoc.getEnd_date().toLocaleString());
 	    	//TODO afficher en html
-	    	((TextView)findViewById(R.id.content)).setText(mDoc.getDocHtmlData());
+	    	((TextView)findViewById(R.id.content)).setText(mDoc.getData());
 	    }
 	}
 	

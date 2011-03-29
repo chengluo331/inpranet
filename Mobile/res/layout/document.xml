@@ -10,12 +10,9 @@
 			android:ellipsize="marquee" android:text="title" android:textStyle="bold"
 			android:layout_height="wrap_content" android:layout_width="fill_parent"
 			android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-		<TextView android:gravity="center_vertical" android:id="@+id/zone"
-			android:ellipsize="marquee" android:text="zone"
-			android:layout_height="wrap_content" android:layout_width="fill_parent"
-			android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+		
 		<TextView android:gravity="center_vertical" android:id="@+id/date"
-			android:ellipsize="marquee" android:text="date"
+			android:ellipsize="marquee" android:text="date" android:textStyle="bold"
 			android:layout_height="wrap_content" android:layout_width="fill_parent"
 			android:textAppearance="?android:attr/textAppearanceSmall"></TextView>
 	</LinearLayout>
