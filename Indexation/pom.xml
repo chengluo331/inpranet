@@ -271,21 +271,20 @@
           		<password>soprasopra</password>
         	</configuration>
         	<executions>
+        		<!--
           		<execution>
           			<id>truncate</id>
             		<phase>process-resources</phase>
             		<goals>
               			<goal>execute</goal>
             		</goals>
-            		<!-- specific configuration for this execution -->
             		<configuration>
-              			<!-- specify your SQL commands, can be all of the following configurations -->
               			<srcFiles>
 	                		<srcFile>src/main/sql/truncate-document.sql</srcFile>
               			</srcFiles>
             		</configuration>
           		</execution>
-          		
+          		-->
           		<!--
           		<execution>
           			<id>create-document</id>
