@@ -25,9 +25,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class InpranetDBHelper extends SQLiteOpenHelper {
-	public static final String CAT_WELCOME = "acceuil";
-	public static final String CAT_SHOPPING = "shopping";
-	public static final String CAT_SCOLAIRE = "scolaire";
+	public static final String CAT_WELCOME = "Acceuil";
+	public static final String CAT_SHOPPING = "Shopping";
+	public static final String CAT_SCOLAIRE = "Scolaire";
 
 	private static final String TAG = "InpranetDBHelper";
 

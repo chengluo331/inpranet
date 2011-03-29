@@ -16,7 +16,7 @@
 			android:layout_height="0dip" android:layout_weight="1"
 			android:gravity="center_vertical" android:textAppearance="?android:attr/textAppearanceLarge"
 			android:textStyle="bold" android:ellipsize="marquee" 
-			android:text = "title"/>
+			android:text = "title" android:maxLines="1"/>
 		<TextView android:layout_width="fill_parent"
 			android:layout_height="0dip" android:layout_weight="1" android:id="@+id/doc_first_line"
 			android:gravity="center_vertical"
