@@ -1,5 +1,6 @@
 package com.inpranet.habit.dao;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -30,7 +31,12 @@ public class PositionDAOTest extends TestCase {
 	
 	public void testCreate() {
 		Position p = new Position(100, 3, 2, new Date());
-		positionDao.createPosition(p);
+		try {
+			positionDao.createPosition(p);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
