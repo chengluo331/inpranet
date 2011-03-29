@@ -2,6 +2,7 @@ package com.inpranet.frontservice.service;
 
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -10,7 +11,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.inpranet.core.model.Document;
 import com.inpranet.core.model.GeoPos;
@@ -59,6 +59,6 @@ public interface IFrontService {
 	@Path("/date")
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public void testDate(XMLGregorianCalendar date);
+	public void testDate(Date date);
 	
 }
