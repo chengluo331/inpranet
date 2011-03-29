@@ -3,13 +3,6 @@
 -- DROP FUNCTION habit.gethabit(integer, integer, integer, integer, integer);
 
 CREATE OR REPLACE FUNCTION habit.gethabit(uid integer, idinter integer, pday integer, phour integer, pminutes integer)
--- cette fonction prend en parametre (
--- 	identifiant_utilisateur, 
--- 	centre_interet qui lui interesse, 
--- 	id jour, // 1..7 (dimanche jusqu'à lundi) correspndant à le jour ajourd'hui
--- 	id heure // 0..23 correspondant à l'heure actuelle
--- 	id minutes // 0..59 correspondant à la minute actuelle)
-
   RETURNS integer AS
 $BODY$
 DECLARE
@@ -47,6 +40,7 @@ BEGIN
 				AND weekly_habit.time_of_week=interval.id
 				AND weekly_habit.user_id=habit_choice.user_id
 				AND interval.day_of_week=habit_choice.day_of_week
+				AND habit_choice.weekly=TRUE
 				AND weekly_habit.user_id=uid 
 				AND interest_id=idinter
 				AND interval.day_of_week=pday
