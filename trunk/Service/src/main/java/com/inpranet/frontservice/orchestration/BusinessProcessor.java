@@ -60,12 +60,15 @@ public class BusinessProcessor implements IBusinessProcessor {
 		log.info("Business Process: handling new geoposition");
 
 		log.info("Step1: call Zone module to get list of zones from a geoposition");
+		// recuperation des zones qui englobent le point GPS
 		List<Zone> zones = zoneService.getZoneListFromPos(pos.getLongitude(),
 				pos.getLatitude());
 		log.info("Zone module returned " + zones.size() + " zones");
 
 		log.info("Step2: call Habit module to store geoposition and zones");
+		// passe la donnee spatiale brute au module habit
 		habitService.stockData(user, pos, zones);
+		log.info("Habit module seems to have stored the data...");
 	}
 
 	/**
@@ -103,7 +106,7 @@ public class BusinessProcessor implements IBusinessProcessor {
 
 		log.info("Step2: call Indexation module to get best documents from predicted zones");
 		List<Document> documents = indexationService.launchRequest(user, zones);
-		log.info("Indexation module returned " + documents.size() + "zones");
+		log.info("Indexation module returned " + documents.size() + "documents");
 		
 		return documents;
 	}

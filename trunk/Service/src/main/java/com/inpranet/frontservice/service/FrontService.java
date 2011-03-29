@@ -1,9 +1,8 @@
 package com.inpranet.frontservice.service;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.logging.Logger;
-
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.inpranet.core.model.Document;
 import com.inpranet.core.model.GeoPos;
@@ -79,7 +78,7 @@ public class FrontService implements IFrontService {
 		return documents;
 	}
 	
-	public void testDate(XMLGregorianCalendar date) {
-		log.info(date.toGregorianCalendar().getTime().toString());
+	public void testDate(Date date) {
+		log.info(date.toString());
 	}
 }
