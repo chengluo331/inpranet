@@ -77,12 +77,12 @@ public class WeeklyHabitDAO implements IWeeklyHabitDAO {
 		Calendar c = Calendar.getInstance();
 		c.setTime(time);
 		final String SELECT_ID_INTERVAL = "SELECT id FROM habit.interval WHERE day_of_week=? " +
-				"AND hour_of_day=? AND begin_minute<=? AND end_minute>?";
+				"AND hour_of_day=? AND (? BETWEEN begin_minute AND end_minute)";
 		int idInterval = 0;
 		try {
 			idInterval = jdbcTemplate.queryForInt(SELECT_ID_INTERVAL, new Object[] {
 					c.get(Calendar.DAY_OF_WEEK), c.get(Calendar.HOUR_OF_DAY), 
-					c.get(Calendar.MINUTE), c.get(Calendar.MINUTE)});
+					c.get(Calendar.MINUTE)});
 		} catch (DataAccessException e) {
 			e.printStackTrace();	
 		}
@@ -115,7 +115,7 @@ public class WeeklyHabitDAO implements IWeeklyHabitDAO {
 		.addValue("pday", c.get(Calendar.DAY_OF_WEEK))
 		.addValue("phour", c.get(Calendar.HOUR_OF_DAY))
 		.addValue("pminutes", c.get(Calendar.MINUTE));
-				
+		
 		int result = 0;
 		try {
 			// Exécution de la fonciton SQL

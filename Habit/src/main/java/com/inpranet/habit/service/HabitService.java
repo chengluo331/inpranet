@@ -42,6 +42,7 @@ public class HabitService implements IHabitService {
 	private ClassPathXmlApplicationContext appContext;
 	
 	public void StockData(User user, GeoPos geoPos, Collection<Zone> zones) {
+		log.info("-------------- WS Habit.StockData -----------------");
 		 appContext = new ClassPathXmlApplicationContext("inpranet-data.xml");
 		
 		// Rï¿½cupï¿½ration du bean DAO 
@@ -50,6 +51,8 @@ public class HabitService implements IHabitService {
 		
 		// Sauvegarde des données positions */
 		Position position = new Position(user.getIdUser(), geoPos.getLongitude(), geoPos.getLatitude(), geoPos.getTime().toGregorianCalendar().getTime());
+		log.info("Stock des données positions : userId=" + user.getIdUser() + " longitude=" + 
+				position.getLongitude() + " , latitude=" + position.getLatitude());
 		positionDao.createPosition(position);
 		
 		// Récupérer l'identifiant de l'interval où se trouve l'heure 
@@ -63,21 +66,25 @@ public class HabitService implements IHabitService {
 
 	public Collection<Zone> DeduceZone(User user, int planningHorizon,
 			Collection<Interest> interests) {
-		log.info("deduction");		
+		log.info("------- WS Habit.DeduceZone ----------");		
 		
 		// Instancier les zones a retoune
 		Collection<Zone> zones = new ArrayList<Zone>();
 		
 		// L'heure requetee est l'heure actuelle plus l'horizon de planification
 		Calendar c = Calendar.getInstance();
+		log.info("Il est actuellement " + c.getTime().toString());
 		c.add(Calendar.MINUTE, user.getPlanningHorizon());
+		log.info("On recherche ses habitudes à " + c.getTime().toString());
 		
 		// Pour chaque centre d'interet de l'utilisateur, recuperer la zone la plus probable
 		for (Interest i : user.getInterests()) {
 			int idZone = weeklyHabitDao.DeduceIdZoneByInterest(user.getIdUser(), i.getIdInterest(), c.getTime());
+			log.info("Il a habitude d'aller dans les zones suivantes :");
 			if (idZone != 0) {
 				Zone z = new Zone(idZone, i);
 				zones.add(z);
+				log.info("Zone numéro " + z.getIdZone());
 			}			
 		}
 		// Renvoie la liste des zones interessantes
