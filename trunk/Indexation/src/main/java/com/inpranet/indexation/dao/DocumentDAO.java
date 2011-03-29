@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,6 +26,11 @@ import com.inpranet.indexation.service.CategoryManager;
  * @author Stephane
  */
 public class DocumentDAO implements IDocumentDAO {
+	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(DocumentDAO.class);
+	
 	/**
 	 * Services qui gerent l'acces aux donnes relatives aux categories
 	 */
@@ -108,6 +114,9 @@ public class DocumentDAO implements IDocumentDAO {
 			List<Category> categoriesList = jdbcTemplate.query(SELECT_DOCUMENT_CATEGORY, new Object[] {rs.getInt("id")}, new DocumentCategoryRowMapper());
 			
 			// Les zones sont la pour accelerer la recherche, pas besoin de les recuperer ici
+			
+			// Debug
+			logger.debug("Resultat de la recherche : (" + rs.getInt("id") + ", " + rs.getString("reference") + ", " + rs.getString("title") + ", " + rs.getBoolean("urgent") + ", " + rs.getString("uri") + ", " + rs.getDate("start_date").toString() + ", " + rs.getDate("end_date").toString() + ", " + rs.getFloat("latitude") + ", " + rs.getFloat("longitude") + ", " + rs.getString("data") + ")");
 			
 			// Construction de l'objet Document
 			Document document = new Document(rs.getInt("id"), rs.getString("reference"), rs.getString("title"), rs.getBoolean("urgent"), categoriesList, rs.getString("uri"), rs.getDate("start_date"), rs.getDate("end_date"), rs.getFloat("latitude"), rs.getFloat("longitude"), new ArrayList<Zone>(), rs.getString("data"));

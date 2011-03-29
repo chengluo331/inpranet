@@ -1,11 +1,14 @@
 package com.inpranet.indexation.regex;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.log4j.Logger;
 
 import com.inpranet.indexation.util.Toolbox;
 
@@ -15,9 +18,14 @@ import com.inpranet.indexation.util.Toolbox;
  */
 public class TemporalRegexEngine extends RegexEngine {
 	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(TemporalRegexEngine.class);
+	
+	/**
 	 * Constructeur de la classe TemporalRegexEngine
 	 */
-	public TemporalRegexEngine() {
+	public TemporalRegexEngine() throws FileNotFoundException {
 		// Initialisation des patterns et des format mappers
 		// Lecture des fichiers contenant les Regex temporelles
 		loadRegexLists("src/main/resources/temporalRegexList.txt");
@@ -36,8 +44,7 @@ public class TemporalRegexEngine extends RegexEngine {
 		TemporalRegexResults temporalRegexResults = new TemporalRegexResults();
 		
 		// Debug
-		System.out.println("TemporalRegexEngine : > Texte a examiner : " + text);
-		System.out.println();
+		logger.debug("Texte a examiner : " + text);
 		
 		// Recherche toutes les expressions regulieres
 		for (int i = 0; i < patterns.size(); i++) {
@@ -45,10 +52,10 @@ public class TemporalRegexEngine extends RegexEngine {
 			matcher = pattern.matcher(text);
 			
 			// Lance la recherche pour une expression reguliere
-			System.out.println("TemporalRegexEngine : Recherche de '" + pattern.toString() + "'...");
+			logger.debug("Recherche de '" + pattern.toString() + "'...");
 			while (matcher.find()) {
 				// Si une date a ete identifiee
-				System.out.println("TemporalRegexEngine : > Trouve '" + matcher.group().trim() + "'");
+				logger.debug("> Trouve '" + matcher.group().trim() + "'");
 				
 				// Formattage du resultat selon le mapper
 				try {
@@ -61,14 +68,14 @@ public class TemporalRegexEngine extends RegexEngine {
 					// Effacement de l'expression trouvee dans le texte source
 					text = matcher.replaceFirst(Toolbox.generateString(pattern.toString().length(), '_'));
 					matcher = pattern.matcher(text);
-					System.out.println("TemporalRegexEngine : > Nouveau texte : " + text);
+					
+					logger.debug("> Nouveau texte : " + text);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 			}
 			
-			System.out.println("TemporalRegexEngine : Aucun autre resultat trouve");
-			System.out.println();
+			logger.debug("Aucun autre resultat trouve");
 		}
 		
 		// Fin de la recherche

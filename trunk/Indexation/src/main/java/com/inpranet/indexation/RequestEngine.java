@@ -7,6 +7,8 @@ import java.util.ListIterator;
 
 import javax.jws.WebService;
 
+import org.apache.log4j.Logger;
+
 import com.inpranet.core.model.Document;
 import com.inpranet.core.model.User;
 import com.inpranet.core.model.Zone;
@@ -18,6 +20,11 @@ import com.inpranet.indexation.service.DocumentManager;
  */
 @WebService(endpointInterface = "com.inpranet.indexation.RequestEngineSEI")
 public class RequestEngine implements RequestEngineSEI {
+	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(RequestEngine.class);
+	
 	/**
 	 * Utilisation des services metiers lies aux objets Documents
 	 */
@@ -46,7 +53,9 @@ public class RequestEngine implements RequestEngineSEI {
 		ListIterator<Document> i = documents.listIterator();
 		while (i.hasNext()) {
 			document = i.next();
-			System.out.println("RequestEngine : Document trouve : " + document.getTitle() + ", " + document.getData());
+			
+			// Debug
+			logger.debug("Document trouve : " + document.getTitle() + ", " + document.getData());
 		}
 		
 		return documents;

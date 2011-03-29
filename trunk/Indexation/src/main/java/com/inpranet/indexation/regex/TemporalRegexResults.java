@@ -149,7 +149,7 @@ public class TemporalRegexResults extends RegexResults<Date> {
 	
 	/**
 	 * Complete les jours avec le jour de la date de reference si besoin
-	 * (cas o� on a que des indications sur les heures mais pas de jour en particulier)
+	 * (cas ou on a que des indications sur les heures mais pas de jour en particulier)
 	 */
 	private void deduceResultsDaysMonthsYears() {
 		// Utilisation d'iterateurs pour la mise a jour des elements de la liste
@@ -202,7 +202,7 @@ public class TemporalRegexResults extends RegexResults<Date> {
 	
 	/**
 	 * Complete l'annee avec l'annee de la date de reference si besoin
-	 * (cas o� on n'a pas d'indications sur l'annee en particulier)
+	 * (cas ou on n'a pas d'indications sur l'annee en particulier)
 	 */
 	private void deduceResultsYears() {
 		// Utilisation d'iterateurs pour la mise a jour des elements de la liste
@@ -302,7 +302,7 @@ public class TemporalRegexResults extends RegexResults<Date> {
 	
 	/**
 	 * Trouve dans l'ensemble des resultats la date la plus appropriee pour etre une date de fin
-	 * De plus, si l'heure n'est pas indiquee, fixe celle-ci � minuit (00:00)
+	 * De plus, si l'heure n'est pas indiquee, fixe celle-ci a minuit (00:00)
 	 * @return La date qui peut etre consideree comme la date de fin parmi les dates qui ont ete trouvees
 	 */
 	public Date GetEndDate() {
@@ -343,29 +343,24 @@ public class TemporalRegexResults extends RegexResults<Date> {
 	
 	/**
 	 * Trouve dans l'ensemble des resultats la date la plus appropriee pour etre une date de debut
-	 * De plus, si l'heure n'est pas indiquee, fixe celle-ci � minuit (00:00)
+	 * De plus, si l'heure n'est pas indiquee, fixe celle-ci a minuit (00:00)
 	 * @return La date qui peut etre consideree comme la date de debut parmi les dates qui ont ete trouvees
 	 */
 	public Date GetStartDate() {
 		ListIterator<Date> resultsListIterator = resultsList.listIterator();
-//		ListIterator<String> formatMappersListIterator = formatMappersList.listIterator();
 		Date result;
-//		String _formatMapper;
 		
 		// Initialisation des variables tampons
 		Date startDate = null;
-//		String formatMapper = new String();
 		
 		// Parcours la liste des resultats et trouve la date la plus vielle
 		while (resultsListIterator.hasNext()) {
 			result = resultsListIterator.next();
-//			_formatMapper = formatMappersListIterator.next();
 			
 			// Comparaison des dates
 			if (startDate == null) {
 				// Cas de la premiere iteration 
 				startDate = result;
-//				formatMapper = _formatMapper;
 			} else {
 				// On cherche la date la plus vielle
 				if (result.before(startDate)) {
@@ -375,7 +370,7 @@ public class TemporalRegexResults extends RegexResults<Date> {
 		}
 		
 		// Contrairement a la date de fin, il n'y a pas de transformations specifiques a appliquer
-		// La date de debut commence par defaut � 00:00 si aucune heure n'a ete trouvee
+		// La date de debut commence par defaut a 00:00 si aucune heure n'a ete trouvee
 		
 		return startDate;
 	}

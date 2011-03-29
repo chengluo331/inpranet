@@ -1,6 +1,7 @@
 package com.inpranet.indexation.regex;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +28,10 @@ public abstract class RegexEngine {
 	 * Charge les patterns et les formatMappers Regex utilises lors de la recherche depuis un fichier
 	 * @param filePath Le chemin d'acces au fichier contenant les patterns et les format mappers.
 	 */
-	protected void loadRegexLists(String filePath) {
+	protected void loadRegexLists(String filePath) throws FileNotFoundException {
 		File file = new File(filePath);
 		Scanner scanner;
-		
-		try {
-			scanner = new Scanner(new FileReader(file));
-		} catch (Exception e) {
-			System.out.println("Erreur : Le fichier contenant les listes Regex n'est pas valide");
-			System.out.println();
-			
-			return;
-		}
+		scanner = new Scanner(new FileReader(file));
 		
 		// Lecture ligne par ligne du fichier
 		String readLine;

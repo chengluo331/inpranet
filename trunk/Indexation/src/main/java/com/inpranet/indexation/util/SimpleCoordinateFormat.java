@@ -5,6 +5,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
+
 import com.vividsolutions.jts.geom.Coordinate;
 
 /**
@@ -12,6 +14,11 @@ import com.vividsolutions.jts.geom.Coordinate;
  * @author Stephane
  */
 public class SimpleCoordinateFormat {
+	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(SimpleCoordinateFormat.class);
+	
 	/**
 	 * Variables necessaires pour l'extraction de nombre depuis une chaine source
 	 */
@@ -25,7 +32,7 @@ public class SimpleCoordinateFormat {
 	 */
 	public static Coordinate Parse(String source, String formatMapper) throws ParseException {
 		// Debug
-		System.out.println("SimpleCoordinateFormat : " + source);
+		logger.debug("Texte a analyser : " + source);
 		
 		// Decompose la chaine qui a ete entree pour en extraire les nombres
 		Matcher matcher = pattern.matcher(source);
@@ -50,7 +57,7 @@ public class SimpleCoordinateFormat {
 			readFactor = Double.valueOf(scanner.next()).doubleValue();
 			
 			// Debug
-			System.out.println("SimpleCoordinateFormat : Trouve " + readValue + ", Format : " + readOperation + ", Multiplicator : " + readFactor);
+			logger.debug("> Trouve : " + readValue + ", Format : " + readOperation + ", Multiplicator : " + readFactor);
 			
 			// Effectue les operations decrites dans le formatMapper associe
 			// Le signe est porte par le format mapper

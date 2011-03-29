@@ -1,5 +1,6 @@
 package com.inpranet.indexation.regex;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 
 /**
  * Moteur de recherche d'expressions lexicales pour les dates
@@ -16,9 +18,14 @@ import java.util.regex.Pattern;
  */
 public class TemporalLexicalRegexEngine extends RegexEngine {
 	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(TemporalLexicalRegexEngine.class);
+	
+	/**
 	 * Constructeur de la classe TemporalLexicalRegexEngine
 	 */
-	public TemporalLexicalRegexEngine() {
+	public TemporalLexicalRegexEngine() throws FileNotFoundException {
 		// Initialisation des patterns et des format mappers
 		// Lecture des fichiers contenant les expressions lexicales temporelles
 		loadRegexLists("src/main/resources/temporalLexicalList.txt");
@@ -44,7 +51,7 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 			// Lecture des variables de decalage, c'est l'operation a effectuer sur la date de reference
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(referenceDate);
-			System.out.println(">> " + calendar.get(Calendar.DAY_OF_WEEK));
+			logger.debug("Jour trouve : " + calendar.get(Calendar.DAY_OF_WEEK));
 			
 			// Planifie les operations de transformations
 			List<Integer> operationList = new ArrayList<Integer>();
@@ -80,10 +87,10 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 					calendar.add(operationList.get(i), readShift);
 				} else if (readOperation.equals("e")) {
 					// Effectue une succession de decalage jusqu'a obtenir la valeur desiree sur le champ
-					System.out.println(">> " + calendar.get(Calendar.DAY_OF_WEEK));
+					logger.debug("> Nouveau jour : " + calendar.get(Calendar.DAY_OF_WEEK));
 					while (calendar.get(operationList.get(i)) != readShift) {
 						calendar.add(operationList.get(i), 1);
-						System.out.println(">> " + calendar.get(Calendar.DAY_OF_WEEK));
+						logger.debug("> Nouveau jour : " + calendar.get(Calendar.DAY_OF_WEEK));
 					}
 				}
 			}
@@ -99,8 +106,8 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 			}
 			
 			// Debug
-			System.out.println("TemporalLexicalRegexEngine : Ancienne date : " + referenceDate.toString());
-			System.out.println("TemporalLexicalRegexEngine : Nouvelle date : " + calendar.getTime().toString());
+			logger.debug("Ancienne date : " + referenceDate.toString());
+			logger.debug("Nouvelle date : " + calendar.getTime().toString());
 			
 			// Effectue le remplacement
 			return simpleDateFormat.format(calendar.getTime());
@@ -121,8 +128,7 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 		Matcher matcher;
 		
 		// Debug
-		System.out.println("TemporalLexicalEngine : > Texte a examiner : " + text);
-		System.out.println();
+		logger.debug("Texte a examiner : " + text);
 		
 		// Recherche toutes les expressions lexicales
 		for (int i = 0; i < patterns.size(); i++) {
@@ -130,19 +136,19 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 			matcher = pattern.matcher(text);
 			
 			// Lance la recherche pour une expression reguliere
-			System.out.println("TemporalLexicalEngine : Recherche de '" + pattern.toString() + "'...");
+			logger.debug("Recherche de '" + pattern.toString() + "'...");
 			while (matcher.find()) {
 				// Si une date a ete identifiee
-				System.out.println("TemporalLexicalEngine : > Trouve '" + matcher.group().trim() + "'");
+				logger.debug("> Trouve '" + matcher.group().trim() + "'");
 				
 				// Remplacement du resultat selon le mapper
 				text = matcher.replaceFirst(generateTemporalReplacement(formatMappers.get(i), date));
 				matcher = pattern.matcher(text);
-				System.out.println("TemporalLexicalEngine : > Nouveau texte : " + text);
+				
+				logger.debug("> Nouveau texte : " + text);
 			}
 			
-			System.out.println("TemporalLexicalEngine : Aucun autre resultat trouve");
-			System.out.println();
+			logger.debug("Aucun autre resultat trouve");
 		}
 		
 		// Fin de la recherche

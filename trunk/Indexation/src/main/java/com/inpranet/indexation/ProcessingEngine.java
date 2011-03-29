@@ -1,5 +1,6 @@
 package com.inpranet.indexation;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 
 import javax.jws.WebService;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.inpranet.core.model.Category;
@@ -31,6 +33,11 @@ import com.vividsolutions.jts.geom.Coordinate;
 @WebService(endpointInterface = "com.inpranet.indexation.ProcessingEngineSEI")
 public class ProcessingEngine implements ProcessingEngineSEI {
 	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(ProcessingEngine.class);
+	
+	/**
 	 * Utilisation des services metiers lies aux objets Documents
 	 */
 	private static DocumentManager documentManager = new DocumentManager();
@@ -38,10 +45,10 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	/**
 	 * Utilisation de moteurs Regex
 	 */
-	private static TemporalRegexEngine temporalRegexEngine = new TemporalRegexEngine();
-	private static TemporalLexicalRegexEngine temporalLexicalRegexEngine = new TemporalLexicalRegexEngine();
-	private static GeographicalRegexEngine geographicalRegexEngine = new GeographicalRegexEngine();
-	private static GeographicalLexicalRegexEngine geographicalLexicalRegexEngine = new GeographicalLexicalRegexEngine();
+	private static TemporalRegexEngine temporalRegexEngine;
+	private static TemporalLexicalRegexEngine temporalLexicalRegexEngine;
+	private static GeographicalRegexEngine geographicalRegexEngine;
+	private static GeographicalLexicalRegexEngine geographicalLexicalRegexEngine;
 	
 	/**
 	 * Date de debut de l'evenement geo-temporel
@@ -68,8 +75,19 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	 * Constructeur statique
 	 */
 	static {
+		// Chargement des beans Spring
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("indexation-data.xml");
 		internalService = (IInternalService) applicationContext.getBean("busService");
+		
+		// Initialisation des moteurs Regex
+		try {
+			temporalRegexEngine = new TemporalRegexEngine();
+			temporalLexicalRegexEngine = new TemporalLexicalRegexEngine();
+			geographicalRegexEngine = new GeographicalRegexEngine();
+			geographicalLexicalRegexEngine = new GeographicalLexicalRegexEngine();
+		} catch (FileNotFoundException e) {
+			logger.error("L'un des fichiers contenant les listes Regex n'a pas pu etre trouve");
+		}
 	}
 	
 	/**
@@ -81,8 +99,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		TemporalRegexResults startDateRegexResults;
 		TemporalRegexResults dateRegexResults;
 		
-		System.out.println("ProcessingEngine : Recherche de dates...");
-		System.out.println();
+		logger.debug("Recherche de dates...");
 		
 		// Verifie si les donnees de la source sont suffisantes
 		if (inputDocument.IsTemporalSourceReliable()) {
@@ -96,24 +113,19 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 			endDateRegexResults.FormatResults(inputDocument.GetCreationDate());
 			
 			// Debug
-			System.out.println("ProcessingEngine : Dates de debut :");
+			logger.debug("Dates de debut :");
 			startDateRegexResults.DisplayResults();
-			System.out.println();
 			
-			System.out.println("ProcessingEngine : Dates de fin :");
+			logger.debug("Dates de fin :");
 			endDateRegexResults.DisplayResults();
-			System.out.println();
 			
 			// Interpretation des resultats obtenus (par exemple, on sait que la date de fin ne peut pas etre depassee)
 			endDate = endDateRegexResults.GetEndDate();
 			startDate = startDateRegexResults.GetStartDate();
 			
 			// Debug
-			System.out.println("InputDocument : Date de debut : " + startDate.toString());
-			System.out.println();
-			
-			System.out.println("InputDocument : Date de fin : " + endDate.toString());
-			System.out.println();
+			logger.debug("Date de debut : " + startDate.toString());
+			logger.debug("Date de fin : " + endDate.toString());
 		} else {
 			// Cas ou il faut faire une analyse sur le texte du document
 			// On lance une recherche sur le contenu du document
@@ -123,9 +135,8 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 			dateRegexResults.FormatResults(inputDocument.GetCreationDate());
 			
 			// Debug
-			System.out.println("ProcessingEngine : Dates trouvees :");
+			logger.debug("Dates trouvees :");
 			dateRegexResults.DisplayResults();
-			System.out.println();
 			
 			// Interpretation des resultats obtenus (par exemple, on sait que la date de fin ne peut pas etre depassee)
 			// On ne recherche une periode que si on a au moins deux resultats (condition interne aux methodes)
@@ -133,13 +144,11 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 			startDate = dateRegexResults.GetStartDate();
 			
 			// Debug
-			System.out.println("InputDocument : Date de debut : " + startDate.toString());
-			System.out.println();
-			
-			System.out.println("InputDocument : Date de fin : " + endDate.toString());
-			System.out.println();
+			logger.debug("Date de debut : " + startDate.toString());
+			logger.debug("Date de fin : " + endDate.toString());
 		}
 		
+		logger.debug("Debut : " + startDate.toString() + ", Fin : " + endDate.toString());
 		return "Debut : " + startDate.toString() + ", Fin : " + endDate.toString(); 
 	}
 	
@@ -150,8 +159,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	private static String geographicalProcessing(InputDocument inputDocument) {
 		GeographicalRegexResults geographicalRegexResults;
 		
-		System.out.println("ProcessingEngine : Recherche de lieux...");
-		System.out.println();
+		logger.debug("Recherche de lieux...");
 		
 		// Verifie si les donnees de la source sont suffisantes
 		if (inputDocument.IsGeographicalSourceReliable()) {
@@ -167,16 +175,14 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		//geographicalRegexResults.FormatResults(inputDocument.GetCreationDate());
 		
 		// Debug
-		System.out.println("ProcessingEngine : Lieux trouves :");
+		logger.debug("Lieux trouves :");
 		geographicalRegexResults.DisplayResults();
-		System.out.println();
 		
 		// Interpretation des resultats obtenus (par exemple, on sait que la date de fin ne peut pas etre depassee)
 		coordinate = geographicalRegexResults.GetBestResult();
 		
 		// Debug
-		System.out.println("InputDocument : Lieu trouve : " + coordinate.toString());
-		System.out.println();
+		logger.debug("Lieu trouve : " + coordinate.toString());
 		
 		return "Lieu : " + coordinate.toString();
 	}
@@ -189,13 +195,13 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		GeoPos geoPos = new GeoPos(coordinate.y, coordinate.x, null);
 		
 		// Lance une requete vers le bus pour l'identification des coordonnees
-		System.out.println("ProcessingEngine : Lance une requête vers le Bus");
+		logger.debug("Lance une requête vers le Bus");
 		List<Zone> mappedZonesList = internalService.getZoneListFromGeoPos(geoPos);
 		
 		// Debug
-		System.out.println("ProcessingEngine : La requête a bien ete lancee");
-		System.out.println("ProcessingEngine : Nombre de zones : " + mappedZonesList.size());
-		System.out.println("ProcessingEngine : Premiere zone trouvee : " + mappedZonesList.get(0).getIdZone());
+		logger.debug("La requête a bien ete lancee");
+		logger.debug("Nombre de zones : " + mappedZonesList.size());
+		logger.debug("Premiere zone trouvee : " + mappedZonesList.get(0).getIdZone());
 		
 		return mappedZonesList;
 	}
@@ -212,7 +218,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		List<String> categoriesList = inputDocument.GetCategoriesList();
 		for (int i = 0; i < categoriesList.size(); i++) {
 			// Debug
-			System.out.println("InputDocument : Categorie trouvee : " + categoriesList.get(i).toString()); 
+			logger.debug("Categorie trouvee : " + categoriesList.get(i).toString());
 			
 			// On ne recupere qu'un seul resultat
 			mappedCategoriesList.add(categoryManager.getCategoryByName(categoriesList.get(i)).get(0));
@@ -247,8 +253,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 		// L'analyse est terminee, le document n'est pas valide
 		if (!inputDocument.IsValid()) {
 			// Selon le type d'erreur, le document est soit detruit, soit mis de cote
-			System.out.println("Erreur : Le fichier n'est pas valide");
-			System.out.println();
+			logger.error("Le fichier n'est pas valide");
 		} else {
 			// Recherche de donnees temporelles
 			temporalProcessingResults = temporalProcessing(inputDocument);

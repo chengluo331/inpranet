@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,6 +17,11 @@ import com.inpranet.core.model.Category;
  */
 public class CategoryDAO {
 	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(CategoryDAO.class);
+	
+	/**
 	 * Classe de construction des objets Document recuperes apres une requete
 	 * @author Stephane
 	 */
@@ -27,7 +33,7 @@ public class CategoryDAO {
 			Category category = new Category(rs.getInt("id"), rs.getString("name"));
 			
 			// Debug
-			System.out.println("CategoryDao : Resultat de la recherche : (" + rs.getInt("id") + ", " + rs.getString("name") + ")");
+			logger.debug("Resultat de la recherche : (" + rs.getInt("id") + ", " + rs.getString("name") + ")");
 			
 			return category;
 		}
@@ -39,7 +45,7 @@ public class CategoryDAO {
 	 */
 	public List<Category> findCategoryById(int id) {
 		// Debug
-		System.out.println("CategoryDao : Lancement de la recherche avec " + id);
+		logger.debug("Lancement de la recherche avec " + id);
 		
 		// Construction de la requete
 		final String SELECT_CATEGORY = "SELECT * FROM indexation.category WHERE id = ?";
@@ -56,7 +62,7 @@ public class CategoryDAO {
 	 */
 	public List<Category> findCategoryByName(String name) {
 		// Debug
-		System.out.println("CategoryDao : Lancement de la recherche avec " + name);
+		logger.debug("Lancement de la recherche avec " + name);
 		
 		// Construction de la requete
 		final String SELECT_CATEGORY = "SELECT * FROM indexation.category WHERE name = '" + name + "'";

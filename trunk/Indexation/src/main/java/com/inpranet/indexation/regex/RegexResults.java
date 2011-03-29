@@ -4,11 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.log4j.Logger;
+
 /**
  * Structure de donnees pour les resultats d'une analyse Regex 
  * @author Stephane
  */
 public class RegexResults<T> {
+	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(RegexResults.class);
+	
 	/**
 	 * Liste des resultats sous la forme d'objets de type T
 	 */
@@ -69,15 +76,10 @@ public class RegexResults<T> {
 		
 		// Debug
 		ListIterator<Integer> startPositionsIterator = startPositionsList.listIterator();
-		System.out.print("filterFormatMapper :");
 		while (startPositionsIterator.hasNext()) {
-			System.out.print(" " + startPositionsIterator.next());
+			logger.debug(" " + startPositionsIterator.next());
 		}
-		System.out.println();
-		
-		// Debug
-		System.out.println("filterFormatMapper : " + filter + " ; " + referenceIndex + " ; " + index);
-		System.out.println();
+		logger.debug(filter + " ; " + referenceIndex + " ; " + index);
 		
 		return index;
 	}
@@ -91,7 +93,7 @@ public class RegexResults<T> {
 		// Augmente le nombre d'occurence si le resutat est deja present
 		int i = resultsList.indexOf(result); 
 		if ((i != -1) && (formatMappersList.get(i).equals(formatMapper))) {
-			System.out.println("Doublon supprime");
+			logger.debug("Doublon supprime");
 			occurencesList.set(i, occurencesList.get(i) + 1);
 		} else {
 			resultsList.add(result);
@@ -111,7 +113,8 @@ public class RegexResults<T> {
 		
 		while (i.hasNext()) {
 			result = i.next();
-			System.out.println(result.toString());
+			
+			logger.debug(result.toString());
 		}
 	}
 	

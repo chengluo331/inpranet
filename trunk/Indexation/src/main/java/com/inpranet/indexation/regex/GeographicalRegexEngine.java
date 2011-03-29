@@ -1,8 +1,11 @@
 package com.inpranet.indexation.regex;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.log4j.Logger;
 
 import com.inpranet.indexation.util.SimpleCoordinateFormat;
 import com.inpranet.indexation.util.Toolbox;
@@ -14,9 +17,14 @@ import com.vividsolutions.jts.geom.Coordinate;
  */
 public class GeographicalRegexEngine extends RegexEngine {
 	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(GeographicalRegexEngine.class);
+	
+	/**
 	 * Constructeur de la classe GeographicalRegexEngine
 	 */
-	public GeographicalRegexEngine() {
+	public GeographicalRegexEngine() throws FileNotFoundException {
 		// Initialisation des patterns et des format mappers
 		// Lecture des fichiers contenant les Regex temporelles
 		loadRegexLists("src/main/resources/geographicalRegexList.txt");
@@ -34,8 +42,7 @@ public class GeographicalRegexEngine extends RegexEngine {
 		GeographicalRegexResults geographicalRegexResults = new GeographicalRegexResults();
 		
 		// Debug
-		System.out.println("GeographicalRegexEngine : > Texte a examiner : " + text);
-		System.out.println();
+		logger.debug("Texte a examiner : " + text);
 		
 		// Recherche toutes les expressions regulieres
 		for (int i = 0; i < patterns.size(); i++) {
@@ -43,10 +50,10 @@ public class GeographicalRegexEngine extends RegexEngine {
 			matcher = pattern.matcher(text);
 			
 			// Lance la recherche pour une expression reguliere
-			System.out.println("GeographicalRegexEngine : Recherche de '" + pattern.toString() + "'...");
+			logger.debug("Recherche de '" + pattern.toString() + "'...");
 			while (matcher.find()) {
 				// Si un lieu a ete identifie
-				System.out.println("GeographicalRegexEngine : > Trouve '" + matcher.group().trim() + "'");
+				logger.debug("> Trouve '" + matcher.group().trim() + "'");
 				
 				// Formattage du resultat selon le mapper
 				try {
@@ -58,14 +65,14 @@ public class GeographicalRegexEngine extends RegexEngine {
 					// Effacement de l'expression trouvee dans le texte source
 					text = matcher.replaceFirst(Toolbox.generateString(pattern.toString().length(), '_'));
 					matcher = pattern.matcher(text);
-					System.out.println("GeographicalRegexEngine : > Nouveau texte : " + text);
+					
+					logger.debug("> Nouveau texte : " + text);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 			}
 			
-			System.out.println("GeographicalRegexEngine : Aucun autre resultat trouve");
-			System.out.println();
+			logger.debug("Aucun autre resultat trouve");
 		}
 		
 		// Fin de la recherche

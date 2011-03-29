@@ -1,27 +1,28 @@
-REM Fichier pour initialiser la base de donnee
-REM pour que la commande psql puisse etre execute, il faut ajouter le variable d'environnement
-REM dans Path qui reference au repertoire postgreSQL\bin
+rem Fichier pour initialiser la base de donnee
+rem pour que la commande psql puisse etre execute, il faut ajouter le variable d'environnement
+rem dans Path qui reference au repertoire postgreSQL\bin
 set url=localhost
 set db_name=postgis
 set password=soprasopra
 set username=postgres
 
-# create schemas
+rem create schemas
 psql -h %url% -d %db_name% -U %username% -w %password%<./creation_schema.sql 
 
-# create tables
+rem create tables
 psql -h %url% -d %db_name% -U %username% -w %password%<./creation_profil.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./creation_zone.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./creation_document.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./creation_habit.sql
 
-# create functions
+rem create functions
 psql -h %url% -d %db_name% -U %username% -w %password%<./function_insertweeklyhabit.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./function_loadHabitFromPos.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./requete_gethabit.sql
 
-# load some data
+rem load some data
 psql -h %url% -d %db_name% -U %username% -w %password%<./load_interests.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./load_user_habit_choice.sql
 psql -h %url% -d %db_name% -U %username% -w %password%<./load_zone.sql
-psql -h %url% -d %db_name% -U %username% -W %password%<./load_positions.sql
+psql -h %url% -d %db_name% -U %username% -w %password%<./load_positions.sql
+psql -h %url% -d %db_name% -U %username% -w %password%<./load_document.sql
