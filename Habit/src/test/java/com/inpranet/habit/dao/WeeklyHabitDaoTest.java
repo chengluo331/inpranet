@@ -1,11 +1,12 @@
 package com.inpranet.habit.dao;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Logger;
 
 import junit.framework.TestCase;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class WeeklyHabitDaoTest extends TestCase {
@@ -46,7 +47,6 @@ public class WeeklyHabitDaoTest extends TestCase {
 		log.info("--------------- TestGetIdInterval started --------------");
 		Date now = new Date();
 		int id = weeklyHabitDao.GetIdInterval(now);
-		//log.info("id = " + id);
 		log.info("--------------- TestGetIdInterval ended --------------");
 	}
 	
@@ -54,7 +54,16 @@ public class WeeklyHabitDaoTest extends TestCase {
 		log.info("--------------- TestDeduceIdZoneByInterest started --------------");
 		Calendar c = Calendar.getInstance();
 		c.set(2011, Calendar.MARCH, 30, 14, 23);
-		int idZone = weeklyHabitDao.DeduceIdZoneByInterest(1, 3, c.getTime());
+		int idZone;
+		try {
+			idZone = weeklyHabitDao.DeduceIdZoneByInterest(1, 3, c.getTime());
+		} catch (NullPointerException e1) {
+			log.error("Champ null, pas de stockage !!!");
+			return;
+		} catch (SQLException e2) {
+			log.error("Erreur de persistence");
+			return;
+		}
 		log.info("id Zone: " + Integer.toString(idZone));
 		log.info("--------------- TestDeduceIdZoneByInterest ended --------------");
 	}

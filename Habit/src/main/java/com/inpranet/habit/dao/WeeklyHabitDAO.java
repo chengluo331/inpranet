@@ -1,11 +1,9 @@
 package com.inpranet.habit.dao;
 
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
 
@@ -18,10 +16,15 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 
 import com.inpranet.habit.model.WeeklyHabit;
 
+/**
+ * Implementation de la couche d'acces aux donnees relatives aux WeeklyHabit
+ * @author Yiquan
+ */
 public class WeeklyHabitDAO implements IWeeklyHabitDAO {
 	/** Logger */ 
 	static Logger log = Logger.getLogger(WeeklyHabitDAO.class.getName());
 	
+	/** Objet jdbcTemplate de spring */
 	private JdbcTemplate jdbcTemplate;
 	
     public void setDataSource(DataSource dataSource) {
@@ -49,7 +52,7 @@ public class WeeklyHabitDAO implements IWeeklyHabitDAO {
 //		return getJdbcTemplate().update(sql);
 //	}
 	
-	public void createWeeklyHabit(WeeklyHabit weeklyHabit){
+	public void createWeeklyHabit(WeeklyHabit weeklyHabit) throws SQLException{
         // Creation d'une requête pour appeler la procédure stockée
 		SimpleJdbcCall simpleGetCall = new SimpleJdbcCall(jdbcTemplate)
 		// Nom de la fonction sql
@@ -84,13 +87,13 @@ public class WeeklyHabitDAO implements IWeeklyHabitDAO {
 					c.get(Calendar.DAY_OF_WEEK), c.get(Calendar.HOUR_OF_DAY), 
 					c.get(Calendar.MINUTE)});
 		} catch (DataAccessException e) {
-			e.printStackTrace();	
+			log.error("No data found");	
 		}
 		return idInterval;
 	}
 	
 	
-	public int DeduceIdZoneByInterest(int userId, int interestId, Date time) {
+	public int DeduceIdZoneByInterest(int userId, int interestId, Date time) throws SQLException, NullPointerException  {
 		// Creation d'une requête pour appeler la procédure stockée
 		SimpleJdbcCall simpleGetCall = new SimpleJdbcCall(jdbcTemplate)
 		// Nom de la fonction sql
@@ -116,16 +119,8 @@ public class WeeklyHabitDAO implements IWeeklyHabitDAO {
 		.addValue("phour", c.get(Calendar.HOUR_OF_DAY))
 		.addValue("pminutes", c.get(Calendar.MINUTE));
 		
-		int result = 0;
-		try {
-			// Exécution de la fonciton SQL
-			result = simpleGetCall.executeFunction(Integer.class, mapParam);
-		}
-		catch (NullPointerException e) {
-			// Aucun résultat retourné
-			log.info("no habit found");
-			return 0;
-		}
+		// Exécution de la fonciton SQL
+		int	result = simpleGetCall.executeFunction(Integer.class, mapParam);
 		return result;
 	}
 
