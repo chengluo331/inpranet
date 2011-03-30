@@ -207,7 +207,11 @@ public class CollectionActivity extends TabActivity implements OnItemClickListen
 			DocumentInfo doc = mLocalDocumentList.get(position);
 			if(doc!=null){
 				// TODO affecter la vraie icone
-				viewHolder.icon.setImageResource(R.drawable.icon);
+				if(doc.isUrgent()){
+					viewHolder.icon.setImageResource(R.drawable.doc_urgent);
+				}else{
+					viewHolder.icon.setImageResource(R.drawable.doc_normal);
+				}
 				viewHolder.title.setText(doc.getDocTitle());
 				viewHolder.firstLine.setText(""+doc.getDocFirstLine());
 			}

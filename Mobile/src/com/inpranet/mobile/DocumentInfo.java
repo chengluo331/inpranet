@@ -25,7 +25,7 @@ public class DocumentInfo {
 		return mTitle;
 	}
 
-	public boolean isImportant() {
+	public boolean isUrgent() {
 		return mEventImportance;
 	}
 

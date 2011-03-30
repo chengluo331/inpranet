@@ -197,7 +197,12 @@ public class InpranetDBHelper extends SQLiteOpenHelper {
 		String[] columns = new String[]{
 				KEY_ROWID,KEY_TITLE,KEY_URGENT,KEY_CATEGORY,KEY_HTML_DATA
 		};
-		Cursor c = query(TABLE_DOCUMENT, columns,KEY_CATEGORY + "='" + category + "'");
+		Cursor c;
+		if(category!=CAT_WELCOME){
+			c = query(TABLE_DOCUMENT, columns,KEY_CATEGORY + "='" + category + "'");
+		}else{
+			c = query(TABLE_DOCUMENT, columns,KEY_URGENT + "=" + 1);
+		}
 		List<DocumentInfo> docList = new ArrayList<DocumentInfo>();
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
 			docList.add(new DocumentInfo(c.getLong(c
