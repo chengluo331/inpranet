@@ -2,9 +2,10 @@ package com.inpranet.habit.dao;
 
 
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 import javax.sql.DataSource;
+
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.inpranet.habit.model.Position;

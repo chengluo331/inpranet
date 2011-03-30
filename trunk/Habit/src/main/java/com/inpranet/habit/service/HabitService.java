@@ -4,11 +4,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.logging.Logger;
 
 import javax.jws.WebService;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.support.xml.SqlXmlFeatureNotImplementedException;
 
 import com.inpranet.core.model.GeoPos;
 import com.inpranet.core.model.Interest;
@@ -47,9 +48,7 @@ public class HabitService implements IHabitService {
 	}
 	
 	public void StockData(User user, GeoPos geoPos, Collection<Zone> zones) {
-		log.info("-------------- WS Habit.StockData -----------------");
-		 
-				
+		log.info("-------------- WS Habit.StockData -----------------");				
 		// Sauvegarde des données positions */
 		try {
 			Position position = new Position(user.getIdUser(), geoPos.getLongitude(), geoPos.getLatitude(), geoPos.getTime().toGregorianCalendar().getTime());
@@ -65,9 +64,10 @@ public class HabitService implements IHabitService {
 				weeklyHabitDao.createWeeklyHabit(weeklyHabit);
 			}
 		} catch (NullPointerException e1) {
-			log.info("Champ null, pas de stockage !!!");
+			log.error("Champ null, pas de stockage !!!");
 			return;
 		} catch (SQLException e2) {
+			log.error("Erreur de persistence");
 			return;
 		}
 				
@@ -89,13 +89,20 @@ public class HabitService implements IHabitService {
 		
 		// Pour chaque centre d'interet de l'utilisateur, recuperer la zone la plus probable
 		for (Interest i : user.getInterests()) {
-			int idZone = weeklyHabitDao.DeduceIdZoneByInterest(user.getIdUser(), i.getIdInterest(), c.getTime());
-			log.info("Il a habitude d'aller dans les zones suivantes :");
-			if (idZone != 0) {
-				Zone z = new Zone(idZone, i);
-				zones.add(z);
-				log.info("Zone numéro " + z.getIdZone());
-			}			
+			try {
+				int idZone = weeklyHabitDao.DeduceIdZoneByInterest(user.getIdUser(), i.getIdInterest(), c.getTime());
+				log.info("Il a habitude d'aller dans les zones suivantes :");
+				if (idZone != 0) {
+					Zone z = new Zone(idZone, i);
+					zones.add(z);
+					log.info("Zone numéro " + z.getIdZone());
+				}
+			} catch (NullPointerException e) {
+				log.error("Aucune zone trouvé pour centre intéret " + i.getName());
+			} catch (SQLException e) {
+				log.error("Erreur de requête SQL");
+			}
+						
 		}
 		// Renvoie la liste des zones interessantes
 		return zones;
