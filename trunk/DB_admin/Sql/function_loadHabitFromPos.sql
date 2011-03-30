@@ -1,7 +1,6 @@
--- Function: habit.loadHabitFromPos()
-/* La fonction permet de creer des donnees habitudes dans la table
-	habit ®§ partir des donn®¶es positions
-*/
+Ôªø-- Function: habit.loadHabitFromPos()
+-- La fonction permet de creer des donnees habitudes dans la table
+--	habit √† partir des donn√©es positions
 
 -- DROP FUNCTION habit.loadHabitFromPos();
 CREATE OR REPLACE FUNCTION habit.loadHabitFromPos()
@@ -18,12 +17,12 @@ DECLARE
         t_dow integer; -- le jour de la semaine
         t_hour integer; -- l'heure du jour
         t_minute integer; -- la minute
-		t_week integer; -- la semaine de l'ann®¶e
+		t_week integer; -- la semaine de l'ann√©e
 		current_week integer; -- la semaine courante du traitement
 
 BEGIN
 		current_week:=0;
-		-- R®¶cup®¶rer tous les enregistrements dans la table position
+		-- R√©cup√©rer tous les enregistrements dans la table position
         OPEN c_pos FOR SELECT * FROM habit.position ORDER BY date_time;
         LOOP
 			-- Pour chaque position
@@ -55,7 +54,7 @@ BEGIN
                                 -- Pour chaque zone
                                 FETCH c_zone INTO t_idZone;
                                 EXIT WHEN NOT FOUND;
-										-- Appel ®§ la proc®¶dure stock®¶e insertweeklyhabit
+										-- Appel √† la proc√©dure stock√©e insertweeklyhabit
                                         PERFORM habit.insertweeklyhabit(rt_pos.user_id, idInterval, t_idZone);                                                  
                         END LOOP;
                         CLOSE c_zone;                
