@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ce fichier décrit les élements dans la page de configuration des paramètres -->
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceScreen
+   android:title="@string/pref_account_title"
+   android:summary="@string/pref_account_summary">
+ 	<intent android:action="android.intent.action.VIEW" 
+	 	android:targetPackage="com.inpranet.mobile"
+	 	android:targetClass="com.inpranet.mobile.Authentification"/>
+  </PreferenceScreen>
+  
+  <CheckBoxPreference
+  	android:key="localizationService"
+  	android:title="@string/pref_localizationService_title"
+  	android:summary="@string/pref_localizationService_summary"
+  	android:defaultValue="true" />
+  
+  <ListPreference
+    android:key="habitPrecision"
+    android:title="@string/pref_habit_precision_title"
+    android:summary="@string/pref_habit_precision_summary"
+    android:entries="@array/entries_precisions"
+    android:entryValues="@array/entryValues_precisions"
+    android:dialogTitle="@string/pref_habit_precision_dialog_title" />
+    
+    <ListPreference
+    android:key="refreshFrequence"
+    android:title="@string/pref_refresh_freq_title"
+    android:summary="@string/pref_refresh_freq_summary"
+    android:entries="@array/entries_frequences"
+    android:entryValues="@array/entryValues_frequences"
+    android:dialogTitle="@string/pref_refresh_freq_diaglog_title" />
+    
+  <PreferenceScreen
+   android:title="@string/pref_account_title"
+   android:summary="@string/pref_account_summary">
+ 	<intent android:action="android.intent.action.VIEW" 
+	 	android:targetPackage="com.inpranet.mobile"
+	 	android:targetClass="com.inpranet.mobile.Authentification"/>
+  </PreferenceScreen>
+    
+</PreferenceScreen>

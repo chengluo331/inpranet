@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<!-- Charge les beans de CXF -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+	
+	<!-- C'est important de le nommer "dataSource" car ce bean est automatiquement 
+		utilise -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/postgis" />
+		<property name="username" value="postgres" />
+		<property name="password" value="soprasopra" />
+	</bean>
+	
+	<!--  Déclaration DAO JDBC-->
+	<bean id="zoneDao"
+		class="com.inpranet.zone.dao.ZoneDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!--  beans service -->
+	 <bean class="com.inpranet.zone.service.ZoneService" id="zoneService"> 
+	  <property name="zoneDAO" ref="zoneDao"></property>
+	</bean>
+	
+	<!-- Définition du Endpoint JAX-WS => pas besoin d'ecrire une classe pour publier le WS
+	Reference une classe annotee @WebService 
+	adress: adresse relative, ici domain-name:port/war-name/zone
+	-->
+	<jaxws:endpoint 
+	  id="service" 
+	  implementor="#zoneService" 
+	  address="/zone" />
+	  
+</beans>
