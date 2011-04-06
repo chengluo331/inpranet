@@ -26,7 +26,7 @@ public interface IDocumentManager {
 	
 	/**
 	 * Recupere les documents qui correspondent a certaines categories
-	 * @param zonesList Les categories a couvrir
+	 * @param categoriesList Les categories a couvrir
 	 */
 	public List<Document> getDocumentByCategories(List<Category> categoriesList);
 		

@@ -58,7 +58,7 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 			operationList.add(Calendar.YEAR);
 			operationList.add(Calendar.MONTH);
 			operationList.add(Calendar.DAY_OF_WEEK);
-			operationList.add(Calendar.HOUR);
+			operationList.add(Calendar.HOUR_OF_DAY);
 			operationList.add(Calendar.MINUTE);
 			
 			// Effectue les transformations sur la date de reference

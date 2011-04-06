@@ -120,7 +120,8 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 			endDateRegexResults.DisplayResults();
 			
 			// Interpretation des resultats obtenus (par exemple, on sait que la date de fin ne peut pas etre depassee)
-			endDate = endDateRegexResults.GetEndDate();
+			// On utilise deux fois GetStartDate ici, on est cense n'avoir qu'une seule date dans ces champs
+			endDate = endDateRegexResults.GetStartDate();
 			startDate = startDateRegexResults.GetStartDate();
 			
 			// Debug
@@ -243,7 +244,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	
 	/**
 	 * Lance le traitement d'un document
-	 * @param documentPath Le chemin d'acces au document a traiter
+	 * @param inputDocumentPath Le chemin d'acces au document a traiter
 	 */
 	public String StartProcessing(String inputDocumentPath) {
 		// Stocke les retours des analyseurs

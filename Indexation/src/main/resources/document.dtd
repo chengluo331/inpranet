@@ -1,0 +1,25 @@
+<!ELEMENT document (metaData, data)>
+<!ELEMENT metaData (reference, title, uri, categoriesList, temporalCreationData, temporalSourceData, geographicalSourceData)>
+<!ELEMENT reference (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT uri (#PCDATA)>
+<!ELEMENT categoriesList (category+)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT temporalCreationData (#PCDATA)>
+<!ELEMENT temporalSourceData (temporalSourceStartData, temporalSourceEndData)>
+<!ELEMENT temporalSourceStartData (#PCDATA)>
+<!ELEMENT temporalSourceEndData (#PCDATA)>
+<!ELEMENT geographicalSourceData (#PCDATA)>
+<!ELEMENT data (#PCDATA)>
+<!ATTLIST document
+	urgent CDATA #REQUIRED
+>
+<!ATTLIST categoriesList
+	categoriesSourceReliable CDATA #REQUIRED
+>
+<!ATTLIST temporalSourceData
+	temporalSourceReliable CDATA #REQUIRED
+>
+<!ATTLIST geographicalSourceData
+	geographicalSourceReliable CDATA #REQUIRED
+>

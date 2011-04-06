@@ -3,6 +3,7 @@ package com.inpranet.indexation.regex;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ListIterator;
+import java.util.Locale;
 
 /**
  * Container pour les resultats d'une analyse Regex portant sur les dates
@@ -13,6 +14,33 @@ public class TemporalRegexResults extends RegexResults<Date> {
 	 * Date de creation du document, on pourra s'en servir pour la suite
 	 */
 	private Date referenceDate = new Date();
+	
+	/**
+	 * Correction de l'annee (2011 au lieu de 0011) si besoin
+	 */
+	private void formatResultsYears() {
+		// Utilisation d'un iterateur pour la mise a jour des elements de la liste
+		ListIterator<Date> resultsListIterator = resultsList.listIterator();
+		
+		// Variable tampon pour le parcours de la liste
+		Date result;
+		Calendar calendar = Calendar.getInstance();
+		
+		// Parcours de la liste des resultats
+		while (resultsListIterator.hasNext()) {
+			result = resultsListIterator.next();
+			calendar.setTime(result);
+			
+			// Teste l'impossibilite de la date
+			if (calendar.get(Calendar.YEAR) <= 2000) {
+				// Modifie la date en conséquence
+				calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + 2000);
+				
+				// Met a jour le resultat dans la liste
+				resultsListIterator.set(calendar.getTime());
+			}
+		}
+	}
 	
 	/**
 	 * Transmet les heures entre les differents resultats trouves
@@ -55,7 +83,7 @@ public class TemporalRegexResults extends RegexResults<Date> {
 					
 					calendar.setTime(result);
 					_calendar.setTime(_result);
-					calendar.set(Calendar.HOUR, _calendar.get(Calendar.HOUR));
+					calendar.set(Calendar.HOUR_OF_DAY, _calendar.get(Calendar.HOUR_OF_DAY));
 					calendar.set(Calendar.MINUTE, _calendar.get(Calendar.MINUTE));
 					formatMapper = formatMapper.concat("+H+m");
 					
@@ -126,20 +154,20 @@ public class TemporalRegexResults extends RegexResults<Date> {
 	 * Ne fait aucun changement sinon
 	 */
 	private Date formatEndHour(Date endDate, String formatMapper) {
-		Calendar dateCalendar = Calendar.getInstance();
+		Calendar dateCalendar = Calendar.getInstance(Locale.FRANCE);
 		dateCalendar.setTime(endDate);
 		
 		// N'effectue pas le traitement si l'heure a ete trouvee (de facon sure ou pas) 
 		if ((!formatMapper.contains("H")) && (!formatMapper.contains("m"))) {
 			// On fixe l'heure a 23:59
-			dateCalendar.set(Calendar.HOUR, 23);
+			dateCalendar.set(Calendar.HOUR_OF_DAY, 23);
 			dateCalendar.set(Calendar.MINUTE, 59);
 		}
 		
 		// Cas ou on avait qu'un seul resultat
 		if (resultsList.size() == 1) {
 			// On force l'heure a 23:59 (si on a une seule heure, c'est forcement l'heure de debut)
-			dateCalendar.set(Calendar.HOUR, 23);
+			dateCalendar.set(Calendar.HOUR_OF_DAY, 23);
 			dateCalendar.set(Calendar.MINUTE, 59);
 		}
 		
@@ -288,6 +316,9 @@ public class TemporalRegexResults extends RegexResults<Date> {
 		if (referenceDate != null) {
 			this.referenceDate = referenceDate; 
 		}
+		
+		// Correction de l'annee (2011 au lieu de 0011) si besoin
+		formatResultsYears();
 		
 		// Transmet les heures entre les differents resultats trouves
 		formatResultsHours();

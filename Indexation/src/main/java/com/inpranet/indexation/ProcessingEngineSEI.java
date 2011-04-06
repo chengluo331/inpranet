@@ -10,7 +10,7 @@ import javax.jws.WebService;
 public interface ProcessingEngineSEI {
 	/**
 	 * Lance le traitement d'un document
-	 * @param documentPath Le chemin d'acces au document a traiter
+	 * @param inputDocumentPath Le chemin d'acces au document a traiter
 	 */
 	public String StartProcessing(String inputDocumentPath);
 }
