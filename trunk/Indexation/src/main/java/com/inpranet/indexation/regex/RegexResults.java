@@ -44,7 +44,7 @@ public class RegexResults<T> {
 	 * passe en parametre (via les start positions)
 	 * Ne peut pas retourner l'index qui a ete passe en parametre
 	 * @param filter Le filtre a appliquer lors de la recherche
-	 * @param rootIndex L'index a prendre en compte lors de la selection du resultat le plus proche
+	 * @param referenceIndex L'index a prendre en compte lors de la selection du resultat le plus proche
 	 * @return L'index du resultat 
 	 */
 	protected int filterFormatMapper(String filter, int referenceIndex) {

@@ -10,68 +10,68 @@
 % Expressions lexicales sur les jours                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-dimanche
+dimanche(\s+[^\d]|[^\s])
 §s 0 s 0 e 1 s 0 s 0
 
-lundi
+lundi(\s+[^\d]|[^\s])
 §s 0 s 0 e 2 s 0 s 0
 
-lundi
+mardi(\s+[^\d]|[^\s])
 §s 0 s 0 e 3 s 0 s 0
 
-mardi
+mercredi(\s+[^\d]|[^\s])
 §s 0 s 0 e 4 s 0 s 0
 
-mercredi
+jeudi(\s+[^\d]|[^\s])
 §s 0 s 0 e 5 s 0 s 0
 
-jeudi
+vendredi(\s+[^\d]|[^\s])
 §s 0 s 0 e 6 s 0 s 0
 
-vendredi
+samedi(\s+[^\d]|[^\s])
 §s 0 s 0 e 7 s 0 s 0
 
-janvier
-§s 0 e 1 s 0 s 0 s 0
+janvier(\s+[^\d]|[^\s])
+-01
 
-fevrier
-§s 0 e 2 s 0 s 0 s 0
+fevrier(\s+[^\d]|[^\s])
+-02
 
-mars
-§s 0 e 3 s 0 s 0 s 0
+mars(\s+[^\d]|[^\s])
+-03
 
-avril
-§s 0 e 4 s 0 s 0 s 0
+avril(\s+[^\d]|[^\s])
+-04
 
-mai
-§s 0 e 5 s 0 s 0 s 0
+mai(\s+[^\d]|[^\s])
+-05
 
-juin
-§s 0 e 6 s 0 s 0 s 0
+juin(\s+[^\d]|[^\s])
+-06
 
-juillet
-§s 0 e 7 s 0 s 0 s 0
+juillet(\s+[^\d]|[^\s])
+-07
 
-aout
-§s 0 e 8 s 0 s 0 s 0
+aout(\s+[^\d]|[^\s])
+-08
 
-août
-§s 0 e 8 s 0 s 0 s 0
+août(\s+[^\d]|[^\s])
+-08
 
-septembre
-§s 0 e 9 s 0 s 0 s 0
+septembre(\s+[^\d]|[^\s])
+-09
 
-octobre
-§s 0 e 10 s 0 s 0 s 0
+octobre(\s+[^\d]|[^\s])
+-10
 
-novembre
-§s 0 e 11 s 0 s 0 s 0
+novembre(\s+[^\d]|[^\s])
+-11
 
-decembre
-§s 0 e 12 s 0 s 0 s 0
+decembre(\s+[^\d]|[^\s])
+-12
 
-décembre
-§s 0 e 12 s 0 s 0 s 0
+décembre(\s+[^\d]|[^\s])
+-12
 
 avant-hier
 §s 0 s 0 s -2 s 0 s 0
@@ -161,3 +161,9 @@ apres-midi
 
 soir
 18:00 23:59
+
+heure(s?)
+:
+
+h
+:

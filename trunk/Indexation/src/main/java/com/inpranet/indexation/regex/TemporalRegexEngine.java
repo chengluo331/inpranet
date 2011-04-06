@@ -60,7 +60,7 @@ public class TemporalRegexEngine extends RegexEngine {
 				// Formattage du resultat selon le mapper
 				try {
 					simpleDateFormat = new SimpleDateFormat(formatMappers.get(i), Locale.FRANCE);
-					date = simpleDateFormat.parse(matcher.group().trim());
+					date = simpleDateFormat.parse(matcher.group().trim().replaceAll("\\s", ""));
 					
 					// Conservation de la date trouvee
 					temporalRegexResults.AddResult(date, formatMappers.get(i), matcher.start());
