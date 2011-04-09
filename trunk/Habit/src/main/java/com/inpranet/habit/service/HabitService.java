@@ -85,11 +85,11 @@ public class HabitService implements IHabitService {
 		Calendar c = Calendar.getInstance();
 		log.info("Il est actuellement " + c.getTime().toString());
 		c.add(Calendar.MINUTE, user.getPlanningHorizon());
-		log.info("On recherche ses habitudes à " + c.getTime().toString());
+		log.info("On recherche les habitudes de utilisateur " + user.getIdUser() + " à " + c.getTime().toString());
 		
 		// Pour chaque centre d'interet de l'utilisateur, recuperer la zone la plus probable
 		for (Interest i : user.getInterests()) {
-			try {
+			try {	
 				int idZone = weeklyHabitDao.DeduceIdZoneByInterest(user.getIdUser(), i.getIdInterest(), c.getTime());
 				log.info("Il a habitude d'aller dans les zones suivantes :");
 				if (idZone != 0) {

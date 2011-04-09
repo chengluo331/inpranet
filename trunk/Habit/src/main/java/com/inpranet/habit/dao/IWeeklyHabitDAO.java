@@ -15,17 +15,17 @@ public interface IWeeklyHabitDAO {
 	/** Le nom de la fonction pour ajouter une habitude */
 	public static final String FUNCTION_INSERT_HABIT = "insertweeklyhabit";
 	
-	/** Le nom de fonction pour requeter la zone la plus probable d'apres les habitudes */
+	/** Le nom de fonction pour requêter la zone la plus probable d'après les habitudes */
 	public static final String FUNCTION_GET_HABIT_NAME = "gethabit";
 	
-	/** Le nom du schéma ou est stockée la fonction */
+	/** Le nom du schéma où est stockée la fonction */
 	public static final String SCHEMA_NAME = "habit";
 	
 	/**
-	 * créer une habitude: incrémentation dans la cube
-	 * la fonction fait appel à la procédure stockée insertweeklyhabit.sql
-	 * @param weeklyHabit
-	 * @throws SQLException Erreur de persistence
+	 * Créer une habitude: incrémentation dans la cube
+	 * La fonction fait appel à la procédure stockée insertweeklyhabit.sql
+	 * @param weeklyHabit Une habitude
+	 * @throws SQLException Exception de persistence
 	 */
 	public void createWeeklyHabit(WeeklyHabit weeklyHabit) throws SQLException;
 	
