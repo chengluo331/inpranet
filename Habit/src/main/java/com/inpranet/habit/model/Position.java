@@ -20,10 +20,17 @@ public class Position {
 	/** l'heure et date*/
 	private Date time;
 
-	public Position() {
-		
+	/** Constructeur vide */
+	public Position() {		
 	}
 	
+	/**
+	 * Constructeur
+	 * @param userId L'identifiant de l'utilisateur
+	 * @param longitude La longitude
+	 * @param latitude La latitude
+	 * @param time L'heure et la date
+	 */
 	public Position(int userId, double longitude, double latitude, Date time) {
 		this.userId = userId;
 		this.longitude = longitude;

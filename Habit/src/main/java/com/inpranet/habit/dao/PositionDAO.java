@@ -20,22 +20,17 @@ public class PositionDAO implements IPositionDAO{
 	/** Logger */
 	static Logger log = Logger.getLogger(HabitService.class.getName());
 	
+	/** Spring jdbcTemplate pour gérer l'accès à la base de données */
 	private JdbcTemplate jdbcTemplate;
 	
+	/** 
+	 * Set la source de données définie dans inpranet-data.xml 
+	 * @param dataSource La source de données
+	 */
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 	
-	/*public void createPosition(Position position) {
-		final String INSERT_POSITION = "INSERT INTO " + TABLE_POSITION + "(user_id, date_time, longitude, latitude) VALUES (?, ?, ?, ?)";
-		try {
-			jdbcTemplate.update(INSERT_POSITION, new Object[] {
-					position.getUserId(), position.getTime(), 
-					position.getLongitude(), position.getLatitude()});
-		} catch (Exception e) {
-			e.printStackTrace();		
-		}
-	}*/
     
     public void createPosition(Position position) throws SQLException {
 		final String INSERT_POSITION = "INSERT INTO " + TABLE_POSITION + "(user_id, date_time, point) " +

@@ -10,13 +10,13 @@ import com.inpranet.habit.model.Position;
  */
 public interface IPositionDAO {
 	
-	/** nom de la table */
+	/** Le nom de la table qui stock les données géo-position brutes */
 	public final String TABLE_POSITION = "habit.position";
 	
 	/**
-	 * Cree une position dans la base
+	 * Créer une position dans la base
 	 * @param position La position a creer dans la base
-	 * @throws SQLException 
+	 * @throws SQLException Exception de persistence
 	 */
 	public void createPosition(Position position) throws SQLException;
 	

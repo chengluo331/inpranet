@@ -10,6 +10,7 @@
 	<url>http://www.springframework.org/spring-ws</url>
 
 	<!-- Shared version number properties -->
+	
 	<properties>
 		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
 		<cxf.version>2.2.7</cxf.version>
@@ -26,14 +27,14 @@
 		</dependency>
 
 
-	<dependency>
-		    <!-- Dependences Apache JAX-WS CXF pour WAR et Client JAX-WS-->
+		<dependency>
+			<!-- Dependences Apache JAX-WS CXF pour WAR et Client JAX-WS -->
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxws</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
 		<dependency>
-		    <!-- Dependences Apache JAX-WS CXF pour Client JAX-WS-->
+			<!-- Dependences Apache JAX-WS CXF pour Client JAX-WS -->
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
@@ -134,14 +135,14 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
-	    	<groupId>log4j</groupId>
-	    	<artifactId>log4j</artifactId>
-	    	<version>1.2.14</version>
-	    	<type>jar</type>
-	    	<scope>compile</scope>
-    	</dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -213,30 +214,17 @@
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 				</configuration>
 			</plugin>
-			<!-- plugin>
-			    <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-codegen-plugin</artifactId>
-                <version>${cxf.version}</version>
-                <executions>
-                                     <execution>
-                                             <id>generate-sources</id>
-                                             <phase>generate-sources</phase>
-                                             <configuration>
-                                                     <sourceRoot>${basedir}/src/main/java/</sourceRoot>
-                                                     <wsdlOptions>
-                                                             <wsdlOption>
-                                                                     <wsdl>${basedir}/src/main/resources/wsdl/monwsdl.wsdl</wsdl>
-                                                             </wsdlOption>
-                                                     </wsdlOptions>
-                                             </configuration>
-                                             <goals>
-                                                     <goal>wsdl2java</goal>
-                                             </goals>
-                                     </execution>
-                             </executions>
-                     </plugin-->
+			
 		</plugins>
 	</build>
-	
-	
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
