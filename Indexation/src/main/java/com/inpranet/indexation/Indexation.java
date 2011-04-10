@@ -14,13 +14,19 @@ import com.inpranet.core.model.Zone;
  */
 public class Indexation {
 	/**	
-	 * Variables statiques
+	 * Moteur de traitement de documents
 	 */
 	private static ProcessingEngine processingEngine = new ProcessingEngine();
+	
+	/**
+	 * Moteur de requetage de documents 
+	 */
 	private static RequestEngine requestEngine = new RequestEngine();
 	
 	/**
 	 * Methode point d'entree pour un Web Service
+	 * @param documentPath Le chemin d'acces au fichier a traiter
+	 * @return Le resultat de la recherche de dates et de lieux sous la forme "Dates trouvees, Lieux trouves"
 	 */
 	public String StartProcessing(String documentPath) {
 		return processingEngine.StartProcessing(documentPath);
@@ -28,7 +34,7 @@ public class Indexation {
 	
 	/**
 	 * Point d'entree de l'application, gere le menu
-	 * @param args
+	 * @param args Aucun argument a preciser
 	 */
 	public static void main(String[] args) {
 		// Variables necessaires pour l'E/S

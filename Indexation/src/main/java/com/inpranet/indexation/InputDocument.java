@@ -37,7 +37,7 @@ public class InputDocument {
 	private TemporalRegexEngine temporalRegexEngine;
 	
 	/**
-	 * Fichier representant le document traite (chemin d'acces, etc.)
+	 * Objet de type Fichier representant le document traite
 	 */
 	private File file;
 	
@@ -46,26 +46,95 @@ public class InputDocument {
 	 */
 	private Document document;
 	
-	// Donnees brutes extraites du document
+	/**
+	 * Chaine extraite des metadonnees identifiant la nature urgente (importante) ou non du document
+	 */
 	private String _urgent;
+	
+	/**
+	 * Chaine extraite des metadonnees representant la reference du document
+	 * Il s'agit d'un identifiant unique non rattache au contenu du document en lui-meme
+	 */
 	private String reference;
+	
+	/**
+	 * Chaine extraite des metadonnees representant le titre du docuement
+	 */
 	private String title;
+	
+	/**
+	 * Chaine extraite des metadonnees representant l'URI du document
+	 */
 	private String uri;
+	
+	/**
+	 * Liste de chaines extraite des metadonnees representant les categories du document
+	 */
 	private List<String> categoriesList = new ArrayList<String>();
+	
+	/**
+	 * Chaine extraite des metadonnees identifiant la fiabilite des categories donnees ou inferees par la source
+	 */
 	private String _categoriesSourceReliable;
+	
+	/**
+	 * Chaine extraite des metadonnees representant les informations sur la date de creation du document 
+	 */
 	private String temporalCreationData;
+	
+	/**
+	 * Chaine extraite des metadonnees identifiant la fiabilite des dates donnees ou inferees par la source
+	 */
 	private String _temporalSourceReliable;
+	
+	/**
+	 * Chaine extraite des metadonnees representant les informations sur la date de debut du document 
+	 */
 	private String temporalSourceStartData;
+	
+	/**
+	 * Chaine extraite des metadonnees representant les informations sur la date de fin du document 
+	 */
 	private String temporalSourceEndData;
+	
+	/**
+	 * Chaine extraite des metadonnees identifiant la fiabilite des lieux donnees ou inferees par la source
+	 */
 	private String _geographicalSourceReliable;
+	
+	/**
+	 * Chaine extraite des metadonnees representant les informations sur le lieu du document 
+	 */
 	private String geographicalSourceData;
+	
+	/**
+	 * Chaine extraite du document representant le contenu de celui-ci 
+	 */
 	private String data;
 	
-	// Interpretation des elements lus
+	/**
+	 * Interpretation de la chaine extraite des metadonnees qui lui est liee
+	 */
 	private boolean urgent;
+	
+	/**
+	 * Interpretation de la chaine extraite des metadonnees qui lui est liee
+	 */
 	private Date creationDate;
+	
+	/**
+	 * Interpretation de la chaine extraite des metadonnees qui lui est liee
+	 */
 	private boolean categoriesSourceReliable;
+	
+	/**
+	 * Interpretation de la chaine extraite des metadonnees qui lui est liee
+	 */
 	private boolean temporalSourceReliable;
+	
+	/**
+	 * Interpretation de la chaine extraite des metadonnees qui lui est liee
+	 */
 	private boolean geographicalSourceReliable;
 	
 	/**
@@ -231,7 +300,7 @@ public class InputDocument {
 	
 	/**
 	 * Constructeur par defaut de la classe Document
-	 * @param documentPath Le chemin d'acces du document
+	 * @param inputDocumentPath Le chemin d'acces du document
 	 */
 	InputDocument(String inputDocumentPath) {
 		// Initialisation des attributs

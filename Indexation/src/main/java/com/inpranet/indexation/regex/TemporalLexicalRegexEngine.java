@@ -24,6 +24,7 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 	
 	/**
 	 * Constructeur de la classe TemporalLexicalRegexEngine
+	 * @throws FileNotFoundException Si le fichier contenant les Regex temporelles lexicales n'a pas pu etre utilise
 	 */
 	public TemporalLexicalRegexEngine() throws FileNotFoundException {
 		// Initialisation des patterns et des format mappers
@@ -34,7 +35,8 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 	/**
 	 * Genere le texte de remplacement en fonction du format mapper
 	 * @param formatMapper Le format mapper concerne
-	 * @param referenceDate La date de reference utilisee (elle peut servir pour interpreter les dates qui s'y trouvent) 
+	 * @param referenceDate La date de reference utilisee (elle peut servir pour interpreter les dates qui s'y trouvent)
+	 * @return Le texte de remplacement qui sera place dans le document source 
 	 */
 	private String generateTemporalReplacement(String formatMapper, Date referenceDate) {
 		// Le format mapper peut indiquer une formule temporelle
@@ -121,6 +123,7 @@ public class TemporalLexicalRegexEngine extends RegexEngine {
 	 * Recherche des correspondances aux expressions lexicales passees en parametre
 	 * Remplace a la volee les occurences trouvees par un texte genere en fonction de la semantique
 	 * @param text Le texte a traiter
+	 * @param date La date de reference a prendre en compte lors de la recherche
 	 * @return Le texte apres que les remplacements aient ete effectues
 	 */
 	public String TemporalLexicalSearch(String text, Date date) {

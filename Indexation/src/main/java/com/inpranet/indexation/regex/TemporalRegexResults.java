@@ -131,6 +131,7 @@ public class TemporalRegexResults extends RegexResults<Date> {
 	 * Ne fait aucun traitement si la date entree en parametre est deja dans le futur
 	 * Ne fait rien egalement si l'annee traitee a ete obtenue de facon sure et qu'elle est quand meme dans le passe
 	 * @param endDate La date a traiter (normalement, c'est une date de fin)
+	 * @return La nouvelle date apres une eventuelle correction
 	 */
 	private Date formatEndYear(Date endDate, String formatMapper) {
 		Calendar nowCalendar = Calendar.getInstance();
@@ -152,6 +153,9 @@ public class TemporalRegexResults extends RegexResults<Date> {
 	/**
 	 * Regle l'heure de la date de fin de preference a 23:59 si aucune heure n'a ete obtenue
 	 * Ne fait aucun changement sinon
+	 * @param endDate La date a traiter (normalement, c'est une date de fin)
+	 * @param formatMapper Le format mapper associe a la date traitee
+	 * @return La nouvelle date apres une eventuelle correction
 	 */
 	private Date formatEndHour(Date endDate, String formatMapper) {
 		Calendar dateCalendar = Calendar.getInstance(Locale.FRANCE);

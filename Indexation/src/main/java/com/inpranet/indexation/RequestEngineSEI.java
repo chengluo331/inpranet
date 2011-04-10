@@ -16,8 +16,9 @@ import com.inpranet.core.model.Zone;
 public interface RequestEngineSEI {
 	/**
 	 * Lance le requetage d'un document pour une recherche normale (mode predictif)
-	 * @param user L'utilisateur qui a effectue la requete
-	 * @param zone Les zones dans lequelles on cherche des documents
+	 * @param user L'utilisateur pour lequel on effectue la requete (filtrage avec les preferences sur les categories)
+	 * @param zone La liste des zones sur lequelles faire la requete (cette liste est fournie par Habitude)
+	 * @return La liste des documents correspondant aux parametres de la recherche
 	 */
 	public List<Document> LaunchRequest(User user, List<Zone> zone);
 }

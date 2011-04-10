@@ -6,6 +6,7 @@ import java.util.Date;
 /**
  * Represente un objet Document persistant
  * @author Stephane
+ * @deprecated Classe remplacee par la classe du package core, {@link com.inpranet.core.model.Document}
  */
 public class Document implements Serializable {
 	/**

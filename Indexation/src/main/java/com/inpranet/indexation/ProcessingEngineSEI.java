@@ -11,6 +11,7 @@ public interface ProcessingEngineSEI {
 	/**
 	 * Lance le traitement d'un document
 	 * @param inputDocumentPath Le chemin d'acces au document a traiter
+	 * @return Le resultat de la recherche de dates et de lieux sous la forme "Dates trouvees, Lieux trouves"
 	 */
 	public String StartProcessing(String inputDocumentPath);
 }

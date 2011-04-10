@@ -24,6 +24,7 @@ public class GeographicalLexicalRegexEngine extends RegexEngine {
 	
 	/**
 	 * Constructeur de la classe GeographicalLexicalRegexEngine
+	 * @throws FileNotFoundException Si le fichier contenant les Regex geographiques lexicales n'a pas pu etre utilise
 	 */
 	public GeographicalLexicalRegexEngine() throws FileNotFoundException {
 		// Initialisation des patterns et des format mappers
@@ -33,7 +34,9 @@ public class GeographicalLexicalRegexEngine extends RegexEngine {
 	
 	/**
 	 * Genere le texte de remplacement en fonction du format mapper
-	 * @param formatMapper Le format mapper concerne 
+	 * @param formatMapper Le format mapper concerne
+	 * @param matchedGroup Le texte source representant un lieu et qui a ete trouve par le moteur Regex
+	 * @return Le texte de remplacement qui sera place dans le document source
 	 */
 	private String generateGeographicalReplacement(String formatMapper, String matchedGroup) {
 		// Le format mapper peut indiquer une formule temporelle
