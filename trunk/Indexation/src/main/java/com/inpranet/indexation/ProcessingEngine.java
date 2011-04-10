@@ -43,11 +43,23 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	private static DocumentManager documentManager = new DocumentManager();
 	
 	/**
-	 * Utilisation de moteurs Regex
+	 * Moteur Regex pour la recherche de dates
 	 */
 	private static TemporalRegexEngine temporalRegexEngine;
+	
+	/**
+	 * Moteur Regex pour la recherche d'expressions temporelles
+	 */
 	private static TemporalLexicalRegexEngine temporalLexicalRegexEngine;
+	
+	/**
+	 * Moteur Regex pour la recherche de lieux
+	 */
 	private static GeographicalRegexEngine geographicalRegexEngine;
+	
+	/**
+	 * Moteur Regex pour la recherche de lieux cles
+	 */
 	private static GeographicalLexicalRegexEngine geographicalLexicalRegexEngine;
 	
 	/**
@@ -92,7 +104,8 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	
 	/**
 	 * Recherche une periode temporelle dans un document
-	 * @param documentPath Le chemin d'acces au document a traiter
+	 * @param inputDocument Le chemin d'acces au document a traiter
+	 * @return Le resultat de la recherche de dates sous la forme "Date trouvees"
 	 */
 	private static String temporalProcessing(InputDocument inputDocument) {
 		TemporalRegexResults endDateRegexResults;
@@ -156,6 +169,8 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	/**
 	 * Recherche une position geographique dans un document
 	 * @param inputDocument Le chemin d'acces au document a traiter
+	 * @return Le resultat de la recherche de lieux sous la forme "Lieux trouves"
+	 * @throws NullPointerException Si le document ne contient pas de lieu geographique ou si une erreur a eu lieu lors de l'identification des zones
 	 */
 	private static String geographicalProcessing(InputDocument inputDocument) throws NullPointerException {
 		GeographicalRegexResults geographicalRegexResults;
@@ -197,6 +212,8 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	
 	/**
 	 * Realise un mapping entre les coordonnes trouvees dans le document et les objet Zone
+	 * @return La liste des zones qui ont ete trouvees
+	 * @throws NullPointerException Si une erreur a eu lieu lors de l'identification des zones
 	 */
 	private static List<Zone> zoneProcessing() throws NullPointerException {
 		// TODO : Uniformiser les types de donnees
@@ -223,6 +240,8 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	
 	/**
 	 * Realise un mapping entre les categories trouvees dans le document et les objet Category
+	 * @param inputDocument Le chemin d'acces au document a traiter
+	 * @return La liste des categories qui ont ete trouvees
 	 */
 	private static List<Category> categoryProcessing(InputDocument inputDocument) {
 		// Utilisation des services metiers des categories
@@ -245,6 +264,7 @@ public class ProcessingEngine implements ProcessingEngineSEI {
 	/**
 	 * Lance le traitement d'un document
 	 * @param inputDocumentPath Le chemin d'acces au document a traiter
+	 * @return Le resultat de la recherche de dates et de lieux sous la forme "Dates trouvees, Lieux trouves"
 	 */
 	public String StartProcessing(String inputDocumentPath) {
 		// Stocke les retours des analyseurs

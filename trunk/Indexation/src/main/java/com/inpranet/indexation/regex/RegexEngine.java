@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Moteur de recherche d'expressions regulieres en utilisant des motifs Regex
- * et des mappers, liant la syntaxe a la semantique
+ * Moteur de recherche d'expressions regulieres en utilisant des motifs Regex et des mappers, liant la syntaxe a la semantique
  * @author Stephane
  */
 public abstract class RegexEngine {
@@ -26,7 +25,8 @@ public abstract class RegexEngine {
 	
 	/**
 	 * Charge les patterns et les formatMappers Regex utilises lors de la recherche depuis un fichier
-	 * @param filePath Le chemin d'acces au fichier contenant les patterns et les format mappers.
+	 * @param filePath Le chemin d'acces au fichier contenant les patterns et les format mappers
+	 * @throws FileNotFoundException Si l'un des fichiers contenant des Regex n'a pas pu etre utilise
 	 */
 	protected void loadRegexLists(String filePath) throws FileNotFoundException {
 		File file = new File(filePath);

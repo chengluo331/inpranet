@@ -29,6 +29,7 @@ public class SimpleCoordinateFormat {
 	 * @param source Les coordonnees a analyser et a transformer
 	 * @param formatMapper Le format mapper associe a la chaine a parser
 	 * @return L'objet Coordinate correspondant
+	 * @throws ParseException Si l'analyseur ne parvient pas a extraire une date a partir du texte source
 	 */
 	public static Coordinate Parse(String source, String formatMapper) throws ParseException {
 		// Debug

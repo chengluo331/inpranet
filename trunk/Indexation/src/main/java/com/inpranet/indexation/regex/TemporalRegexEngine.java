@@ -24,6 +24,7 @@ public class TemporalRegexEngine extends RegexEngine {
 	
 	/**
 	 * Constructeur de la classe TemporalRegexEngine
+	 * @throws FileNotFoundException Si le fichier contenant les Regex temporelles n'a pas pu etre utilise
 	 */
 	public TemporalRegexEngine() throws FileNotFoundException {
 		// Initialisation des patterns et des format mappers

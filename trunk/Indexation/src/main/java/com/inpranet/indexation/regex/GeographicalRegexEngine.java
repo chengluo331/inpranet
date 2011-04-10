@@ -23,6 +23,7 @@ public class GeographicalRegexEngine extends RegexEngine {
 	
 	/**
 	 * Constructeur de la classe GeographicalRegexEngine
+	 * @throws FileNotFoundException Si le fichier contenant les Regex geographiques n'a pas pu etre utilise
 	 */
 	public GeographicalRegexEngine() throws FileNotFoundException {
 		// Initialisation des patterns et des format mappers
