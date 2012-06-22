@@ -24,7 +24,7 @@ MOE :
 Le module Profil est à renommer : Il s'agit d'un *service frontal*.<br/>
 Il ne fait que des redirections pour l'instant : demain, on ne sait pas ce qu'il pourra faire, d'où l'*utilité d'utiliser un ESB.
 
-= 2. Entreprise Serial Bus (ESB) et Service-Oriented Architecture (SOA) =
+= 2. Entreprise Service Bus (ESB) et Service-Oriented Architecture (SOA) =
 
 == 2.1. Problématique ==
 
